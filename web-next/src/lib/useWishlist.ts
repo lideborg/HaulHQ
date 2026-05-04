@@ -19,5 +19,22 @@ export function useWishlist() {
   const toggle = useCallback((item: Item) => wishlistStore.toggle(itemKey(item)), []);
   const clear = useCallback(() => wishlistStore.clear(), []);
 
-  return { wishlist: set, count: set.size, isWished, toggle, clear };
+  // Wishlist all of the given items (idempotent — already-wished stay wished).
+  const addAll = useCallback((items: Item[]) => {
+    const next = new Set(set);
+    for (const it of items) next.add(itemKey(it));
+    wishlistStore.setAll([...next]);
+  }, [set]);
+
+  // Un-wish all of the given items (leaves anything else alone).
+  const removeAll = useCallback((items: Item[]) => {
+    const next = new Set(set);
+    for (const it of items) next.delete(itemKey(it));
+    wishlistStore.setAll([...next]);
+  }, [set]);
+
+  // Replace the entire wishlist with raw keys (used by Import).
+  const setAll = useCallback((keys: string[]) => wishlistStore.setAll(keys), []);
+
+  return { wishlist: set, count: set.size, isWished, toggle, clear, addAll, removeAll, setAll };
 }

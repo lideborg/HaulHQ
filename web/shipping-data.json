@@ -1,0 +1,159 @@
+{
+  "_meta": {
+    "compiled": "2026-05-03",
+    "currency_assumptions": { "cny_per_usd": 6.83 },
+    "notes": "Sources synthesized from research/shipping.md, research/customs-us.md, JadeShip line pages (May 2026 snapshot), and r/FashionReps community data. Interpolation between weight tiers is linear above the 4 kg anchor; below 1 kg expect roughly +50% per-kg relative to the 1 kg cell. All numbers are planning estimates ±10–15%."
+  },
+
+  "lines": [
+    {
+      "id": "us-ocean-brands",
+      "label": "US Ocean Cargo (with brands)",
+      "agent": "Superbuy",
+      "transit_days": [30, 45],
+      "brands_ok": true,
+      "min_kg": 12,
+      "volumetric_divisor": null,
+      "tariff_handling": "tariffless",
+      "tiers": { "4": 86, "10": 135, "12": 145, "15": 160, "20": 200 }
+    },
+    {
+      "id": "matson",
+      "label": "Matson Ocean Express (Sugargoo ZH)",
+      "agent": "Sugargoo",
+      "transit_days": [25, 40],
+      "brands_ok": "grey",
+      "min_kg": 12,
+      "volumetric_divisor": 6000,
+      "tariff_handling": "tariffless",
+      "tiers": { "1": 25, "4": 48, "7": 70, "10": 92, "12": 108, "15": 130, "20": 170 }
+    },
+    {
+      "id": "duty-free-air-actual",
+      "label": "Duty-Free Air Express (Actual Weight)",
+      "agent": "Superbuy",
+      "transit_days": [11, 22],
+      "brands_ok": true,
+      "min_kg": 0.5,
+      "volumetric_divisor": null,
+      "tariff_handling": "ddp",
+      "tiers": { "1": 45, "4": 125, "7": 185, "10": 245, "12": 285, "15": 345, "20": 445 }
+    },
+    {
+      "id": "duty-free-air-b",
+      "label": "EU&US Duty-Free Air Express -B",
+      "agent": "Superbuy",
+      "transit_days": [11, 22],
+      "brands_ok": true,
+      "min_kg": 0.5,
+      "volumetric_divisor": 8000,
+      "tariff_handling": "ddp",
+      "tiers": { "1": 50, "4": 141, "7": 205, "10": 270, "12": 315, "15": 380, "20": 490 }
+    },
+    {
+      "id": "hkups-t",
+      "label": "HKUPS-T (UPS-HK 5500 DDP)",
+      "agent": "Superbuy",
+      "transit_days": [4, 9],
+      "brands_ok": true,
+      "min_kg": 0.5,
+      "volumetric_divisor": 5000,
+      "tariff_handling": "ddp",
+      "tiers": { "1": 55, "4": 140, "7": 200, "10": 265, "12": 305, "15": 370, "20": 475 }
+    },
+    {
+      "id": "hk-dhl-pref",
+      "label": "HK DHL Preferential (recipient pays duty)",
+      "agent": "Superbuy",
+      "transit_days": [8, 11],
+      "brands_ok": false,
+      "min_kg": 0.5,
+      "volumetric_divisor": 5000,
+      "tariff_handling": "recipient",
+      "deposit_pct": 0.45,
+      "tiers": { "1": 48, "4": 110, "7": 160, "10": 215, "12": 250, "15": 300, "20": 390 }
+    },
+    {
+      "id": "ems-pref",
+      "label": "EMS Preferential Line USA",
+      "agent": "Sugargoo",
+      "transit_days": [12, 25],
+      "brands_ok": "grey",
+      "min_kg": 0.5,
+      "volumetric_divisor": null,
+      "tariff_handling": "recipient",
+      "tiers": { "1": 45, "4": 111, "7": 165, "10": 220, "12": 255, "15": 305, "20": 395 }
+    }
+  ],
+
+  "weights": {
+    "_columns": ["category", "low_kg", "typical_kg", "high_kg", "vol_mult"],
+    "tee":              [0.20, 0.30, 0.45, 1.05],
+    "shirt":            [0.30, 0.45, 0.70, 1.10],
+    "knit":             [0.45, 0.70, 1.20, 1.10],
+    "hoodie":           [0.55, 0.80, 1.30, 1.15],
+    "pants-cotton":     [0.40, 0.55, 0.75, 1.05],
+    "pants-wool":       [0.45, 0.65, 0.90, 1.10],
+    "pants-denim":      [0.55, 0.75, 1.10, 1.10],
+    "pants":            [0.45, 0.65, 0.90, 1.10],
+    "shorts":           [0.20, 0.30, 0.50, 1.05],
+    "blazer":           [0.55, 0.80, 1.10, 1.25],
+    "blazer-lined":     [0.90, 1.20, 1.70, 1.30],
+    "sneakers":         [0.90, 1.20, 1.60, 1.40],
+    "loafers":          [0.90, 1.30, 1.80, 1.40],
+    "boots":            [1.30, 1.80, 2.60, 1.50],
+    "shoes":            [0.90, 1.20, 1.60, 1.40],
+    "eyewear":          [0.20, 0.30, 0.45, 1.30],
+    "tie":              [0.10, 0.15, 0.25, 1.10],
+    "bolo":             [0.08, 0.15, 0.30, 1.15],
+    "bag-small":        [0.10, 0.20, 0.40, 1.20],
+    "bag":              [0.50, 0.90, 1.40, 1.35],
+    "bag-large":        [0.80, 1.30, 2.20, 1.40],
+    "belt":             [0.20, 0.30, 0.50, 1.15],
+    "accessory":        [0.10, 0.20, 0.40, 1.15],
+    "_default":         [0.30, 0.50, 0.80, 1.15]
+  },
+
+  "tariffs": {
+    "_note": "Total effective duty as a percentage of declared customs value, May 2026. Stack = HTSUS Column 1 + Section 301 (China) + Section 122 (10% all countries, post-IEEPA SCOTUS ruling Feb 2026). Apply only when shipping line tariff_handling = 'recipient'. DDP / tariffless lines absorb (or under-declare) duty; treat tariff = 0 for those lines in the calc.",
+    "tee":          { "rate": 0.45, "hts": "6109/6110", "label": "Knit tops" },
+    "shirt":        { "rate": 0.45, "hts": "6203/6205", "label": "Shirts / blazers / pants" },
+    "knit":         { "rate": 0.45, "hts": "6110",      "label": "Knitwear" },
+    "hoodie":       { "rate": 0.45, "hts": "6110",      "label": "Sweatshirts" },
+    "pants":        { "rate": 0.45, "hts": "6203/6204", "label": "Trousers" },
+    "pants-cotton": { "rate": 0.45, "hts": "6203",      "label": "Cotton trousers" },
+    "pants-wool":   { "rate": 0.45, "hts": "6203",      "label": "Wool trousers" },
+    "pants-denim":  { "rate": 0.45, "hts": "6203",      "label": "Denim" },
+    "shorts":       { "rate": 0.45, "hts": "6203/6204", "label": "Shorts" },
+    "blazer":       { "rate": 0.45, "hts": "6203/6204", "label": "Blazer" },
+    "blazer-lined": { "rate": 0.45, "hts": "6203",      "label": "Wool blazer" },
+    "sneakers":     { "rate": 0.55, "hts": "6403/6404", "label": "Footwear" },
+    "loafers":      { "rate": 0.55, "hts": "6403",      "label": "Leather shoes" },
+    "boots":        { "rate": 0.55, "hts": "6403",      "label": "Boots" },
+    "shoes":        { "rate": 0.55, "hts": "6403/6404", "label": "Footwear" },
+    "eyewear":      { "rate": 0.37, "hts": "9004",      "label": "Eyewear (25% Sec 301 + 10% Sec 122 + 2% MFN)" },
+    "tie":          { "rate": 0.35, "hts": "6215/6217", "label": "Neckties" },
+    "bolo":         { "rate": 0.35, "hts": "6217/7117", "label": "Bolo (mixed)" },
+    "bag-small":    { "rate": 0.40, "hts": "4202",      "label": "Small leather goods" },
+    "bag":          { "rate": 0.40, "hts": "4202",      "label": "Handbags" },
+    "bag-large":    { "rate": 0.40, "hts": "4202",      "label": "Totes / duffels" },
+    "belt":         { "rate": 0.40, "hts": "4203",      "label": "Belts" },
+    "accessory":    { "rate": 0.40, "hts": "4202/9004", "label": "Accessory (mixed)" },
+    "_default":     { "rate": 0.40, "hts": "—",         "label": "Default (mixed apparel)" }
+  },
+
+  "category_aliases": {
+    "apparel-top": "shirt",
+    "apparel-bottom": "pants",
+    "shoes": "sneakers",
+    "eyewear": "eyewear",
+    "bag": "bag",
+    "accessory": "accessory"
+  },
+
+  "fees": {
+    "superbuy_payment_pct": 0.03,
+    "agent_handling_per_parcel_usd": 5,
+    "_note": "Superbuy adds ~3% on the line invoice. Agent handling/repack ranges $3–$10 per parcel."
+  }
+}

@@ -68,7 +68,7 @@ export function Card({ item }: CardProps) {
           </p>
         ) : null}
         <p className="m-0 text-[12px] font-medium tracking-[0.02em]">
-          {formatPrice(item.price)}
+          {formatPrice(item)}
         </p>
       </div>
     </article>
@@ -76,26 +76,28 @@ export function Card({ item }: CardProps) {
 }
 
 function StatusBadges({ item }: { item: Item }) {
-  const badges: Array<{ label: string; tone: "good" | "bad" | "neutral" | "skipped" }> = [];
+  type Tone = "good" | "bad" | "neutral" | "skipped" | "warn";
+  const badges: { label: string; tone: Tone }[] = [];
   if (item.target_size) badges.push({ label: `Size ${item.target_size}`, tone: "good" });
   if (item.target_variant) badges.push({ label: item.target_variant, tone: "neutral" });
+  if (item.requires_contact) badges.push({ label: "Contact seller", tone: "warn" });
   if (item.out_of_stock) badges.push({ label: "Out of stock", tone: "bad" });
   if (item.skipped) badges.push({ label: "Skipped", tone: "skipped" });
   if (badges.length === 0) return null;
+
+  const toneClass: Record<Tone, string> = {
+    good: "bg-emerald-700 text-white",
+    bad: "bg-red-700 text-white",
+    neutral: "bg-neutral-900/70 text-white",
+    skipped: "bg-neutral-200 text-neutral-700 line-through",
+    warn: "bg-amber-100 text-amber-900 border border-amber-700",
+  };
   return (
     <div className="absolute left-2 top-2 flex flex-wrap gap-1">
       {badges.map((b) => (
         <span
           key={b.label}
-          className={[
-            "inline-block rounded-sm px-1.5 py-0.5 text-[9px] uppercase tracking-[0.1em]",
-            b.tone === "good" && "bg-emerald-700 text-white",
-            b.tone === "bad" && "bg-red-700 text-white",
-            b.tone === "skipped" && "bg-neutral-200 text-neutral-700 line-through",
-            b.tone === "neutral" && "bg-neutral-900/70 text-white",
-          ]
-            .filter(Boolean)
-            .join(" ")}
+          className={`inline-block rounded-sm px-1.5 py-0.5 text-[9px] uppercase tracking-[0.1em] ${toneClass[b.tone]}`}
         >
           {b.label}
         </span>

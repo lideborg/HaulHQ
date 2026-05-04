@@ -66,7 +66,7 @@
   },
   "source": "taobao",
   "category": "apparel-top",
-  "notes": "10 detail images captured. Size chart parsed from d001.jpg (产品尺码).",
+  "notes": "10 detail images captured. Size chart parsed from d001.jpg (产品尺码). | Jan declined the shared offer (slide deck 2026-05-04); now Hampus only.",
   "size_chart": {
     "unit": "cm",
     "sizes": [
@@ -124,8 +124,7 @@
     "images/tr-knit/d009.jpg"
   ],
   "owners": [
-    "hampus",
-    "jan"
+    "hampus"
   ],
   "requires_contact": false,
   "acquisition": "superbuy",

@@ -15,9 +15,10 @@ These are the durable rules for working on this repo (apply to humans and to AI 
 Every PR — human-authored or AI-authored — goes through this loop **before merge**:
 
 1. **First self-review**: open the PR's diff, read each commit, look for: dead code, premature abstractions, missed edge cases, type-erasing `any`, hardcoded secrets, console.logs, accidentally-committed files, broken imports, unhandled async errors.
-2. **Fix anything found.** Push fixes as additional commits, don't force-push (so the review history stays visible).
-3. **Second self-review**: re-read the *current* diff (`git diff <base>...HEAD`). Confirm fixes landed and didn't introduce new issues.
-4. **Merge** (or hand off — see below).
+2. **For UI work, also verify in the browser.** Open the affected page in the Playwright browser MCP, click through the new feature, screenshot, and check the console for errors / warnings. Type checks and lints don't catch hydration mismatches, click-handler bugs, layout regressions, or runtime React warnings — the browser does.
+3. **Fix anything found.** Push fixes as additional commits, don't force-push (so the review history stays visible).
+4. **Second self-review**: re-read the *current* diff (`git diff <base>...HEAD`). Confirm fixes landed and didn't introduce new issues.
+5. **Merge** (or hand off — see below).
 
 **Merge authority:**
 

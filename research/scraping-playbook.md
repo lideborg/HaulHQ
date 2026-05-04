@@ -294,7 +294,7 @@ Copy this when you need to add a new item.
    For Weidian items: also browser-fetch+base64 dance and decode_weidian_images.py
 8. python3 scripts/trim_and_price.py
 9. Regenerate the _index.json (small Python loop over data/<source>/*.json)
-10. Refresh http://127.0.0.1:8765/web/
+10. Refresh the dev site (`cd web-next && npm run dev` → http://localhost:3000)
 ```
 
 For sizing on apparel/footwear, dispatch a parallel Agent in the background with item slug + which `d###` to look at first.

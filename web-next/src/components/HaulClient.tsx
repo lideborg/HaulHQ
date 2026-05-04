@@ -5,10 +5,11 @@
 // but the footer always reflects the FULL wishlist.
 
 import { useMemo } from "react";
-import { CatalogGrid } from "./CatalogGrid";
+import { ItemList } from "./ItemList";
 import { CategoryFilter } from "./CategoryFilter";
 import { OwnerFilterBar } from "./OwnerFilter";
 import { SortControl } from "./SortControl";
+import { ViewModeToggle } from "./ViewModeToggle";
 import { HaulFooter } from "./HaulFooter";
 import { ShippingPanel } from "./ShippingPanel";
 import { useFilterState } from "@/lib/useFilterState";
@@ -60,6 +61,9 @@ export function HaulClient({ items, shippingData }: HaulClientProps) {
         onSortChange={(sort) => set({ sort })}
         onShowOosChange={(showOos) => set({ showOos })}
       />
+      <div className="flex justify-center">
+        <ViewModeToggle active={state.view} onChange={(view) => set({ view })} />
+      </div>
       <main className="mx-auto max-w-[1180px] px-8 pb-24 pt-10">
         {wishedItems.length === 0 ? (
           <div className="py-16 text-center text-(--color-muted)">
@@ -67,7 +71,7 @@ export function HaulClient({ items, shippingData }: HaulClientProps) {
           </div>
         ) : (
           <>
-            <CatalogGrid items={filtered} />
+            <ItemList items={filtered} view={state.view} />
             <HaulFooter items={wishedItems} />
             <ShippingPanel data={shippingData} items={wishedItems} />
           </>

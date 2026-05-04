@@ -5,12 +5,14 @@ import { categoryLabel, priceCny } from "./items";
 
 export type SortMode = "default" | "price-desc" | "price-asc";
 export type OwnerFilter = "all" | "hampus" | "jan" | "shared";
+export type ViewMode = "grid" | "list" | "compact";
 
 export interface FilterState {
   category: string; // category key OR "all"
   owner: OwnerFilter;
   sort: SortMode;
   showOos: boolean;
+  view: ViewMode;
 }
 
 export const DEFAULT_FILTERS: FilterState = {
@@ -18,6 +20,7 @@ export const DEFAULT_FILTERS: FilterState = {
   owner: "all",
   sort: "default",
   showOos: false,
+  view: "grid",
 };
 
 export function passesCategory(item: Item, category: string): boolean {

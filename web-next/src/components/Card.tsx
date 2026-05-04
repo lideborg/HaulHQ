@@ -14,6 +14,7 @@ import { useState } from "react";
 import type { Item } from "@/types/catalog";
 import { imagesOf, formatPrice } from "@/lib/items";
 import { useWishlist } from "@/lib/useWishlist";
+import { useModal } from "./ModalProvider";
 import { WishStar } from "./WishStar";
 
 export interface CardProps {
@@ -25,10 +26,14 @@ export function Card({ item }: CardProps) {
   const [activeIdx, setActiveIdx] = useState(0);
   const hero = images[activeIdx] ?? images[0];
   const { isWished, toggle } = useWishlist();
+  const { open } = useModal();
 
   return (
     <article className="flex flex-col">
-      <div className="relative aspect-[3/4] overflow-hidden bg-[#f0efed] cursor-pointer group">
+      <div
+        className="relative aspect-[3/4] overflow-hidden bg-[#f0efed] cursor-pointer group"
+        onClick={() => open(item)}
+      >
         {hero ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

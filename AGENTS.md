@@ -4,12 +4,34 @@ These are the durable rules for working on this repo (apply to humans and to AI 
 
 ## Source control
 
-- **Never merge a PR without a code review.** Self-merging is reserved for emergency hotfixes only and must be flagged in the PR description if used.
-- **Open PRs as drafts** until they're ready for human review.
-- **Self-review before pushing**: read your own diff (`git diff origin/main...HEAD`) and make sure each commit message is meaningful.
 - **Logical, scoped commits.** A commit should answer one question. If the message wants to be "and / also", split it.
 - **Branch naming**: `feat/<short-name>`, `fix/<short-name>`, `chore/<short-name>`. Avoid noun-phrase or question-style names.
 - **Don't commit `node_modules/`, build outputs, debug screenshots, or one-off scrape JSON dumps.** The `.gitignore` enforces most of this.
+
+## Review and merge workflow
+
+Every PR — human-authored or AI-authored — goes through this loop **before merge**:
+
+1. **First self-review**: open the PR's diff, read each commit, look for: dead code, premature abstractions, missed edge cases, type-erasing `any`, hardcoded secrets, console.logs, accidentally-committed files, broken imports, unhandled async errors.
+2. **Fix anything found.** Push fixes as additional commits, don't force-push (so the review history stays visible).
+3. **Second self-review**: re-read the *current* diff (`git diff <base>...HEAD`). Confirm fixes landed and didn't introduce new issues.
+4. **Merge** (or hand off — see below).
+
+**Merge authority:**
+
+- **AI may self-merge** routine PRs after passing both reviews: refactors, component ports, doc updates, dependency bumps, tests, scoped feature work that doesn't touch the categories listed below.
+- **AI must leave PR for human review** — open as draft, ping the user — when the change touches:
+  - **Data shape** (DB schema, JSON file structure used by other tools, public API contracts)
+  - **Payments / billing**
+  - **Auth** (login flows, permission checks, token handling)
+  - **Infra** (Vercel config, environment variables, deployment pipelines, secrets)
+- When unsure which bucket applies, default to human review.
+
+## Other conventions
+
+- **Open work-in-progress PRs as drafts.** Mark "Ready for review" only after both self-reviews pass.
+- **Branch base** for stacked PRs: explicitly set `--base <prev-branch>` and call out the stack in the PR description.
+- **Don't `--force-push`** unless a reviewer asks. Add fix-up commits instead.
 
 ## Repo layout
 

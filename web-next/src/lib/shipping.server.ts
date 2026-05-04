@@ -10,7 +10,7 @@ let cache: ShippingData | null = null;
 export async function loadShippingData(): Promise<ShippingData> {
   if (cache) return cache;
   const buf = await fs.readFile(
-    path.join(REPO_ROOT, "web", "shipping-data.json"),
+    path.join(REPO_ROOT, "data", "shipping-data.json"),
     "utf8"
   );
   cache = JSON.parse(buf) as ShippingData;

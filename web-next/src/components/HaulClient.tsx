@@ -10,17 +10,20 @@ import { CategoryFilter } from "./CategoryFilter";
 import { OwnerFilterBar } from "./OwnerFilter";
 import { SortControl } from "./SortControl";
 import { HaulFooter } from "./HaulFooter";
+import { ShippingPanel } from "./ShippingPanel";
 import { useFilterState } from "@/lib/useFilterState";
 import { useWishlist } from "@/lib/useWishlist";
 import { applyFilters, distinctCategories } from "@/lib/filters";
 import { itemKey } from "@/lib/items";
 import type { Item } from "@/types/catalog";
+import type { ShippingData } from "@/types/shipping";
 
 export interface HaulClientProps {
   items: Item[];
+  shippingData: ShippingData;
 }
 
-export function HaulClient({ items }: HaulClientProps) {
+export function HaulClient({ items, shippingData }: HaulClientProps) {
   const { state, set } = useFilterState();
   const { wishlist } = useWishlist();
   const wishedItems = useMemo(
@@ -66,6 +69,7 @@ export function HaulClient({ items }: HaulClientProps) {
           <>
             <CatalogGrid items={filtered} />
             <HaulFooter items={wishedItems} />
+            <ShippingPanel data={shippingData} items={wishedItems} />
           </>
         )}
       </main>

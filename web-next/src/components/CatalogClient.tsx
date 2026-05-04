@@ -1,13 +1,14 @@
 "use client";
 
-// Top-level client wrapper for the Catalog tab. Owns filter UI + filtering;
-// the underlying CatalogGrid + Card components are pure presentation.
+// Top-level client wrapper for the Catalog tab. Owns filter + view-mode
+// state; underlying ItemList swaps between Grid / List / Compact.
 
 import { useMemo } from "react";
-import { CatalogGrid } from "./CatalogGrid";
+import { ItemList } from "./ItemList";
 import { CategoryFilter } from "./CategoryFilter";
 import { OwnerFilterBar } from "./OwnerFilter";
 import { SortControl } from "./SortControl";
+import { ViewModeToggle } from "./ViewModeToggle";
 import { useFilterState } from "@/lib/useFilterState";
 import { applyFilters, distinctCategories } from "@/lib/filters";
 import type { Item } from "@/types/catalog";
@@ -43,8 +44,11 @@ export function CatalogClient({ items }: CatalogClientProps) {
         onSortChange={(sort) => set({ sort })}
         onShowOosChange={(showOos) => set({ showOos })}
       />
+      <div className="flex justify-center">
+        <ViewModeToggle active={state.view} onChange={(view) => set({ view })} />
+      </div>
       <main className="mx-auto max-w-[1180px] px-8 pb-24 pt-10">
-        <CatalogGrid items={filtered} />
+        <ItemList items={filtered} view={state.view} />
       </main>
     </>
   );

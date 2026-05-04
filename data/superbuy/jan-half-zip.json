@@ -63,7 +63,7 @@
   },
   "source": "taobao",
   "category": "apparel-top",
-  "notes": "10 detail images captured. Size chart parsed from d002. Sleeve measurement is raglan (连肩袖, shoulder-to-cuff).",
+  "notes": "Jan: brown if available, otherwise skip. From Jan's slide deck (2026-05-04).",
   "size_chart": {
     "unit": "cm",
     "sizes": [
@@ -117,5 +117,6 @@
     "images/jan-half-zip/d009.jpg"
   ],
   "requires_contact": false,
-  "acquisition": "superbuy"
+  "acquisition": "superbuy",
+  "target_variant": "brown"
 }

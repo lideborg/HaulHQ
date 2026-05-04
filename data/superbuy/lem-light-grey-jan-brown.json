@@ -1,5 +1,5 @@
 {
-  "user_label": "Lem (light grey)",
+  "user_label": "Lem (dark brown)",
   "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D906858758708",
   "source_url": "https://item.taobao.com/item.htm?id=906858758708",
   "title": "Spring seconds according to LEMA~ Side slit glossy dry silk shirt men's 25 spring and summer deep coffee casual loose long-sleeved shirt",
@@ -73,7 +73,7 @@
   },
   "source": "taobao",
   "category": "apparel-top",
-  "notes": "10 detail images captured. Size chart parsed from d001.jpg (sleeve/shoulder/bust/length for S, M). | Color split 2026-05-04: Hampus picked light grey here; Jan's dark-brown variant lives at lem-light-grey-jan-brown.json.",
+  "notes": "Color split 2026-05-04: Jan's dark-brown variant of the same Taobao listing as Hampus's lem-light-grey.json.",
   "size_chart": {
     "unit": "cm",
     "sizes": [
@@ -123,10 +123,10 @@
     "images/lem-light-grey/d009.jpg"
   ],
   "owners": [
-    "hampus"
+    "jan"
   ],
   "requires_contact": false,
   "acquisition": "superbuy",
   "target_size": "S",
-  "target_variant": "light grey"
+  "target_variant": "dark brown"
 }

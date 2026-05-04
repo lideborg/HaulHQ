@@ -1,6 +1,6 @@
 {
   "scraped_at": "2026-05-03",
-  "total": 51,
+  "total": 52,
   "entries": [
     {
       "user_label": "Blair Witch Tee",
@@ -330,7 +330,8 @@
       "out_of_stock": false,
       "requires_contact": false,
       "acquisition": "superbuy",
-      "locked": false
+      "locked": false,
+      "skipped": true
     },
     {
       "user_label": "half zip",
@@ -396,7 +397,8 @@
       "out_of_stock": false,
       "requires_contact": false,
       "acquisition": "superbuy",
-      "locked": false
+      "locked": false,
+      "skipped": true
     },
     {
       "user_label": "The Row Henley LS Tee",
@@ -509,7 +511,7 @@
       "locked": false
     },
     {
-      "user_label": "Lem Light grey",
+      "user_label": "Lem (light grey)",
       "file": "lem-light-grey.json",
       "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D906858758708",
       "title_translated": "Spring seconds according to LEMA~ Side slit glossy dry silk shirt men's 25 spring and summer deep coffee casual loose lo",
@@ -522,14 +524,14 @@
       "seller": "Spring seconds according to the agreement",
       "source": "taobao",
       "owners": [
-        "hampus",
-        "jan"
+        "hampus"
       ],
       "has_size_chart": true,
       "out_of_stock": false,
       "requires_contact": false,
       "acquisition": "superbuy",
-      "locked": false
+      "locked": false,
+      "target_variant": "light grey"
     },
     {
       "user_label": "LM Pants",
@@ -856,8 +858,7 @@
       "seller": "Tsunam1",
       "source": "taobao",
       "owners": [
-        "hampus",
-        "jan"
+        "hampus"
       ],
       "has_size_chart": true,
       "out_of_stock": false,
@@ -1132,6 +1133,29 @@
       "locked": false,
       "target_variant": "white paint",
       "preferred_size": "EU 41 (26.5 cm)"
+    },
+    {
+      "user_label": "Lem (dark brown)",
+      "file": "lem-light-grey-jan-brown.json",
+      "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D906858758708",
+      "title_translated": "Spring seconds according to LEMA~ Side slit glossy dry silk shirt men's 25 spring and summer deep coffee casual loose long-sleeved shirt",
+      "image_count": 7,
+      "price": "¥609.55",
+      "price_usd": "$89.25",
+      "brand": "LEMAIRE (rep)",
+      "category": "apparel-top",
+      "item_code": null,
+      "seller": "Spring seconds according to the agreement",
+      "source": "taobao",
+      "owners": [
+        "jan"
+      ],
+      "has_size_chart": true,
+      "out_of_stock": false,
+      "requires_contact": false,
+      "acquisition": "superbuy",
+      "locked": false,
+      "target_variant": "dark brown"
     }
   ]
 }

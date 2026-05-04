@@ -1,10 +1,12 @@
 // Site header — logo + tab navigation. Server component (no state).
+// The haul count badge is a tiny client subcomponent (HaulCountBadge)
+// so we can read localStorage without making the whole header client-side.
 
 import Link from "next/link";
+import { HaulCountBadge } from "./HaulCountBadge";
 
 export interface HeaderProps {
   active: "catalog" | "haul" | "notes";
-  haulCount?: number;
 }
 
 const tabs = [
@@ -13,7 +15,7 @@ const tabs = [
   { id: "notes" as const, href: "/notes", label: "Notes" },
 ];
 
-export function Header({ active, haulCount }: HeaderProps) {
+export function Header({ active }: HeaderProps) {
   return (
     <header className="border-b border-(--color-border) px-6 pt-14 pb-6 text-center">
       <div className="inline-flex items-center gap-4 text-[26px] font-medium uppercase tracking-[0.22em]">
@@ -36,11 +38,7 @@ export function Header({ active, haulCount }: HeaderProps) {
               ].join(" ")}
             >
               {t.label}
-              {t.id === "haul" && haulCount && haulCount > 0 ? (
-                <span className="ml-2 inline-flex items-center justify-center rounded-full bg-(--color-fg) px-2 py-0.5 text-[10px] text-white">
-                  {haulCount}
-                </span>
-              ) : null}
+              {t.id === "haul" ? <HaulCountBadge /> : null}
             </Link>
           );
         })}

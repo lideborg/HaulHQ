@@ -2,6 +2,13 @@
 
 // Catalog card — hero image, brand/label, price.
 // Client component because it'll later own hover state, wishlist toggle, and modal-open click.
+//
+// Why <img> instead of next/image:
+//   Catalog photos live under /data/<source>/images/<slug>/ via a symlink
+//   from public/data → ../../data. next/image needs explicit remotePatterns
+//   config and runs an optimization pipeline we don't need for this many
+//   small local files yet. Phase 2 (when images move to Supabase storage)
+//   will switch to next/image.
 
 import { useState } from "react";
 import type { Item } from "@/types/catalog";

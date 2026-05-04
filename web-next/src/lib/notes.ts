@@ -6,6 +6,7 @@ import type {
   GlossaryFile,
   NotesIndex,
   RenderedGuide,
+  SellerMessagesFile,
   SellersFile,
 } from "@/types/notes";
 
@@ -22,6 +23,10 @@ export async function loadSellers(): Promise<SellersFile> {
 
 export async function loadGlossary(): Promise<GlossaryFile> {
   return readJSON<GlossaryFile>(path.join(NOTES_DIR, "glossary.json"));
+}
+
+export async function loadSellerMessages(): Promise<SellerMessagesFile> {
+  return readJSON<SellerMessagesFile>(path.join(NOTES_DIR, "seller-messages.json"));
 }
 
 export async function loadGuides(): Promise<RenderedGuide[]> {

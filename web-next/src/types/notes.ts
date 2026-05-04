@@ -53,3 +53,17 @@ export interface RenderedGuide {
   title: string;
   html: string;
 }
+
+export interface SellerMessageTemplate {
+  key: string;
+  label: string;
+  seller_name_pattern: string; // case-insensitive substring match against item.seller
+  intro: string;
+  line_format: string;
+  closing: string;
+}
+
+export interface SellerMessagesFile {
+  _note?: string;
+  templates: SellerMessageTemplate[];
+}

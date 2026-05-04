@@ -9,19 +9,22 @@ import { CardGrid } from "./CardGrid";
 import { FilterBar } from "./FilterBar";
 import { HaulFooter } from "./HaulFooter";
 import { ShippingPanel } from "./ShippingPanel";
+import { SellerCopyButtons } from "./SellerCopyButtons";
 import { useFilterState } from "@/lib/useFilterState";
 import { useWishlist } from "@/lib/useWishlist";
 import { applyFilters, distinctCategories } from "@/lib/filters";
 import { itemKey } from "@/lib/items";
 import type { Item } from "@/types/catalog";
 import type { ShippingData } from "@/types/shipping";
+import type { SellerMessagesFile } from "@/types/notes";
 
 export interface HaulClientProps {
   items: Item[];
   shippingData: ShippingData;
+  sellerMessages: SellerMessagesFile;
 }
 
-export function HaulClient({ items, shippingData }: HaulClientProps) {
+export function HaulClient({ items, shippingData, sellerMessages }: HaulClientProps) {
   const { state, set } = useFilterState();
   const { wishlist } = useWishlist();
   const wishedItems = useMemo(
@@ -53,6 +56,7 @@ export function HaulClient({ items, shippingData }: HaulClientProps) {
           <>
             <CardGrid items={filtered} />
             <HaulFooter items={wishedItems} />
+            <SellerCopyButtons items={wishedItems} data={sellerMessages} />
             <ShippingPanel data={shippingData} items={wishedItems} />
           </>
         )}

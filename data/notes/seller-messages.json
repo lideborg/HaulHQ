@@ -1,0 +1,45 @@
+{
+  "_note": "Per-seller message templates for the Haul tab's 'Copy message for X' buttons. Tokens in line_format: {{user_label}} {{item_code}} {{variant}} {{size}} {{url}} {{photo_url}}. Match strategy: 'seller_name_pattern' is a case-insensitive substring match against item.seller; first matching template wins. The 'default' template is the fallback.",
+  "templates": [
+    {
+      "key": "happywhale",
+      "label": "HappyWhale",
+      "seller_name_pattern": "happywhale",
+      "intro": "Hi! Here are the items I'd like quotes on — variant for the eyewear noted in parens.\n",
+      "line_format": "{{item_code_pad}}{{user_label}}{{variant_paren}} — {{url}}",
+      "closing": ""
+    },
+    {
+      "key": "enzo",
+      "label": "Enzo Optical",
+      "seller_name_pattern": "enzooopticl",
+      "intro": "Hi! Following up on:\n",
+      "line_format": "Model: {{item_code}}{{variant_paren}}\nAlbum: {{url}}\nPhoto: {{photo_url}}\n",
+      "closing": "\nShipping to: New York City, NY, USA\nPayment: PayPal or Wise.\n\nThanks!"
+    },
+    {
+      "key": "logan",
+      "label": "Logan (loganhere)",
+      "seller_name_pattern": "loganhere",
+      "intro": "Hi! Could you send Superbuy/Weidian links + quotes for these? Sizing comes after.\n",
+      "line_format": "{{user_label}}{{variant_paren}} — {{url}}",
+      "closing": ""
+    },
+    {
+      "key": "mvt-shop01",
+      "label": "MVT-Shop01",
+      "seller_name_pattern": "mvt-shop01",
+      "intro": "Hi! Could you send a Superbuy/Weidian link + quote for this?\n",
+      "line_format": "{{user_label}} — {{url}}",
+      "closing": ""
+    },
+    {
+      "key": "default",
+      "label": "Generic",
+      "seller_name_pattern": "",
+      "intro": "Hi! Could you send Superbuy/Weidian links + quotes for these?\n",
+      "line_format": "{{user_label}}{{variant_paren}}{{item_code_paren}} — {{url}}",
+      "closing": ""
+    }
+  ]
+}

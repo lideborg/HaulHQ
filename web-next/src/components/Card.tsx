@@ -13,6 +13,8 @@
 import { useState } from "react";
 import type { Item } from "@/types/catalog";
 import { imagesOf, formatPrice } from "@/lib/items";
+import { useWishlist } from "@/lib/useWishlist";
+import { WishStar } from "./WishStar";
 
 export interface CardProps {
   item: Item;
@@ -22,6 +24,7 @@ export function Card({ item }: CardProps) {
   const images = imagesOf(item);
   const [activeIdx, setActiveIdx] = useState(0);
   const hero = images[activeIdx] ?? images[0];
+  const { isWished, toggle } = useWishlist();
 
   return (
     <article className="flex flex-col">
@@ -36,6 +39,7 @@ export function Card({ item }: CardProps) {
           />
         ) : null}
         <StatusBadges item={item} />
+        <WishStar active={isWished(item)} onToggle={() => toggle(item)} />
       </div>
 
       <ThumbStrip

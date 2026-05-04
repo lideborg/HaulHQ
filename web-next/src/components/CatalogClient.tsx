@@ -6,6 +6,7 @@
 import { useMemo } from "react";
 import { CardGrid } from "./CardGrid";
 import { FilterBar } from "./FilterBar";
+import { HaulPeek } from "./HaulPeek";
 import { useFilterState } from "@/lib/useFilterState";
 import { applyFilters, distinctCategories } from "@/lib/filters";
 import type { Item } from "@/types/catalog";
@@ -34,6 +35,7 @@ export function CatalogClient({ items }: CatalogClientProps) {
       <main className="mx-auto max-w-[1180px] px-8 pb-24 pt-10">
         <CardGrid items={filtered} />
       </main>
+      <HaulPeek items={items} />
     </>
   );
 }

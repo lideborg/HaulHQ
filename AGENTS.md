@@ -33,7 +33,10 @@ Every PR — human-authored or AI-authored — goes through this loop **before m
 
 - **Open work-in-progress PRs as drafts.** Mark "Ready for review" only after both self-reviews pass.
 - **Branch base** for stacked PRs: explicitly set `--base <prev-branch>` and call out the stack in the PR description.
-- **Don't `--force-push`** unless a reviewer asks. Add fix-up commits instead.
+- **Don't `--force-push`** during review. Add fix-up commits instead so reviewers can see what changed.
+  Exception: it's fine to `--force-with-lease` on your own branch when restacking onto an updated base
+  (e.g. parent PR was merged) **before** posting any review activity. The rule's purpose is preserving
+  review history, not banning rebases.
 
 ## Repo layout
 

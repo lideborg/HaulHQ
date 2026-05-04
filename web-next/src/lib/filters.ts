@@ -5,23 +5,41 @@ import { categoryLabel, priceCny } from "./items";
 
 export type SortMode = "default" | "price-desc" | "price-asc";
 export type OwnerFilter = "all" | "hampus" | "jan" | "shared";
-export type ViewMode = "grid" | "list" | "compact";
 
 export interface FilterState {
-  category: string; // category key OR "all"
+  q: string;            // free-text search
+  category: string;     // category key OR "all"
   owner: OwnerFilter;
   sort: SortMode;
   showOos: boolean;
-  view: ViewMode;
 }
 
 export const DEFAULT_FILTERS: FilterState = {
+  q: "",
   category: "all",
   owner: "all",
   sort: "default",
   showOos: false,
-  view: "grid",
 };
+
+export function passesQuery(item: Item, q: string): boolean {
+  const needle = q.trim().toLowerCase();
+  if (!needle) return true;
+  const haystack = [
+    item.user_label,
+    item.brand,
+    item.title,
+    item.title_translated,
+    item.item_code,
+    item.model_code,
+    item.target_variant,
+    item.description,
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+  return haystack.includes(needle);
+}
 
 export function passesCategory(item: Item, category: string): boolean {
   if (category === "all") return true;
@@ -71,6 +89,7 @@ export function applyFilters(items: Item[], state: FilterState): Item[] {
     items.filter(
       (it) =>
         passesVisibility(it, state.showOos) &&
+        passesQuery(it, state.q) &&
         passesCategory(it, state.category) &&
         passesOwner(it, state.owner)
     ),
@@ -86,7 +105,6 @@ export function distinctCategories(items: Item[]): string[] {
   for (const it of items) {
     if (!it.category) continue;
     const label = categoryLabel(it.category);
-    // Keep the first key seen for that label — used as the chip's value.
     if (!labelToKey.has(label)) labelToKey.set(label, it.category);
   }
   return [...labelToKey.values()].sort((a, b) =>

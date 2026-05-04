@@ -1,15 +1,11 @@
 "use client";
 
-// Top-level client wrapper for the Catalog tab. Owns filter + view-mode
-// state; underlying ItemList swaps between Grid / List / Compact.
+// Top-level client wrapper for the Catalog tab. Owns filter state; the
+// underlying CardGrid is pure presentation.
 
 import { useMemo } from "react";
-import { ItemList } from "./ItemList";
-import { CategoryFilter } from "./CategoryFilter";
-import { OwnerFilterBar } from "./OwnerFilter";
-import { SortControl } from "./SortControl";
-import { ViewModeToggle } from "./ViewModeToggle";
-import { BulkActions } from "./BulkActions";
+import { CardGrid } from "./CardGrid";
+import { FilterBar } from "./FilterBar";
 import { useFilterState } from "@/lib/useFilterState";
 import { applyFilters, distinctCategories } from "@/lib/filters";
 import type { Item } from "@/types/catalog";
@@ -29,30 +25,14 @@ export function CatalogClient({ items }: CatalogClientProps) {
 
   return (
     <>
-      <CategoryFilter
+      <FilterBar
+        state={state}
         categories={categories}
-        active={state.category}
-        onChange={(category) => set({ category })}
-      />
-      <OwnerFilterBar
-        active={state.owner}
-        onChange={(owner) => set({ owner })}
-      />
-      <SortControl
-        sort={state.sort}
-        showOos={state.showOos}
         hiddenCount={hiddenCount}
-        onSortChange={(sort) => set({ sort })}
-        onShowOosChange={(showOos) => set({ showOos })}
+        onChange={set}
       />
-      <div className="flex justify-center">
-        <ViewModeToggle active={state.view} onChange={(view) => set({ view })} />
-      </div>
-      <div className="flex justify-center">
-        <BulkActions visibleItems={filtered} />
-      </div>
       <main className="mx-auto max-w-[1180px] px-8 pb-24 pt-10">
-        <ItemList items={filtered} view={state.view} />
+        <CardGrid items={filtered} />
       </main>
     </>
   );

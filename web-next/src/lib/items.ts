@@ -44,3 +44,21 @@ export function categoryLabel(c: string | null | undefined): string {
 export function itemKey(item: Item): string {
   return `${item._dir}|${item.user_label}|${item.url ?? ""}`;
 }
+
+// Yupoo seller listings paste the same factory-pricing marketing blurb
+// onto every item description. It adds noise to the modal without saying
+// anything about the product. Strip it (and the trailing emojis / link
+// glyphs) so what's left is the actually-useful detail.
+const YUPOO_BOILERPLATE_PATTERNS: RegExp[] = [
+  /Direct factory pricing[^\.]*\.\s*Stop overpaying!\s*Contact us for factory price[^\.]*\.\s*/i,
+  /Direct factory pricing[^.]*$/i,
+  /🔗\s*$/u,
+  /\s*Category:\s*[^.]+\.\s*$/i,
+];
+
+export function cleanDescription(raw: string | null | undefined): string {
+  if (!raw) return "";
+  let s = String(raw);
+  for (const re of YUPOO_BOILERPLATE_PATTERNS) s = s.replace(re, "");
+  return s.trim();
+}

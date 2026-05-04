@@ -106,7 +106,7 @@ function ModalContent({
             <p className="m-0 text-[13px] text-(--color-muted)">{item.title_translated}</p>
           ) : null}
           <p className="m-0 text-[14px] font-medium tracking-[0.02em]">
-            {formatPrice(item.price)}
+            {formatPrice(item)}
           </p>
           <dl className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 text-[12px]">
             {dlRows

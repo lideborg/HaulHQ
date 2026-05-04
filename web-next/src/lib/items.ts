@@ -2,7 +2,10 @@
 
 import type { Item } from "@/types/catalog";
 
-const CNY_PER_USD = 6.83;
+// Single source of truth for the CNY → USD conversion rate.
+// Keep in sync with data/shipping-data.json:_meta.currency_assumptions.cny_per_usd.
+// Phase 2 will pull this from the shipping-data row instead of a constant.
+export const CNY_PER_USD = 6.83;
 
 export function imagesOf(item: Item): string[] {
   if (item.local_image_paths?.length) {
@@ -17,15 +20,23 @@ export function priceCny(item: Pick<Item, "price">): number {
   return m ? parseFloat(m[1]) : 0;
 }
 
-export function formatPrice(p: string | null | undefined): string {
-  if (!p) return "—";
-  const m = String(p).match(/[¥￥]\s*(\d+(?:\.\d+)?)/);
-  if (m) {
-    const cny = parseFloat(m[1]);
-    const usd = Math.round(cny / CNY_PER_USD);
-    return `${p}  ($${usd})`;
+// Prefer the stored price_usd if the item has one (more accurate — set at
+// scrape time from the seller's actual quote). Fall back to converting
+// price_cny via CNY_PER_USD.
+export function priceUsd(item: Pick<Item, "price" | "price_usd">): number {
+  if (item.price_usd) {
+    const m = String(item.price_usd).match(/\$\s*(\d+(?:\.\d+)?)/);
+    if (m) return parseFloat(m[1]);
   }
-  return p;
+  return priceCny(item) / CNY_PER_USD;
+}
+
+export function formatPrice(item: Pick<Item, "price" | "price_usd">): string {
+  if (!item.price) return "—";
+  const cny = priceCny(item);
+  if (cny === 0) return item.price;
+  const usd = Math.round(priceUsd(item));
+  return `${item.price}  ($${usd})`;
 }
 
 export function categoryLabel(c: string | null | undefined): string {

@@ -5,12 +5,12 @@
 // user applied in the grid above.
 
 import { useMemo, useState } from "react";
-import { priceCny } from "@/lib/items";
+import { priceCny, priceUsd } from "@/lib/items";
 import { useWishlist } from "@/lib/useWishlist";
 import type { Item } from "@/types/catalog";
 
-const CNY_PER_USD = 6.83;
-const fmt = (cny: number) => `¥${cny.toFixed(2)}  ($${Math.round(cny / CNY_PER_USD)})`;
+const fmt = (totals: { cny: number; usd: number }) =>
+  `¥${totals.cny.toFixed(2)}  ($${Math.round(totals.usd)})`;
 
 interface OwnerBuckets {
   hampus: Item[];
@@ -31,10 +31,15 @@ function bucket(items: Item[]): OwnerBuckets {
   return out;
 }
 
-const sumOf = (arr: Item[]) => arr.reduce((s, it) => s + priceCny(it), 0);
+const sumCny = (arr: Item[]) => arr.reduce((s, it) => s + priceCny(it), 0);
+const sumUsd = (arr: Item[]) => arr.reduce((s, it) => s + priceUsd(it), 0);
+// Both totals at once so callers display them consistently.
+function sumOf(arr: Item[]): { cny: number; usd: number } {
+  return { cny: sumCny(arr), usd: sumUsd(arr) };
+}
 
 export function HaulFooter({ items }: { items: Item[] }) {
-  const totalCny = useMemo(() => sumOf(items), [items]);
+  const total = useMemo(() => sumOf(items), [items]);
   const buckets = useMemo(() => bucket(items), [items]);
   const [toast, setToast] = useState<"ok" | "err" | null>(null);
   const { clear } = useWishlist();
@@ -42,7 +47,7 @@ export function HaulFooter({ items }: { items: Item[] }) {
   if (items.length === 0) return null;
 
   const copy = async () => {
-    const text = renderHaulSnippet(items, buckets, totalCny);
+    const text = renderHaulSnippet(items, buckets, total);
     try {
       await navigator.clipboard.writeText(text);
       setToast("ok");
@@ -64,7 +69,7 @@ export function HaulFooter({ items }: { items: Item[] }) {
 
       <div className="mt-4 flex items-baseline justify-between border-t border-(--color-border) pt-3">
         <span className="text-[14px] text-neutral-700">Total  ·  {items.length} items</span>
-        <span className="text-[20px] font-semibold">{fmt(totalCny)}</span>
+        <span className="text-[20px] font-semibold">{fmt(total)}</span>
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2">
@@ -104,7 +109,11 @@ function Row({ label, value, hide }: { label: string; value: string; hide?: bool
   );
 }
 
-function renderHaulSnippet(items: Item[], buckets: OwnerBuckets, totalCny: number): string {
+function renderHaulSnippet(
+  items: Item[],
+  buckets: OwnerBuckets,
+  total: { cny: number; usd: number }
+): string {
   const lineFor = (it: Item) => {
     const code = it.item_code ? `#${it.item_code}` : "";
     const variant = it.target_variant ? ` (${it.target_variant})` : "";
@@ -125,6 +134,6 @@ function renderHaulSnippet(items: Item[], buckets: OwnerBuckets, totalCny: numbe
   block("Jan", buckets.jan);
   block("Shared", buckets.shared);
   block("Unassigned", buckets.unknown);
-  sections.push(`## Total  ·  ${items.length} items  ·  ${fmt(totalCny)}`);
+  sections.push(`## Total  ·  ${items.length} items  ·  ${fmt(total)}`);
   return sections.join("\n");
 }

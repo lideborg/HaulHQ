@@ -6,6 +6,7 @@
 
 import { useMemo, useState } from "react";
 import { priceCny } from "@/lib/items";
+import { useWishlist } from "@/lib/useWishlist";
 import type { Item } from "@/types/catalog";
 
 const CNY_PER_USD = 6.83;
@@ -36,6 +37,7 @@ export function HaulFooter({ items }: { items: Item[] }) {
   const totalCny = useMemo(() => sumOf(items), [items]);
   const buckets = useMemo(() => bucket(items), [items]);
   const [toast, setToast] = useState<"ok" | "err" | null>(null);
+  const { clear } = useWishlist();
 
   if (items.length === 0) return null;
 
@@ -77,6 +79,16 @@ export function HaulFooter({ items }: { items: Item[] }) {
         </button>
         {toast === "ok" ? <span className="text-[12px] text-emerald-700">Copied ✓</span> : null}
         {toast === "err" ? <span className="text-[12px] text-red-700">Copy failed — see console</span> : null}
+        <span className="ml-auto">
+          <button
+            onClick={() => {
+              if (window.confirm(`Clear all ${items.length} items from your haul?`)) clear();
+            }}
+            className="text-[11px] text-(--color-muted) hover:text-red-700 hover:underline"
+          >
+            Clear haul
+          </button>
+        </span>
       </div>
     </div>
   );

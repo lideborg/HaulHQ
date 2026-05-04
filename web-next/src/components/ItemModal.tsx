@@ -9,7 +9,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { Item } from "@/types/catalog";
-import { imagesOf, formatPrice, itemKey } from "@/lib/items";
+import { imagesOf, formatPrice, itemKey, cleanDescription } from "@/lib/items";
 
 export interface ItemModalProps {
   item: Item | null;
@@ -121,9 +121,9 @@ function ModalContent({
               ))}
           </dl>
           <SizeChart item={item} />
-          {item.description ? (
+          {cleanDescription(item.description) ? (
             <p className="m-0 text-[13px] leading-relaxed text-neutral-700">
-              {item.description}
+              {cleanDescription(item.description)}
             </p>
           ) : null}
           {item.url ? (

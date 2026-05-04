@@ -37,3 +37,19 @@ export interface GlossaryFile {
   abbreviations: AbbreviationEntry[];
   terminology: TerminologyEntry[];
 }
+
+export interface GuideEntry {
+  slug: string;
+  title: string;
+  file: string; // relative to data/notes/, but resolves into research/
+}
+
+export interface NotesIndex {
+  guides: GuideEntry[];
+}
+
+export interface RenderedGuide {
+  slug: string;
+  title: string;
+  html: string;
+}

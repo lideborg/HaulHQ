@@ -1,0 +1,65 @@
+{
+  "user_label": "Gats Blue Paint",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1027828764261",
+  "source_url": "https://item.taobao.com/item.htm?id=1027828764261",
+  "title": "MVT Gats（blue paint）",
+  "title_translated": "MVT Gats (blue paint splatter colorway)",
+  "description": "MVT Gats — German training shoe in 'blue paint' splatter colorway. Top-grain cowhide upper and lining, sheepskin insole. Lace closure, flat heel, round toe. Sizes EU 40–47. Hampus prefers EU 41 (≈ 26.5 cm).",
+  "price_rmb": "¥462.11",
+  "price_usd_estimate": "$73.39",
+  "sizing": "EU 40, 41, 42, 43, 44, 45, 46, 47",
+  "sizes": [
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47"
+  ],
+  "variants": [
+    "blue paint"
+  ],
+  "target_variant": "blue paint",
+  "seller_id": "2222102384444",
+  "brand": "MVT",
+  "item_code": null,
+  "seller": "gatsvt",
+  "image_urls": [
+    "https://img.alicdn.com/imgextra/i4/2222102384444/O1CN01EfFvsF1ihPF2zyvD6_!!2222102384444.jpg",
+    "https://img.alicdn.com/imgextra/i1/2222102384444/O1CN01nNGZcX1ihPF300KUs_!!2222102384444.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i4/2222102384444/O1CN01Y5hbYM1ihPF1zjDLt_!!2222102384444.png"
+  ],
+  "params": {
+    "Brands": "other",
+    "popular elements": "Sewing thread",
+    "style": "Leisure",
+    "Vamp Lining Material": "First layer cowhide",
+    "Suitable": "youth",
+    "Color": "blue paint"
+  },
+  "source": "taobao",
+  "category": "shoes",
+  "notes": "Hero photos pulled from listing; spec/sizing chart in detail image. Hampus's pick: 26.5 cm = EU 41.",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "price_usd": "$68",
+  "price": "¥462.11",
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "preferred_size": "EU 41 (26.5 cm)",
+  "local_image_paths": [
+    "images/gats-blue-paint/g000.jpg",
+    "images/gats-blue-paint/g001.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/gats-blue-paint/d000.png"
+  ],
+  "target_size": "41"
+}

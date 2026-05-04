@@ -1,0 +1,108 @@
+{
+  "user_label": "TR Shorts (a)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D804490894236",
+  "source_url": "https://item.taobao.com/item.htm?id=804490894236",
+  "title": "T row style wool shorts men's 24 summer five-point pants are loose and casual without wearing black texture and good elastic bands",
+  "title_translated": "T row style wool shorts men's 24 summer five-point pants are loose and casual without wearing black texture and good elastic bands",
+  "description": "T row style wool shorts men's 24 summer five-point pants are loose and casual without wearing black texture and good elastic bands",
+  "price": "¥435.57",
+  "price_rmb": "¥435.57",
+  "price_usd": "$63.77",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "black",
+    "S",
+    "M",
+    "L"
+  ],
+  "seller_id": "2212795883826",
+  "brand": "The Row (rep)",
+  "item_code": null,
+  "seller": "Spring seconds according to the agreement",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/2212795883826/O1CN016vSno11e8MJKHWfGa_!!2212795883826.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/2212795883826/O1CN013rjaGH1e8MOYs8Bjj_!!2212795883826.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/2212795883826/O1CN01F9HhbL1e8MOX1S17O_!!2212795883826.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2212795883826/O1CN01qqOqQC1e8MOX1R0jc_!!2212795883826.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2212795883826/O1CN01y9WnGp1e8MOZEpOnZ_!!2212795883826.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2212795883826/O1CN01d47VAn1e8MOXfZPL9_!!2212795883826.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2212795883826/O1CN01ElUZUO1e8MJML3qC4_!!2212795883826.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i2/2212795883826/O1CN01a5gh941e8MOuyDOgM_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212795883826/O1CN01THtkb01e8MOw0jkjE_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i1/2212795883826/O1CN01wDI5vm1e8MOX1YOex_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i4/2212795883826/O1CN01Y8o0YZ1e8MOwhqJZ3_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i2/2212795883826/O1CN01ZQ0wZI1e8MOwYsZQD_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212795883826/O1CN01TDmHqc1e8MOuyFXiD_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i4/2212795883826/O1CN01Op24Na1e8MJNOa9Zg_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i4/2212795883826/O1CN01fhWaOL1e8MJD2LQWw_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i4/2212795883826/O1CN01QgCpkP1e8MJLnxGl2_!!2212795883826.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212795883826/O1CN01MakSGl1e8MJKevlge_!!2212795883826.jpg"
+  ],
+  "params": {
+    "Brands": "Others (Apparel)",
+    "Season": "summer",
+    "Clothing version": "Loose",
+    "Year of season": "Summer 2024",
+    "Long pants": "Shorts",
+    "size": "S,M,L",
+    "style": "other",
+    "Color": "black"
+  },
+  "source": "taobao",
+  "category": "apparel-bottom",
+  "notes": "10 detail images captured. Size chart parsed from d002.jpg.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "measurements": {
+      "shorts_length": [
+        49,
+        50,
+        51
+      ],
+      "waist": [
+        "74-88",
+        "76-90",
+        "82-96"
+      ]
+    },
+    "source_image": "images/tr-shorts-a/d002.jpg"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/tr-shorts-a/g001.jpg",
+    "images/tr-shorts-a/g000.jpg",
+    "images/tr-shorts-a/g002.jpg",
+    "images/tr-shorts-a/g003.jpg",
+    "images/tr-shorts-a/g004.jpg",
+    "images/tr-shorts-a/g005.jpg",
+    "images/tr-shorts-a/g006.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/tr-shorts-a/d000.jpg",
+    "images/tr-shorts-a/d001.jpg",
+    "images/tr-shorts-a/d002.jpg",
+    "images/tr-shorts-a/d003.jpg",
+    "images/tr-shorts-a/d004.jpg",
+    "images/tr-shorts-a/d005.jpg",
+    "images/tr-shorts-a/d006.jpg",
+    "images/tr-shorts-a/d007.jpg",
+    "images/tr-shorts-a/d008.jpg",
+    "images/tr-shorts-a/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "skipped": true,
+  "skipped_reason": "Hampus chose not to buy this"
+}

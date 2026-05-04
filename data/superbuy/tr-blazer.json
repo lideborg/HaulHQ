@@ -1,0 +1,143 @@
+{
+  "user_label": "TR Blazer",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1047602124385",
+  "source_url": "https://item.taobao.com/item.htm?id=1047602124385",
+  "title": "Row 80-count double yarn 100 wool spring thin cupro lined suit jacket",
+  "title_translated": "Row 80-count double yarn 100 wool spring thin cupro lined suit jacket",
+  "description": "Row 80-count double yarn 100 wool spring thin cupro lined suit jacket",
+  "price": "¥1172.47",
+  "price_rmb": "¥1172.47",
+  "price_usd": "$171.66",
+  "sizing": "S 44, M 46, L 48, XL 50, XXL 52",
+  "sizes": [
+    "S 44",
+    "M 46",
+    "L 48",
+    "XL 50",
+    "XXL 52"
+  ],
+  "variants": [
+    "black"
+  ],
+  "seller_id": "2942007530",
+  "brand": "The Row (rep)",
+  "item_code": null,
+  "seller": "TheWang",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i3/2942007530/O1CN01k90DEw25UnVl4uPWH_!!2942007530.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2942007530/O1CN01Onkf3t25UnVlXDk21_!!2942007530.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2942007530/O1CN01t2ZGdM25UnVl4uPWF_!!2942007530.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2942007530/O1CN015CtcxN25UnVl4vkkS_!!2942007530.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i1/2942007530/O1CN01BrYvMr25UnVlO7z3l_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i1/2942007530/O1CN0110Yrcy25UnVl6KQQp_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i4/2942007530/O1CN01h8JFhm25UnVla2uPp_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i2/2942007530/O1CN01rC2UIL25UnVla3eEJ_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i3/2942007530/O1CN01EHXQRo25UnVlXYxF2_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i2/2942007530/O1CN01TbjzXC25UnVgh2ytZ_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i3/2942007530/O1CN01qNRIwo25UnVlq2TRo_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i3/2942007530/O1CN01vS3L4q25UnVlGLJMJ_!!2942007530.jpg",
+    "https://img.alicdn.com/imgextra/i4/2942007530/O1CN01x8UDPQ25UnVldPGml_!!2942007530.jpg"
+  ],
+  "params": {
+    "Brands": "5cm",
+    "Version": "Loose",
+    "To apply a gender": "Unisex",
+    "Fabrics": "Pure wool worsted",
+    "style": "Leisure wind",
+    "Suitable": "middle aged",
+    "Features": "Glossy, soft, breathable",
+    "Applicable scene": "Daily, commuting, business, work, leisure",
+    "Rear slit type": "No slit",
+    "Year of season": "Spring 2026",
+    "Collar": "Flat collar",
+    "Placket": "Two single-breasted",
+    "pattern": "Solid color",
+    "size": "XXL,S,M,L,XL",
+    "Color": "black"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "9 detail images captured. Size chart parsed from d001.jpg.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+    ],
+    "measurements": {
+      "front_length": [
+        77,
+        79,
+        81,
+        83,
+        85
+      ],
+      "back_length": [
+        75,
+        77,
+        78,
+        80,
+        82
+      ],
+      "bust": [
+        107,
+        111,
+        115,
+        119,
+        123
+      ],
+      "shoulder": [
+        49.5,
+        50.5,
+        51.5,
+        52.5,
+        53.5
+      ],
+      "hem": [
+        106,
+        110,
+        114,
+        118,
+        122
+      ],
+      "sleeve": [
+        63,
+        64,
+        65,
+        66,
+        67
+      ]
+    },
+    "source_image": "images/tr-blazer/d001.jpg"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/tr-blazer/g000.jpg",
+    "images/tr-blazer/g001.jpg",
+    "images/tr-blazer/g002.jpg",
+    "images/tr-blazer/g003.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/tr-blazer/d000.jpg",
+    "images/tr-blazer/d001.jpg",
+    "images/tr-blazer/d002.jpg",
+    "images/tr-blazer/d003.jpg",
+    "images/tr-blazer/d004.jpg",
+    "images/tr-blazer/d005.jpg",
+    "images/tr-blazer/d006.jpg",
+    "images/tr-blazer/d007.jpg",
+    "images/tr-blazer/d008.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "XXL (52)"
+}

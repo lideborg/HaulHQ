@@ -1,0 +1,67 @@
+{
+  "user_label": "Gats",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1027027777468",
+  "source_url": "https://item.taobao.com/item.htm?id=1027027777468",
+  "title": "MVT Gats（black）",
+  "title_translated": "MVT Gats (black)",
+  "description": "MVT Gats — German training shoe in black. Top-grain cowhide upper with cowhide lining, lace closure, flat heel, round toe. Casual / sport-leisure styling, Spring 2026 season. Sizes EU 40–47, single colorway (black).",
+  "price_rmb": "¥418.41",
+  "price_usd_estimate": "$418.41",
+  "sizing": "EU 40, 41, 42, 43, 44, 45, 46, 47",
+  "sizes": [
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47"
+  ],
+  "variants": [
+    "black"
+  ],
+  "seller_id": "2222102384444",
+  "brand": "MVT",
+  "item_code": null,
+  "seller": "gatsvt",
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/2222102384444/O1CN01Sv0vPh1ihPF31GLAQ~crop,7,0,1305,1305~_!!2222102384444.jpg",
+    "https://img.alicdn.com/imgextra/i4/2222102384444/O1CN01EfFvsF1ihPF2zyvD6_!!2222102384444.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i4/2222102384444/O1CN01Y5hbYM1ihPF1zjDLt_!!2222102384444.png"
+  ],
+  "params": {
+    "Brands": "other",
+    "Style": "Leisure",
+    "Vamp Lining Material": "First layer cowhide",
+    "Upper material": "Cowhide",
+    "Closure": "Lace",
+    "Occasion": "Sports and leisure",
+    "Season": "Spring 2026",
+    "Collection": "German training shoes",
+    "Heel": "Flat",
+    "Shoe shape": "Round head",
+    "Color": "black"
+  },
+  "source": "taobao",
+  "category": "shoes",
+  "notes": "Single hero image plus a tall description PNG that likely contains shoe-spec details. Sizing chart not yet OCR'd.",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "local_image_paths": [
+    "images/gats/g000.jpg",
+    "images/gats/g001.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/gats/d000.png"
+  ],
+  "price_usd": "$61.26",
+  "price": "¥418.41",
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

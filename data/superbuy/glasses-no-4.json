@@ -1,0 +1,56 @@
+{
+  "user_label": "Glasses number 4",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemId%3D7688271614%26vc_cps_track%3D1459920903_0_0",
+  "source_url": "https://weidian.com/item.html?itemId=7688271614",
+  "title": "SL572",
+  "title_translated": "SL572 (Saint Laurent SL572-style sunglasses)",
+  "description": "Saint Laurent SL572-style rectangular black sunglasses, sold by Weidian shop \"GodsGlasses\". Rep with branded \"SAINT LAURENT\" arms and \"MADE IN ITALY\" temple marking; ships in a Saint Laurent-branded gift box with ribbon as shown. Five colorway/lens variants are offered (numbered 1–5 in the picker; pictured here is variant 1, glossy black with smoke lens).",
+  "price_rmb": "¥350",
+  "price_usd_estimate": "$55.42",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "1 (black/smoke)",
+    "2",
+    "3",
+    "4",
+    "5"
+  ],
+  "seller_id": "wdseller1534758718",
+  "brand": "Saint Laurent (rep)",
+  "item_code": "SL572",
+  "seller": "GodsGlasses",
+  "image_urls": [
+    "https://si.geilicdn.com/wdseller1534758718-7ef80000019c2649b8030a23c1e0_1575_1578.jpg",
+    "https://si.geilicdn.com/wdseller1534758718-54740000019c264a31bc0a2305d8_1442_1444.jpg",
+    "https://si.geilicdn.com/wdseller1534758718-4c850000019c264a16700a2303ea_1442_1444.jpg",
+    "https://si.geilicdn.com/wdseller1534758718-1a060000019c2649fab70a230417_1442_1444.jpg",
+    "https://si.geilicdn.com/wdseller1534758718-54730000019c2649d53c0a2305d8_1442_1444.jpg"
+  ],
+  "detail_image_urls": [],
+  "params": {
+    "Stock": "9",
+    "Service Fee": "≈US $0 / item",
+    "Risk flags": "Sensitive Items, Battered Items, Sensitive Product Risk"
+  },
+  "source": "weidian",
+  "category": "eyewear",
+  "notes": "Eyewear listing — no sizing chart provided (typical for sunglasses on Weidian). Five color/lens variants. Underlying model is Saint Laurent SL572. Real-world SL572 published frame measurements are typically 56-19-145 (lens-bridge-temple, mm) — not verified for this rep, listing does not state.",
+  "size_chart": null,
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/glasses-no-4/g000.jpg",
+    "images/glasses-no-4/g001.jpg",
+    "images/glasses-no-4/g002.jpg",
+    "images/glasses-no-4/g003.jpg",
+    "images/glasses-no-4/g004.jpg"
+  ],
+  "local_detail_image_paths": [],
+  "price_usd": "$55.42",
+  "price": "¥350",
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

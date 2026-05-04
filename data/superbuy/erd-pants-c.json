@@ -1,0 +1,122 @@
+{
+  "user_label": "ERD Pants (court trousers 24FW)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D872661171336",
+  "source_url": "https://item.taobao.com/item.htm?id=872661171336",
+  "title": "{Top men's taste choice}erd24fw Melancholic rich second-generation straight-leg loose wool old money style court trousers",
+  "title_translated": "{Top men's taste choice}erd24fw Melancholic rich second-generation straight-leg loose wool old money style court trousers",
+  "description": "{Top men's taste choice}erd24fw Melancholic rich second-generation straight-leg loose wool old money style court trousers",
+  "price": "¥446.99",
+  "price_rmb": "¥446.99",
+  "price_usd": "$65.45",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "black",
+    "44",
+    "46",
+    "48",
+    "42 (custom code)"
+  ],
+  "seller_id": "2215800851954",
+  "brand": "Enfants Riches Déprimés (rep)",
+  "item_code": null,
+  "seller": "Crypto made",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i3/2215800851954/O1CN01esOUlx1QIyvIl0yRJ_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2215800851954/O1CN018aWk041QIywFxMuXO_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2215800851954/O1CN012nhf3F1QIywGismTe_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2215800851954/O1CN01od2E2c1QIywH0oXFu_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/2215800851954/O1CN01HgysK71QIywIf7blq_!!2215800851954.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i1/2215800851954/O1CN01nqFaal1QIywKDCtkY_!!2215800851954.jpg",
+    "https://gw.alicdn.com/imgextra/i1/O1CN01vWMf4v25HVynQwwXa_!!6000000007501-2-tps-1240-450.png",
+    "https://gtms01.alicdn.com/tps/i1/TB1AHXiGXXXXXXAXVXX.uTD.FXX-10-10.png",
+    "https://img.alicdn.com/imgextra/i3/2215800851954/O1CN01eaCsqR1QIywJHMETC_!!2215800851954.jpg",
+    "https://img.alicdn.com/imgextra/i1/2215800851954/O1CN01QVQaMQ1QIywKDEyiT_!!2215800851954.jpg",
+    "https://img.alicdn.com/imgextra/i3/2215800851954/O1CN01Lbn7sX1QIywGUssNm_!!2215800851954.jpg",
+    "https://img.alicdn.com/imgextra/i4/2215800851954/O1CN01bgEx101QIyw8xl8K0_!!2215800851954.jpg",
+    "https://img.alicdn.com/imgextra/i4/2215800851954/O1CN019JjerY1QIywEAjJO4_!!2215800851954.jpg",
+    "https://img.alicdn.com/imgextra/i1/2215800851954/O1CN01aLKWD31QIyvIQPzoj_!!2215800851954.jpg",
+    "https://img.alicdn.com/imgextra/i2/2215800851954/O1CN01yufsmW1QIyvKW6mPb_!!2215800851954.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Season": "autumn",
+    "Year of season": "Spring 2025",
+    "Long pants": "trousers",
+    "Subdivision style": "Cool wind",
+    "size": "42 (custom code), 44, 46, 48",
+    "Basis style": "other",
+    "For people": "youth",
+    "Applicable scene": "Leisure",
+    "Color": "black"
+  },
+  "source": "taobao",
+  "category": "apparel-bottom",
+  "notes": "10 detail images captured. Size chart parsed from d003.jpg.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "42",
+      "44",
+      "46",
+      "48"
+    ],
+    "measurements": {
+      "waist": [
+        78,
+        82,
+        86,
+        90
+      ],
+      "hips": [
+        106,
+        110,
+        114,
+        118
+      ],
+      "thigh": [
+        76,
+        78,
+        80,
+        82
+      ],
+      "pants_length": [
+        110,
+        113,
+        115,
+        117
+      ]
+    },
+    "source_image": "images/erd-pants-c/d003.jpg"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/erd-pants-c/g000.jpg",
+    "images/erd-pants-c/g001.jpg",
+    "images/erd-pants-c/g002.jpg",
+    "images/erd-pants-c/g003.jpg",
+    "images/erd-pants-c/g004.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/erd-pants-c/d000.jpg",
+    "images/erd-pants-c/d001.png",
+    "images/erd-pants-c/d002.png",
+    "images/erd-pants-c/d003.jpg",
+    "images/erd-pants-c/d004.jpg",
+    "images/erd-pants-c/d005.jpg",
+    "images/erd-pants-c/d006.jpg",
+    "images/erd-pants-c/d007.jpg",
+    "images/erd-pants-c/d008.jpg",
+    "images/erd-pants-c/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "skipped": true,
+  "skipped_reason": "Hampus chose not to buy this"
+}

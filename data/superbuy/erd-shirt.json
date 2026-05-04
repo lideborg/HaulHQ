@@ -1,0 +1,131 @@
+{
+  "user_label": "ERD Shirt",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D843882194434",
+  "source_url": "https://item.taobao.com/item.htm?id=843882194434",
+  "title": "ERD's melancholy rich second-generation slogan washed, splashed ink, wormhole hoodie, sweatshirt, American casual, Bai Jingting, the same style",
+  "title_translated": "ERD's melancholy rich second-generation slogan washed, splashed ink, wormhole hoodie, sweatshirt, American casual, Bai Jingting, the same style",
+  "description": "ERD's melancholy rich second-generation slogan washed, splashed ink, wormhole hoodie, sweatshirt, American casual, Bai Jingting, the same style",
+  "price": "¥280.16",
+  "price_rmb": "¥280.16",
+  "price_usd": "$41.02",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "flecking gray",
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "seller_id": "2510981490",
+  "brand": "Enfants Riches Déprimés (rep)",
+  "item_code": null,
+  "seller": "INFINITE Club",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/2510981490/O1CN01jkyYAD1MsT8bvwaHJ_!!2510981490.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2510981490/O1CN01wIk5ls1MsT8Yonr7P_!!2510981490.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2510981490/O1CN01N9MyxF1MsT8bwR7kB_!!2510981490.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2510981490/O1CN019nssyJ1MsT8ceV1xQ_!!2510981490.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2510981490/O1CN01A0pphR1MsT8awCYzY_!!2510981490.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2510981490/O1CN01AgyQqL1MsT8Yop84T_!!2510981490.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i1/2510981490/O1CN01l2fx2P1MsT6ilV1tX_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i2/2510981490/O1CN013YSlJG1MsT6IIBqY3_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i4/2510981490/O1CN01NFngAp1MsT8YC0xef_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i4/2510981490/O1CN01O4iyCU1MsT8c86pa3_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i2/2510981490/O1CN01vrEoEK1MsT8c87q2J_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i1/2510981490/O1CN01hpFmwD1MsT8YGZvwA_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i4/2510981490/O1CN01Fcmgzr1MsT9K0WjKP_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i1/2510981490/O1CN01eksTHF1MsT9L2kTw5_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i3/2510981490/O1CN01V8ZTKy1MsT9JftXaL_!!2510981490.jpg",
+    "https://img.alicdn.com/imgextra/i1/2510981490/O1CN01roQRBK1MsT9JZ0yEn_!!2510981490.jpg"
+  ],
+  "params": {
+    "Brands": "SIMPLE CYCLE",
+    "Fit classification": "Loose",
+    "Design details": "Distressed",
+    "Basis style": "Youth pop",
+    "Sleeve Type": "conventional",
+    "For people": "youth",
+    "Applicable scene": "daily",
+    "Season": "spring autumn winter",
+    "Collection": "Sleeve",
+    "Place of origin": "China",
+    "thickness": "conventional",
+    "Year of season": "Fall 2024",
+    "Sleeve length type": "Long sleeve",
+    "style": "American",
+    "Collar design": "Hooded",
+    "pattern": "Text",
+    "size": "S,M,L,XL",
+    "Color": "flecking gray"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "10 detail images captured. Size chart parsed from d002.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "length": [
+        62,
+        64,
+        66,
+        68
+      ],
+      "bust": [
+        144,
+        148,
+        152,
+        156
+      ],
+      "sleeve": [
+        53,
+        54,
+        55,
+        56
+      ],
+      "shoulder": [
+        74,
+        76,
+        78,
+        80
+      ]
+    },
+    "source_image": "images/erd-shirt/d002.jpg"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/erd-shirt/g000.jpg",
+    "images/erd-shirt/g001.jpg",
+    "images/erd-shirt/g002.jpg",
+    "images/erd-shirt/g003.jpg",
+    "images/erd-shirt/g004.jpg",
+    "images/erd-shirt/g005.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/erd-shirt/d000.jpg",
+    "images/erd-shirt/d001.jpg",
+    "images/erd-shirt/d002.jpg",
+    "images/erd-shirt/d003.jpg",
+    "images/erd-shirt/d004.jpg",
+    "images/erd-shirt/d005.jpg",
+    "images/erd-shirt/d006.jpg",
+    "images/erd-shirt/d007.jpg",
+    "images/erd-shirt/d008.jpg",
+    "images/erd-shirt/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "S"
+}

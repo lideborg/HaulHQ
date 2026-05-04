@@ -1,0 +1,128 @@
+{
+  "user_label": "Lem Charcoal Grey",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1039628446453",
+  "source_url": "https://item.taobao.com/item.htm?id=1039628446453",
+  "title": "SOSO LEM style quiet luxury and elegance minimalist drape worsted Australian wool two-tone casual pleated straight-leg trousers",
+  "title_translated": "SOSO LEM style quiet luxury and elegance minimalist drape worsted Australian wool two-tone casual pleated straight-leg trousers",
+  "description": "SOSO LEM style quiet luxury and elegance minimalist drape worsted Australian wool two-tone casual pleated straight-leg trousers",
+  "price": "¥394.94",
+  "price_rmb": "¥394.94",
+  "price_usd": "$57.82",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "Khaki",
+    "Charcoal gray",
+    "42",
+    "44",
+    "46",
+    "48"
+  ],
+  "seller_id": "2212129711476",
+  "brand": "LEMAIRE (rep)",
+  "item_code": null,
+  "seller": "sososry",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/2212129711476/O1CN01SAzKff1Mm3j20lu1U_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2212129711476/O1CN01vQ0WuB1Mm3j1rDpfF_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2212129711476/O1CN01ogcFE11Mm3j2D7FAQ_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2212129711476/O1CN01Phoqgn1Mm3j1rEdWL_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/2212129711476/O1CN01jAuKCM1Mm3j3TTNjG_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/2212129711476/O1CN01QZCBLx1Mm3j2HRuP6_!!2212129711476.png",
+    "https://img.alicdn.com/bao/uploaded/i1/2212129711476/O1CN01uzcvbu1Mm3j2VTaAV_!!2212129711476.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN016TjAoQ1Mm3j264dYH_!!2212129711476.png",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN011fQIaN1Mm3j3UfES6_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i4/2212129711476/O1CN01QZ1Pn51Mm3ixFDvxm_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN012ttoTp1Mm3eNwvtoO_!!2212129711476.png",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN01d3eLys1Mm3j2GEUuO_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN01FycBqG1Mm3fWzV7AH_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i2/2212129711476/O1CN01I1t0Ks1Mm3j1wVDha_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i1/2212129711476/O1CN01rzCjz81Mm3bII5kPf_!!2212129711476.png",
+    "https://img.alicdn.com/imgextra/i2/2212129711476/O1CN01Axxvom1Mm3j20l1z2_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i2/2212129711476/O1CN01vQ0WuB1Mm3j1rDpfF_!!2212129711476.jpg"
+  ],
+  "params": {
+    "Brands": "Others (Apparel)",
+    "Version": "Straight",
+    "Year of season": "Spring 2026",
+    "Design details": "Pleats",
+    "size": "42,44,46,48",
+    "Basis style": "Leisure wind",
+    "Fabrics": "wool",
+    "Are malls the same paragraph": "Pure e-commerce (only available online)",
+    "For people": "neutral",
+    "Applicable scene": "Business, work, leisure",
+    "Material composition": "55% polyester fiber 45% wool",
+    "Color": "khaki, charcoal gray"
+  },
+  "source": "taobao",
+  "category": "apparel-bottom",
+  "notes": "10 detail images captured. Size chart parsed from d002.jpg (sizes 42/44/46/48 with pants_length/waist/hips/leg_opening).",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "42",
+      "44",
+      "46",
+      "48"
+    ],
+    "measurements": {
+      "pants_length": [
+        106,
+        108,
+        110,
+        112
+      ],
+      "waist": [
+        78,
+        82,
+        86,
+        90
+      ],
+      "hips": [
+        102,
+        106,
+        110,
+        114
+      ],
+      "leg_opening": [
+        54,
+        54,
+        55,
+        55
+      ]
+    },
+    "source_image": "images/lem-charcoal-grey/d002.jpg"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/lem-charcoal-grey/g001.jpg",
+    "images/lem-charcoal-grey/g000.jpg",
+    "images/lem-charcoal-grey/g002.jpg",
+    "images/lem-charcoal-grey/g003.jpg",
+    "images/lem-charcoal-grey/g004.jpg",
+    "images/lem-charcoal-grey/g005.png",
+    "images/lem-charcoal-grey/g006.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/lem-charcoal-grey/d000.png",
+    "images/lem-charcoal-grey/d001.jpg",
+    "images/lem-charcoal-grey/d002.jpg",
+    "images/lem-charcoal-grey/d003.png",
+    "images/lem-charcoal-grey/d004.jpg",
+    "images/lem-charcoal-grey/d005.jpg",
+    "images/lem-charcoal-grey/d006.jpg",
+    "images/lem-charcoal-grey/d007.png",
+    "images/lem-charcoal-grey/d008.jpg",
+    "images/lem-charcoal-grey/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "48"
+}

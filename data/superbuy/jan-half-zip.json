@@ -1,0 +1,121 @@
+{
+  "user_label": "half zip",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D871806942943",
+  "source_url": "https://item.taobao.com/item.htm?id=871806942943",
+  "title": "VUJADE 009-FRANK KNITTED TURTLENECK HALF-ZIP WOOL SWEATER KENIJIMA'S MATCHING STAND COLLAR CROPPED",
+  "title_translated": "VUJADE 009-FRANK KNITTED TURTLENECK HALF-ZIP WOOL SWEATER KENIJIMA'S MATCHING STAND COLLAR CROPPED",
+  "description": "VUJADE 009-FRANK KNITTED TURTLENECK HALF-ZIP WOOL SWEATER KENIJIMA'S MATCHING STAND COLLAR CROPPED",
+  "price": "¥244.56",
+  "price_rmb": "¥244.56",
+  "price_usd": "$35.81",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "brown",
+    "Black (autonomous)",
+    "Gray (autonomous)",
+    "M",
+    "L",
+    "XL"
+  ],
+  "seller_id": "2958131434",
+  "brand": null,
+  "item_code": null,
+  "seller": "Tsunam1",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/2958131434/O1CN01rR6Qpw1MSozAMjz7l_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2958131434/O1CN01zumDEc1MSoz3suVaq_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2958131434/O1CN0191kIs31MSoz6Sdf8u_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2958131434/O1CN01zkOrXU1MSoz4O5cfM_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2958131434/O1CN01oFiRCM1MSoz4nlPLz_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2958131434/O1CN013Ok2Wx1MSoz4VnyfL_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2958131434/O1CN010MQWGy1MSozH0jLln_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2958131434/O1CN01wHPpcL1MSozDJ0olu_!!2958131434.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i3/2958131434/O1CN01gyl9Ej1MSozCMwiwZ_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i3/2958131434/O1CN01cdC98o1MSozCkv12g_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i1/2958131434/O1CN01pHpJPG1MSoz3t21XN_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i3/2958131434/O1CN01xxdPtS1MSoz2SwHo5_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i2/2958131434/O1CN01OvvdRx1MSoz2XdqvI_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i4/2958131434/O1CN01so2UYm1MSoz4uqGDB_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i3/2958131434/O1CN018oBoOX1MSoz3t1YQ3_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i2/2958131434/O1CN01Tbw1x51MSoz4upO7Z_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i3/2958131434/O1CN017gncSd1MSoz4JDO00_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i3/2958131434/O1CN01z1cPei1MSoz3t1Q5Z_!!2958131434.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Fabrics": "wool",
+    "style": "Youthful vitality",
+    "For people": "juvenile",
+    "Season": "Spring and autumn",
+    "Length type": "Short paragraph",
+    "The way they dress": "Sleeve",
+    "Year of season": "Spring 2025",
+    "Sleeve length type": "Long sleeve",
+    "Subdivision style": "Basic public",
+    "Collar design": "Standing collar",
+    "pattern": "Color matching",
+    "size": "M,L,XL",
+    "Color": "Brown, Black (Autonomous), Grey (Autonomous)"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "10 detail images captured. Size chart parsed from d002. Sleeve measurement is raglan (连肩袖, shoulder-to-cuff).",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "bust": [
+        108,
+        112,
+        116
+      ],
+      "length": [
+        58,
+        61,
+        64
+      ],
+      "raglan_sleeve": [
+        77,
+        79,
+        81
+      ]
+    },
+    "source_image": "images/jan-half-zip/d002.jpg"
+  },
+  "needs_sizing_parse": false,
+  "owners": [
+    "jan"
+  ],
+  "local_image_paths": [
+    "images/jan-half-zip/g000.jpg",
+    "images/jan-half-zip/g001.jpg",
+    "images/jan-half-zip/g002.jpg",
+    "images/jan-half-zip/g003.jpg",
+    "images/jan-half-zip/g004.jpg",
+    "images/jan-half-zip/g005.jpg",
+    "images/jan-half-zip/g006.jpg",
+    "images/jan-half-zip/g007.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/jan-half-zip/d000.jpg",
+    "images/jan-half-zip/d001.jpg",
+    "images/jan-half-zip/d002.jpg",
+    "images/jan-half-zip/d003.jpg",
+    "images/jan-half-zip/d004.jpg",
+    "images/jan-half-zip/d005.jpg",
+    "images/jan-half-zip/d006.jpg",
+    "images/jan-half-zip/d007.jpg",
+    "images/jan-half-zip/d008.jpg",
+    "images/jan-half-zip/d009.jpg"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

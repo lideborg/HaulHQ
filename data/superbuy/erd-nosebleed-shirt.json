@@ -1,0 +1,47 @@
+{
+  "user_label": "ERD Nosebleed Shirt",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemId%3D7430091096%26vc_cps_track%3D1459920903_0_0",
+  "source_url": "https://weidian.com/item.html?itemId=7430091096&vc_cps_track=1459920903_0_0",
+  "title": "ERD 18ss nosebleed DJ girl shirt HF",
+  "title_translated": "ERD 18ss nosebleed DJ girl shirt HF",
+  "description": "ERD 18ss nosebleed DJ girl shirt HF",
+  "price": "¥248",
+  "price_rmb": "¥248",
+  "price_usd": "$36.31",
+  "sizing": null,
+  "sizes": [],
+  "variants": [],
+  "seller_id": "pcitem901915903137",
+  "brand": "Enfants Riches Déprimés (rep)",
+  "item_code": null,
+  "seller": "top enfants",
+  "seller_url": null,
+  "image_urls": [
+    "https://si.geilicdn.com/pcitem901915903137-594900000195adb7f3200a21146b_1280_1707.jpg",
+    "https://si.geilicdn.com/pcitem901915903137-4ce600000195adb7edff0a2395d6_1280_1707.jpg",
+    "https://si.geilicdn.com/pcitem901915903137-526d00000195adb7f0910a2304aa_1280_1707.jpg"
+  ],
+  "detail_image_urls": [
+    "https://si.geilicdn.com/pcitem901915903137-4e2200000195b232719b0a2303ee-unadjust_440_342.png"
+  ],
+  "params": {},
+  "source": "weidian",
+  "category": "apparel-top",
+  "notes": "Detail image not available locally; no size chart found.",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "local_image_paths": [
+    "images/erd-nosebleed-shirt/g000.jpg",
+    "images/erd-nosebleed-shirt/g001.jpg",
+    "images/erd-nosebleed-shirt/g002.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/erd-nosebleed-shirt/d000.png"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "L"
+}

@@ -1,0 +1,101 @@
+{
+  "user_label": "Tall Pants",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D584242961352",
+  "source_url": "https://item.taobao.com/item.htm?id=584242961352",
+  "title": "European and American tall super long men's pants high-waisted wide-leg mopping trousers for men and women drape mopping trousers casual vibe style",
+  "title_translated": "European and American tall super long men's pants high-waisted wide-leg mopping trousers for men and women drape mopping trousers casual vibe style",
+  "description": "European and American tall super long men's pants high-waisted wide-leg mopping trousers for men and women drape mopping trousers casual vibe style",
+  "price": "¥146.98",
+  "price_rmb": "¥146.98",
+  "price_usd": "$21.52",
+  "sizing": "Other size, 32, 34, 35, 30, 28, 29, 31, 33, Other colors can be set",
+  "sizes": [
+    "Other size",
+    "32",
+    "34",
+    "35",
+    "30",
+    "28",
+    "29",
+    "31",
+    "33",
+    "Other colors can be set"
+  ],
+  "variants": [
+    "black"
+  ],
+  "seller_id": "672277232",
+  "brand": null,
+  "item_code": null,
+  "seller": "MAVERICK",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/672277232/O1CN01YI2xVq23IJIf8Rn9u_!!672277232.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/672277232/O1CN01UVFidP23IJIjtJOLp_!!672277232.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/672277232/O1CN01NffZTo23IJIgoLPrj_!!672277232.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/672277232/O1CN01vufz3w23IJIfRvX5e_!!672277232.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/672277232/O1CN01NiSdFV23IJIXklgM9_!!672277232.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/672277232/O1CN01xomCgV23IJImYVAgx_!!672277232.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i1/672277232/TB2g4FdxkqvpuFjSZFhXXaOgXXa_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i2/672277232/O1CN01eXUL1i23IIulaRF1R_!!672277232.png",
+    "https://img.alicdn.com/imgextra/i2/672277232/O1CN01KERPko23IJIkeL8eo_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i4/672277232/O1CN01JThjVx23IJNan3LRY_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i1/672277232/O1CN01CTWFHs23IJNZpCfc8_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i3/672277232/O1CN01mYEL3n23IIpnOqgZY_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i2/672277232/O1CN01zccXCP23IIpmXENd7_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i3/672277232/O1CN01NKis4F23IIplWNSsb_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i1/672277232/O1CN015RQaSi23IIpjjGnYX_!!672277232.jpg",
+    "https://img.alicdn.com/imgextra/i4/672277232/O1CN01EBFw9B23IIwz8rimc_!!672277232.jpg"
+  ],
+  "params": {
+    "Brands": "sui generis",
+    "Clothing version": "Loose",
+    "Long pants": "trousers",
+    "style": "Youthful vitality",
+    "For people": "youth",
+    "Applicable scene": "Other leisure",
+    "Num.": "hsc-1",
+    "Season": "Four seasons universal",
+    "Collection": "Wide leg pants",
+    "trouser hem style": "Straight",
+    "Year of season": "Spring 2023",
+    "thickness": "conventional",
+    "Subdivision style": "European and American simplicity",
+    "pattern": "Solid color",
+    "Color": "black"
+  },
+  "source": "taobao",
+  "category": "apparel-bottom",
+  "notes": "10 detail images captured. No size chart present in detail images; listing offers waist sizes 28-35 (jean-style).",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "local_image_paths": [
+    "images/tall-pants/g000.jpg",
+    "images/tall-pants/g001.jpg",
+    "images/tall-pants/g002.jpg",
+    "images/tall-pants/g003.jpg",
+    "images/tall-pants/g004.jpg",
+    "images/tall-pants/g005.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/tall-pants/d000.jpg",
+    "images/tall-pants/d001.png",
+    "images/tall-pants/d002.jpg",
+    "images/tall-pants/d003.jpg",
+    "images/tall-pants/d004.jpg",
+    "images/tall-pants/d005.jpg",
+    "images/tall-pants/d006.jpg",
+    "images/tall-pants/d007.jpg",
+    "images/tall-pants/d008.jpg",
+    "images/tall-pants/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "skipped": true,
+  "skipped_reason": "Hampus chose not to buy this"
+}

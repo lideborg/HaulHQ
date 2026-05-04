@@ -1,0 +1,125 @@
+{
+  "user_label": "TR Pants (a)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D968656890648",
+  "source_url": "https://item.taobao.com/item.htm?id=968656890648",
+  "title": "ROW Style 25SS XON Black Worsted Wool Trousers with an elastic waist and machine washable trousers with a relaxed feel of old money",
+  "title_translated": "The Row 25SS 'XON' worsted-wool trousers — black, elastic waist, machine-washable, 'old-money' relaxed fit",
+  "description": "The Row-style 'XON' worsted-wool trouser in black. Loose-fit silhouette with elastic waistband, machine-washable wool. Fall 2025 season. Single colorway (black), four sizes (XXS / XS / S / M). 'Old money' minimal styling.",
+  "price_rmb": "¥314.63",
+  "price_usd": "$46.07",
+  "sizing": "XXS, XS, S, M",
+  "sizes": [
+    "XXS",
+    "XS",
+    "S",
+    "M"
+  ],
+  "variants": [
+    "Black"
+  ],
+  "seller_id": "2958131434",
+  "brand": "The Row (rep)",
+  "item_code": "XON 25SS",
+  "seller": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i4/2958131434/O1CN011hgjYA1MSp2lbjBGI_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/2958131434/O1CN0174qp0q1MSp2luJGcH_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2958131434/O1CN01TdEC9F1MSp2kUk1gA_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2958131434/O1CN01Uqb4A21MSp2mS7RKJ_!!2958131434.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2958131434/O1CN014ymyMX1MSp2kyNdkG_!!2958131434.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i3/2958131434/O1CN01xGxSIh1MSp2mWjteL_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i2/2958131434/O1CN01ktF8yZ1MSp2m5FcPY_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i2/2958131434/O1CN01W11x521MSp2kulo74_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i4/2958131434/O1CN01B9ppPG1MSp2lbiqR0_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i1/2958131434/O1CN01WrnnAW1MSp2kukfPZ_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i2/2958131434/O1CN018EAXBw1MSp2kyPzEq_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i1/2958131434/O1CN01QjAIwY1MSp2mWmqdw_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i1/2958131434/O1CN01m8gMhU1MSp2m5GxaJ_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i4/2958131434/O1CN01OGa7u81MSp2mS9zGb_!!2958131434.jpg",
+    "https://img.alicdn.com/imgextra/i1/2958131434/O1CN01zblN621MSp2m5CKay_!!2958131434.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Fit": "Loose",
+    "Fabric": "Worsted wool",
+    "Care": "Machine wash",
+    "Pattern": "Solid color",
+    "Season": "Fall 2025",
+    "Style": "Cool wind / youth pop",
+    "Color": "Black"
+  },
+  "source": "taobao",
+  "category": "apparel-bottom",
+  "notes": "Sizing chart parsed from detail image d001.jpg (尺码表 with columns 腰围/裤长/臀围/腿围/脚口).",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "XXS",
+      "XS",
+      "S",
+      "M"
+    ],
+    "measurements": {
+      "waist": [
+        76,
+        80,
+        84,
+        88
+      ],
+      "pants_length": [
+        109,
+        110,
+        111,
+        112
+      ],
+      "hips": [
+        108,
+        110,
+        114,
+        118
+      ],
+      "thigh": [
+        33.5,
+        34.5,
+        35.5,
+        36.5
+      ],
+      "leg_opening": [
+        24.5,
+        25,
+        25.5,
+        26
+      ]
+    },
+    "source_image": "images/tr-pants-a/d001.jpg"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/tr-pants-a/g000.jpg",
+    "images/tr-pants-a/g001.jpg",
+    "images/tr-pants-a/g002.jpg",
+    "images/tr-pants-a/g003.jpg",
+    "images/tr-pants-a/g004.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/tr-pants-a/d000.jpg",
+    "images/tr-pants-a/d001.jpg",
+    "images/tr-pants-a/d002.jpg",
+    "images/tr-pants-a/d003.jpg",
+    "images/tr-pants-a/d004.jpg",
+    "images/tr-pants-a/d005.jpg",
+    "images/tr-pants-a/d006.jpg",
+    "images/tr-pants-a/d007.jpg",
+    "images/tr-pants-a/d008.jpg",
+    "images/tr-pants-a/d009.jpg"
+  ],
+  "price": "¥314.63",
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "M"
+}

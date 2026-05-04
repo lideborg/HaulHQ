@@ -1,0 +1,133 @@
+{
+  "user_label": "Raw Edge sweater",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1002059201497",
+  "source_url": "https://item.taobao.com/item.htm?id=1002059201497",
+  "title": "Tassel mesh raw edge washed double pull-toe sweatshirt",
+  "title_translated": "Tassel mesh raw edge washed double pull-toe sweatshirt",
+  "description": "Tassel mesh raw edge washed double pull-toe sweatshirt",
+  "price": "¥201.88",
+  "price_rmb": "¥201.88",
+  "price_usd": "$29.56",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "Washed blue",
+    "S 【7】",
+    "M 【7】",
+    "L 【7】",
+    "XL 【7】"
+  ],
+  "seller_id": "842049512",
+  "brand": "The Row (rep)",
+  "item_code": null,
+  "seller": null,
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/842049512/O1CN01BJ9WwD2K8YUDrXRXC_!!842049512.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/842049512/O1CN01OS13q52K8YUIU9aOL_!!842049512.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/842049512/O1CN01mJkuBV2K8YUJLDmaN_!!842049512.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i2/842049512/O1CN0122n67V2K8YUJL9Q87_!!842049512.jpg",
+    "https://img.alicdn.com/imgextra/i4/842049512/O1CN01ff1rpI2K8YUIqiDiO_!!842049512.jpg",
+    "https://img.alicdn.com/imgextra/i4/842049512/O1CN01iVZSti2K8YUJZ6jkO_!!842049512.png",
+    "https://img.alicdn.com/imgextra/i4/842049512/O1CN01RALXrS2K8YUIYEkRo_!!842049512.jpg",
+    "https://img.alicdn.com/imgextra/i4/842049512/O1CN01ayKg2a2K8YUJLBZPJ_!!842049512.jpg",
+    "https://img.alicdn.com/imgextra/i1/842049512/O1CN01Bi4La22K8YUIAlXO2_!!842049512.jpg",
+    "https://img.alicdn.com/imgextra/i1/842049512/O1CN01feoOfH2K8YUKCOc68_!!842049512.jpg",
+    "https://img.alicdn.com/imgextra/i2/842049512/O1CN01tmHZnJ2K8YUIYFgaX_!!842049512.jpg",
+    "https://img.alicdn.com/imgextra/i2/842049512/O1CN01p7pMNX2K8YUJVEKr6_!!842049512.jpg"
+  ],
+  "params": {
+    "Version": "Loose",
+    "Design details": "tassel",
+    "Crafts": "Washed",
+    "Liner material": "cotton",
+    "Fabrics": "cotton",
+    "Shopping mall with the same paragraph": "no",
+    "Sleeve design": "Drop sleeve",
+    "With or without liner": "no",
+    "Applicable scene": "daily",
+    "Material composition": "Cotton 70% Polyethylene terephthalate (polyester) 30%",
+    "To apply a gender": "male",
+    "Year of season": "Winter 2025",
+    "Sleeve length specifications": "Long sleeve",
+    "Filler type": "cotton",
+    "style": "Leisure wind",
+    "size": "S,M,L,XL",
+    "Color": "Washed blue",
+    "Brands": "patty onion cheese club",
+    "skirt design": "Ribbed hem",
+    "Suitable": "youth",
+    "Features": "Breathable",
+    "thickness": "conventional",
+    "Lining": "Polyester",
+    "Neckline design": "Baseball collar",
+    "Clothing pocket style": "Diagonal slip pocket",
+    "Length": "conventional",
+    "Placket": "zipper",
+    "Whether with a hat": "no"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "9 detail images captured. Size chart parsed from d002.png.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "length": [
+        62,
+        64,
+        66,
+        68
+      ],
+      "bust": [
+        130,
+        134,
+        138,
+        142
+      ],
+      "shoulder": [
+        62,
+        64,
+        66,
+        68
+      ],
+      "sleeve": [
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    "source_image": "images/raw-edge-sweater/d002.png"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/raw-edge-sweater/g000.jpg",
+    "images/raw-edge-sweater/g001.jpg",
+    "images/raw-edge-sweater/g002.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/raw-edge-sweater/d000.jpg",
+    "images/raw-edge-sweater/d001.jpg",
+    "images/raw-edge-sweater/d002.png",
+    "images/raw-edge-sweater/d003.jpg",
+    "images/raw-edge-sweater/d004.jpg",
+    "images/raw-edge-sweater/d005.jpg",
+    "images/raw-edge-sweater/d006.jpg",
+    "images/raw-edge-sweater/d007.jpg",
+    "images/raw-edge-sweater/d008.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "M"
+}

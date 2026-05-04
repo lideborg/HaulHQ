@@ -18,15 +18,14 @@ build/
 .context/
 .playwright-mcp/
 
-# --- Debug screenshots (root-level one-offs) ---
-debug-*.jpeg
-debug-*.png
-gats-splatter-page.jpeg
-glasses-*-top*.jpeg
-glasses-*-desc*.jpeg
-prada-*-album.jpeg
-prada-204491930-album.jpeg
-web-next-first-render.jpeg
+# --- Debug screenshots / temp images at repo root ---
+# Anything image-shaped at the root is presumed to be a one-off scratch
+# capture (browser screenshots, scrape debugging). Real images live under
+# data/<source>/images/, public/, or web-next/public/.
+/*.jpeg
+/*.jpg
+/*.png
+/*.webp
 
 # --- Temp scrape dumps at repo root ---
 scrape-*.json

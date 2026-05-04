@@ -2,6 +2,8 @@
 
 These are the durable rules for working on this repo (apply to humans and to AI agents alike).
 
+> **AI agents: read this file before any edit, push, or merge.** It supersedes general defaults from your training. If a rule here conflicts with what you'd otherwise do, this file wins.
+
 ## Source control
 
 - **Logical, scoped commits.** A commit should answer one question. If the message wants to be "and / also", split it.

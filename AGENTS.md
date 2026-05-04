@@ -44,8 +44,8 @@ Every PR — human-authored or AI-authored — goes through this loop **before m
 - `data/` — catalog content (JSON files + mirrored images). Source of truth for Phase 1.
 - `research/` — markdown notes (sizing, shipping, customs, sellers, scraping playbook).
 - `scripts/` — Python helpers for scraping, image download, sizing parse.
-- `web/` — legacy static site (vanilla JS). Kept until Next.js port reaches parity, then removed.
-- `web-next/` — Next.js 16 + TypeScript + Tailwind app. The future home of the site.
+- `web-next/` — Next.js 16 + TypeScript + Tailwind app.
+- `supabase/` — Phase 2 backend: project config + SQL migrations. See `supabase/README.md`.
 
 ## Code style
 
@@ -56,5 +56,5 @@ Every PR — human-authored or AI-authored — goes through this loop **before m
 
 ## Phase plan (2026-05-04)
 
-- **Phase 1 — Next.js port (current)**: feature-parity with the static site, JSON files still on disk.
-- **Phase 2 — Database + agents (later)**: Supabase (Postgres + auth + storage), Drizzle ORM, scraper agents writing into the same DB.
+- **Phase 1 — Next.js port (DONE)**: feature-parity with the legacy static site, JSON files still on disk.
+- **Phase 2 — Database + agents (in progress)**: Supabase (Postgres + auth + storage), Drizzle ORM, scraper agents writing into the same DB. See `supabase/README.md` for project ref, env vars, and migration conventions.

@@ -134,5 +134,7 @@
     "images/jan-beige-track-jacket/d009.jpg"
   ],
   "requires_contact": false,
-  "acquisition": "superbuy"
+  "acquisition": "superbuy",
+  "skipped": true,
+  "skipped_reason": "Jan declined (slide deck 2026-05-04)"
 }

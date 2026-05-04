@@ -9,6 +9,7 @@ import { CategoryFilter } from "./CategoryFilter";
 import { OwnerFilterBar } from "./OwnerFilter";
 import { SortControl } from "./SortControl";
 import { ViewModeToggle } from "./ViewModeToggle";
+import { BulkActions } from "./BulkActions";
 import { useFilterState } from "@/lib/useFilterState";
 import { applyFilters, distinctCategories } from "@/lib/filters";
 import type { Item } from "@/types/catalog";
@@ -46,6 +47,9 @@ export function CatalogClient({ items }: CatalogClientProps) {
       />
       <div className="flex justify-center">
         <ViewModeToggle active={state.view} onChange={(view) => set({ view })} />
+      </div>
+      <div className="flex justify-center">
+        <BulkActions visibleItems={filtered} />
       </div>
       <main className="mx-auto max-w-[1180px] px-8 pb-24 pt-10">
         <ItemList items={filtered} view={state.view} />

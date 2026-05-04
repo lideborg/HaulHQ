@@ -1,15 +1,12 @@
 "use client";
 
-// Haul tab — wishlisted items + grand-total footer. Filter UI is shared
+// Haul tab — wishlisted items + grand-total footer. Shares the filter bar
 // with Catalog so users can drill into "Hampus's haul" or "just eyewear",
 // but the footer always reflects the FULL wishlist.
 
 import { useMemo } from "react";
-import { ItemList } from "./ItemList";
-import { CategoryFilter } from "./CategoryFilter";
-import { OwnerFilterBar } from "./OwnerFilter";
-import { SortControl } from "./SortControl";
-import { ViewModeToggle } from "./ViewModeToggle";
+import { CardGrid } from "./CardGrid";
+import { FilterBar } from "./FilterBar";
 import { HaulFooter } from "./HaulFooter";
 import { ShippingPanel } from "./ShippingPanel";
 import { useFilterState } from "@/lib/useFilterState";
@@ -32,38 +29,21 @@ export function HaulClient({ items, shippingData }: HaulClientProps) {
     [items, wishlist]
   );
   const categories = useMemo(() => distinctCategories(wishedItems), [wishedItems]);
-  // Wishlisted items always pass the visibility filter (out-of-stock items
-  // you've picked stay visible).
+  // Wishlisted items always pass the visibility filter (skipped/oos items
+  // you've already picked stay visible in the haul).
   const filtered = useMemo(
     () => applyFilters(wishedItems, { ...state, showOos: true }),
     [wishedItems, state]
   );
-  const hiddenCount = useMemo(
-    () => items.filter((it) => it.out_of_stock || it.skipped).length,
-    [items]
-  );
 
   return (
     <>
-      <CategoryFilter
+      <FilterBar
+        state={state}
         categories={categories}
-        active={state.category}
-        onChange={(category) => set({ category })}
+        hiddenCount={0}
+        onChange={set}
       />
-      <OwnerFilterBar
-        active={state.owner}
-        onChange={(owner) => set({ owner })}
-      />
-      <SortControl
-        sort={state.sort}
-        showOos={state.showOos}
-        hiddenCount={hiddenCount}
-        onSortChange={(sort) => set({ sort })}
-        onShowOosChange={(showOos) => set({ showOos })}
-      />
-      <div className="flex justify-center">
-        <ViewModeToggle active={state.view} onChange={(view) => set({ view })} />
-      </div>
       <main className="mx-auto max-w-[1180px] px-8 pb-24 pt-10">
         {wishedItems.length === 0 ? (
           <div className="py-16 text-center text-(--color-muted)">
@@ -71,7 +51,7 @@ export function HaulClient({ items, shippingData }: HaulClientProps) {
           </div>
         ) : (
           <>
-            <ItemList items={filtered} view={state.view} />
+            <CardGrid items={filtered} />
             <HaulFooter items={wishedItems} />
             <ShippingPanel data={shippingData} items={wishedItems} />
           </>

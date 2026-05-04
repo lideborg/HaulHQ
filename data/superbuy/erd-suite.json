@@ -1,0 +1,125 @@
+{
+  "user_label": "ERD suite",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D972650911842",
+  "source_url": "https://item.taobao.com/item.htm?id=972650911842",
+  "title": "[Exclusive Spot] ERD 24FW Rose Belt Suit First cut pure wool suit",
+  "title_translated": "Enfants Riches Déprimés (ERD) 24FW — 'Rose Belt' first-cut pure wool suit",
+  "description": "ERD 24FW 'Rose Belt' single-breasted suit (jacket; vendor labels listing as 'suite'). Standard fit, conventional thickness, suit collar, no rear vent, long sleeves. First-cut pure wool, solid colorway, single-breasted closure. Sizes EU 44 / 46 / 48 / 50. Fall 2025 / 24FW season. Vendor lists no brand registration.",
+  "price_rmb": "¥1734.83",
+  "price_usd": "$254.00",
+  "sizing": "EU 44, 46, 48, 50",
+  "sizes": [
+    "44",
+    "46",
+    "48",
+    "50"
+  ],
+  "variants": [],
+  "seller_id": "3162495111",
+  "brand": "Enfants Riches Déprimés (rep)",
+  "item_code": "Rose Belt 24FW",
+  "seller": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/3162495111/O1CN01bRQiqv1nctNeiY4f1_!!3162495111.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/3162495111/O1CN01CFrddi1nctNYvXR8M_!!3162495111.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/3162495111/O1CN01acdYXa1nctNf8DlaH_!!3162495111.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/3162495111/O1CN019Gr5sW1nctNdf3I3y_!!3162495111.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/3162495111/O1CN01T88EhG1nctNeGEhtq_!!3162495111.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i3/3162495111/O1CN01yJRSGY1nctNeXNNHj_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i2/3162495111/O1CN018kcaw51nctOhpcj5p_!!3162495111.png",
+    "https://img.alicdn.com/imgextra/i2/3162495111/O1CN018rIFK21nctNfZ5SJA_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i1/3162495111/O1CN01vbJCJQ1nctNdf8OJ5_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i1/3162495111/O1CN01vGGuam1nctNf6pa8s_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i3/3162495111/O1CN01CwPUHs1nctNfCJ0Q2_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i1/3162495111/O1CN015UbMpk1nctNecrfUD_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i3/3162495111/O1CN01BjI3hO1nctNf6rSXz_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i3/3162495111/O1CN01Vb4b3S1nctNfZ7CRO_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i4/3162495111/O1CN017j7oJn1nctNfCGWaZ_!!3162495111.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Fit": "Standard",
+    "Thickness": "Conventional",
+    "Sleeve": "Long",
+    "Collar": "Suit collar",
+    "Placket": "Single-breasted",
+    "Rear vent": "None",
+    "Pattern": "Solid color",
+    "Style": "Youthful / 'old-money'",
+    "Season": "Fall 2025 (24FW)"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "10 detail images captured; sizing chart parsed from detail image d001.png (ENFANTS RICHES DÉPRIMÉS size chart, cm). Chart shows shoulder, bust (chest), front length, back mid length, and sleeve — no separate back-width row; 'length' key holds front length and 'back_width' is replaced by 'back_length' (back mid length).",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "44",
+      "46",
+      "48",
+      "50"
+    ],
+    "measurements": {
+      "shoulder": [
+        46,
+        48,
+        50,
+        52
+      ],
+      "chest": [
+        111,
+        115,
+        119,
+        123
+      ],
+      "length": [
+        79,
+        81,
+        83,
+        85
+      ],
+      "back_length": [
+        77,
+        79,
+        81,
+        83
+      ],
+      "sleeve": [
+        65,
+        66,
+        67,
+        68
+      ]
+    },
+    "source_image": "images/erd-suite/d001.png"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/erd-suite/g000.jpg",
+    "images/erd-suite/g001.jpg",
+    "images/erd-suite/g002.jpg",
+    "images/erd-suite/g003.jpg",
+    "images/erd-suite/g004.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/erd-suite/d000.jpg",
+    "images/erd-suite/d001.png",
+    "images/erd-suite/d002.jpg",
+    "images/erd-suite/d003.jpg",
+    "images/erd-suite/d004.jpg",
+    "images/erd-suite/d005.jpg",
+    "images/erd-suite/d006.jpg",
+    "images/erd-suite/d007.jpg",
+    "images/erd-suite/d008.jpg",
+    "images/erd-suite/d009.jpg"
+  ],
+  "price": "¥1734.83",
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "48"
+}

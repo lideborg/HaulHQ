@@ -1,0 +1,39 @@
+# --- Dependencies / build outputs ---
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# --- Local env / IDE ---
+.env
+.env.local
+.env*.local
+.DS_Store
+.vscode/
+.idea/
+
+# --- Tooling state ---
+.context/
+.playwright-mcp/
+
+# --- Debug screenshots (root-level one-offs) ---
+debug-*.jpeg
+debug-*.png
+gats-splatter-page.jpeg
+glasses-*-top*.jpeg
+glasses-*-desc*.jpeg
+prada-*-album.jpeg
+prada-204491930-album.jpeg
+web-next-first-render.jpeg
+
+# --- Temp scrape dumps at repo root ---
+scrape-*.json
+prada-album-list.json
+prada-y00978-rescrape.json
+photo-id-maps.json
+origin-maps.json
+map-blcg.json
+img-card-structure.json
+test-output.json

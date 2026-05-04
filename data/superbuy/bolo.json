@@ -1,0 +1,68 @@
+{
+  "user_label": "Bolo",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemId%3D7242908891%26vc_cps_track%3D1459920903_0_0",
+  "source_url": "https://weidian.com/item.html?itemId=7242908891&vc_cps_track=1459920903_0_0",
+  "title": "Triangle logo cowhide formal casual bow tie",
+  "title_translated": "Triangle logo cowhide formal casual bow tie",
+  "description": "Triangle logo cowhide formal casual bow tie",
+  "price": "¥160",
+  "price_rmb": "¥160",
+  "price_usd": "$23.43",
+  "sizing": null,
+  "sizes": [],
+  "variants": [],
+  "seller_id": "1390148631",
+  "brand": "Bolo (style)",
+  "item_code": null,
+  "seller": null,
+  "seller_url": null,
+  "image_urls": [
+    "https://si.geilicdn.com/wdseller1390148631-426400000194d805576b0a239646_735_790.jpg",
+    "https://si.geilicdn.com/wdseller1390148631-426400000194d805576b0a239646_735_790.jpg.webp?w=60&h=60&cp=0",
+    "https://si.geilicdn.com/wdseller1390148631-1db1000001900bc7183e0a239646_1170_1170.jpg.webp?w=60&h=60&cp=0",
+    "https://si.geilicdn.com/wdseller1390148631-45d6000001900bc718450a20e35c_1170_1170.jpg.webp?w=60&h=60&cp=0",
+    "https://si.geilicdn.com/wdseller1390148631-28b3000001900bc596be0a2102b1_3840_4596.jpg.webp?w=60&h=60&cp=0"
+  ],
+  "detail_image_urls": [
+    "https://si.geilicdn.com/weidian901984501520-4c660000019be0aeef700a8134f0_978_1200.jpg",
+    "https://si.geilicdn.com/wdseller1390148631-11c500000190692e3dbb0a22d172_1080_1080.jpg",
+    "https://si.geilicdn.com/wdseller1390148631-06b9000001900bc9ab630a20e284_1080_1920.jpg",
+    "https://si.geilicdn.com/weidian901984501520-330c0000019bdb4025140a2301b4_1170_1170.jpg",
+    "https://si.geilicdn.com/weidian901984501520-33730000019bdb4040dc0a210256_1170_1170.jpg",
+    "https://si.geilicdn.com/weidian901984501520-25d00000019bdb405dd30a20e273_1170_1170.jpg",
+    "https://si.geilicdn.com/weidian901984501520-25890000019bdb4098aa0a239846_1170_1170.jpg",
+    "https://si.geilicdn.com/weidian901984501520-3ed90000019bdb40aeaf0a23111a_1170_1170.jpg",
+    "https://si.geilicdn.com/weidian901984501520-34810000019bdb40c31f0a20e284_1170_1170.jpg",
+    "https://si.geilicdn.com/wdseller1390148631-1db1000001900bc7183e0a239646_1170_1170.jpg"
+  ],
+  "params": {},
+  "source": "weidian",
+  "category": "accessory",
+  "notes": "10 detail images captured. Sizing chart not yet parsed.",
+  "size_chart": null,
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/bolo/g000.jpg",
+    "images/bolo/g001.jpg",
+    "images/bolo/g002.jpg",
+    "images/bolo/g003.jpg",
+    "images/bolo/g004.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/bolo/d000.jpg",
+    "images/bolo/d001.jpg",
+    "images/bolo/d002.jpg",
+    "images/bolo/d003.jpg",
+    "images/bolo/d004.jpg",
+    "images/bolo/d005.jpg",
+    "images/bolo/d006.jpg",
+    "images/bolo/d007.jpg",
+    "images/bolo/d008.jpg",
+    "images/bolo/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

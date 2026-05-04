@@ -1,0 +1,10 @@
+{
+  "guides": [
+    { "slug": "superbuy", "title": "Superbuy — Platform & Fees", "file": "../../research/superbuy.md" },
+    { "slug": "shipping", "title": "Shipping Lines & Costs to US", "file": "../../research/shipping.md" },
+    { "slug": "customs-us", "title": "US Customs (post-de-minimis)", "file": "../../research/customs-us.md" },
+    { "slug": "qc-process", "title": "QC Process & Defect Checklists", "file": "../../research/qc-process.md" },
+    { "slug": "taobao-weidian-1688", "title": "Taobao / Weidian / 1688", "file": "../../research/taobao-weidian-1688.md" },
+    { "slug": "rep-community-lore", "title": "Community Lore & TS Sellers", "file": "../../research/rep-community-lore.md" }
+  ]
+}

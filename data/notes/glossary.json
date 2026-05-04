@@ -1,0 +1,643 @@
+{
+  "updated": "2026-05-02",
+  "abbreviations": [
+    {
+      "abbr": "ACG",
+      "brand": "Nike ACG (All Conditions Gear)",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "ACNE",
+      "brand": "Acne Studios",
+      "category": "designer",
+      "notes": "Sometimes just 'Acne'"
+    },
+    {
+      "abbr": "ACW",
+      "brand": "A-Cold-Wall*",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "AF1",
+      "brand": "Air Force 1 (Nike)",
+      "category": "sneakers",
+      "notes": "Model, not brand, but used as shorthand"
+    },
+    {
+      "abbr": "AJ",
+      "brand": "Air Jordan",
+      "category": "sneakers",
+      "notes": "Often AJ1, AJ4, etc."
+    },
+    {
+      "abbr": "AME",
+      "brand": "Amiri",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "AMI",
+      "brand": "AMI Paris",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "AMI2",
+      "brand": "Amiri",
+      "category": "designer",
+      "notes": "Alt"
+    },
+    {
+      "abbr": "AP",
+      "brand": "Audemars Piguet",
+      "category": "watches",
+      "notes": "r/RepTime territory"
+    },
+    {
+      "abbr": "APC",
+      "brand": "A.P.C.",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "ARC",
+      "brand": "Arc'teryx",
+      "category": "streetwear",
+      "notes": "Outdoor/techwear crossover"
+    },
+    {
+      "abbr": "BAL",
+      "brand": "Balenciaga",
+      "category": "luxury",
+      "notes": "Sometimes BLCG"
+    },
+    {
+      "abbr": "BAPE",
+      "brand": "A Bathing Ape",
+      "category": "streetwear",
+      "notes": "Already an acronym"
+    },
+    {
+      "abbr": "BBC",
+      "brand": "Billionaire Boys Club",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "BBR",
+      "brand": "Burberry",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "BLCG",
+      "brand": "Balenciaga",
+      "category": "luxury",
+      "notes": "Alt to BAL"
+    },
+    {
+      "abbr": "BOT",
+      "brand": "Bottega Veneta",
+      "category": "luxury",
+      "notes": "Alt to BV"
+    },
+    {
+      "abbr": "BV",
+      "brand": "Bottega Veneta",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "CART",
+      "brand": "Cartier",
+      "category": "luxury",
+      "notes": "Love bracelet, Juste un Clou are top targets"
+    },
+    {
+      "abbr": "CDG",
+      "brand": "Comme des Garçons",
+      "category": "designer",
+      "notes": "Includes PLAY line"
+    },
+    {
+      "abbr": "CE",
+      "brand": "Cav Empt / C.E.",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "CEL",
+      "brand": "Celine",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "CH",
+      "brand": "Chrome Hearts",
+      "category": "designer",
+      "notes": "Sometimes CHRH"
+    },
+    {
+      "abbr": "CHA",
+      "brand": "Chanel",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "CHNL",
+      "brand": "Chanel",
+      "category": "luxury",
+      "notes": "Also just 'Chanel' spelled out"
+    },
+    {
+      "abbr": "CP",
+      "brand": "C.P. Company",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "DIOR",
+      "brand": "Dior",
+      "category": "luxury",
+      "notes": "Rarely abbreviated further; CD seen for Christian Dior"
+    },
+    {
+      "abbr": "DR",
+      "brand": "Dior",
+      "category": "luxury",
+      "notes": "Occasional shorthand"
+    },
+    {
+      "abbr": "DRKSHDW",
+      "brand": "Rick Owens DRKSHDW",
+      "category": "designer",
+      "notes": "Diffusion / denim line"
+    },
+    {
+      "abbr": "ERD",
+      "brand": "Enfants Riches Déprimés",
+      "category": "designer",
+      "notes": "Among the most-repped on FR"
+    },
+    {
+      "abbr": "ESS",
+      "brand": "Fear of God Essentials",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "EVI",
+      "brand": "Evisu",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "FOG",
+      "brand": "Fear of God",
+      "category": "designer",
+      "notes": "Main line, distinct from Essentials"
+    },
+    {
+      "abbr": "GAL",
+      "brand": "Galleria (Prada bag) / Gallery Dept",
+      "category": "designer",
+      "notes": "Context-dependent"
+    },
+    {
+      "abbr": "GD",
+      "brand": "Gallery Dept",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "GG",
+      "brand": "Gucci (GG monogram) / Goyard occasionally",
+      "category": "luxury",
+      "notes": "GG usually = Gucci monogram"
+    },
+    {
+      "abbr": "GIV",
+      "brand": "Givenchy",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "GOY",
+      "brand": "Goyard",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "GUC",
+      "brand": "Gucci",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "HER",
+      "brand": "Hermès",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "HM",
+      "brand": "Hermès",
+      "category": "luxury",
+      "notes": "Alt"
+    },
+    {
+      "abbr": "JIL",
+      "brand": "Jil Sander",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "JJJ",
+      "brand": "JJJJound",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "JW",
+      "brand": "JW Anderson",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "KAP",
+      "brand": "Kapital",
+      "category": "streetwear",
+      "notes": "Japanese workwear/denim"
+    },
+    {
+      "abbr": "KAWS",
+      "brand": "KAWS",
+      "category": "streetwear",
+      "notes": "Already short"
+    },
+    {
+      "abbr": "LEM",
+      "brand": "Lemaire",
+      "category": "designer",
+      "notes": "Croissant bag is the main target"
+    },
+    {
+      "abbr": "LOE",
+      "brand": "Loewe",
+      "category": "luxury",
+      "notes": "Sometimes LOEW"
+    },
+    {
+      "abbr": "LP",
+      "brand": "Loro Piana",
+      "category": "luxury",
+      "notes": "Quiet-luxury target"
+    },
+    {
+      "abbr": "LV",
+      "brand": "Louis Vuitton",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "MAR",
+      "brand": "Maison Margiela",
+      "category": "designer",
+      "notes": "Often MM6 for the diffusion line"
+    },
+    {
+      "abbr": "MIH",
+      "brand": "Mihara Yasuhiro",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "MIU",
+      "brand": "Miu Miu",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "MM6",
+      "brand": "MM6 Maison Margiela",
+      "category": "designer",
+      "notes": "Diffusion line"
+    },
+    {
+      "abbr": "MMM",
+      "brand": "Maison Martin Margiela",
+      "category": "designer",
+      "notes": "Older spelling"
+    },
+    {
+      "abbr": "MNCLR",
+      "brand": "Moncler",
+      "category": "luxury",
+      "notes": "Sometimes MONC"
+    },
+    {
+      "abbr": "NB",
+      "brand": "New Balance",
+      "category": "sneakers",
+      "notes": ""
+    },
+    {
+      "abbr": "NDG",
+      "brand": "Needles",
+      "category": "streetwear",
+      "notes": "Track pants are the staple"
+    },
+    {
+      "abbr": "OW",
+      "brand": "Off-White",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "PALM",
+      "brand": "Palm Angels",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "PAT",
+      "brand": "Patek Philippe",
+      "category": "watches",
+      "notes": ""
+    },
+    {
+      "abbr": "PRA",
+      "brand": "Prada",
+      "category": "luxury",
+      "notes": "Often just 'Prada'"
+    },
+    {
+      "abbr": "RAF",
+      "brand": "Raf Simons",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "RL",
+      "brand": "Ralph Lauren / Red Light",
+      "category": "context",
+      "notes": "RL = Ralph Lauren as brand; RL = Red Light in QC threads"
+    },
+    {
+      "abbr": "RO",
+      "brand": "Rick Owens",
+      "category": "designer",
+      "notes": "DRKSHDW = diffusion line"
+    },
+    {
+      "abbr": "ROL",
+      "brand": "Rolex",
+      "category": "watches",
+      "notes": ""
+    },
+    {
+      "abbr": "SAL",
+      "brand": "Salomon",
+      "category": "sneakers",
+      "notes": ""
+    },
+    {
+      "abbr": "SI",
+      "brand": "Stone Island",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "SLP",
+      "brand": "Saint Laurent Paris",
+      "category": "luxury",
+      "notes": "YSL also used"
+    },
+    {
+      "abbr": "SP5DER",
+      "brand": "Sp5der Worldwide",
+      "category": "streetwear",
+      "notes": "Often '555' shorthand"
+    },
+    {
+      "abbr": "SS",
+      "brand": "Stüssy / Triple S (Balenciaga)",
+      "category": "context",
+      "notes": "Ambiguous; usually Stüssy"
+    },
+    {
+      "abbr": "STU",
+      "brand": "Stüssy",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "SUP",
+      "brand": "Supreme",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "TB",
+      "brand": "Thom Browne",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "TIFF",
+      "brand": "Tiffany & Co.",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "TNF",
+      "brand": "The North Face",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "TR",
+      "brand": "The Row",
+      "category": "designer",
+      "notes": "Hottest quiet-luxury target 2025-26"
+    },
+    {
+      "abbr": "UNIQ",
+      "brand": "Uniqlo",
+      "category": "streetwear",
+      "notes": "Usually only abbreviated in Yupoo lists"
+    },
+    {
+      "abbr": "VCA",
+      "brand": "Van Cleef & Arpels",
+      "category": "luxury",
+      "notes": "Alhambra is the rep target"
+    },
+    {
+      "abbr": "VIS",
+      "brand": "Visvim",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "VTM",
+      "brand": "Vetements",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "WTAPS",
+      "brand": "WTAPS / (W)taps",
+      "category": "streetwear",
+      "notes": ""
+    },
+    {
+      "abbr": "Y3",
+      "brand": "Y-3 (Yohji x Adidas)",
+      "category": "designer",
+      "notes": ""
+    },
+    {
+      "abbr": "YSL",
+      "brand": "Yves Saint Laurent / Saint Laurent",
+      "category": "luxury",
+      "notes": ""
+    },
+    {
+      "abbr": "YY",
+      "brand": "Yohji Yamamoto",
+      "category": "designer",
+      "notes": "Mainline; Y-3 separate"
+    },
+    {
+      "abbr": "YZY",
+      "brand": "Yeezy",
+      "category": "sneakers",
+      "notes": ""
+    }
+  ],
+  "terminology": [
+    {
+      "term": "W2C",
+      "meaning": "Where to cop / where to buy. A request post seeking a Taobao or Yupoo link for an item."
+    },
+    {
+      "term": "QC",
+      "meaning": "Quality check. Photos taken by the agent's warehouse (or seller) before shipping, posted to the sub for community verdict."
+    },
+    {
+      "term": "GL",
+      "meaning": "Green Light. Verdict on a QC meaning the item is good — proceed to ship."
+    },
+    {
+      "term": "RL",
+      "meaning": "Red Light. Verdict on a QC meaning return/refund. (Note: also = Ralph Lauren as a brand.)"
+    },
+    {
+      "term": "TS",
+      "meaning": "Trusted Seller. A community-vouched Taobao/Weidian/Yupoo seller listed on a major sub's wiki."
+    },
+    {
+      "term": "Batch",
+      "meaning": "A specific factory's production run of an item (e.g., 'OG batch', 'v3 batch', 'PK batch'). Different batches vary in accuracy."
+    },
+    {
+      "term": "Factory",
+      "meaning": "The actual manufacturer. Sneaker batches are named by factory (PK, LJR, GP, OWF). For bags, factories are usually anonymous."
+    },
+    {
+      "term": "FOB",
+      "meaning": "Free On Board. Slang claim that goods came off the same line as authentic ('factory overrun'). Usually marketing — true FOB is rare."
+    },
+    {
+      "term": "Haul",
+      "meaning": "A post showing multiple items received together. The standard celebratory format on FR/RL."
+    },
+    {
+      "term": "Rep",
+      "meaning": "Replica. Generic term for a fake item."
+    },
+    {
+      "term": "1:1",
+      "meaning": "Claim that a rep is indistinguishable from authentic. Marketing language; top-tier reps realistically hit 95–98%."
+    },
+    {
+      "term": "Super clone / super fake",
+      "meaning": "Top-tier rep, especially for watches and jewelry — implies correct movement/materials (e.g., real 18k gold for a Cartier Love)."
+    },
+    {
+      "term": "Finder fee",
+      "meaning": "A tip ($1–10 typically) paid to community members or Discord finders who locate hard-to-find Taobao/Yupoo links."
+    },
+    {
+      "term": "Spreadsheet",
+      "meaning": "A community-maintained doc of Taobao/Weidian links by brand/item (e.g., FR's CNFans spreadsheet). Default reference for popular streetwear."
+    },
+    {
+      "term": "Haul tax / Reddit tax",
+      "meaning": "The price bump TS sellers add on items hyped on Reddit. Same item is often cheaper from non-TS Yupoos at higher QC risk."
+    },
+    {
+      "term": "StockX tax / Goat tax",
+      "meaning": "The legit-resale price you avoid by going rep."
+    },
+    {
+      "term": "Yupoo",
+      "meaning": "Chinese photo-hosting site (yupoo.com) used by sellers as a free product catalog. Not a marketplace — you buy via Taobao/Weidian/WeChat."
+    },
+    {
+      "term": "Weidian",
+      "meaning": "Chinese WeChat-based marketplace. Many sellers list here instead of (or alongside) Taobao."
+    },
+    {
+      "term": "Taobao",
+      "meaning": "Alibaba's Chinese consumer marketplace. The primary source for most reps."
+    },
+    {
+      "term": "Agent / shipping agent",
+      "meaning": "A service (CNFans, Sugargoo, Kakobuy, Hoobuy, CSSBuy, Superbuy) that buys from Chinese platforms on your behalf and consolidates/ships internationally."
+    },
+    {
+      "term": "Pre-shipment QC",
+      "meaning": "Photos the agent takes of your item before international shipping. Almost all agents do this for free; always request it."
+    },
+    {
+      "term": "Consolidation / parcel",
+      "meaning": "Combining multiple orders in the agent's warehouse into one international shipment to save on line-haul cost."
+    },
+    {
+      "term": "Line / shipping line",
+      "meaning": "A specific carrier route from China to your country (e.g., 'EU sensitive line', 'US E-Express'). Trade off speed, price, and customs aggressiveness."
+    },
+    {
+      "term": "Sensitive line",
+      "meaning": "A shipping route that accepts branded/replica goods (less likely to be seized). Usually pricier and slower."
+    },
+    {
+      "term": "DHgate / AliExpress reps",
+      "meaning": "Bottom-tier rep platforms. FR/RL generally do not recommend them."
+    },
+    {
+      "term": "PK / LJR / GP / OWF",
+      "meaning": "Top sneaker rep factories. PK God, LJR, GP, OWF — each has known accuracy strengths per model."
+    },
+    {
+      "term": "Legit check",
+      "meaning": "Authentication post — community evaluating whether a piece (often gifted or secondhand) is real or rep."
+    },
+    {
+      "term": "1-yuan link",
+      "meaning": "A Taobao listing priced at 1 yuan as a placeholder. Buyer messages the seller with the SKU and the price is updated to the real amount."
+    },
+    {
+      "term": "Reverse image search",
+      "meaning": "Using Taobao image search, 1688 image search, or JadeShip to find a Chinese listing from a Western stock photo or Yupoo album image."
+    },
+    {
+      "term": "JadeShip",
+      "meaning": "Community knowledge base + browser extension that auto-converts Yupoo/Reddit/Taobao links to your chosen agent and overlays QC pics."
+    }
+  ]
+}

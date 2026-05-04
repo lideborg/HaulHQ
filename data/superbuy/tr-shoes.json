@@ -1,0 +1,97 @@
+{
+  "user_label": "TR shoes",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D966139643823",
+  "source_url": "https://item.taobao.com/item.htm?id=966139643823",
+  "title": "[In stock] ROW style high mercerized cow anti-suede CANAL brown old money minimalist suede lazy loafers",
+  "title_translated": "[In stock] ROW style high mercerized cow anti-suede CANAL brown old money minimalist suede lazy loafers",
+  "description": "[In stock] ROW style high mercerized cow anti-suede CANAL brown old money minimalist suede lazy loafers",
+  "price": "¥506.32",
+  "price_rmb": "¥506.32",
+  "price_usd": "$74.13",
+  "sizing": "44, 38, 43, 40, 41, 39, 42, 45, 46",
+  "sizes": [
+    "44",
+    "38",
+    "43",
+    "40",
+    "41",
+    "39",
+    "42",
+    "45",
+    "46"
+  ],
+  "variants": [
+    "brown"
+  ],
+  "seller_id": "2206813414132",
+  "brand": "The Row (rep)",
+  "item_code": null,
+  "seller": "The Godfather made",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/2206813414132/O1CN01vgAVEc1gOVcu9Pygm_!!2206813414132.png",
+    "https://img.alicdn.com/bao/uploaded/i4/2206813414132/O1CN01HFkemQ1gOVczXqG4z_!!2206813414132.png",
+    "https://img.alicdn.com/bao/uploaded/i1/2206813414132/O1CN01BZX1f21gOVczcgsVX_!!2206813414132.png",
+    "https://img.alicdn.com/bao/uploaded/i4/2206813414132/O1CN01Z3mI6j1gOVd0VFoJ6_!!2206813414132.png",
+    "https://img.alicdn.com/bao/uploaded/i3/2206813414132/O1CN017y1bbM1gOVd02S1Cw_!!2206813414132.png"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i3/2206813414132/O1CN01WyefRD1gOVd0JttaL_!!2206813414132.jpg",
+    "https://img.alicdn.com/imgextra/i3/2206813414132/O1CN01rT3X781gOVd0G9T36_!!2206813414132.jpg",
+    "https://img.alicdn.com/imgextra/i3/2206813414132/O1CN01H2pMVb1gOVd0tkLuN_!!2206813414132.jpg",
+    "https://img.alicdn.com/imgextra/i3/2206813414132/O1CN01aj2uSE1gOVcyjSCLV_!!2206813414132.jpg",
+    "https://img.alicdn.com/imgextra/i3/2206813414132/O1CN01mwUBkK1gOVd08zYmH_!!2206813414132.jpg",
+    "https://img.alicdn.com/imgextra/i1/2206813414132/O1CN01vgAVEc1gOVcu9Pygm_!!2206813414132.png",
+    "https://img.alicdn.com/imgextra/i4/2206813414132/O1CN01eACKcL1gOVd0ScWZe_!!2206813414132.png",
+    "https://img.alicdn.com/imgextra/i4/2206813414132/O1CN01nAKqf01gOVd06WO1L_!!2206813414132.jpg",
+    "https://img.alicdn.com/imgextra/i3/2206813414132/O1CN01l8QV8v1gOVcyus8Qc_!!2206813414132.jpg",
+    "https://img.alicdn.com/imgextra/i3/2206813414132/O1CN01swHzVc1gOVcyuqOL2_!!2206813414132.jpg"
+  ],
+  "params": {
+    "Brands": "0001",
+    "popular elements": "Sewing thread",
+    "style": "Leisure",
+    "Vamp Lining Material": "No lining",
+    "size": "42,40,45,43,38,39,44,46,41",
+    "Upper material": "Synthetic Leather",
+    "Suitable": "Youth (18-40 years old)",
+    "Closed": "One foot",
+    "occasion": "Sports and leisure",
+    "season": "summer",
+    "High heel": "Low heel (1-3cm)",
+    "Collection": "Outdoor casual shoes",
+    "Year of season": "Summer 2025",
+    "Shoe styles": "Round head",
+    "pattern": "Solid color",
+    "Color": "brown"
+  },
+  "source": "taobao",
+  "category": "shoes",
+  "notes": "10 detail images captured. Sizing chart not yet parsed.",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "local_image_paths": [
+    "images/tr-shoes/g000.png",
+    "images/tr-shoes/g001.png",
+    "images/tr-shoes/g002.png",
+    "images/tr-shoes/g003.png",
+    "images/tr-shoes/g004.png"
+  ],
+  "local_detail_image_paths": [
+    "images/tr-shoes/d000.jpg",
+    "images/tr-shoes/d001.jpg",
+    "images/tr-shoes/d002.jpg",
+    "images/tr-shoes/d003.jpg",
+    "images/tr-shoes/d004.jpg",
+    "images/tr-shoes/d005.png",
+    "images/tr-shoes/d006.png",
+    "images/tr-shoes/d007.jpg",
+    "images/tr-shoes/d008.jpg",
+    "images/tr-shoes/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

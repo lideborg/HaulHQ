@@ -1,0 +1,117 @@
+{
+  "user_label": "The Row shorts",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D924831600792",
+  "source_url": "https://item.taobao.com/item.htm?id=924831600792",
+  "title": "ROW Old Money Style TR Style 140S Australian Wool Silk Loose Loose Versatile Elasticated Waist Trousers Shorts",
+  "title_translated": "The Row 'old-money' style — 140s Australian wool / silk shorts, loose fit, elastic waist",
+  "description": "The Row-style summer shorts in 140s Australian wool with mulberry-silk content. Loose mid-rise fit, elastic waistband, straight leg opening. Single black colorway, sizes S/M/L. Summer 2025 season. Vendor specifies wool composition at 100%.",
+  "price_rmb": "¥411.43",
+  "price_usd": "$60.24",
+  "sizing": "S, M, L",
+  "sizes": [
+    "S",
+    "M",
+    "L"
+  ],
+  "variants": [
+    "Black"
+  ],
+  "seller_id": "2212129711476",
+  "brand": "The Row (rep)",
+  "item_code": null,
+  "seller": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/2212129711476/O1CN01D2nZkO1Mm3eKd4Sro_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2212129711476/O1CN01Udiu0o1Mm3eDOYkYc_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2212129711476/O1CN015auaqH1Mm3eHiM9zY_!!2212129711476.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2212129711476/O1CN01VZYcj91Mm3eHhqD95_!!2212129711476.png"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i2/2212129711476/O1CN01u698es1Mm3eK1QrjL_!!2212129711476.png",
+    "https://img.alicdn.com/imgextra/i1/2212129711476/O1CN018yaEls1Mm3eKJDTZi_!!2212129711476.png",
+    "https://img.alicdn.com/imgextra/i1/2212129711476/O1CN01QuKIs41Mm3eKadTTn_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN012ttoTp1Mm3eNwvtoO_!!2212129711476.png",
+    "https://img.alicdn.com/imgextra/i1/2212129711476/O1CN01Je4KQU1Mm3eOLiwn0_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN01FycBqG1Mm3fWzV7AH_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN01FiGPDb1Mm3ePR0xp7_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i3/2212129711476/O1CN01jmbsBJ1Mm3eNb5Wb3_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i2/2212129711476/O1CN01rKWRXc1Mm3eNx7v1h_!!2212129711476.jpg",
+    "https://img.alicdn.com/imgextra/i2/2212129711476/O1CN01kPvqur1Mm3eLnLpyJ_!!2212129711476.jpg"
+  ],
+  "params": {
+    "Fit": "Loose",
+    "Waist": "Mid waist (elastic)",
+    "Length": "Shorts",
+    "Fabric": "140s wool + mulberry silk",
+    "Material composition": "Wool 100%",
+    "Leg opening": "Straight",
+    "Pattern": "Solid color",
+    "Season": "Summer 2025",
+    "Style": "Young / 'old-money' tide"
+  },
+  "source": "taobao",
+  "category": "apparel-bottom",
+  "notes": "10 detail images captured; sizing chart parsed from detail image d001.png (columns: 尺码/腰围(松紧)/裤长/臀围). Chart only provides waist, shorts_length, and hips — thigh and leg_opening are not listed by vendor.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "measurements": {
+      "shorts_length": [
+        53,
+        54,
+        55
+      ],
+      "waist": [
+        82,
+        86,
+        90
+      ],
+      "hips": [
+        120,
+        124,
+        128
+      ],
+      "thigh": [
+        null,
+        null,
+        null
+      ],
+      "leg_opening": [
+        null,
+        null,
+        null
+      ]
+    },
+    "source_image": "images/the-row-shorts/d001.png"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/the-row-shorts/g000.jpg",
+    "images/the-row-shorts/g001.jpg",
+    "images/the-row-shorts/g002.jpg",
+    "images/the-row-shorts/g003.png"
+  ],
+  "local_detail_image_paths": [
+    "images/the-row-shorts/d000.png",
+    "images/the-row-shorts/d001.png",
+    "images/the-row-shorts/d002.jpg",
+    "images/the-row-shorts/d003.png",
+    "images/the-row-shorts/d004.jpg",
+    "images/the-row-shorts/d005.jpg",
+    "images/the-row-shorts/d006.jpg",
+    "images/the-row-shorts/d007.jpg",
+    "images/the-row-shorts/d008.jpg",
+    "images/the-row-shorts/d009.jpg"
+  ],
+  "price": "¥411.43",
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "M"
+}

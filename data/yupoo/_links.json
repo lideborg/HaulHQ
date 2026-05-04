@@ -1,0 +1,243 @@
+{
+  "_note": "Master link manifest for all Yupoo albums tracked. Includes the original RTF links plus subsequent additions.",
+  "items": [
+    {
+      "slug": "blcg-green",
+      "label": "BLCG Green",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "Y00015",
+      "category": "eyewear",
+      "album_url": "https://happywhale.x.yupoo.com/albums/197445618?uid=1&isSubCate=true&referrercate=549191",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "cartier-blue-tint-silver-frame",
+      "label": "Cartier Blue tint silver frame",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "Y00370",
+      "category": "eyewear",
+      "album_url": "https://happywhale.x.yupoo.com/albums/197447095?uid=1&isSubCate=true&referrercate=549197",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "celine-y00109-monochroms-black",
+      "label": "Celine Monochroms wraparound (Y00109, black)",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "Y00109",
+      "category": "eyewear",
+      "album_url": "https://happywhale.x.yupoo.com/albums/206658671?uid=1&isSubCate=true&referrercate=590778",
+      "preview_photo_url": "https://happywhale.x.yupoo.com/84917017?uid=1",
+      "target_variant": "Black",
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "givenchy-tee",
+      "label": "Givenchy Tee",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "",
+      "category": "apparel-top",
+      "album_url": "https://happywhale.x.yupoo.com/albums/226370984?uid=1&isSubCate=false&referrercate=4873821",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "gucci-glasses",
+      "label": "Gucci glasses",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "",
+      "category": "eyewear",
+      "album_url": "https://happywhale.x.yupoo.com/albums/191012430?uid=1&isSubCate=true&referrercate=549204",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "jan-balenci-shorts",
+      "label": "Balenci shorts",
+      "platform": "yupoo",
+      "seller": "mvt-shop01",
+      "item_code": null,
+      "category": "apparel-bottom",
+      "album_url": "https://mvt-shop01.x.yupoo.com/albums/199548214?uid=1&isSubCate=false&referrercate=",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "jan"
+      ]
+    },
+    {
+      "slug": "jan-blue-miu-miu-shirt",
+      "label": "BLUE MIU MIU SHIRT",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": null,
+      "category": "apparel-top",
+      "album_url": "https://happywhale.x.yupoo.com/albums/235801965?uid=1&isSubCate=false&referrercate=",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "jan"
+      ]
+    },
+    {
+      "slug": "jan-gm-sunglasses",
+      "label": "GM Sunglasses",
+      "platform": "yupoo",
+      "seller": "enzooopticl",
+      "item_code": null,
+      "category": "eyewear",
+      "album_url": "https://enzooopticl.x.yupoo.com/albums/223934283?uid=1&isSubCate=false&referrercate=4547040",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "jan"
+      ]
+    },
+    {
+      "slug": "jan-ol-hoodie-brown",
+      "label": "OL Hoodie brown",
+      "platform": "yupoo",
+      "seller": "loganhere",
+      "item_code": null,
+      "category": "apparel-top",
+      "album_url": "https://loganhere.x.yupoo.com/albums/162151639?uid=1&isSubCate=false&referrercate=4550879",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "jan"
+      ]
+    },
+    {
+      "slug": "jan-protocol-index-sweats",
+      "label": "protocol index sweats",
+      "platform": "yupoo",
+      "seller": "loganhere",
+      "item_code": null,
+      "category": "apparel-bottom",
+      "album_url": "https://loganhere.x.yupoo.com/albums/222463305?uid=1&isSubCate=false&referrercate=5103081",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "jan"
+      ]
+    },
+    {
+      "slug": "prada-summer-bag",
+      "label": "Prada summer bag",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "OF0200",
+      "category": "bag",
+      "album_url": "https://happywhale.x.yupoo.com/albums/200049241?uid=1&isSubCate=false&referrercate=4919642",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "prada-toiletry-b",
+      "label": "Prada Toiletry B",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "OF0147",
+      "category": "bag",
+      "album_url": "https://happywhale.x.yupoo.com/albums/200011041?uid=1&isSubCate=false&referrercate=4919642",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "prada-y00991-metal",
+      "label": "Prada Sunglasses (Y00991)",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "Y00991",
+      "category": "eyewear",
+      "album_url": "https://happywhale.x.yupoo.com/albums/204491948?uid=1&isSubCate=true&referrercate=549203",
+      "preview_photo_url": "https://happywhale.x.yupoo.com/84175687?uid=1",
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "tr-drawstring",
+      "label": "TR Drawstring",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "AF6360",
+      "category": "apparel-bottom",
+      "album_url": "https://happywhale.x.yupoo.com/albums/235201791?uid=1&isSubCate=false&referrercate=4881426",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "tr-pant",
+      "label": "TR Pant",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "AF6361",
+      "category": "apparel-bottom",
+      "album_url": "https://happywhale.x.yupoo.com/albums/235201966?uid=1&isSubCate=false&referrercate=4881426",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "ysl-y00753",
+      "label": "YSL Sunglasses (Y00753)",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "Y00753",
+      "category": "eyewear",
+      "album_url": "https://happywhale.x.yupoo.com/albums/209873064?uid=1&isSubCate=true&referrercate=549187",
+      "preview_photo_url": "https://happywhale.x.yupoo.com/86672884?uid=1",
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    },
+    {
+      "slug": "prada-01229-b11sf",
+      "label": "Prada Glasses (item 01229, MOD B11SF)",
+      "platform": "yupoo",
+      "seller": "happywhale",
+      "item_code": "01229",
+      "category": "eyewear",
+      "album_url": "https://happywhale.x.yupoo.com/albums/204491856?uid=1&isSubCate=true&referrercate=549203",
+      "preview_photo_url": null,
+      "target_variant": null,
+      "owners": [
+        "hampus"
+      ]
+    }
+  ]
+}

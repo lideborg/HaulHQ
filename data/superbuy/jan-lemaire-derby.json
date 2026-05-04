@@ -1,0 +1,61 @@
+{
+  "user_label": "lemaire derby shoe",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemId%3D7570766947%26vc_cps_track%3D1459920903_0_0",
+  "source_url": "https://weidian.com/item.html?itemId=7570766947&vc_cps_track=1459920903_0_0",
+  "title": "(48h delivery) Lemire's square-headed derby Love passed a kick",
+  "title_translated": "(48h delivery) Lemire's square-headed derby Love passed a kick",
+  "description": "(48h delivery) Lemire's square-headed derby Love passed a kick",
+  "price": null,
+  "price_rmb": null,
+  "price_usd": "$22",
+  "sizing": null,
+  "sizes": [],
+  "variants": [],
+  "seller_id": "901934352401",
+  "brand": "LEMAIRE (rep)",
+  "item_code": null,
+  "seller": "The Godfather made",
+  "seller_url": null,
+  "image_urls": [
+    "https://si.geilicdn.com/wdseller901934352401-6a2300000199dd9ecb670a239646_1180_1224.jpg",
+    "https://si.geilicdn.com/wdseller901934352401-6a2300000199dd9ecb670a239646_1180_1224.jpg.webp?w=60&h=60&cp=0",
+    "https://si.geilicdn.com/wdseller901934352401-429e00000199dd9ecbc20a210139_1180_1202.jpg.webp?w=60&h=60&cp=0"
+  ],
+  "detail_image_urls": [
+    "https://si.geilicdn.com/wdseller1673522603-3e6e0000019a44fa2e720a230449_1022_1709.jpg",
+    "https://si.geilicdn.com/wdseller1673522603-0ad80000019a44ae8cca0a239839_1206_1608.jpg",
+    "https://si.geilicdn.com/wdseller1673522603-3d1a0000019a44ae8ccc0a2302e6_1206_1608.jpg",
+    "https://si.geilicdn.com/wdseller1673522603-3d1b0000019a44ae8cf20a230449_1206_1608.jpg",
+    "https://si.geilicdn.com/wdseller1673522603-0aea0000019a44b3ae930a239839_960_1280.jpg",
+    "https://si.geilicdn.com/wdseller1673522603-3b570000019a44b3ae950a2305d8_960_1185.jpg",
+    "https://si.geilicdn.com/wdseller1673522603-3aa80000019a44b3ae950a2102b1_960_1183.jpg",
+    "https://si.geilicdn.com/wdseller1673522603-08a80000019a44b3afe80a23c286_960_1337.jpg"
+  ],
+  "params": {},
+  "source": "weidian",
+  "category": "shoes",
+  "notes": "OUT OF STOCK as of 2026-05-03. 8 detail images captured. Sizing chart not yet parsed.",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "owners": [
+    "jan"
+  ],
+  "local_image_paths": [
+    "images/jan-lemaire-derby/g000.jpg",
+    "images/jan-lemaire-derby/g001.jpg",
+    "images/jan-lemaire-derby/g002.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/jan-lemaire-derby/d000.jpg",
+    "images/jan-lemaire-derby/d001.jpg",
+    "images/jan-lemaire-derby/d002.jpg",
+    "images/jan-lemaire-derby/d003.jpg",
+    "images/jan-lemaire-derby/d004.jpg",
+    "images/jan-lemaire-derby/d005.jpg",
+    "images/jan-lemaire-derby/d006.jpg",
+    "images/jan-lemaire-derby/d007.jpg"
+  ],
+  "out_of_stock": true,
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

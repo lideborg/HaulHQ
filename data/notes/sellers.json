@@ -1,0 +1,649 @@
+{
+  "updated": "2026-05-02",
+  "verdict_legend": {
+    "trusted": "TS-listed or community-vetted; safe with normal precautions",
+    "use-via-agent": "Not vetted; only buy through Superbuy / agent escrow, never direct-pay",
+    "avoid": "Known scam patterns or strong negative signals",
+    "unknown": "Insufficient info — treat as use-via-agent"
+  },
+  "sellers": [
+    {
+      "name": "Footaction_Sneaker",
+      "yupoo": "https://footaction.x.yupoo.com/",
+      "contact": {
+        "whatsapp": "+8618065535736",
+        "instagram": "@Footaction_Sneaker"
+      },
+      "specialty": "Sneakers (Nike/Adidas/Jordan/NB/Hoka/On/Yeezy), some apparel and luxury",
+      "verdict": "use-via-agent",
+      "notes": "Massive general-purpose Yupoo. Self-claims to be 'first on Reddit's TS list' — couldn't verify on any actual TS wiki. Not on JadeShip's curated list. Direct-ship model (Wise/Zelle/PayPal) — bypasses agent escrow, which is the highest-risk archetype. If you want anything, route through Superbuy Expert Sourcing (10% fee) so they hold the goods and do QC. Don't direct-pay.",
+      "sources": [
+        "https://www.scamadviser.com/check-website/footaction.x.yupoo.com",
+        "https://www.jadeship.com/sellers/platform/yupoo"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Enzo (eyewear tier label)",
+      "yupoo": "https://sunglasses-brand.x.yupoo.com/albums/210227325",
+      "contact": {},
+      "specialty": "Replica luxury eyewear (Cartier, Gucci, Prada, etc.) — marketed as 'AAA / mirror top quality' tier",
+      "verdict": "unknown",
+      "notes": "Enzo is not a seller — it's a quality-tier label that appears as an album under multiple omnibus eyewear Yupoos (sunglasses-brand, copy-brand, joe6757, eyeglow-glasses). Treat as 'this seller's claimed better batch.' No TS write-ups, no QC threads. Hosts are mass-catalog Yupoos, not curated TS sellers. For Cartier specifically, community trusts Ms. Chen — Enzo is a step down in trust. Verify with QC, not the brochure.",
+      "sources": [
+        "https://sunglasses-brand.x.yupoo.com/albums/210227325",
+        "https://eyeglow-glasses.x.yupoo.com/categories/4509174"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "happywhale",
+      "yupoo": "https://happywhale.x.yupoo.com/",
+      "contact": {},
+      "specialty": "The Row, ERD, Lemaire, Yohji, Prada bags & eyewear, Cartier, Givenchy, Balenciaga — broad designer apparel + accessories",
+      "verdict": "unknown",
+      "notes": "Source of all 11 items currently in the catalog. Albums are organized, prices listed in CNY for apparel, dimensions for bags. No formal community write-up found yet. Default treatment: route purchases through Superbuy.",
+      "sources": [],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Heat",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "God",
+      "yupoo": "",
+      "url": "https://shop1740515896.v.weidian.com/?userid=1740515896",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Cola",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1200666234",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "FZJT",
+      "yupoo": "",
+      "url": "https://shop34829095.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend. URL field note: (Mostly wechat).",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Big Money Wang",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend. URL field note: Wechat only. URL field: Wechat only.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "RMism",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1651238208",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Turn On My Own",
+      "yupoo": "",
+      "url": "https://shop490683351.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Cool",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "William Made",
+      "yupoo": "",
+      "url": "https://shop1759817517.v.weidian.com/?userid=1759817517",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Jersey Made",
+      "yupoo": "",
+      "url": "https://shop1830297161.v.weidian.com/?userid=1830297161",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Joker",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1858725248",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Redwave",
+      "yupoo": "",
+      "url": "https://redwave.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Bear",
+      "yupoo": "",
+      "url": "https://shop191137643.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Highly recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "MVT",
+      "yupoo": "",
+      "url": "https://shop236556112.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Satan Made",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1258568610",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Chief",
+      "yupoo": "",
+      "url": "https://shop245854942.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Krypton",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "XXZ",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Chitu",
+      "yupoo": "",
+      "url": "https://shop1628880569.v.weidian.com/?userid=1628880569",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Bangbang",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "KJ Made",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "DB Made",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1629906430",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Ash Made",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1658217817",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Jenny",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1405292126",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "B197",
+      "yupoo": "",
+      "url": "https://shop122132134.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "FDA",
+      "yupoo": "",
+      "url": "https://shop383556858.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Survival Source",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Made By Swag",
+      "yupoo": "",
+      "url": "https://shop349170071.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Vogue",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Not recommended. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Vovo",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Not recommended. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Crushy",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Not recommended. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "MrLee",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Atomu",
+      "yupoo": "",
+      "url": "https://shop455952085.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Panda archive",
+      "yupoo": "",
+      "url": "https://shop1808679281.v.weidian.com/?userid=1808679281",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Gufan made",
+      "yupoo": "",
+      "url": "",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Not recommended. No URL listed on wiki.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Baiwan made",
+      "yupoo": "",
+      "url": "https://shop1871592536.v.weidian.com/?userid=1871592536",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "BDSJ made",
+      "yupoo": "",
+      "url": "https://shop291139567.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Caicaiqingxun",
+      "yupoo": "",
+      "url": "https://shop316777392.world.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Charmander",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1687832660",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Geist",
+      "yupoo": "",
+      "url": "https://shop238401705.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "i795",
+      "yupoo": "",
+      "url": "https://shop456857300.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Recommend.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "NIE",
+      "yupoo": "",
+      "url": "https://shop473803271.taobao.com/",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Xiaolan studio",
+      "yupoo": "",
+      "url": "https://weidian.com/?userid=1627919585",
+      "contact": {},
+      "specialty": "",
+      "verdict": "trusted",
+      "notes": "QualityReps wiki recommendation tier: Buy with caution.",
+      "sources": [
+        "https://www.reddit.com/r/QualityReps/wiki/seller_list/"
+      ],
+      "researched": "2026-05-02"
+    },
+    {
+      "name": "Logan (loganhere)",
+      "yupoo": "https://loganhere.x.yupoo.com/",
+      "contact": {
+        "discord": "https://discord.gg/NcpQFgtw9",
+        "whatsapp_unverified": [
+          "+8618159070918 (from third-party reseller suppliervortex — unverified)",
+          "+86 131 5918 8992 (from third-party listing)",
+          "+86 130 7777 2416 (from third-party listing)",
+          "+86 13385028267 (from third-party listing)"
+        ],
+        "wechat_unverified": "wwq20160515 (third-party listing — unverified)",
+        "email_unverified": "serviceyupoo@gmail.com (third-party listing — unverified)"
+      },
+      "specialty": "Wide multi-brand catalogue (Our Legacy, ENFANTS RICHES DEPRIMES, Vetements, MARNI, Y/PROJECT, Lululemon, sneakers etc).",
+      "verdict": "use-via-agent",
+      "notes": "Logan's own Yupoo Contact page is empty — only published contact is the Discord invite (https://discord.gg/NcpQFgtw9), which the Discord album presents as \"Click on the link below to chat with me\". Multiple third-party listings/aggregators claim WhatsApp/WeChat numbers — those are unverified and may belong to copycats or affiliates. Recommend reaching out via Discord first; if Logan replies, verify any other channel he gives. Listed by JadeShip as a Yupoo seller.",
+      "sources": [
+        "https://loganhere.x.yupoo.com/albums/186318933 — Logan's own Discord album",
+        "https://www.jadeship.com/seller/Logan"
+      ],
+      "researched": "2026-05-03"
+    },
+    {
+      "name": "Enzoo Optical (enzooopticl)",
+      "yupoo": "https://enzooopticl.x.yupoo.com/",
+      "contact": {
+        "yupoo_password": "enzoo123",
+        "note": "Password supplied by Jan on 2026-05-03; unlocks all Enzoo Optical albums (full Yupoo storefront)."
+      },
+      "specialty": "Replica eyewear (Cartier, Gucci, Prada, Jacques Marie Mage, Chrome Hearts etc).",
+      "verdict": "use-via-agent",
+      "notes": "Yupoo store-wide password is \"enzoo123\". Source: Jan. Verified working 2026-05-03 on the Monica album.",
+      "sources": [
+        "https://enzooopticl.x.yupoo.com/",
+        "https://www.tiktok.com/discover/enzoo-optical-yupoo",
+        "https://issuu.com/enzoo-optical/docs/yupoo (legitimate-looking aggregator)"
+      ],
+      "researched": "2026-05-03"
+    }
+  ]
+}

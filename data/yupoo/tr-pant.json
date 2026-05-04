@@ -1,0 +1,90 @@
+{
+  "user_label": "TR Pant",
+  "url": "https://happywhale.x.yupoo.com/albums/235201966?uid=1&isSubCate=false&referrercate=4881426",
+  "title": "￥580 THE ROW Extremely simple straight leg trousers AF6361",
+  "title_translated": "THE ROW Extremely Simple Straight Leg Trousers AF6361",
+  "description": "Trousers featuring hidden slanted pockets on both sides with neat and tight wiring, reinforced bag openings, and seamless construction without side seams. Designed for smooth and flowing lines with minimalist aesthetic. Material: Wool. Loose fit.",
+  "image_urls": [
+    "https://photo.yupoo.com/happywhale/88fc24d608/small.jpg",
+    "https://photo.yupoo.com/happywhale/7996244f42/small.jpg",
+    "https://photo.yupoo.com/happywhale/7273e1db6f/small.jpg",
+    "https://photo.yupoo.com/happywhale/b7bc1b995e/small.jpg",
+    "https://photo.yupoo.com/happywhale/301544d5be/small.jpg",
+    "https://photo.yupoo.com/happywhale/6a2e1787b8/small.jpg",
+    "https://photo.yupoo.com/happywhale/068cc9516c/small.jpg",
+    "https://photo.yupoo.com/happywhale/17a62ff090/small.jpg",
+    "https://photo.yupoo.com/happywhale/014a78e044/small.jpg",
+    "https://photo.yupoo.com/happywhale/feccdec950/small.jpg",
+    "https://photo.yupoo.com/happywhale/294094d548/small.jpg"
+  ],
+  "price": "¥320",
+  "sizing": "S, M, L, XL",
+  "variants": [
+    "Black"
+  ],
+  "notes": "Material: Wool. Model AF6361. Reported 12 photos but 11 URLs extracted.",
+  "local_image_paths": [
+    "images/tr-pant/003.jpg",
+    "images/tr-pant/000.jpg",
+    "images/tr-pant/001.jpg",
+    "images/tr-pant/002.jpg",
+    "images/tr-pant/004.jpg",
+    "images/tr-pant/005.jpg",
+    "images/tr-pant/006.jpg",
+    "images/tr-pant/007.jpg",
+    "images/tr-pant/008.jpg",
+    "images/tr-pant/009.jpg",
+    "images/tr-pant/010.jpg"
+  ],
+  "source": "yupoo",
+  "seller": "happywhale",
+  "brand": "The Row",
+  "category": "apparel-bottom",
+  "item_code": "AF6361",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "pants_length": [
+        101,
+        103,
+        105,
+        107
+      ],
+      "waist": [
+        78,
+        82,
+        86,
+        90
+      ],
+      "hip": [
+        104,
+        108,
+        112,
+        116
+      ],
+      "leg_opening": [
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    "source_image": "images/tr-pant/002.jpg"
+  },
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": true,
+  "acquisition": "contact-seller",
+  "price_rmb": "¥320",
+  "price_usd": "$47",
+  "quoted_by": "happywhale",
+  "quoted_on": "2026-05-03",
+  "target_size": "XL"
+}

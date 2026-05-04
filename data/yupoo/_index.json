@@ -1,0 +1,358 @@
+{
+  "scraped_at": "2026-05-03",
+  "total": 17,
+  "entries": [
+    {
+      "user_label": "BLCG Red",
+      "file": "blcg-green.json",
+      "url": "https://happywhale.x.yupoo.com/albums/197445618?uid=1&isSubCate=true&referrercate=549191",
+      "title_translated": "Item Y00015 Wholesale at true factory prices",
+      "image_count": 19,
+      "price": "Not specified - contact for factory price",
+      "brand": "Balenciaga",
+      "category": "eyewear",
+      "item_code": "Y00015",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": "Red"
+    },
+    {
+      "user_label": "Cartier Blue tint silver frame",
+      "file": "cartier-blue-tint-silver-frame.json",
+      "url": "https://happywhale.x.yupoo.com/albums/197447095?uid=1&isSubCate=true&referrercate=549197",
+      "title_translated": "Item Y00370 Wholesale at true factory prices",
+      "image_count": 17,
+      "price": "¥320",
+      "brand": "Cartier",
+      "category": "eyewear",
+      "item_code": "Y00370",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$47"
+    },
+    {
+      "user_label": "Celine Monochroms wraparound (Y00109, black)",
+      "file": "celine-y00109-monochroms-black.json",
+      "url": "https://happywhale.x.yupoo.com/albums/206658671?uid=1&isSubCate=true&referrercate=590778",
+      "title_translated": "Celine \"Monochroms\" wraparound rectangular sunglasses — Item Y00109. Hampus wants BLACK.",
+      "image_count": 51,
+      "price": "¥320",
+      "brand": "Celine (rep)",
+      "category": "eyewear",
+      "item_code": "Y00109",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": "Black",
+      "price_usd": "$47"
+    },
+    {
+      "user_label": "Givenchy Tee",
+      "file": "givenchy-tee.json",
+      "url": "https://happywhale.x.yupoo.com/albums/226370984?uid=1&isSubCate=false&referrercate=4873821",
+      "title_translated": "¥220 Givenchy 22FW Printing and Embroidery Washed Item 30098",
+      "image_count": 21,
+      "price": "¥280",
+      "brand": "Givenchy",
+      "category": "apparel-top",
+      "item_code": "",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$41"
+    },
+    {
+      "user_label": "Gucci glasses",
+      "file": "gucci-glasses.json",
+      "url": "https://happywhale.x.yupoo.com/albums/191012430?uid=1&isSubCate=true&referrercate=549204",
+      "title_translated": "Item 00514 – Wholesale at true factory prices (no middleman markup)",
+      "image_count": 10,
+      "price": "¥320",
+      "brand": "Gucci",
+      "category": "eyewear",
+      "item_code": "",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": "Tortoise (Hampus pick — preview photo wsxc1739543583888_5.jpg)",
+      "price_usd": "$47"
+    },
+    {
+      "user_label": "Balenci shorts",
+      "file": "jan-balenci-shorts.json",
+      "url": "https://mvt-shop01.x.yupoo.com/albums/199548214?uid=1&isSubCate=false&referrercate=",
+      "title_translated": "BLCG Distressed Shorts33",
+      "image_count": 67,
+      "price": null,
+      "brand": "Balenciaga (rep)",
+      "category": "apparel-bottom",
+      "item_code": null,
+      "seller": "mvt-shop01",
+      "source": "yupoo",
+      "owners": [
+        "jan"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null
+    },
+    {
+      "user_label": "BLUE MIU MIU SHIRT",
+      "file": "jan-blue-miu-miu-shirt.json",
+      "url": "https://happywhale.x.yupoo.com/albums/235801965?uid=1&isSubCate=false&referrercate=",
+      "title_translated": "HZ0397 miumiu  Klein Blue Embroidered Sunscreen Shirt20",
+      "image_count": 41,
+      "price": "¥320",
+      "brand": "Miu Miu (rep)",
+      "category": "apparel-top",
+      "item_code": null,
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "jan"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$47"
+    },
+    {
+      "user_label": "GM Sunglasses",
+      "file": "jan-gm-sunglasses.json",
+      "url": "https://enzooopticl.x.yupoo.com/albums/223934283?uid=1&isSubCate=false&referrercate=4547040",
+      "title_translated": "GM (Gentle Monster) \"MONICA\" sunglasses — Enzoo Optical",
+      "image_count": 69,
+      "price": "¥342",
+      "brand": "Gentle Monster (rep)",
+      "category": "eyewear",
+      "item_code": "MONICA",
+      "seller": "enzooopticl",
+      "source": "yupoo",
+      "owners": [
+        "jan"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$50"
+    },
+    {
+      "user_label": "OL Hoodie brown",
+      "file": "jan-ol-hoodie-brown.json",
+      "url": "https://loganhere.x.yupoo.com/albums/162151639?uid=1&isSubCate=false&referrercate=4550879",
+      "title_translated": "￥238 Our legacy Sweater12",
+      "image_count": 25,
+      "price": "¥238",
+      "brand": "Our Legacy (rep)",
+      "category": "apparel-top",
+      "item_code": null,
+      "seller": "loganhere",
+      "source": "yupoo",
+      "owners": [
+        "jan"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null
+    },
+    {
+      "user_label": "protocol index sweats",
+      "file": "jan-protocol-index-sweats.json",
+      "url": "https://loganhere.x.yupoo.com/albums/222463305?uid=1&isSubCate=false&referrercate=5103081",
+      "title_translated": "￥200 Protocol lndex  Pants22",
+      "image_count": 45,
+      "price": "¥200",
+      "brand": "Protocol Index",
+      "category": "apparel-bottom",
+      "item_code": null,
+      "seller": "loganhere",
+      "source": "yupoo",
+      "owners": [
+        "jan"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null
+    },
+    {
+      "user_label": "Prada summer bag",
+      "file": "prada-summer-bag.json",
+      "url": "https://happywhale.x.yupoo.com/albums/200049241?uid=1&isSubCate=false&referrercate=4919642",
+      "title_translated": "Item OF0200 – Wholesale at true factory prices (no middleman markup)",
+      "image_count": 28,
+      "price": "¥1880",
+      "brand": "Prada",
+      "category": "bag",
+      "item_code": "OF0200",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$275"
+    },
+    {
+      "user_label": "Prada Toiletry B",
+      "file": "prada-toiletry-b.json",
+      "url": "https://happywhale.x.yupoo.com/albums/200011041?uid=1&isSubCate=false&referrercate=4919642",
+      "title_translated": "Item OF0147 – Wholesale at true factory prices (no middleman markup)",
+      "image_count": 17,
+      "price": "¥650",
+      "brand": "Prada",
+      "category": "bag",
+      "item_code": "OF0147",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$95"
+    },
+    {
+      "user_label": "Prada Sunglasses (Y00991)",
+      "file": "prada-y00991-metal.json",
+      "url": "https://happywhale.x.yupoo.com/albums/204491948?uid=1&isSubCate=true&referrercate=549203",
+      "title_translated": "Prada metal-frame sunglasses — Item Y00991, hexagonal/angular gold + black metal frames, multiple lens colorways",
+      "image_count": 59,
+      "price": "¥320",
+      "brand": "Prada (rep)",
+      "category": "eyewear",
+      "item_code": "Y00991",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$47"
+    },
+    {
+      "user_label": "TR Drawstring",
+      "file": "tr-drawstring.json",
+      "url": "https://happywhale.x.yupoo.com/albums/235201791?uid=1&isSubCate=false&referrercate=4881426",
+      "title_translated": "THE ROW Drawstring Wide Leg Casual Pants - ¥380 (Model AF6360)",
+      "image_count": 10,
+      "price": "¥380",
+      "brand": "The Row",
+      "category": "apparel-bottom",
+      "item_code": "AF6360",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null
+    },
+    {
+      "user_label": "TR Pant",
+      "file": "tr-pant.json",
+      "url": "https://happywhale.x.yupoo.com/albums/235201966?uid=1&isSubCate=false&referrercate=4881426",
+      "title_translated": "THE ROW Extremely Simple Straight Leg Trousers AF6361",
+      "image_count": 11,
+      "price": "¥320",
+      "brand": "The Row",
+      "category": "apparel-bottom",
+      "item_code": "AF6361",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$47"
+    },
+    {
+      "user_label": "YSL Sunglasses (Y00753)",
+      "file": "ysl-y00753.json",
+      "url": "https://happywhale.x.yupoo.com/albums/209873064?uid=1&isSubCate=true&referrercate=549187",
+      "title_translated": "YSL (Saint Laurent) sunglasses — Item Y00753, multi-colorway rectangular acetate frames",
+      "image_count": 65,
+      "price": "¥320",
+      "brand": "Saint Laurent (rep)",
+      "category": "eyewear",
+      "item_code": "Y00753",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$47"
+    },
+    {
+      "user_label": "Prada Glasses (item 01229, MOD B11SF)",
+      "file": "prada-01229-b11sf.json",
+      "url": "https://happywhale.x.yupoo.com/albums/204491856?uid=1&isSubCate=true&referrercate=549203",
+      "title_translated": "Prada rectangular acetate sunglasses — model B11SF (small size, 55-18). Item 01229.",
+      "image_count": 11,
+      "price": "¥320",
+      "brand": "Prada (rep)",
+      "category": "eyewear",
+      "item_code": "01229",
+      "seller": "happywhale",
+      "source": "yupoo",
+      "owners": [
+        "hampus"
+      ],
+      "locked": false,
+      "requires_contact": true,
+      "acquisition": "contact-seller",
+      "target_variant": null,
+      "price_usd": "$47"
+    }
+  ]
+}

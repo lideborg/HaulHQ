@@ -1,0 +1,145 @@
+{
+  "user_label": "The Row Henley LS Tee",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D843555483959",
+  "source_url": "https://item.taobao.com/item.htm?id=843555483959",
+  "title": "ROW-style Ennio wool-blend oatmeal off-white apricot long-sleeved henry neck knit base layer",
+  "title_translated": "ROW-style Ennio wool-blend oatmeal off-white apricot long-sleeved henry neck knit base layer",
+  "description": "ROW-style Ennio wool-blend oatmeal off-white apricot long-sleeved henry neck knit base layer",
+  "price": null,
+  "price_rmb": null,
+  "price_usd": "$50.51",
+  "sizing": null,
+  "sizes": [],
+  "variants": [],
+  "seller_id": "1781922864",
+  "brand": "The Row (rep)",
+  "item_code": null,
+  "seller": "Frank Chang",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/1781922864/O1CN01peDXXq1X1lM5J6DG6_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/1781922864/O1CN01p5E8Ox1X1lNfCcA8P_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/1781922864/O1CN01onPWBK1X1lNgitZzU_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/1781922864/O1CN01lLX7Gq1X1lM4WVgN3_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/1781922864/O1CN01qqh0uz1X1lNZM86KI_!!1781922864.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN01eCi2Uf1X1lLtUgcyr_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN01GPJU0A1X1lQZ0IkcN_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i4/1781922864/O1CN01XhqKwA1X1lM3eGhnu_!!1781922864.png",
+    "https://img.alicdn.com/imgextra/i4/1781922864/O1CN01Pt17WX1X1lQZM2J2C_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i2/1781922864/O1CN01b1CyEE1X1lNfYcXej_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i2/1781922864/O1CN01LM8V7l1X1lQiuTzd7_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN017od8hr1X1lM6trYY9_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN01Sq0DSL1X1lQTNbNqm_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i3/1781922864/O1CN01rT8df21X1lQjYv8pr_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i2/1781922864/O1CN01IcuKQY1X1lQiY3p3q_!!1781922864.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Design details": "Simple and casual",
+    "Fabrics": "Mohair",
+    "style": "other",
+    "For people": "youth",
+    "Sleeve Type": "conventional",
+    "To apply a gender": "Unisex",
+    "Applicable scene": "Leisure",
+    "Season": "autumn",
+    "The way they dress": "Sleeve",
+    "Year of season": "Fall 2024",
+    "Sleeve length type": "Long sleeve",
+    "Collar design": "Henry Collar",
+    "Features": "Skin-friendly",
+    "pattern": "Solid color",
+    "size": "S,M,L,XL"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "OUT OF STOCK as of 2026-05-03. 10 detail images captured. Size chart parsed from d002. Bust/hem given as 1/2 measurements (half-circumference).",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "front_length": [
+        65.5,
+        67.5,
+        69.5,
+        71.5
+      ],
+      "half_bust": [
+        55,
+        57,
+        59,
+        61
+      ],
+      "half_hem": [
+        53,
+        55,
+        57,
+        59
+      ],
+      "shoulder": [
+        44,
+        45.5,
+        47,
+        48.5
+      ],
+      "sleeve": [
+        61,
+        62,
+        63,
+        64
+      ],
+      "half_sleeve_width": [
+        19,
+        19.5,
+        20,
+        20.5
+      ],
+      "half_cuff": [
+        12,
+        12.5,
+        13,
+        13.5
+      ],
+      "collar_height": [
+        2.5,
+        2.5,
+        2.5,
+        2.5
+      ]
+    },
+    "source_image": "images/jan-the-row-henley/d002.png"
+  },
+  "needs_sizing_parse": false,
+  "owners": [
+    "jan"
+  ],
+  "local_image_paths": [
+    "images/jan-the-row-henley/g000.jpg",
+    "images/jan-the-row-henley/g001.jpg",
+    "images/jan-the-row-henley/g002.jpg",
+    "images/jan-the-row-henley/g003.jpg",
+    "images/jan-the-row-henley/g004.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/jan-the-row-henley/d000.jpg",
+    "images/jan-the-row-henley/d001.jpg",
+    "images/jan-the-row-henley/d002.png",
+    "images/jan-the-row-henley/d003.jpg",
+    "images/jan-the-row-henley/d004.jpg",
+    "images/jan-the-row-henley/d005.jpg",
+    "images/jan-the-row-henley/d006.jpg",
+    "images/jan-the-row-henley/d007.jpg",
+    "images/jan-the-row-henley/d008.jpg",
+    "images/jan-the-row-henley/d009.jpg"
+  ],
+  "out_of_stock": true,
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

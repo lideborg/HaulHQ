@@ -1,0 +1,140 @@
+{
+  "user_label": "Blair Witch Tee",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D754176500497",
+  "source_url": "https://item.taobao.com/item.htm?id=754176500497",
+  "title": "Russell Athletic Everyday Plus Size Short Sleeves Simple Exercise Casual Short Sleeve T-Shirt",
+  "title_translated": "Russell Athletic Everyday Plus Size Short Sleeves Simple Exercise Casual Short Sleeve T-Shirt",
+  "description": "Russell Athletic Everyday Plus Size Short Sleeves Simple Exercise Casual Short Sleeve T-Shirt",
+  "price": "¥50.45",
+  "price_rmb": "¥50.45",
+  "price_usd": "$7.39",
+  "sizing": null,
+  "sizes": [],
+  "variants": [
+    "black",
+    "M",
+    "L",
+    "XL",
+    "3XL",
+    "2XL",
+    "1 yard off shoulder",
+    "2 yards off shoulders",
+    "3 yards off shoulders"
+  ],
+  "seller_id": "179126450",
+  "brand": "Blair Witch (graphic)",
+  "item_code": null,
+  "seller": "Brandon American enthusiast",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i3/179126450/O1CN01k7elPX1xW9WueiLIP_!!179126450.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/179126450/O1CN0115jX6z1xW9WvehrlY_!!179126450.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/179126450/O1CN01lILMvU1xW9WvejsWK_!!179126450.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/179126450/O1CN01Yn8zT91xW9WusHTPa_!!179126450.png"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i2/179126450/O1CN01GZp65r1xW9V5akXPl_!!179126450.png",
+    "https://img.alicdn.com/imgextra/i2/179126450/O1CN01iL116P1xW9kmvhrBr_!!179126450.png",
+    "https://img.alicdn.com/imgextra/i3/179126450/O1CN01k7elPX1xW9WueiLIP_!!179126450.jpg",
+    "https://img.alicdn.com/imgextra/i3/179126450/O1CN0115jX6z1xW9WvehrlY_!!179126450.jpg",
+    "https://img.alicdn.com/imgextra/i3/179126450/O1CN01lILMvU1xW9WvejsWK_!!179126450.jpg",
+    "https://img.alicdn.com/imgextra/i1/179126450/O1CN01kFRMY31xW9MqYaoaJ_!!179126450.jpg"
+  ],
+  "params": {
+    "Brands": "brandless",
+    "Fit classification": "Loose",
+    "Fabrics": "cotton",
+    "Basis style": "Youth pop",
+    "Sleeve Type": "conventional",
+    "Num.": "GG2141",
+    "Features": "Not easy to fade, skin-friendly and breathable",
+    "Year of season": "Summer 2025",
+    "To apply a gender": "Unisex",
+    "Sleeve Length": "Short sleeve",
+    "style": "Leisure wind",
+    "Collar design": "Round neck",
+    "pattern": "Retro pattern",
+    "size": "3XL, 2XL, M, L, XL, 1 yard drop, 2 yards drop, 3 yards drop shoulder",
+    "Color": "black"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "6 detail images captured. Size chart parsed from d001.png; chart provides two fits (regular-shoulder M-3XL and drop-shoulder 1/2/3). Fabric noted as 260g double-yarn cotton.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "M",
+      "L",
+      "XL",
+      "2XL",
+      "3XL",
+      "drop-shoulder 1",
+      "drop-shoulder 2",
+      "drop-shoulder 3"
+    ],
+    "measurements": {
+      "length": [
+        66,
+        68,
+        70,
+        72,
+        74,
+        74,
+        75,
+        76
+      ],
+      "shoulder": [
+        46,
+        46,
+        47,
+        48,
+        49,
+        58,
+        60,
+        62
+      ],
+      "chest": [
+        102,
+        106,
+        110,
+        114,
+        118,
+        120,
+        124,
+        128
+      ],
+      "sleeve": [
+        20,
+        20.5,
+        21,
+        21.5,
+        22,
+        22.5,
+        22.5,
+        22.5
+      ]
+    },
+    "source_image": "images/blair-witch-tee/d001.png"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/blair-witch-tee/g000.jpg",
+    "images/blair-witch-tee/g001.jpg",
+    "images/blair-witch-tee/g002.jpg",
+    "images/blair-witch-tee/g003.png"
+  ],
+  "local_detail_image_paths": [
+    "images/blair-witch-tee/d000.png",
+    "images/blair-witch-tee/d001.png",
+    "images/blair-witch-tee/d002.jpg",
+    "images/blair-witch-tee/d003.jpg",
+    "images/blair-witch-tee/d004.jpg",
+    "images/blair-witch-tee/d005.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "drop-shoulder 2"
+}

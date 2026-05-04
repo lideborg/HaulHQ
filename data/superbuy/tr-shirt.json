@@ -1,0 +1,96 @@
+{
+  "user_label": "TR Shirt",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D911244408473",
+  "source_url": "https://item.taobao.com/item.htm?id=911244408473",
+  "title": "Coffee Row Style Brown 100% wool shirt",
+  "title_translated": "Coffee Row Style Brown 100% wool shirt",
+  "description": "Coffee Row Style Brown 100% wool shirt",
+  "price": "¥507.19",
+  "price_rmb": "¥507.19",
+  "price_usd": "$74.26",
+  "sizing": "XS, S, M, L",
+  "sizes": [
+    "XS",
+    "S",
+    "M",
+    "L"
+  ],
+  "variants": [
+    "Brown"
+  ],
+  "seller_id": "2218055182113",
+  "brand": "The Row (rep)",
+  "item_code": null,
+  "seller": "Coffee manufacturing",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/2218055182113/O1CN01kClCDY1RTnwYjrMwR_!!2218055182113.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2218055182113/O1CN01j2nJEa1RTnwYh6VkN_!!2218055182113.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i2/2218055182113/O1CN01AqwwSe1RTnvvLj4ug_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN01raSl9B1RTnw2BSogc_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i4/2218055182113/O1CN01mUsXHu1RTnw0K7d5g_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN01AKmKVA1RTnw2BTUGi_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i2/2218055182113/O1CN01goDoHt1RTnw0Czg7w_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i4/2218055182113/O1CN01S9VWyS1RTnw3cufZz_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN01kClCDY1RTnwYjrMwR_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i3/2218055182113/O1CN01j2nJEa1RTnwYh6VkN_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN013aEy7s1RTnwXKGyde_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN01ITlhRy1RTnwY03AUx_!!2218055182113.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Fit classification": "Slim fit",
+    "Design details": "other",
+    "Fabrics": "Wool, sheep wool",
+    "For people": "youth",
+    "Applicable scene": "other",
+    "Material composition": "100% sheep wool",
+    "Season": "spring and fall",
+    "Features": "Wrinkle resistance",
+    "thickness": "conventional",
+    "Year of season": "Spring 2025",
+    "Sleeve Length": "Long sleeve",
+    "style": "Leisure wind",
+    "Collar design": "lapel",
+    "To apply a gender": "Unisex",
+    "The way they dress": "Cardigan",
+    "pattern": "Solid color",
+    "size": "S,M,L,XS",
+    "Color": "Brown",
+    "coffee making row style shirt": "Size chart/size",
+    "S\t80\t108\t45\t66": "M\t82\t112\t47\t67",
+    "L\t84\t116\t49\t68": "I am 182 155 and wear M and it fits",
+    "This style is a slim fit": "Fabric",
+    "goYears of use of domestic fabric dyeing": "Not very satisfied with the coloring",
+    "Switch to imported yarn (Toray)": "Production process",
+    "some product pictures": "Model upper body reference"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "10 detail images captured (d000-d009). No size chart found in any detail image; images show fabric/product photos and screenshots only.",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "local_image_paths": [
+    "images/tr-shirt/g000.jpg",
+    "images/tr-shirt/g001.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/tr-shirt/d000.jpg",
+    "images/tr-shirt/d001.jpg",
+    "images/tr-shirt/d002.jpg",
+    "images/tr-shirt/d003.jpg",
+    "images/tr-shirt/d004.jpg",
+    "images/tr-shirt/d005.jpg",
+    "images/tr-shirt/d006.jpg",
+    "images/tr-shirt/d007.jpg",
+    "images/tr-shirt/d008.jpg",
+    "images/tr-shirt/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy"
+}

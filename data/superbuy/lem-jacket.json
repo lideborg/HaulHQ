@@ -1,0 +1,134 @@
+{
+  "user_label": "LEM Jacket",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1003569225773",
+  "source_url": "https://item.taobao.com/item.htm?id=1003569225773",
+  "title": "LEM style same 22AW puffer JACKET gray-green cotton jacket loose-fitting jacket Frank Zhang",
+  "title_translated": "LEM style same 22AW puffer JACKET gray-green cotton jacket loose-fitting jacket Frank Zhang",
+  "description": "LEM style same 22AW puffer JACKET gray-green cotton jacket loose-fitting jacket Frank Zhang",
+  "price": null,
+  "price_rmb": null,
+  "price_usd": "$60.01",
+  "sizing": null,
+  "sizes": [],
+  "variants": [],
+  "seller_id": "1781922864",
+  "brand": "LEMAIRE (rep)",
+  "item_code": null,
+  "seller": "Frank Chang",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/1781922864/O1CN01J50fac1X1lRaJP2SQ_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/1781922864/O1CN01HZuabV1X1lRa6DFzK_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/1781922864/O1CN01gN0q251X1lRa7I7eU_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/1781922864/O1CN01gn9xhy1X1lRZwy8wG_!!1781922864.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/1781922864/O1CN013CHDuW1X1lRa7TOsD_!!1781922864.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN01eCi2Uf1X1lLtUgcyr_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN01BHSAqy1X1lRZi8riS_!!1781922864.png",
+    "https://img.alicdn.com/imgextra/i2/1781922864/O1CN01O1y9VY1X1lRZx166n_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i3/1781922864/O1CN01h70zzh1X1lRaNrtzz_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN01BDbZaA1X1lRZOAh1H_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i2/1781922864/O1CN01UQkvlN1X1lRak4JZF_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i1/1781922864/O1CN01ncI2FX1X1lRak475t_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i3/1781922864/O1CN01RvBdvz1X1lRZVW3dm_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i3/1781922864/O1CN01kxDn2F1X1lRYjwouy_!!1781922864.jpg",
+    "https://img.alicdn.com/imgextra/i4/1781922864/O1CN01u3RUWz1X1lRZ6b4h6~crop,0,0,2480,4960~_!!1781922864.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Version": "Loose",
+    "Basis style": "fashion City",
+    "Sleeve Type": "Conventional sleeve",
+    "Suitable": "youth",
+    "Hooded or not": "no",
+    "Applicable scene": "Leisure",
+    "Year of season": "Winter 2022",
+    "Feature": "Keep warm",
+    "Sleeve Length": "Long sleeve",
+    "style": "cleanfit",
+    "Collar": "Standing collar",
+    "Length": "Conventional",
+    "Placket": "Button",
+    "pattern": "Solid color",
+    "size": "S,M,L,XL",
+    "Color": "dark green"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "10 detail images captured. Size chart parsed from d001.png (LEM puffer chart S/M/L/XL with back_length/bust/hem/shoulder/sleeve/cuff).",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "length": [
+        76,
+        78,
+        80,
+        82
+      ],
+      "bust": [
+        124,
+        128,
+        132,
+        136
+      ],
+      "hem": [
+        112,
+        116,
+        120,
+        124
+      ],
+      "shoulder": [
+        58,
+        59,
+        60,
+        61
+      ],
+      "sleeve": [
+        56.5,
+        57.5,
+        58.5,
+        59.5
+      ],
+      "cuff": [
+        32,
+        33,
+        34,
+        35
+      ]
+    },
+    "source_image": "images/lem-jacket/d001.png"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/lem-jacket/g000.jpg",
+    "images/lem-jacket/g001.jpg",
+    "images/lem-jacket/g002.jpg",
+    "images/lem-jacket/g003.jpg",
+    "images/lem-jacket/g004.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/lem-jacket/d000.jpg",
+    "images/lem-jacket/d001.png",
+    "images/lem-jacket/d002.jpg",
+    "images/lem-jacket/d003.jpg",
+    "images/lem-jacket/d004.jpg",
+    "images/lem-jacket/d005.jpg",
+    "images/lem-jacket/d006.jpg",
+    "images/lem-jacket/d007.jpg",
+    "images/lem-jacket/d008.jpg",
+    "images/lem-jacket/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "L"
+}

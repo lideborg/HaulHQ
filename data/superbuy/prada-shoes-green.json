@@ -1,0 +1,76 @@
+{
+  "user_label": "Prada shoes White",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemId%3D7629525102%26vc_cps_track%3D1459920903_0_0",
+  "source_url": "https://weidian.com/item.html?itemId=7629525102&vc_cps_track=1459920903_0_0",
+  "title": "P Collapse Thin Sole Shoes In Stock Only Batch (Preview Image) (Original Independent Product)",
+  "title_translated": "P Collapse Thin Sole Shoes In Stock Only Batch (Preview Image) (Original Independent Product)",
+  "description": "P Collapse Thin Sole Shoes In Stock Only Batch (Preview Image) (Original Independent Product)",
+  "price": "¥559",
+  "price_rmb": "¥559",
+  "price_usd": "$81.84",
+  "sizing": "35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45",
+  "sizes": [
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45"
+  ],
+  "variants": [
+    "white",
+    "black",
+    "green"
+  ],
+  "seller_id": "pcitem2017191297",
+  "brand": "Prada (rep)",
+  "item_code": null,
+  "seller": "william made",
+  "seller_url": null,
+  "image_urls": [
+    "https://si.geilicdn.com/pcitem2017191297-79480000019af2c2cfbb0a81347d_966_1060.jpg"
+  ],
+  "detail_image_urls": [
+    "https://si.geilicdn.com/pcitem2017191297-05d20000019c05143c9d0a2103bd_750_949.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-404d0000019c05143e220a23913e_750_943.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-6f040000019c05143f8a0a23038e_750_939.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-6e9f0000019c051440fc0a23111a_750_938.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-461b0000019b024ee8170a239646_974_1161.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-77040000019af2aa43fe0a23057e_2622_2622.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-6b2f0000019af2aa50d20a8134f0_2824_2824.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-70590000019af2aa5cb50a23047e_2652_2652.jpg",
+    "https://si.geilicdn.com/pcitem2017191297-72190000019af2aa67390a207569_2813_2813.jpg"
+  ],
+  "params": {},
+  "source": "weidian",
+  "category": "shoes",
+  "notes": "10 detail images captured. Sizing chart not yet parsed.",
+  "size_chart": null,
+  "needs_sizing_parse": true,
+  "local_image_paths": [
+    "images/prada-shoes-green/g000.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/prada-shoes-green/d000.jpg",
+    "images/prada-shoes-green/d001.jpg",
+    "images/prada-shoes-green/d002.jpg",
+    "images/prada-shoes-green/d003.jpg",
+    "images/prada-shoes-green/d004.jpg",
+    "images/prada-shoes-green/d005.jpg",
+    "images/prada-shoes-green/d006.jpg",
+    "images/prada-shoes-green/d007.jpg",
+    "images/prada-shoes-green/d008.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_variant": "white",
+  "target_size": "41"
+}

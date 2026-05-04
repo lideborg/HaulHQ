@@ -1,0 +1,84 @@
+{
+  "user_label": "TR Drawstring",
+  "url": "https://happywhale.x.yupoo.com/albums/235201791?uid=1&isSubCate=false&referrercate=4881426",
+  "title": "￥380 THE ROW Drawstring wide leg casual pants AF6360",
+  "title_translated": "THE ROW Drawstring Wide Leg Casual Pants - ¥380 (Model AF6360)",
+  "description": "Premium wool wide-leg trousers featuring hidden side pockets with reinforced openings. The design emphasizes clean lines and sophisticated simplicity through natural fabric drape paired with a loose fit, creating an elongated silhouette.",
+  "image_urls": [
+    "https://photo.yupoo.com/happywhale/b1873f5c94/small.jpg",
+    "https://photo.yupoo.com/happywhale/78b4954b11/small.jpg",
+    "https://photo.yupoo.com/happywhale/6855081f80/small.jpg",
+    "https://photo.yupoo.com/happywhale/e638224f58/small.jpg",
+    "https://photo.yupoo.com/happywhale/daa475521d/small.jpg",
+    "https://photo.yupoo.com/happywhale/1b411c5978/small.jpg",
+    "https://photo.yupoo.com/happywhale/b09444e7a9/small.jpg",
+    "https://photo.yupoo.com/happywhale/6c764c5e20/small.jpg",
+    "https://photo.yupoo.com/happywhale/efd1e663ad/small.jpg",
+    "https://photo.yupoo.com/happywhale/116d55fd91/small.jpg"
+  ],
+  "price": "¥380",
+  "sizing": "S, M, L, XL",
+  "variants": [
+    "Black"
+  ],
+  "notes": "Material: Wool. Model AF6360. 10 photos.",
+  "local_image_paths": [
+    "images/tr-drawstring/000.jpg",
+    "images/tr-drawstring/001.jpg",
+    "images/tr-drawstring/002.jpg",
+    "images/tr-drawstring/003.jpg",
+    "images/tr-drawstring/004.jpg",
+    "images/tr-drawstring/005.jpg",
+    "images/tr-drawstring/006.jpg",
+    "images/tr-drawstring/007.jpg",
+    "images/tr-drawstring/008.jpg",
+    "images/tr-drawstring/009.jpg"
+  ],
+  "source": "yupoo",
+  "seller": "happywhale",
+  "brand": "The Row",
+  "category": "apparel-bottom",
+  "item_code": "AF6360",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "pants_length": [
+        101,
+        103,
+        105,
+        107
+      ],
+      "waist": [
+        78,
+        82,
+        86,
+        90
+      ],
+      "hip": [
+        104,
+        108,
+        112,
+        116
+      ],
+      "leg_opening": [
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    "source_image": "images/tr-drawstring/001.jpg"
+  },
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": true,
+  "acquisition": "contact-seller",
+  "target_size": "L"
+}

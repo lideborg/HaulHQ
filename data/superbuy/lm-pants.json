@@ -1,0 +1,129 @@
+{
+  "user_label": "LM Pants",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D983453060598",
+  "source_url": "https://item.taobao.com/item.htm?id=983453060598",
+  "title": "Row style Lonan spring worsted luxury twill silhouette loose wool trousers",
+  "title_translated": "Row style Lonan spring worsted luxury twill silhouette loose wool trousers",
+  "description": "Row style Lonan spring worsted luxury twill silhouette loose wool trousers",
+  "price": "¥576.66",
+  "price_rmb": "¥576.66",
+  "price_usd": "$84.43",
+  "sizing": "2, 4, 6, 0",
+  "sizes": [
+    "2",
+    "4",
+    "6",
+    "0"
+  ],
+  "variants": [
+    "black"
+  ],
+  "seller_id": "2218055182113",
+  "brand": "LEMAIRE (rep)",
+  "item_code": null,
+  "seller": "Coffee manufacturing",
+  "seller_url": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/2218055182113/O1CN01aR9CLP1RTnyvHTM8O_!!2218055182113.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2218055182113/O1CN01aMdNoc1RTnyuILRgM_!!2218055182113.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/2218055182113/O1CN01ZTHmS31RTnytOxVcP_!!2218055182113.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2218055182113/O1CN01NDxcYI1RTnyuINSak_!!2218055182113.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2218055182113/O1CN01AsFsB91RTnytQLVtJ_!!2218055182113.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN01SbHj8R1RTnyuMLnrR_!!2218055182113.png",
+    "https://img.alicdn.com/imgextra/i3/2218055182113/O1CN01fZdTaY1RTnyuMpbvR_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i4/2218055182113/O1CN01JvenQa1RTnyv5fn1a_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i3/2218055182113/O1CN01awv9df1RTnyv6Ky6S_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i2/2218055182113/O1CN01IdHZTK1RTnytQzvaJ_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i3/2218055182113/O1CN019guClJ1RTnyv5zGBN_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN013m2nyA1RTnysyzpJ9_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i1/2218055182113/O1CN01aChNSq1RTnyv5h48y_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i4/2218055182113/O1CN01YgOAHp1RTnyvI7ANO_!!2218055182113.jpg",
+    "https://img.alicdn.com/imgextra/i2/2218055182113/O1CN01Ktrgcy1RTnyu06IpX_!!2218055182113.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Time to market": "2025-10",
+    "size": "0,2,4,6",
+    "Basis style": "fashion City",
+    "Fabrics": "wool",
+    "Are malls the same paragraph": "Pure e-commerce (only available online)",
+    "For people": "youth",
+    "Applicable scene": "Leisure",
+    "Material composition": "100% sheep wool",
+    "Version": "Straight",
+    "Season": "summer",
+    "Year of season": "Fall 2025",
+    "Place of origin": "China",
+    "Subdivision style": "Cool wind",
+    "pattern": "Solid color",
+    "Color": "black"
+  },
+  "source": "taobao",
+  "category": "apparel-bottom",
+  "notes": "10 detail images captured. Size chart parsed from d000.png.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "0",
+      "2",
+      "4",
+      "6"
+    ],
+    "measurements": {
+      "pants_length": [
+        107,
+        108,
+        110,
+        111
+      ],
+      "waist": [
+        78,
+        82,
+        86,
+        90
+      ],
+      "hips": [
+        100,
+        104,
+        108,
+        112
+      ],
+      "thigh": [
+        66,
+        68,
+        72,
+        74
+      ]
+    },
+    "source_image": "images/lm-pants/d000.png"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/lm-pants/g000.jpg",
+    "images/lm-pants/g001.jpg",
+    "images/lm-pants/g002.jpg",
+    "images/lm-pants/g003.jpg",
+    "images/lm-pants/g004.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/lm-pants/d000.png",
+    "images/lm-pants/d001.jpg",
+    "images/lm-pants/d002.jpg",
+    "images/lm-pants/d003.jpg",
+    "images/lm-pants/d004.jpg",
+    "images/lm-pants/d005.jpg",
+    "images/lm-pants/d006.jpg",
+    "images/lm-pants/d007.jpg",
+    "images/lm-pants/d008.jpg",
+    "images/lm-pants/d009.jpg"
+  ],
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "skipped": true,
+  "skipped_reason": "Hampus chose not to buy this"
+}

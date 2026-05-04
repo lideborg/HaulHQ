@@ -1,0 +1,117 @@
+{
+  "user_label": "ERD Sweater",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D914895120726",
+  "source_url": "https://item.taobao.com/item.htm?id=914895120726",
+  "title": "[Exclusive Stock] ERD Soviet Surveillance Portrait Illustration Stitched Knit Black Long Sleeves",
+  "title_translated": "Enfants Riches Déprimés (ERD) — 'Soviet Surveillance' portrait illustration stitched knit, black long-sleeve",
+  "description": "ERD long-sleeve knit sweater in black with the 'Soviet Surveillance' portrait illustration applied as a stitched knit motif. 100% cotton, loose unisex fit, round neck, four-season weight. Spring 2025 season. Vendor lists no brand registration. Sizes S/M/L/XL.",
+  "price_rmb": "¥266.66",
+  "price_usd": "$39.04",
+  "sizing": "S, M, L, XL",
+  "sizes": [
+    "S",
+    "M",
+    "L",
+    "XL"
+  ],
+  "variants": [
+    "Black"
+  ],
+  "seller_id": "3162495111",
+  "brand": "Enfants Riches Déprimés (rep)",
+  "item_code": "Soviet Surveillance Portrait",
+  "seller": null,
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/3162495111/O1CN015JFlsN1nctLGRQiWd_!!3162495111.jpg",
+    "https://img.alicdn.com/bao/uploaded/i4/3162495111/O1CN01UMp7lM1nctLGIVSHZ_!!3162495111.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/3162495111/O1CN01hgzii11nctLGRPNUq_!!3162495111.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/3162495111/O1CN01Imt0Hf1nctLGITRae_!!3162495111.jpg"
+  ],
+  "detail_image_urls": [
+    "https://img.alicdn.com/imgextra/i4/3162495111/O1CN01ZKe9T01nctLGxz89A_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i2/3162495111/O1CN01Hj78gq1nctO7qY7dc_!!3162495111.png",
+    "https://img.alicdn.com/imgextra/i2/3162495111/O1CN01JY2CEn1nctLG214RU_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i3/3162495111/O1CN01Upscmu1nctLRdSCpw_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i2/3162495111/O1CN01aQMDUw1nctLHXNxcO_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i1/3162495111/O1CN01ejd1kA1nctLHaiKr2_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i2/3162495111/O1CN01UTE9UB1nctLGmOuyz_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i1/3162495111/O1CN01zGkmsS1nctLAD1vNL_!!3162495111.jpg",
+    "https://img.alicdn.com/imgextra/i4/3162495111/O1CN01USXTc11nctLG21oJp_!!3162495111.jpg"
+  ],
+  "params": {
+    "Brands": "No brand, no registered trademark",
+    "Fit": "Loose",
+    "Crafts": "Stitching, knitting",
+    "Fabric": "Cotton",
+    "Material composition": "100% cotton",
+    "Sleeve": "Long, conventional",
+    "Collar": "Round neck",
+    "Pattern": "Solid color (with stitched portrait illustration)",
+    "Audience": "Unisex / youth",
+    "Season": "Four-season universal — Spring 2025"
+  },
+  "source": "taobao",
+  "category": "apparel-top",
+  "notes": "9 detail images captured; sizing chart parsed from detail image d001.png (ENFANTS RICHES DÉPRIMÉS size chart, cm).",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "shoulder": [
+        58,
+        60,
+        62,
+        64
+      ],
+      "bust": [
+        114,
+        118,
+        122,
+        130
+      ],
+      "length": [
+        64,
+        65,
+        67,
+        69
+      ],
+      "sleeve": [
+        59,
+        60,
+        61,
+        62
+      ]
+    },
+    "source_image": "images/erd-sweater/d001.png"
+  },
+  "needs_sizing_parse": false,
+  "local_image_paths": [
+    "images/erd-sweater/g000.jpg",
+    "images/erd-sweater/g001.jpg",
+    "images/erd-sweater/g002.jpg",
+    "images/erd-sweater/g003.jpg"
+  ],
+  "local_detail_image_paths": [
+    "images/erd-sweater/d000.jpg",
+    "images/erd-sweater/d001.png",
+    "images/erd-sweater/d002.jpg",
+    "images/erd-sweater/d003.jpg",
+    "images/erd-sweater/d004.jpg",
+    "images/erd-sweater/d005.jpg",
+    "images/erd-sweater/d006.jpg",
+    "images/erd-sweater/d007.jpg",
+    "images/erd-sweater/d008.jpg"
+  ],
+  "price": "¥266.66",
+  "owners": [
+    "hampus"
+  ],
+  "requires_contact": false,
+  "acquisition": "superbuy",
+  "target_size": "L"
+}

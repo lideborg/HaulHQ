@@ -146,7 +146,8 @@
       "requires_contact": true,
       "acquisition": "contact-seller",
       "target_variant": null,
-      "price_usd": "$47"
+      "price_usd": "$47",
+      "target_size": "L"
     },
     {
       "user_label": "GM Sunglasses",
@@ -290,7 +291,8 @@
       "locked": false,
       "requires_contact": true,
       "acquisition": "contact-seller",
-      "target_variant": null
+      "target_variant": null,
+      "target_size": "XL"
     },
     {
       "user_label": "TR Pant",

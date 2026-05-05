@@ -56,8 +56,9 @@ export function interpolateRate(line: ShippingLine, kg: number): number {
   const tiers = Object.entries(line.tiers)
     .map(([k, v]) => [parseFloat(k), v] as [number, number])
     .sort((a, b) => a[0] - b[0]);
+  if (tiers.length === 0) return 0;
   const billable = Math.max(kg, line.min_kg ?? 0);
-  if (billable <= tiers[0][0]) {
+  if (billable <= tiers[0][0] || tiers.length === 1) {
     return tiers[0][1] * (billable / tiers[0][0]);
   }
   for (let i = 0; i < tiers.length - 1; i++) {

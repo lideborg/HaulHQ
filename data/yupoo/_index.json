@@ -8,7 +8,7 @@
       "url": "https://happywhale.x.yupoo.com/albums/197445618?uid=1&isSubCate=true&referrercate=549191",
       "title_translated": "Item Y00015 Wholesale at true factory prices",
       "image_count": 19,
-      "price": "Not specified - contact for factory price",
+      "price": "¥320",
       "brand": "Balenciaga",
       "category": "eyewear",
       "item_code": "Y00015",
@@ -20,7 +20,8 @@
       "locked": false,
       "requires_contact": true,
       "acquisition": "contact-seller",
-      "target_variant": "Red"
+      "target_variant": "Red",
+      "price_usd": "$47"
     },
     {
       "user_label": "Cartier Blue tint silver frame",

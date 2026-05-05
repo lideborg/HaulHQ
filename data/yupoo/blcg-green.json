@@ -25,7 +25,7 @@
     "https://photo.yupoo.com/happywhale/8face88b/small.jpg",
     "https://photo.yupoo.com/happywhale/49399bd9/small.jpg"
   ],
-  "price": "Not specified - contact for factory price",
+  "price": "¥320",
   "sizing": "Not specified",
   "variants": [],
   "notes": "Balenciaga sunglasses item Y00015. 19 photos. Hampus picks the RED variant — see preview_photo_url. Hero image reordered to match.",
@@ -61,5 +61,9 @@
   "requires_contact": true,
   "acquisition": "contact-seller",
   "preview_photo_url": "https://happywhale.x.yupoo.com/80804427?uid=1",
-  "target_variant": "Red"
+  "target_variant": "Red",
+  "price_rmb": "¥320",
+  "price_usd": "$47",
+  "quoted_by": "happywhale",
+  "quoted_on": "2026-05-04"
 }

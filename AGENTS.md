@@ -22,13 +22,10 @@ Every PR — human-authored or AI-authored — goes through this loop **before m
 
 **Merge authority:**
 
-- **AI may self-merge** routine PRs after passing both reviews: refactors, component ports, doc updates, dependency bumps, tests, scoped feature work that doesn't touch the categories listed below.
-- **AI must leave PR for human review** — open as draft, ping the user — when the change touches:
-  - **Data shape** (DB schema, JSON file structure used by other tools, public API contracts)
-  - **Payments / billing**
-  - **Auth** (login flows, permission checks, token handling)
-  - **Infra** (Vercel config, environment variables, deployment pipelines, secrets)
-- When unsure which bucket applies, default to human review.
+- **AI never merges a PR without explicit user approval, full stop.** This applies to docs, refactors, dependencies, schema, infra — everything. The two self-reviews exist to catch issues; the human approval exists to confirm intent.
+- After both self-reviews pass, push the PR and **ping the user**. If they reply with a clear go-ahead in chat (e.g. "merge", "looks good", "go ahead"), then merge.
+- A `PreToolUse` hook in `.claude/settings.json` enforces this at the tool level: any `gh pr merge` Bash call is blocked unless `ALLOW_AUTO_MERGE=1` is set on that command. To merge after approval, prefix the call: `ALLOW_AUTO_MERGE=1 gh pr merge <id> --merge`.
+- If the user wants to keep the PR open while you start the next thing, do that — leave the branch / PR untouched and start a new branch off `main` for the next feature. Don't accumulate uncommitted changes across multiple stacked branches.
 
 ## Other conventions
 

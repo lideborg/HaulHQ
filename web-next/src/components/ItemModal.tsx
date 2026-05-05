@@ -141,21 +141,28 @@ function ModalContent({
           {images.length > 1 ? (
             <div className="grid grid-cols-6 gap-2 sm:grid-cols-8 md:grid-cols-10">
               {images.map((src, i) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <button
                   key={src + i}
-                  src={src}
-                  alt=""
-                  loading="lazy"
+                  type="button"
                   onClick={() => {
                     setActiveIdx(i);
                     dialogRef.current?.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className={[
-                    "block aspect-[3/4] w-full cursor-pointer object-cover transition-opacity",
-                    i === activeIdx ? "opacity-100" : "opacity-55 hover:opacity-100",
-                  ].join(" ")}
-                />
+                  aria-label={`Show image ${i + 1}`}
+                  aria-pressed={i === activeIdx}
+                  className="block p-0 m-0 border-0 bg-transparent"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    className={[
+                      "block aspect-[3/4] w-full cursor-pointer object-cover transition-opacity",
+                      i === activeIdx ? "opacity-100" : "opacity-55 hover:opacity-100",
+                    ].join(" ")}
+                  />
+                </button>
               ))}
             </div>
           ) : null}

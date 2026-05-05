@@ -49,7 +49,6 @@
   "local_image_paths": [
     "images/tie-no-2-black/g000.jpg",
     "images/tie-no-2-black/g001.jpg",
-    "images/tie-no-2-black/g002.jpg",
     "images/tie-no-2-black/g003.jpg",
     "images/tie-no-2-black/g004.jpg",
     "images/tie-no-2-black/g005.jpg",
@@ -58,18 +57,7 @@
     "images/tie-no-2-black/g008.jpg",
     "images/tie-no-2-black/g009.jpg"
   ],
-  "local_detail_image_paths": [
-    "images/tie-no-2-black/d000.jpg",
-    "images/tie-no-2-black/d001.jpg",
-    "images/tie-no-2-black/d002.jpg",
-    "images/tie-no-2-black/d003.jpg",
-    "images/tie-no-2-black/d004.jpg",
-    "images/tie-no-2-black/d005.jpg",
-    "images/tie-no-2-black/d006.jpg",
-    "images/tie-no-2-black/d007.jpg",
-    "images/tie-no-2-black/d008.jpg",
-    "images/tie-no-2-black/d009.jpg"
-  ],
+  "local_detail_image_paths": [],
   "owners": [
     "hampus"
   ],

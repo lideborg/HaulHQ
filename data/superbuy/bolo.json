@@ -45,21 +45,9 @@
     "images/bolo/g000.jpg",
     "images/bolo/g001.jpg",
     "images/bolo/g002.jpg",
-    "images/bolo/g003.jpg",
-    "images/bolo/g004.jpg"
+    "images/bolo/g003.jpg"
   ],
-  "local_detail_image_paths": [
-    "images/bolo/d000.jpg",
-    "images/bolo/d001.jpg",
-    "images/bolo/d002.jpg",
-    "images/bolo/d003.jpg",
-    "images/bolo/d004.jpg",
-    "images/bolo/d005.jpg",
-    "images/bolo/d006.jpg",
-    "images/bolo/d007.jpg",
-    "images/bolo/d008.jpg",
-    "images/bolo/d009.jpg"
-  ],
+  "local_detail_image_paths": [],
   "owners": [
     "hampus"
   ],

@@ -30,19 +30,23 @@ export function Card({ item }: CardProps) {
 
   return (
     <article className="flex flex-col">
-      <div
-        className="relative aspect-[3/4] overflow-hidden bg-[#f0efed] cursor-pointer group"
-        onClick={() => open(item)}
-      >
-        {hero ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={hero}
-            alt={item.user_label}
-            loading="lazy"
-            className="block h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
-          />
-        ) : null}
+      <div className="relative aspect-[3/4] overflow-hidden bg-[#f0efed] group">
+        <button
+          type="button"
+          onClick={() => open(item)}
+          aria-label={`Open ${item.user_label}`}
+          className="block h-full w-full cursor-pointer p-0 m-0 border-0 bg-transparent"
+        >
+          {hero ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={hero}
+              alt={item.user_label}
+              loading="lazy"
+              className="block h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
+            />
+          ) : null}
+        </button>
         <StatusBadges item={item} />
         <WishStar active={isWished(item)} onToggle={() => toggle(item)} />
       </div>
@@ -119,18 +123,25 @@ function ThumbStrip({
   return (
     <div className="mt-2 grid grid-cols-9 gap-1">
       {images.map((src, i) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <button
           key={src + i}
-          src={src}
-          alt=""
-          loading="lazy"
+          type="button"
           onClick={() => onChange(i)}
-          className={[
-            "block aspect-[3/4] w-full cursor-pointer object-cover transition-opacity",
-            i === activeIdx ? "opacity-100" : "opacity-55 hover:opacity-100",
-          ].join(" ")}
-        />
+          aria-label={`Show image ${i + 1}`}
+          aria-pressed={i === activeIdx}
+          className="block p-0 m-0 border-0 bg-transparent"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt=""
+            loading="lazy"
+            className={[
+              "block aspect-[3/4] w-full cursor-pointer object-cover transition-opacity",
+              i === activeIdx ? "opacity-100" : "opacity-55 hover:opacity-100",
+            ].join(" ")}
+          />
+        </button>
       ))}
     </div>
   );

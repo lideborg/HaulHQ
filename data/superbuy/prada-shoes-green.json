@@ -55,17 +55,7 @@
   "local_image_paths": [
     "images/prada-shoes-green/g000.jpg"
   ],
-  "local_detail_image_paths": [
-    "images/prada-shoes-green/d000.jpg",
-    "images/prada-shoes-green/d001.jpg",
-    "images/prada-shoes-green/d002.jpg",
-    "images/prada-shoes-green/d003.jpg",
-    "images/prada-shoes-green/d004.jpg",
-    "images/prada-shoes-green/d005.jpg",
-    "images/prada-shoes-green/d006.jpg",
-    "images/prada-shoes-green/d007.jpg",
-    "images/prada-shoes-green/d008.jpg"
-  ],
+  "local_detail_image_paths": [],
   "owners": [
     "hampus"
   ],

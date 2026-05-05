@@ -35,9 +35,7 @@
     "images/erd-nosebleed-shirt/g001.jpg",
     "images/erd-nosebleed-shirt/g002.jpg"
   ],
-  "local_detail_image_paths": [
-    "images/erd-nosebleed-shirt/d000.png"
-  ],
+  "local_detail_image_paths": [],
   "owners": [
     "hampus"
   ],

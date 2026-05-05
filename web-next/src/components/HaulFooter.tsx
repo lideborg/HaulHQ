@@ -12,6 +12,8 @@ import type { Item } from "@/types/catalog";
 const fmt = (totals: { cny: number; usd: number }) =>
   `¥${totals.cny.toFixed(2)}  ($${Math.round(totals.usd)})`;
 
+const plural = (n: number) => `${n} item${n === 1 ? "" : "s"}`;
+
 interface OwnerBuckets {
   hampus: Item[];
   jan: Item[];
@@ -61,14 +63,14 @@ export function HaulFooter({ items }: { items: Item[] }) {
   return (
     <div className="mx-auto mt-12 max-w-[800px] border-t border-(--color-border) px-2 pt-8">
       <dl className="grid grid-cols-[1fr_auto] gap-y-2 text-[13px]">
-        <Row label={`Hampus  ·  ${buckets.hampus.length} items`} value={fmt(sumOf(buckets.hampus))} hide={!buckets.hampus.length} />
-        <Row label={`Jan  ·  ${buckets.jan.length} items`} value={fmt(sumOf(buckets.jan))} hide={!buckets.jan.length} />
-        <Row label={`Shared (Hampus + Jan)  ·  ${buckets.shared.length} items`} value={fmt(sumOf(buckets.shared))} hide={!buckets.shared.length} />
-        <Row label={`Unassigned  ·  ${buckets.unknown.length} items`} value={fmt(sumOf(buckets.unknown))} hide={!buckets.unknown.length} />
+        <Row label={`Hampus  ·  ${plural(buckets.hampus.length)}`} value={fmt(sumOf(buckets.hampus))} hide={!buckets.hampus.length} />
+        <Row label={`Jan  ·  ${plural(buckets.jan.length)}`} value={fmt(sumOf(buckets.jan))} hide={!buckets.jan.length} />
+        <Row label={`Shared (Hampus + Jan)  ·  ${plural(buckets.shared.length)}`} value={fmt(sumOf(buckets.shared))} hide={!buckets.shared.length} />
+        <Row label={`Unassigned  ·  ${plural(buckets.unknown.length)}`} value={fmt(sumOf(buckets.unknown))} hide={!buckets.unknown.length} />
       </dl>
 
       <div className="mt-4 flex items-baseline justify-between border-t border-(--color-border) pt-3">
-        <span className="text-[14px] text-neutral-700">Total  ·  {items.length} items</span>
+        <span className="text-[14px] text-neutral-700">Total  ·  {plural(items.length)}</span>
         <span className="text-[20px] font-semibold">{fmt(total)}</span>
       </div>
 
@@ -126,7 +128,7 @@ function renderHaulSnippet(
   const sections: string[] = [`# HAUL — ${date}`, ""];
   const block = (label: string, arr: Item[]) => {
     if (!arr.length) return;
-    sections.push(`## ${label}  ·  ${arr.length} items  ·  ${fmt(sumOf(arr))}`, "");
+    sections.push(`## ${label}  ·  ${plural(arr.length)}  ·  ${fmt(sumOf(arr))}`, "");
     for (const it of arr) sections.push(lineFor(it));
     sections.push("");
   };
@@ -134,6 +136,6 @@ function renderHaulSnippet(
   block("Jan", buckets.jan);
   block("Shared", buckets.shared);
   block("Unassigned", buckets.unknown);
-  sections.push(`## Total  ·  ${items.length} items  ·  ${fmt(total)}`);
+  sections.push(`## Total  ·  ${plural(items.length)}  ·  ${fmt(total)}`);
   return sections.join("\n");
 }

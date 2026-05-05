@@ -11,7 +11,6 @@
       "name": "Footaction_Sneaker",
       "yupoo": "https://footaction.x.yupoo.com/",
       "contact": {
-        "whatsapp": "+8618065535736",
         "instagram": "@Footaction_Sneaker"
       },
       "specialty": "Sneakers (Nike/Adidas/Jordan/NB/Hoka/On/Yeezy), some apparel and luxury",
@@ -632,12 +631,11 @@
       "name": "Enzoo Optical (enzooopticl)",
       "yupoo": "https://enzooopticl.x.yupoo.com/",
       "contact": {
-        "yupoo_password": "enzoo123",
         "note": "Password supplied by Jan on 2026-05-03; unlocks all Enzoo Optical albums (full Yupoo storefront)."
       },
       "specialty": "Replica eyewear (Cartier, Gucci, Prada, Jacques Marie Mage, Chrome Hearts etc).",
       "verdict": "use-via-agent",
-      "notes": "Yupoo store-wide password is \"enzoo123\". Source: Jan. Verified working 2026-05-03 on the Monica album.",
+      "notes": "Yupoo store-wide password is «password — see sellers.local.json». Source: Jan. Verified working 2026-05-03 on the Monica album.",
       "sources": [
         "https://enzooopticl.x.yupoo.com/",
         "https://www.tiktok.com/discover/enzoo-optical-yupoo",

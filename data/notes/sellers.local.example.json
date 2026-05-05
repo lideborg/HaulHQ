@@ -1,0 +1,17 @@
+{
+  "_note": "Local overlay for sellers.json. Copy to sellers.local.json (gitignored) and fill in sensitive contact fields. The notes loader merges this into sellers.json at runtime — entries are matched by 'name' and the 'contact' object is shallow-merged.",
+  "sellers": [
+    {
+      "name": "Enzoo Optical (enzooopticl)",
+      "contact": {
+        "yupoo_password": "<paste current store password here>"
+      }
+    },
+    {
+      "name": "Footaction_Sneaker",
+      "contact": {
+        "whatsapp": "+8612345678901"
+      }
+    }
+  ]
+}

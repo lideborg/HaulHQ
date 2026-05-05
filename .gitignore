@@ -27,6 +27,12 @@ build/
 /*.png
 /*.webp
 
+# --- Per-machine overlays (never commit) ---
+# Sensitive contact dictionaries, passwords, and verified phone numbers live in
+# *.local.json files alongside their public counterparts. The notes loader
+# merges them at runtime if present.
+data/notes/*.local.json
+
 # --- Temp scrape dumps at repo root ---
 scrape-*.json
 prada-album-list.json

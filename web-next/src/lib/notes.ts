@@ -18,7 +18,26 @@ async function readJSON<T>(p: string): Promise<T> {
 }
 
 export async function loadSellers(): Promise<SellersFile> {
-  return readJSON<SellersFile>(path.join(NOTES_DIR, "sellers.json"));
+  const base = await readJSON<SellersFile>(path.join(NOTES_DIR, "sellers.json"));
+  // Merge in the gitignored local overlay if present (sensitive contact
+  // fields — passwords, verified phone numbers — that don't belong in git).
+  // Match by `name`; shallow-merge the `contact` object so overlay values
+  // win over public ones.
+  try {
+    const overlay = await readJSON<SellersFile>(
+      path.join(NOTES_DIR, "sellers.local.json")
+    );
+    const overlayByName = new Map(overlay.sellers.map((s) => [s.name, s]));
+    for (const s of base.sellers) {
+      const o = overlayByName.get(s.name);
+      if (!o) continue;
+      s.contact = { ...(s.contact ?? {}), ...(o.contact ?? {}) };
+    }
+  } catch (err) {
+    // Overlay missing is fine. Anything else (parse error) bubbles up.
+    if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err;
+  }
+  return base;
 }
 
 export async function loadGlossary(): Promise<GlossaryFile> {

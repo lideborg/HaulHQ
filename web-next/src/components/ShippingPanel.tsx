@@ -89,7 +89,7 @@ export function ShippingPanel({ data, items }: ShippingPanelProps) {
       </div>
 
       <dl className="mt-4 grid grid-cols-[1fr_auto] gap-y-1.5 text-[13px]">
-        <Row k="Item subtotal" v={fmtUsd(result.itemsUsd)} sub={`(${items.length} items)`} />
+        <Row k="Item subtotal" v={fmtUsd(result.itemsUsd)} sub={`(${items.length} item${items.length === 1 ? "" : "s"})`} />
         <Row
           k="Weight (actual / charged)"
           v={`${fmtKg(result.actualKg)} / ${fmtKg(result.chargedKg)}`}

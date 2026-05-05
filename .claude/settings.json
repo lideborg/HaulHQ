@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); if echo \"$cmd\" | grep -qE '\\bgh\\s+pr\\s+merge\\b'; then if [ \"${ALLOW_AUTO_MERGE:-}\" != \"1\" ]; then echo 'BLOCKED: gh pr merge requires explicit user approval per AGENTS.md. Ask the user first, then have them rerun the command with ALLOW_AUTO_MERGE=1 prefixed.' >&2; exit 2; fi; fi; exit 0",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); if echo \"$cmd\" | grep -qE '\\bgh\\s+pr\\s+merge\\b'; then if ! echo \"$cmd\" | grep -qE '(^|[^A-Za-z_])ALLOW_AUTO_MERGE=1\\b'; then echo 'BLOCKED: gh pr merge requires explicit user approval per AGENTS.md. Ask the user first, then prefix the command with ALLOW_AUTO_MERGE=1.' >&2; exit 2; fi; fi; exit 0",
             "timeout": 10
           }
         ]

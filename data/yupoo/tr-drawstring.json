@@ -21,7 +21,7 @@
   "variants": [
     "Black"
   ],
-  "notes": "Material: Wool. Model AF6360. 10 photos.",
+  "notes": "Material: Wool. Model AF6360. 10 photos. | Size XL: chart maxes here. Waist 90 = body-true (drawstring forgives), hip 116 = relaxed, leg opening ~27cm = moderate wide-leg (less drape than Hampus's Our Legacy / COS — closer to a structured trouser).",
   "local_image_paths": [
     "images/tr-drawstring/000.jpg",
     "images/tr-drawstring/001.jpg",
@@ -80,5 +80,5 @@
   ],
   "requires_contact": true,
   "acquisition": "contact-seller",
-  "target_size": "L"
+  "target_size": "XL"
 }

@@ -42,19 +42,9 @@
   ],
   "local_image_paths": [
     "images/jan-lemaire-derby/g000.jpg",
-    "images/jan-lemaire-derby/g001.jpg",
     "images/jan-lemaire-derby/g002.jpg"
   ],
-  "local_detail_image_paths": [
-    "images/jan-lemaire-derby/d000.jpg",
-    "images/jan-lemaire-derby/d001.jpg",
-    "images/jan-lemaire-derby/d002.jpg",
-    "images/jan-lemaire-derby/d003.jpg",
-    "images/jan-lemaire-derby/d004.jpg",
-    "images/jan-lemaire-derby/d005.jpg",
-    "images/jan-lemaire-derby/d006.jpg",
-    "images/jan-lemaire-derby/d007.jpg"
-  ],
+  "local_detail_image_paths": [],
   "out_of_stock": true,
   "requires_contact": false,
   "acquisition": "superbuy"

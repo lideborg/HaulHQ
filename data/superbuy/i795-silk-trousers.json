@@ -1,0 +1,32 @@
+{
+  "user_label": "i795 Silk Suit Trousers",
+  "brand": "LE Style",
+  "title": "i795 LE Style 26SS dry silk suit set",
+  "title_translated": "i795 LE Style 26SS dry silk suit set",
+  "category": "apparel-bottom",
+  "source": "superbuy",
+  "url": "https://www.superbuy.com/en/page/buy/?nTag=Home-search&from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7755720751",
+  "source_url": "https://weidian.com/item.html?itemID=7755720751",
+  "price": "¥658",
+  "price_rmb": 658,
+  "owners": ["hampus"],
+  "target_size": "48",
+  "target_variant": "Dry silk trousers",
+  "seller": "i795",
+  "acquisition": "superbuy",
+  "image_urls": [],
+  "local_image_paths": [],
+  "detail_image_urls": [],
+  "local_detail_image_paths": [],
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["44", "46", "48", "50"],
+    "measurements": {
+      "length": [107.5, 109, 110.5, 112],
+      "waist": [78, 82, 86, 90],
+      "hip": [102, 106, 110, 114],
+      "thigh": [68, 70, 72, 74],
+      "hem": [62, 64, 66, 68]
+    }
+  }
+}

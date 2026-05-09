@@ -1156,6 +1156,12 @@
       "acquisition": "superbuy",
       "locked": false,
       "target_variant": "dark brown"
+    },
+    {
+      "file": "i795-silk-suit.json"
+    },
+    {
+      "file": "i795-silk-trousers.json"
     }
   ]
 }

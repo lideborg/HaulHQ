@@ -18,9 +18,9 @@
   "acquisition": "superbuy",
   "image_urls": [],
   "local_image_paths": [
-    "images/i795-silk-suit/g000.jpg",
-    "images/i795-silk-suit/g001.jpg",
     "images/i795-silk-suit/g002.jpg",
+    "images/i795-silk-suit/g001.jpg",
+    "images/i795-silk-suit/g000.jpg",
     "images/i795-silk-suit/g003.jpg"
   ],
   "detail_image_urls": [],

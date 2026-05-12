@@ -1,0 +1,37 @@
+{
+  "user_label": "ERD Checkerboard Shirt",
+  "brand": "ERD",
+  "title": "棋盘格衬衫/chessboard shirt",
+  "title_translated": "Checkerboard mesh yarn silk wool interwoven jacquard long-sleeved shirt",
+  "category": "apparel-top",
+  "source": "superbuy",
+  "url": "https://www.superbuy.com/en/page/buy/?nTag=Home-search&from=search-input&url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7494451353",
+  "source_url": "https://weidian.com/item.html?itemID=7494451353",
+  "price": "¥385",
+  "price_rmb": 385,
+  "owners": ["hampus"],
+  "target_size": "XL",
+  "seller": "Wang",
+  "acquisition": "superbuy",
+  "image_urls": [],
+  "local_image_paths": [
+    "images/erd-checkerboard-shirt/g000.jpg",
+    "images/erd-checkerboard-shirt/g002.jpg",
+    "images/erd-checkerboard-shirt/g003.jpg",
+    "images/erd-checkerboard-shirt/g004.jpg",
+    "images/erd-checkerboard-shirt/g005.jpg",
+    "images/erd-checkerboard-shirt/g006.jpg"
+  ],
+  "detail_image_urls": [],
+  "local_detail_image_paths": [],
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["S", "M", "L", "XL"],
+    "measurements": {
+      "length": [72.5, 74, 75.5, 77],
+      "chest": [108, 112, 116, 120],
+      "shoulder": [54, 56, 58, 60],
+      "sleeve": [64, 65.5, 67, 68.5]
+    }
+  }
+}

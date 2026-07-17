@@ -15,6 +15,17 @@ export interface Product {
   created_at: string;
 }
 
+export interface Friend {
+  id: string;
+  name: string;
+  email: string | null;
+  access_token: string;
+  shipping_address: Record<string, unknown> | null;
+  currency: string;
+  is_admin: boolean;
+  active: boolean;
+}
+
 export interface Seller {
   id: string;
   name: string;

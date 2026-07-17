@@ -15,6 +15,17 @@ export async function getPublishedProducts(brand?: string): Promise<Product[]> {
   return (data ?? []) as Product[];
 }
 
+export async function getProductById(id: string): Promise<Product | null> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("products")
+    .select("*")
+    .eq("id", id)
+    .maybeSingle();
+  if (error) throw error;
+  return (data as Product) ?? null;
+}
+
 export async function getBrands(): Promise<string[]> {
   const sb = createAdminClient();
   const { data, error } = await sb

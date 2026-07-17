@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Product } from "@/lib/types";
 
 export function ProductCard({ product }: { product: Product }) {
@@ -7,7 +8,7 @@ export function ProductCard({ product }: { product: Product }) {
       ? `US$ ${product.price_usd.toFixed(2)}`
       : "Quote on request";
   return (
-    <div className="group block">
+    <Link href={`/product/${product.id}`} className="group block">
       <div className="aspect-[3/4] overflow-hidden bg-neutral-100">
         {img ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -27,6 +28,6 @@ export function ProductCard({ product }: { product: Product }) {
         </p>
         <p className="text-[11px]">{price}</p>
       </div>
-    </div>
+    </Link>
   );
 }

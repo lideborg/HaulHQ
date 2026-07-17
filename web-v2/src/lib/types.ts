@@ -1,3 +1,10 @@
+export interface SizeGuide {
+  unit: "cm" | "in";
+  note?: string;
+  sizes: string[];
+  measurements: Record<string, (number | null)[]>;
+}
+
 export interface Product {
   id: string;
   brand: string | null;
@@ -13,6 +20,10 @@ export interface Product {
   size_options: string[];
   published: boolean;
   created_at: string;
+  size_guide: SizeGuide | null;
+  admin_sizing_note: string | null;
+  source_platform: string | null;
+  colors: string[];
 }
 
 export interface Friend {
@@ -24,6 +35,7 @@ export interface Friend {
   currency: string;
   is_admin: boolean;
   active: boolean;
+  measurements: Record<string, number> | null;
 }
 
 export interface Seller {

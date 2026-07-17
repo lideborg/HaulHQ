@@ -151,5 +151,6 @@
   "requires_contact": false,
   "acquisition": "superbuy",
   "target_variant": "white and black",
-  "target_size": "L"
+  "target_size": "L",
+  "status": "warehouse"
 }

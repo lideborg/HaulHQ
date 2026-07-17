@@ -1,0 +1,70 @@
+{
+  "user_label": "VC Roots Washed Vintage Hoodie (Swag Made)",
+  "url": "https://www.superbuy.com/en/page/shop/shop/?shopid=349170071&platform=TB",
+  "source_url": null,
+  "yupoo_url": "https://swaggymade.x.yupoo.com/albums/224103951?uid=1&isSubCate=false&referrercate=5222675",
+  "title": "VC Roots Heavily-Washed Vintage Hoodie (style 251208)",
+  "brand": "VC (archive-style rep)",
+  "category": "apparel-top",
+  "source": "yupoo",
+  "seller": "Swag Made (Taobao shop MADEBYSWAG1, shopid 349170071)",
+  "price": "~$76-78 (¥520-535)",
+  "status": "favorite",
+  "sizing": "Get 52 (largest). Runs SLIM + SHORT for a hoodie; chart calibrated to a ~180cm model. Chart (length / 1/2-chest=pit / shoulder / sleeve, cm): 46 63/55/48/60, 48 65/57/49.5/61, 50 67/59/51/62, 52 69/61/52.5/63. For 183cm/75kg: even 52 = pit 61 / shoulder 52.5 / length 69 — comfortably RELAXED but NOT oversized (his Jenkem benchmark is pit 69.5/shoulder 69.5/length 84; this is much slimmer + ~15cm shorter). 52 is the max, so it's as roomy as this gets — expect a fitted-vintage hoodie, not a tent. Size 50 if he wants it slightly trimmer.",
+  "size_chart": {
+    "unit": "cm",
+    "note": "胸围 is 1/2 chest (pit-to-pit); chart calibrated ~180cm model; style 251208",
+    "sizes": [
+      "46",
+      "48",
+      "50",
+      "52"
+    ],
+    "measurements": {
+      "length": [
+        63,
+        65,
+        67,
+        69
+      ],
+      "pit_to_pit": [
+        55,
+        57,
+        59,
+        61
+      ],
+      "shoulder": [
+        48,
+        49.5,
+        51,
+        52.5
+      ],
+      "sleeve": [
+        60,
+        61,
+        62,
+        63
+      ]
+    },
+    "source_image": "images/swag-vc-roots-hoodie/01.jpg"
+  },
+  "notes": "Swag Made (swaggymade) Yupoo album 224103951. Heavily garment-washed / vintage-distressed pullover hoodie, tonal 'VC roots' embroidery on chest (VC letters sprouting tree roots). Colors: washed black + washed navy/blue (seller notes batch color ratio ~1:1, natural vintage feel). No price/Taobao link on the album — contact Swag Made (WeChat/Discord/TikTok) to order. ORDERABLE VIA SUPERBUY: Taobao shop MADEBYSWAG1 (shopid 349170071), listed as 'MADEBYSWAG makes old sweatshirts from VC tree roots' ~$76-78, washed black + washed navy.",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [
+    "https://photo.yupoo.com/swaggymade/2e2fac50/big.jpg",
+    "https://photo.yupoo.com/swaggymade/16f25a94/big.jpg",
+    "https://photo.yupoo.com/swaggymade/dcce4895/big.jpg",
+    "https://photo.yupoo.com/swaggymade/11b9de5e/big.jpg",
+    "https://photo.yupoo.com/swaggymade/cfee3ea5/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/swag-vc-roots-hoodie/02.jpg",
+    "images/swag-vc-roots-hoodie/03.jpg",
+    "images/swag-vc-roots-hoodie/04.jpg",
+    "images/swag-vc-roots-hoodie/05.jpg",
+    "images/swag-vc-roots-hoodie/06.jpg",
+    "images/swag-vc-roots-hoodie/01.jpg"
+  ]
+}

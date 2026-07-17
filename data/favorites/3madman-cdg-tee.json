@@ -1,0 +1,37 @@
+{
+  "user_label": "CDG White Tee (3MadMan)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D993867912802",
+  "source_url": "https://item.taobao.com/item.htm?id=993867912802",
+  "yupoo_url": "https://3madman.x.yupoo.com/albums/196590055?uid=1&isSubCate=false&referrercate=5079570",
+  "title": "Comme des Garcons (CDG) White Tee",
+  "brand": "Comme des Garcons (rep)",
+  "category": "apparel-top",
+  "source": "taobao",
+  "seller": "3MadMan",
+  "price": null,
+  "status": "favorite",
+  "sizes": ["S", "M", "L", "XL"],
+  "sizing": "Size XL for 183cm/75kg — runs SMALL/slim. XL pit 53 (full chest 106), shoulder 51, length 72 = standard fit on you, not oversized. Smaller would be tight. Chart full-chest: S 66/45/94/17.5, M 68/47/98/18, L 70/49/102/18.5, XL 72/51/106/19 = length/shoulder/chest/sleeve.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["S", "M", "L", "XL"],
+    "measurements": {
+      "length": [66, 68, 70, 72],
+      "shoulder": [45, 47, 49, 51],
+      "chest": [94, 98, 102, 106],
+      "sleeve": [17.5, 18, 18.5, 19]
+    }
+  },
+  "owners": ["hampus"],
+  "image_urls": [
+    "https://photo.yupoo.com/3madman/b064dd45/big.jpg",
+    "https://photo.yupoo.com/3madman/05ad087e/big.jpg",
+    "https://photo.yupoo.com/3madman/fd111230/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/3madman-cdg-tee/001.jpg",
+    "images/3madman-cdg-tee/002.jpg",
+    "images/3madman-cdg-tee/003.jpg",
+    "images/3madman-cdg-tee/004.jpg"
+  ]
+}

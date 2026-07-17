@@ -1,0 +1,40 @@
+{
+  "user_label": "Loewe Poplin Shirt",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7704894933",
+  "source_url": "https://weidian.com/item.html?itemID=7704894933",
+  "yupoo_url": "https://fashionbroda.x.yupoo.com/albums/227255734?uid=1&isSubCate=false&referrercate=4874408",
+  "title": "Loewe White Poplin Shirt (LOT1682904-A45)",
+  "brand": "Loewe (rep)",
+  "category": "apparel-top",
+  "source": "weidian",
+  "seller": "FashionBroda",
+  "price": "¥295",
+  "status": "favorite",
+  "sizing": "Size 40 for 183cm/75kg/96cm chest — pit 63 (15cm ease, relaxed), shoulder 52 dropped, length 77, sleeve 66. Clean relaxed fit. Go 41 (chest 130, pit 65) for more oversized. Chart full-chest: 38(74/118/50/63) 39(76/122/51/64) 40(77/126/52/66) 41(79/130/53/67) = length/chest/shoulder/sleeve.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["38", "39", "40", "41"],
+    "measurements": {
+      "length": [74, 76, 77, 79],
+      "chest": [118, 122, 126, 130],
+      "shoulder": [50, 51, 52, 53],
+      "sleeve": [63, 64, 66, 67]
+    }
+  },
+  "notes": "High-count combed cotton poplin with liquid ammonia finish. Mother-of-pearl buttons, embroidered logo on left chest, relaxed dropped-shoulder fit, two-button cuff adjustment. Straight stitching and consistent color.",
+  "owners": ["hampus"],
+  "image_urls": [
+    "https://photo.yupoo.com/fashionbroda/c4b23a40/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/5ce19441/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/9af343ca/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/9102e20d/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/709f3494/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/fb-loewe-poplin-shirt/01.jpg",
+    "images/fb-loewe-poplin-shirt/02.jpg",
+    "images/fb-loewe-poplin-shirt/03.jpg",
+    "images/fb-loewe-poplin-shirt/04.jpg",
+    "images/fb-loewe-poplin-shirt/05.jpg"
+  ]
+}

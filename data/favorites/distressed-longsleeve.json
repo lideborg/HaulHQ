@@ -1,0 +1,29 @@
+{
+  "user_label": "Dini SS06 Black Distressed Sweater",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1055292127401",
+  "source_url": "https://item.taobao.com/item.htm?id=1055292127401",
+  "yupoo_url": null,
+  "title": "Dini SS06 \"The World was a mess, but his hair was Perfect\" Black Distressed Sweater",
+  "brand": "Producedbydini",
+  "category": "apparel-top",
+  "source": "taobao",
+  "price": "¥436.22",
+  "status": "favorite",
+  "sizing": "Size L for 183cm/75kg. Brand height/weight guide: 180cm/80kg = L. Slim distressed cut (chest 51.5 half, length 71, sleeve 80 — intentionally long). Sizes XS-L.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["XS", "S", "M", "L"],
+    "measurements": {
+      "half_chest": [45.5, 47.5, 49.5, 51.5],
+      "length": [66.5, 68, 69.5, 71],
+      "cuff_width": [15.5, 16.3, 17.1, 17.9],
+      "sleeve": [77, 78, 79, 80]
+    }
+  },
+  "notes": "Black distressed sweater. Brand size guide: 160/55=XS, 170/60=S, 175/70=M, 180/80=L.",
+  "owners": ["hampus"],
+  "image_urls": [],
+  "local_image_paths": [
+    "images/distressed-longsleeve/000.jpg"
+  ]
+}

@@ -94,5 +94,6 @@
     "hampus"
   ],
   "requires_contact": false,
-  "acquisition": "superbuy"
+  "acquisition": "superbuy",
+  "status": "warehouse"
 }

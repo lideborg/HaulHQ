@@ -3,7 +3,7 @@
 // organically — only the columns we actually rely on are typed strictly.
 
 export type Owner = "hampus" | "jan";
-export type DataSource = "yupoo" | "superbuy" | "weidian" | "taobao" | "1688";
+export type DataSource = "yupoo" | "superbuy" | "favorites" | "weidian" | "taobao" | "1688";
 export type Category =
   | "apparel-top"
   | "apparel-bottom"
@@ -13,6 +13,7 @@ export type Category =
   | "accessory";
 
 export type Acquisition = "superbuy" | "contact-seller";
+export type ItemStatus = "favorite" | "purchased" | "warehouse" | "shipped";
 
 export interface SizeChart {
   unit: "cm" | "in";
@@ -26,6 +27,7 @@ export interface Item {
   user_label: string;
   url?: string;
   source_url?: string | null;
+  yupoo_url?: string | null;
   title?: string | null;
   title_translated?: string | null;
   description?: string | null;
@@ -63,6 +65,7 @@ export interface Item {
   preview_photo_url?: string | null;
 
   // State
+  status?: ItemStatus;
   owners?: Owner[];
   out_of_stock?: boolean;
   skipped?: boolean;

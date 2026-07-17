@@ -1,0 +1,37 @@
+{
+  "user_label": "Acne Studios Pants (Logan)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D934513910471",
+  "source_url": "https://item.taobao.com/item.htm?id=934513910471",
+  "yupoo_url": "https://loganhere.x.yupoo.com/albums/198401779?uid=1&isSubCate=false&referrercate=4551003",
+  "title": "Acne Studios Pants (Logan)",
+  "brand": "Acne Studios (rep)",
+  "category": "apparel-bottom",
+  "source": "taobao",
+  "seller": "Logan (loganhere)",
+  "price": "¥145",
+  "status": "favorite",
+  "sizes": ["S", "M", "L", "XL"],
+  "sizing": "Size XL for 183cm/75kg (89 waist, 94-95 hips). Waist runs small/relaxed (likely elastic-drawstring): full waist S64/M68/L72/XL76 — XL relaxed 76 stretches to fit your 89. Hip XL112 = relaxed. CONFIRM it's elastic/drawstring waist. Chart half-waist: S 105/32/100, M 107/34/104, L 109/36/108, XL 111/38/112 = length/half-waist/hip.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["S", "M", "L", "XL"],
+    "measurements": {
+      "length": [105, 107, 109, 111],
+      "half_waist": [32, 34, 36, 38],
+      "hip": [100, 104, 108, 112]
+    }
+  },
+  "notes": "Logan. Waist measured flat/relaxed — assume elastic or drawstring; confirm before ordering.",
+  "owners": ["hampus"],
+  "image_urls": [
+    "https://photo.yupoo.com/loganhere/97505a20/big.jpg",
+    "https://photo.yupoo.com/loganhere/c4f85986/big.jpg",
+    "https://photo.yupoo.com/loganhere/c158e286/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/logan-acne-pants/001.jpg",
+    "images/logan-acne-pants/002.jpg",
+    "images/logan-acne-pants/003.jpg",
+    "images/logan-acne-pants/004.jpg"
+  ]
+}

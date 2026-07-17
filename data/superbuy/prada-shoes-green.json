@@ -62,5 +62,6 @@
   "requires_contact": false,
   "acquisition": "superbuy",
   "target_variant": "white",
-  "target_size": "41"
+  "target_size": "41",
+  "status": "purchased"
 }

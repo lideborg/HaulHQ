@@ -1,0 +1,65 @@
+{
+  "user_label": "Our Legacy Floral Shirt (Logan)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Floganhere.x.yupoo.com%2Falbums%2F176923141",
+  "source_url": null,
+  "yupoo_url": "https://loganhere.x.yupoo.com/albums/176923141?uid=1&isSubCate=false&referrercate=4550879",
+  "title": "Our Legacy Floral Sheer Button-Up Shirt",
+  "brand": "Our Legacy (rep)",
+  "category": "apparel-top",
+  "source": "yupoo",
+  "seller": "Logan (loganhere)",
+  "price": "¥180",
+  "status": "favorite",
+  "sizing": "Get L/50. Long-sleeve button-up, relaxed/oversized. Chart (length / 1/2-chest=pit / shoulder / sleeve): S46 72/67/48/60, M48 74/69/50/61, L50 76/71/52/62. For 183cm/75kg: L pit 71 = his preferred relaxed Our Legacy fit (matches his own OL purple tee at pit 71 which he calls oversized/likes); longest length (76) + sleeve (62). L is also the max size so no over-size risk. Caveat: sleeve 62 runs a touch short for his long arms (his JWA shirt sleeve 74.5, hoodies ~70) — fine for a shirt worn cuffed/pushed, but not long-draped.",
+  "size_chart": {
+    "unit": "cm",
+    "note": "1/2 Chest = half (pit-to-pit); measuring error 1-3cm",
+    "sizes": [
+      "S/46",
+      "M/48",
+      "L/50"
+    ],
+    "measurements": {
+      "length": [
+        72,
+        74,
+        76
+      ],
+      "pit_to_pit": [
+        67,
+        69,
+        71
+      ],
+      "shoulder": [
+        48,
+        50,
+        52
+      ],
+      "sleeve": [
+        60,
+        61,
+        62
+      ]
+    },
+    "source_image": "images/logan-our-legacy-shirt/01.jpg"
+  },
+  "notes": "Logan loganhere Yupoo album 176923141. White sheer/semi-sheer cotton-blend shirt with all-over muted floral print, spread collar, button-up, long sleeve. Our Legacy 'Initial/Borrowed' shirt style.",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [
+    "https://photo.yupoo.com/loganhere/2951894c/big.jpg",
+    "https://photo.yupoo.com/loganhere/241a5e7f/big.jpg",
+    "https://photo.yupoo.com/loganhere/9e3c19cf/big.jpg",
+    "https://photo.yupoo.com/loganhere/f796794c/big.jpg",
+    "https://photo.yupoo.com/loganhere/ae9ebc03/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/logan-our-legacy-shirt/05.jpg",
+    "images/logan-our-legacy-shirt/06.jpg",
+    "images/logan-our-legacy-shirt/07.jpg",
+    "images/logan-our-legacy-shirt/08.jpg",
+    "images/logan-our-legacy-shirt/10.jpg",
+    "images/logan-our-legacy-shirt/01.jpg"
+  ]
+}

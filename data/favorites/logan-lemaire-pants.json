@@ -1,0 +1,37 @@
+{
+  "user_label": "Lemaire Pants (Logan)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D970402275612",
+  "source_url": "https://item.taobao.com/item.htm?id=970402275612",
+  "yupoo_url": "https://loganhere.x.yupoo.com/albums/208589090?uid=1&isSubCate=false&referrercate=4999601",
+  "title": "Lemaire Pants (Logan)",
+  "brand": "Lemaire (rep)",
+  "category": "apparel-bottom",
+  "source": "taobao",
+  "seller": "Logan (loganhere)",
+  "price": "¥140",
+  "status": "favorite",
+  "sizes": ["S", "M", "L", "XL"],
+  "sizing": "Size XL for 183cm/75kg (89 waist, 94-95 hips). Waist relaxed/likely elastic: full waist S68/M72/L76/XL80 — XL relaxed 80 stretches to your 89. Hip XL100 (slight ease on 94-95); L hip 96 would be snug. CONFIRM elastic/drawstring waist. Chart half-waist: S 103/34/88, M 105/36/92, L 107/38/96, XL 109/40/100 = length/half-waist/hip.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["S", "M", "L", "XL"],
+    "measurements": {
+      "length": [103, 105, 107, 109],
+      "half_waist": [34, 36, 38, 40],
+      "hip": [88, 92, 96, 100]
+    }
+  },
+  "notes": "Logan. Waist measured flat/relaxed — assume elastic or drawstring; confirm before ordering.",
+  "owners": ["hampus"],
+  "image_urls": [
+    "https://photo.yupoo.com/loganhere/ab3cb8c7/big.jpg",
+    "https://photo.yupoo.com/loganhere/1cefe6ee/big.jpg",
+    "https://photo.yupoo.com/loganhere/c0571c14/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/logan-lemaire-pants/001.jpg",
+    "images/logan-lemaire-pants/002.jpg",
+    "images/logan-lemaire-pants/003.jpg",
+    "images/logan-lemaire-pants/004.jpg"
+  ]
+}

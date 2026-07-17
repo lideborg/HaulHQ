@@ -81,5 +81,6 @@
   "requires_contact": true,
   "acquisition": "contact-seller",
   "target_size": "XL",
-  "superbuy_url": "https://k.youshop10.com/TxtUGFP2"
+  "superbuy_url": "https://k.youshop10.com/TxtUGFP2",
+  "status": "warehouse"
 }

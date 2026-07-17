@@ -9,7 +9,9 @@
   "source_url": "https://weidian.com/item.html?itemID=7494451353",
   "price": "¥385",
   "price_rmb": 385,
-  "owners": ["hampus"],
+  "owners": [
+    "hampus"
+  ],
   "target_size": "XL",
   "seller": "Wang",
   "acquisition": "superbuy",
@@ -26,12 +28,38 @@
   "local_detail_image_paths": [],
   "size_chart": {
     "unit": "cm",
-    "sizes": ["S", "M", "L", "XL"],
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
     "measurements": {
-      "length": [72.5, 74, 75.5, 77],
-      "chest": [108, 112, 116, 120],
-      "shoulder": [54, 56, 58, 60],
-      "sleeve": [64, 65.5, 67, 68.5]
+      "length": [
+        72.5,
+        74,
+        75.5,
+        77
+      ],
+      "chest": [
+        108,
+        112,
+        116,
+        120
+      ],
+      "shoulder": [
+        54,
+        56,
+        58,
+        60
+      ],
+      "sleeve": [
+        64,
+        65.5,
+        67,
+        68.5
+      ]
     }
-  }
+  },
+  "status": "warehouse"
 }

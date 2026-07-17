@@ -127,5 +127,6 @@
   ],
   "requires_contact": false,
   "acquisition": "superbuy",
-  "target_size": "S"
+  "target_size": "S",
+  "status": "purchased"
 }

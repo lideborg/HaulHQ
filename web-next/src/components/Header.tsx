@@ -6,13 +6,14 @@ import Link from "next/link";
 import { HaulCountBadge } from "./HaulCountBadge";
 
 export interface HeaderProps {
-  active: "catalog" | "haul" | "notes";
+  active: "catalog" | "haul" | "notes" | "import";
 }
 
 const tabs = [
-  { id: "catalog" as const, href: "/", label: "Catalog" },
+  { id: "catalog" as const, href: "/", label: "Browse" },
   { id: "haul" as const, href: "/haul", label: "Haul" },
   { id: "notes" as const, href: "/notes", label: "Notes" },
+  { id: "import" as const, href: "/import", label: "Import" },
 ];
 
 export function Header({ active }: HeaderProps) {

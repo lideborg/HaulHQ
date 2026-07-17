@@ -1,0 +1,38 @@
+{
+  "user_label": "Sorlan FW07 Navigate Mohair Sweater",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1049296764596",
+  "source_url": "https://item.taobao.com/item.htm?id=1049296764596",
+  "taobao_url": "https://item.taobao.com/item.htm?id=1049296764596",
+  "title": "Sorlan 07AW \"Navigate\" Mohair Sweater (black with cream stripe)",
+  "brand": "Raf Simons (rep)",
+  "category": "apparel-top",
+  "source": "taobao",
+  "seller": "Sorlan",
+  "price": "¥334.5",
+  "status": "favorite",
+  "sizes": ["S", "M", "L"],
+  "sizing": "Size L for 183cm/75kg — Hampus wants it a little oversized. L chest 50 half (100 full) starts slightly relaxed, then mohair stretches to a comfortable oversized body fit. (Seller says size down for the fitted Raf look; M for that.) Note L length 69cm is shortish for 183 — oversized in width, normal length. Chart: S(46/65/40/68) M(48/67/42/70) L(50/69/44/72) = chest/length/shoulder/sleeve.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["S", "M", "L"],
+    "measurements": {
+      "half_chest": [46, 48, 50],
+      "length": [65, 67, 69],
+      "shoulder": [40, 42, 44],
+      "sleeve": [68, 70, 72]
+    }
+  },
+  "notes": "Black mohair with cream stripe across chest — same 'Navigate' design as the Dini version. Raf Simons archival reference. ~3cm measurement tolerance (mohair).",
+  "owners": ["hampus"],
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i1/2219317529825/O1CN01z39Kji2MRuUWNWsm5_!!2219317529825.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2219317529825/O1CN01z3dQYD2MRuU3WnQdY_!!2219317529825.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2219317529825/O1CN01lqB1Kr2MRuUXLiTe8_!!2219317529825.jpg"
+  ],
+  "local_image_paths": [
+    "images/sb-sorlan-navigate-mohair-sweater/000.jpg",
+    "images/sb-sorlan-navigate-mohair-sweater/001.jpg",
+    "images/sb-sorlan-navigate-mohair-sweater/002.jpg",
+    "images/sb-sorlan-navigate-mohair-sweater/003.jpg"
+  ]
+}

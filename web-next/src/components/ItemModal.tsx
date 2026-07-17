@@ -126,16 +126,28 @@ function ModalContent({
               {cleanDescription(item.description)}
             </p>
           ) : null}
-          {item.url ? (
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[12px] uppercase tracking-[0.12em] text-(--color-muted) hover:text-(--color-fg)"
-            >
-              View on source ↗
-            </a>
-          ) : null}
+          <div className="flex flex-wrap gap-3">
+            {item.url ? (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[12px] uppercase tracking-[0.12em] text-(--color-muted) hover:text-(--color-fg)"
+              >
+                View on Superbuy ↗
+              </a>
+            ) : null}
+            {item.yupoo_url ? (
+              <a
+                href={item.yupoo_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[12px] uppercase tracking-[0.12em] text-(--color-muted) hover:text-(--color-fg)"
+              >
+                View on Yupoo ↗
+              </a>
+            ) : null}
+          </div>
         </aside>
         <section className="lg:col-span-2">
           {images.length > 1 ? (

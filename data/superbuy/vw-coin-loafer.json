@@ -1,0 +1,30 @@
+{
+  "user_label": "VW Coin Loafer",
+  "brand": "Vivienne Westwood",
+  "title": "EIX GNOD cowhide loafers XD-59",
+  "title_translated": "Cowhide loafers old money style leather slip-on shoes",
+  "category": "shoes",
+  "source": "superbuy",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1044919199122",
+  "source_url": "https://item.taobao.com/item.htm?id=1044919199122",
+  "price": "¥1081",
+  "price_rmb": 1081,
+  "owners": [
+    "hampus"
+  ],
+  "target_size": "41",
+  "target_variant": "Burgundy XD-59",
+  "seller": "EIX GNOD",
+  "acquisition": "superbuy",
+  "image_urls": [],
+  "local_image_paths": [
+    "images/vw-coin-loafer/g000.jpg",
+    "images/vw-coin-loafer/g005.jpg",
+    "images/vw-coin-loafer/g006.jpg",
+    "images/vw-coin-loafer/g007.jpg",
+    "images/vw-coin-loafer/g008.jpg"
+  ],
+  "detail_image_urls": [],
+  "local_detail_image_paths": [],
+  "status": "warehouse"
+}

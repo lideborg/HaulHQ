@@ -1,0 +1,73 @@
+{
+  "user_label": "Prada 'Dirty' Shirt Jacket (cn--made)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7767981330",
+  "source_url": "https://weidian.com/item.html?itemID=7767981330",
+  "yupoo_url": "https://cn--made.x.yupoo.com/albums",
+  "title": "Prada Dirty-Wash Shirt Jacket / Overshirt",
+  "brand": "Prada (rep)",
+  "category": "apparel-top",
+  "source": "weidian",
+  "seller": "cn--made (CNMADE multi-brand catalog)",
+  "price": "¥390",
+  "status": "purchased",
+  "sizing": "Get L. Relaxed 'dirty'-wash overshirt, beige, S-XL. Chart (shoulder/chest-FULL/length) + rec height/weight: S 55/122/69 (160-170,50-60kg), M 56/126/71 (165-175,60-70kg), L 57/130/75 (175-185,70-80kg), XL 58/134/75 (175-185,80-90kg). For 183cm/75kg, L matches BOTH rec height (175-185) and weight (70-80kg) exactly — chest 130/pit 65 = relaxed. XL (chest 134/pit 67, same length 75) only if he wants more drape; L is the call.",
+  "size_chart": {
+    "unit": "cm",
+    "note": "chest=full circumference; rec height+weight on chart. 1-3cm tolerance.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "shoulder": [
+        55,
+        56,
+        57,
+        58
+      ],
+      "chest": [
+        122,
+        126,
+        130,
+        134
+      ],
+      "length": [
+        69,
+        71,
+        75,
+        75
+      ]
+    },
+    "rec_height_cm": [
+      "160-170",
+      "165-175",
+      "175-185",
+      "175-185"
+    ],
+    "rec_weight_kg": [
+      "50-60",
+      "60-70",
+      "70-80",
+      "80-90"
+    ],
+    "source_image": "images/cnmade-prada-dirty-shirt-jacket/chart.jpg"
+  },
+  "notes": "Washed/'dirty' faded shirt jacket (overshirt). cn--made catalog. Orderable via Superbuy (Weidian link) or agents Hubbuy/Kakobuy/Acbuy/Mulebuy/Oopbuy. WhatsApp +1 209-279-6170, Discord discord.gg/Ff35E4Hc5d.",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [],
+  "local_image_paths": [
+    "images/cnmade-prada-dirty-shirt-jacket/01.jpg",
+    "images/cnmade-prada-dirty-shirt-jacket/02.jpg",
+    "images/cnmade-prada-dirty-shirt-jacket/03.jpg",
+    "images/cnmade-prada-dirty-shirt-jacket/04.jpg",
+    "images/cnmade-prada-dirty-shirt-jacket/05.jpg",
+    "images/cnmade-prada-dirty-shirt-jacket/06.jpg",
+    "images/cnmade-prada-dirty-shirt-jacket/chart.jpg"
+  ],
+  "order_no": "DO26761604935",
+  "ordered_variant": "L beige"
+}

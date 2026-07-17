@@ -1,0 +1,30 @@
+{
+  "user_label": "Loe wool jacket",
+  "yupoo_url": "https://i795.x.yupoo.com/albums/219342192?uid=1&isSubCate=false&referrercate=4963635",
+  "title": "Loe wool jacket",
+  "brand": null,
+  "category": null,
+  "source": "yupoo",
+  "seller": "i795",
+  "price": null,
+  "status": "favorite",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [
+    "https://photo.yupoo.com/i795/2e169c7a/big.jpeg",
+    "https://photo.yupoo.com/i795/8e4d085e/big.jpeg",
+    "https://photo.yupoo.com/i795/c3b47b35/big.jpeg",
+    "https://photo.yupoo.com/i795/42ba9baf/big.jpeg",
+    "https://photo.yupoo.com/i795/c17855fa/big.jpeg",
+    "https://photo.yupoo.com/i795/a610b923/big.png"
+  ],
+  "local_image_paths": [
+    "images/loe-wool-jacket/000.jpg",
+    "images/loe-wool-jacket/001.jpg",
+    "images/loe-wool-jacket/002.jpg",
+    "images/loe-wool-jacket/003.jpg",
+    "images/loe-wool-jacket/004.jpg",
+    "images/loe-wool-jacket/005.jpg"
+  ]
+}

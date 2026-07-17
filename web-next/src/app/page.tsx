@@ -1,19 +1,19 @@
-// Catalog page — landing.
+// Browse page — shows favorited items (not yet purchased).
 
 import { Suspense } from "react";
 import { Header } from "@/components/Header";
-import { CatalogClient } from "@/components/CatalogClient";
-import { loadAllItems } from "@/lib/data";
+import { BrowseClient } from "@/components/BrowseClient";
+import { loadBrowseItems } from "@/lib/data";
 
 export const dynamic = "force-static";
 
-export default async function CatalogPage() {
-  const items = await loadAllItems();
+export default async function BrowsePage() {
+  const items = await loadBrowseItems();
   return (
     <>
       <Header active="catalog" />
       <Suspense>
-        <CatalogClient items={items} />
+        <BrowseClient items={items} />
       </Suspense>
     </>
   );

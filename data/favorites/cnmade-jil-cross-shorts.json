@@ -1,0 +1,80 @@
+{
+  "user_label": "Jil Sander Cross Shorts (cn--made)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7784078263",
+  "source_url": "https://weidian.com/item.html?itemID=7784078263",
+  "yupoo_url": "https://cn--made.x.yupoo.com/albums",
+  "title": "Jil Sander Cross Shorts",
+  "brand": "Jil Sander (rep)",
+  "category": "apparel-bottom",
+  "source": "weidian",
+  "seller": "cn--made (CNMADE multi-brand catalog)",
+  "price": "¥235",
+  "status": "purchased",
+  "sizing": "Get XL. ELASTIC/ruched-waist baggy shorts. Chart (waist-elastic / hip / length / leg-opening / front-rise / back-rise): S 70/60/44/35/30/41, M 74/62/45/36/31/42, L 78/64/46/37/32/43, XL 82/66/47/38/33/44. For 183cm/75kg (waist 89): waist is the deciding dim — XL relaxed 82 stretches to his 89 with comfy ~7cm give; L's 78 would be taut (~11cm stretch). Hip/length/leg-opening all baggy at both sizes, so XL keeps the silhouette + comfier band. Matches how he wears shorts (loose; COS ref ~107 full waist). XL.",
+  "size_chart": {
+    "unit": "cm",
+    "note": "waist = relaxed elastic circumference; hip/leg-opening likely half-flat (baggy). 1-3cm tolerance.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "waist": [
+        70,
+        74,
+        78,
+        82
+      ],
+      "hip": [
+        60,
+        62,
+        64,
+        66
+      ],
+      "length": [
+        44,
+        45,
+        46,
+        47
+      ],
+      "leg_opening": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "front_rise": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "back_rise": [
+        41,
+        42,
+        43,
+        44
+      ]
+    },
+    "source_image": "images/cnmade-jil-cross-shorts/chart.png"
+  },
+  "notes": "Jil Sander cross/panelled shorts. cn--made catalog. Orderable via Superbuy (Weidian link) or agents Hubbuy/Kakobuy/Acbuy/Mulebuy/Oopbuy. WhatsApp +1 209-279-6170, Discord discord.gg/Ff35E4Hc5d.",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [],
+  "local_image_paths": [
+    "images/cnmade-jil-cross-shorts/01.jpg",
+    "images/cnmade-jil-cross-shorts/02.jpg",
+    "images/cnmade-jil-cross-shorts/03.jpg",
+    "images/cnmade-jil-cross-shorts/04.jpg",
+    "images/cnmade-jil-cross-shorts/05.jpg",
+    "images/cnmade-jil-cross-shorts/06.jpg",
+    "images/cnmade-jil-cross-shorts/chart.png"
+  ],
+  "target_size": "XL",
+  "order_no": "DO26761604935",
+  "ordered_variant": "XL black"
+}

@@ -136,5 +136,6 @@
   ],
   "requires_contact": false,
   "acquisition": "superbuy",
-  "target_size": "drop-shoulder 2"
+  "target_size": "drop-shoulder 2",
+  "status": "purchased"
 }

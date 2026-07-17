@@ -139,5 +139,6 @@
   ],
   "requires_contact": false,
   "acquisition": "superbuy",
-  "target_size": "XXL (52)"
+  "target_size": "XXL (52)",
+  "status": "warehouse"
 }

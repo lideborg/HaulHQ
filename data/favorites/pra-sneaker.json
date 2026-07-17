@@ -1,0 +1,28 @@
+{
+  "user_label": "Pra sneaker",
+  "yupoo_url": "https://i795.x.yupoo.com/albums/226374312?uid=1&isSubCate=false&referrercate=5199207",
+  "title": "Pra sneaker",
+  "brand": null,
+  "category": null,
+  "source": "yupoo",
+  "seller": "i795",
+  "price": "¥600",
+  "status": "favorite",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [
+    "https://photo.yupoo.com/i795/13fd9340/big.jpeg",
+    "https://photo.yupoo.com/i795/909d55c6/big.jpeg",
+    "https://photo.yupoo.com/i795/92f917c4/big.jpeg",
+    "https://photo.yupoo.com/i795/51138cac/big.jpeg",
+    "https://photo.yupoo.com/i795/d21e042e/big.jpeg"
+  ],
+  "local_image_paths": [
+    "images/pra-sneaker/000.jpg",
+    "images/pra-sneaker/001.jpg",
+    "images/pra-sneaker/002.jpg",
+    "images/pra-sneaker/003.jpg",
+    "images/pra-sneaker/004.jpg"
+  ]
+}

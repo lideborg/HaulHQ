@@ -1,0 +1,46 @@
+{
+  "user_label": "ERD Distressed Cropped Cashmere-Cotton Cardigan (Crypto made)",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D965649084862",
+  "source_url": "https://item.taobao.com/item.htm?id=965649084862",
+  "yupoo_url": null,
+  "title": "ERD25SS (Enfants Riches Déprimés) distressed cashmere-cotton silver-buckle cropped knit cardigan, black (Jackson Wang / Wang Jiaer same style)",
+  "brand": "Enfants Riches Déprimés (rep)",
+  "category": "apparel-top",
+  "source": "taobao",
+  "seller": "Crypto made (cryptomade — Superbuy/Taobao store shopid 590930507)",
+  "price": "¥399 (~$63.77)",
+  "status": "favorite",
+  "target_size": "XL",
+  "sizing": "Get XL (largest). Runs SMALL + CROPPED — it's derived from a women's pattern; the SELLER explicitly warns 'boys don't choose M, it's too short — pick at least L, XL length is the most forgiving.' Chart (length / bust-FULL / shoulder / sleeve, cm): M 48/100/43/62, L 50/104/45/63, XL 52/108/47/64. Bust full → pit-to-pit M50 L52 XL54. For 183cm/75kg (chest ~96 full / pit 48, shoulder ~46): XL = pit 54 (relaxed, ~12cm total ease) + shoulder 47 (natural, NOT dropped). BUT length 52cm is genuinely CROPPED on him (his tees are 72-78cm) — it'll sit at or above the natural waist, and sleeve 64 runs a bit short (his hoodies ~70). So XL = a relaxed-fit but deliberately short/cropped cardigan, not oversized-long. If he's fine with the cropped look, XL is the pick; there's no larger size.",
+  "size_chart": {
+    "unit": "cm",
+    "note": "胸围/bust = full circumference (pit-to-pit = half); 2-3cm tolerance; women's-derived pattern runs small, size up",
+    "sizes": ["M", "L", "XL"],
+    "measurements": {
+      "length": [48, 50, 52],
+      "bust": [100, 104, 108],
+      "shoulder": [43, 45, 47],
+      "sleeve": [62, 63, 64]
+    },
+    "source_image": "images/cryptomade-erd-cropped-cardigan/size-chart.png"
+  },
+  "notes": "Crypto made (cryptomade) ERD Taobao store, shopid 590930507. 'Wang Jiaer's (Jackson Wang) same ERD' distressed cropped cardigan — black knit, 15% cashmere / 85% cotton, engraved silver/zinc-alloy buttons, destroyed/raw-edge detailing, round neck, cropped 'short paragraph' cut, unisex (women's-derived). Fall 2025. Seller notes it's independent mold-making, fit runs small; boys should size up (L min, XL most forgiving on length). Seller ID 2215800851954.",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i3/2215800851954/O1CN01ljeM0u1QIyzlm3xzq_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i3/2215800851954/O1CN012vLYPw1QIyzlm4hl5_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2215800851954/O1CN01wx9baa1QIyzlAHs3i_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i2/2215800851954/O1CN01qSWjLS1QIyzlm3QlW_!!2215800851954.jpg",
+    "https://img.alicdn.com/bao/uploaded/i1/2215800851954/O1CN013OWWMQ1QIyzfEa0Zn_!!2215800851954.jpg"
+  ],
+  "local_image_paths": [
+    "images/cryptomade-erd-cropped-cardigan/000.jpg",
+    "images/cryptomade-erd-cropped-cardigan/001.jpg",
+    "images/cryptomade-erd-cropped-cardigan/002.jpg",
+    "images/cryptomade-erd-cropped-cardigan/003.jpg",
+    "images/cryptomade-erd-cropped-cardigan/004.jpg",
+    "images/cryptomade-erd-cropped-cardigan/size-chart.png"
+  ]
+}

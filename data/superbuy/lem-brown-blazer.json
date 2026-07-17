@@ -115,5 +115,6 @@
   ],
   "requires_contact": false,
   "acquisition": "superbuy",
-  "target_size": "M"
+  "target_size": "M",
+  "status": "warehouse"
 }

@@ -135,5 +135,6 @@
   ],
   "requires_contact": false,
   "acquisition": "superbuy",
-  "target_size": "XL"
+  "target_size": "XL",
+  "status": "purchased"
 }

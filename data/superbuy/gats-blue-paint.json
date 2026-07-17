@@ -61,5 +61,6 @@
   "local_detail_image_paths": [
     "images/gats-blue-paint/d000.png"
   ],
-  "target_size": "41"
+  "target_size": "41",
+  "status": "warehouse"
 }

@@ -1,0 +1,70 @@
+{
+  "user_label": "ERD 23FW Embroidered Camp Shirt",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7778964318",
+  "source_url": "https://weidian.com/item.html?itemID=7778964318",
+  "yupoo_url": null,
+  "title": "Enfants Riches Déprimés 23FW Embroidered Short-Sleeve Camp Shirt (cream, black contrast collar)",
+  "brand": "ERD",
+  "category": "apparel-top",
+  "source": "weidian",
+  "seller": "Weidian (itemID 7778964318)",
+  "price": "¥299",
+  "status": "purchased",
+  "sizing": "Get XL. Boxy short-sleeve camp shirt that runs SHORT and narrow-shouldered. Chart (pit-to-pit / shoulder / front length): S 59/46/64, M 61/47.5/65, L 63/49/66, XL 65/50.5/67. For 183cm/75kg (tee sweet spot pit 60-62, oversized to 71, dislikes length <70): XL gives pit 65 (relaxed without swimming), widest shoulder, longest body. Caveat: even XL is only 67cm long = inherently cropped/boxy on his frame; will NOT read as a long draped shirt (JWA ref pit 74/sh 62.5/len 91). Right pick only if he wants the boxy ERD camp-shirt look.",
+  "size_chart": {
+    "unit": "cm",
+    "note": "胸围 is pit-to-pit (flat half); manual measure 2-4cm tolerance",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "measurements": {
+      "front_length": [
+        64,
+        65,
+        66,
+        67
+      ],
+      "back_length": [
+        69,
+        70,
+        71,
+        72
+      ],
+      "pit_to_pit": [
+        59,
+        61,
+        63,
+        65
+      ],
+      "shoulder": [
+        46,
+        47.5,
+        49,
+        50.5
+      ],
+      "sleeve": [
+        21.5,
+        22,
+        22.5,
+        23
+      ]
+    },
+    "source_image": "images/erd-23fw-embroidered-shirt/size-chart.png"
+  },
+  "notes": "Cream/ivory cotton camp (bowling) shirt, black contrast camp collar, chest pocket, embroidered vintage-illustration figures (dancing couple, kite figure, tuxedo man). youshop10 short link: k.youshop10.com/KY14TM8u.",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [
+    "https://si.geilicdn.com/wdseller902015312808-5eff0000019e79f9276f0a8133cc_1196_1477.jpg.webp"
+  ],
+  "local_image_paths": [
+    "images/erd-23fw-embroidered-shirt/01.jpg",
+    "images/erd-23fw-embroidered-shirt/size-chart.png"
+  ],
+  "order_no": "DO26761503779",
+  "ordered_size": "L (NOTE: bought L, recommendation was XL; already in warehouse)"
+}

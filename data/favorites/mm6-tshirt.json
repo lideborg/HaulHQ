@@ -1,0 +1,30 @@
+{
+  "user_label": "MM6 T-shirt",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fft%3Dt%26id%3D1055398479592",
+  "source_url": "https://item.taobao.com/item.htm?ft=t&id=1055398479592",
+  "yupoo_url": "https://richbro.x.yupoo.com/albums/240827252?uid=1&isSubCate=false&referrercate=5210292",
+  "title": "MM6 T-shirt",
+  "brand": "MM6 Maison Margiela (rep)",
+  "category": "apparel-top",
+  "source": "yupoo",
+  "seller": "RichBro",
+  "price": null,
+  "status": "favorite",
+  "owners": [
+    "hampus"
+  ],
+  "image_urls": [
+    "https://photo.yupoo.com/richbro/f2a5da097d/big.jpg",
+    "https://photo.yupoo.com/richbro/9665f0269b/big.jpg",
+    "https://photo.yupoo.com/richbro/a2900def69/big.jpg",
+    "https://photo.yupoo.com/richbro/ed698b3f98/big.jpg",
+    "https://photo.yupoo.com/richbro/7163b44493/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/mm6-tshirt/01.jpg",
+    "images/mm6-tshirt/02.jpg",
+    "images/mm6-tshirt/03.jpg",
+    "images/mm6-tshirt/04.jpg",
+    "images/mm6-tshirt/05.jpg"
+  ]
+}

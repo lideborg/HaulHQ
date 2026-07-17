@@ -1,0 +1,33 @@
+{
+  "user_label": "MVT 1981M Black Paint Splatter Jeans",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D992822993831",
+  "source_url": "https://item.taobao.com/item.htm?id=992822993831",
+  "title": "MVT 1981M Vintage Black paint-splatter wide-leg jeans",
+  "brand": "Acne Studios (rep)",
+  "category": "apparel-bottom",
+  "source": "taobao",
+  "seller": "MVT",
+  "price": null,
+  "status": "favorite",
+  "sizes": ["44", "46", "48", "50"],
+  "sizing": "Size 50 for 183cm/75kg (89 waist) — waist 90 = true fit on your 89, baggy wide-leg (hip 121, opening 57). Brand reference says 180/75=48, but 48's waist is 86 (3cm tight on you); 50 fits the waist properly and is baggier (your preference). Go 48 only for a snugger true-waist fit. Chart (full waist): 44 107/78/115/51, 46 108/82/117/53, 48 109/86/119/55, 50 110/90/121/57 = length/waist/hip/opening.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["44", "46", "48", "50"],
+    "measurements": {
+      "length": [107, 108, 109, 110],
+      "waist": [78, 82, 86, 90],
+      "hip": [115, 117, 119, 121],
+      "leg_opening": [51, 53, 55, 57]
+    }
+  },
+  "notes": "MVT 1981M base in Vintage Black paint-splatter wash. 100% cotton, wide-leg. Brand size ref: 178/60=44, 180/75=48, 180/85=50.",
+  "owners": ["hampus"],
+  "image_urls": [
+    "https://img.alicdn.com/bao/uploaded/i2/2216942154536/O1CN01ZH3R1L1jNXeohslYZ_!!2216942154536.png"
+  ],
+  "local_image_paths": [
+    "images/mvt-1981m-black-splatter-jeans/000.jpg",
+    "images/mvt-1981m-black-splatter-jeans/001_chart.png"
+  ]
+}

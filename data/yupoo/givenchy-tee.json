@@ -94,5 +94,6 @@
   "price_usd": "$41",
   "quoted_by": "happywhale",
   "quoted_on": "2026-05-03",
-  "target_size": "L"
+  "target_size": "L",
+  "out_of_stock": true
 }

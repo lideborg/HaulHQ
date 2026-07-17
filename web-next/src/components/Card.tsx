@@ -80,8 +80,11 @@ export function Card({ item }: CardProps) {
 }
 
 function StatusBadges({ item }: { item: Item }) {
-  type Tone = "good" | "bad" | "neutral" | "skipped" | "warn";
+  type Tone = "good" | "bad" | "neutral" | "skipped" | "warn" | "purchased" | "warehouse" | "shipped";
   const badges: { label: string; tone: Tone }[] = [];
+  if (item.status === "purchased") badges.push({ label: "Purchased", tone: "purchased" });
+  if (item.status === "warehouse") badges.push({ label: "In Warehouse", tone: "warehouse" });
+  if (item.status === "shipped") badges.push({ label: "Shipped", tone: "shipped" });
   if (item.target_size) badges.push({ label: `Size ${item.target_size}`, tone: "good" });
   if (item.target_variant) badges.push({ label: item.target_variant, tone: "neutral" });
   if (item.requires_contact) badges.push({ label: "Contact seller", tone: "warn" });
@@ -95,6 +98,9 @@ function StatusBadges({ item }: { item: Item }) {
     neutral: "bg-neutral-900/70 text-white",
     skipped: "bg-neutral-200 text-neutral-700 line-through",
     warn: "bg-amber-100 text-amber-900 border border-amber-700",
+    purchased: "bg-blue-600 text-white",
+    warehouse: "bg-emerald-600 text-white",
+    shipped: "bg-purple-600 text-white",
   };
   return (
     <div className="absolute left-2 top-2 flex flex-wrap gap-1">

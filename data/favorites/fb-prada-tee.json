@@ -1,0 +1,29 @@
+{
+  "user_label": "Prada T-Shirt",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fweidian.com%2Fitem.html%3FitemID%3D7772534312",
+  "source_url": "https://weidian.com/item.html?itemID=7772534312",
+  "yupoo_url": "https://fashionbroda.x.yupoo.com/albums/238902897?uid=1&isSubCate=false&referrercate=4867655",
+  "title": "Prada T-Shirt (PDT1684277-B75)",
+  "brand": "Prada (rep)",
+  "category": "apparel-top",
+  "source": "weidian",
+  "seller": "FashionBroda",
+  "price": "¥440",
+  "status": "favorite",
+  "sizing": "Size 41 for 183cm/75kg/96cm chest. Sizes 39-42, regular fit, ~250g.",
+  "owners": ["hampus"],
+  "image_urls": [
+    "https://photo.yupoo.com/fashionbroda/57dddd088f/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/bc289280fa/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/ea5aa61264/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/ec5bf997d2/big.jpg",
+    "https://photo.yupoo.com/fashionbroda/c24cd76f2d/big.jpg"
+  ],
+  "local_image_paths": [
+    "images/fb-prada-tee/01.jpg",
+    "images/fb-prada-tee/02.jpg",
+    "images/fb-prada-tee/03.jpg",
+    "images/fb-prada-tee/04.jpg",
+    "images/fb-prada-tee/05.jpg"
+  ]
+}

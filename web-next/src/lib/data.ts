@@ -12,7 +12,7 @@ import type {
 } from "@/types/catalog";
 
 const REPO_ROOT = path.resolve(process.cwd(), "..");
-const SOURCES: DataSource[] = ["yupoo", "superbuy"];
+const SOURCES: DataSource[] = ["yupoo", "superbuy", "favorites"];
 
 async function readJSON<T>(p: string): Promise<T> {
   const buf = await fs.readFile(p, "utf8");
@@ -44,4 +44,21 @@ async function loadFromSource(source: DataSource): Promise<Item[]> {
 export async function loadAllItems(): Promise<Item[]> {
   const groups = await Promise.all(SOURCES.map(loadFromSource));
   return groups.flat();
+}
+
+export async function loadBrowseItems(): Promise<Item[]> {
+  const all = await loadAllItems();
+  return all.filter((it) => {
+    if (it.out_of_stock || it.skipped) return false;
+    if (it.status === "favorite") return true;
+    if (!it.status) return true;
+    return false;
+  });
+}
+
+const HAUL_STATUSES: Set<string> = new Set(["purchased", "warehouse", "shipped"]);
+
+export async function loadHaulItems(): Promise<Item[]> {
+  const all = await loadAllItems();
+  return all.filter((it) => it.status && HAUL_STATUSES.has(it.status));
 }

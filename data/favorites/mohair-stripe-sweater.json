@@ -1,0 +1,29 @@
+{
+  "user_label": "Dini FW07 Navigate Mohair Sweater",
+  "url": "https://www.superbuy.com/en/page/buy/?url=https%3A%2F%2Fitem.taobao.com%2Fitem.htm%3Fid%3D1057050941779",
+  "source_url": "https://item.taobao.com/item.htm?id=1057050941779",
+  "yupoo_url": null,
+  "title": "Dini FW07 \"Navigate\" Mohair Sweater",
+  "brand": "Producedbydini",
+  "category": "apparel-top",
+  "source": "taobao",
+  "price": "¥441.1",
+  "status": "favorite",
+  "sizing": "Size L for 183cm/75kg. Brand height/weight guide: 180cm/80kg = L. Fitted mohair cut (pit 55, length 68.5, shoulder 43.5, sleeve 68) — slimmer than your oversized Acne knit, but that's how mohair sits. Sizes XS-L.",
+  "size_chart": {
+    "unit": "cm",
+    "sizes": ["XS", "S", "M", "L"],
+    "measurements": {
+      "half_chest": [49, 51, 53, 55],
+      "length": [64, 65.5, 67, 68.5],
+      "shoulder": [40.5, 41.5, 42.5, 43.5],
+      "sleeve": [65, 66, 67, 68]
+    }
+  },
+  "notes": "Black mohair with white stripe panel across chest. Brand size guide: 160/55=XS, 170/60=S, 175/70=M, 180/80=L.",
+  "owners": ["hampus"],
+  "image_urls": [],
+  "local_image_paths": [
+    "images/mohair-stripe-sweater/000.jpg"
+  ]
+}

@@ -80,6 +80,14 @@
 - **Inseam target**: 76–84 cm depending on rise. Higher-waisted = longer inseam (~80+); lower-waisted = ~76.
 - **Leg opening half** target by silhouette: 30–32 (tapered), 36–38 (regular wide), 39–42 (wide-leg / sweat).
 
+#### Fit-preference rules of thumb (learned 2026-06 ordering session)
+
+- **Shirts — wants oversized/draped.** Benchmark = JW Anderson oversized shirt (pit 74, shoulder 62.5, length 91, sleeve 74.5). Size up toward it. But if a piece is *already* generous at every size, pick the middle (e.g. Yohji Sunflower → M not L, "oversized without swimming"). Many slim designer shirts (Loewe poplin, Gucci shirt) top out well under the JWA ref — say so, don't pretend they'll be oversized.
+- **Mohair / knit sweaters:** mohair stretches → seller says "size down." For the *fitted* Raf look size to body (M = body chest); for *slightly oversized* go one up (L). He leaned L (oversized) on the Sorlan/Dini Navigate mohairs.
+- **Baggy jeans:** prefers them big. Size by waist, and he's fine going up then **tailoring the waist in** (taking a waist IN is easy; letting out isn't). MVT Demna jeans → size 36. MVT 1981M → 50 (tailor in).
+- **Tees:** "regular" sweet spot pit 60–62 / shoulder 55–58 / length 72–75; oversized up to pit 71. Watch for slim-running brands (CDG tee ran small → needed XL just for standard fit).
+- **Eyewear / EU numeric shoe-style sizing (39–42):** ~size 41 true; 42 for oversized shirts on that scale.
+
 ## Jan
 
 Reference measurements (in inches), taken from his own garments — 2026-05-03.

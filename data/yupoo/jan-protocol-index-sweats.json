@@ -89,5 +89,7 @@
     "images/jan-protocol-index-sweats/022.jpg"
   ],
   "requires_contact": true,
-  "acquisition": "contact-seller"
+  "acquisition": "contact-seller",
+  "target_variant": "Black",
+  "status": "warehouse"
 }

@@ -12,7 +12,9 @@ This is a **rebuild** on top of v1's proven pieces (the `add-haul-item` scrape p
 - **Admin** (Hampus, single): **Supabase Auth email magic-link**, `is_admin` allowlist gate on `/admin/*`. No Clerk. Can generate/revoke friend links.
 
 ## 3. Friend experience (3 pages)
-- **Shop** — brand chips (The Row, ERD, Lemaire, Prada…) + search bar + clean product cards (image, name, **USD price**, size options). Only items Hampus has flagged **published**.
+**Visual design = SSENSE.** Left **collapsible brand sidebar** (all brands, scrollable) · main area **grid of 4 columns** · each card = image, then **BRAND** (bold) → item description → **price** underneath. Minimal, editorial, lots of whitespace. **No right-hand sort/color/filter panel** — just brands-left + grid.
+
+- **Shop** — SSENSE-style: brand sidebar + 4-col grid of clean product cards (image, brand, description, **USD price**, size options). Only items Hampus has flagged **published**.
   - Search **hit** → cards; pick size → add to cart.
   - Search **miss** → friendly card: "Not in the shop yet — paste a link or request it," **plus the real seller names** from the saved-sellers list who carry that brand.
 - **Request** — paste any link + size + note → scrape pipeline → clean card → into cart.
@@ -48,6 +50,7 @@ Images move to **Supabase storage** (no more local git image dumps). v1 `owners:
 
 ## 8. Tech stack
 - **Next.js** (already on 16) + **Supabase** (Postgres + Auth + Storage)
+- **Supabase project:** ref `pqfiwdscftwhmcutspay` → `https://pqfiwdscftwhmcutspay.supabase.co`. Keys live in `web-v2/.env.local` (anon = publishable client-side; service_role = server-only secret, never committed). App lives in a new `web-v2/` (v1's `web-next/` stays intact + frozen at `v1-snapshot`).
 - **Keep the `add-haul-item` scrape pipeline** → becomes the `/request` endpoint (Yupoo/Weidian/Taobao/Superbuy-wrapper → clean card)
 - **Notifications:** Supabase insert → Edge Function → email (Resend) or Telegram bot ping to admin on new request
 

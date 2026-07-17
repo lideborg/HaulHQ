@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { AddToCart } from "@/components/AddToCart";
+import { SizeGuide } from "@/components/SizeGuide";
 import { ProductGallery } from "@/components/ProductGallery";
 import { getProductById } from "@/lib/data";
 
@@ -41,6 +42,7 @@ export default async function ProductPage({
           </div>
           <div className="mt-6">
             <AddToCart productId={product.id} sizes={product.size_options ?? []} />
+            {product.size_guide && <SizeGuide guide={product.size_guide} />}
           </div>
         </div>
       </main>

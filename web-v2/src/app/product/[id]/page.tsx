@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { AddToCart } from "@/components/AddToCart";
+import { ProductGallery } from "@/components/ProductGallery";
 import { getProductById } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -23,21 +24,7 @@ export default async function ProductPage({
     <>
       <Header />
       <main className="mx-auto grid max-w-[1100px] gap-10 px-6 py-8 md:grid-cols-2">
-        <div className="space-y-3">
-          {product.image_urls?.length ? (
-            product.image_urls.map((u, i) => (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={i}
-                src={u}
-                alt={product.title}
-                className="w-full bg-neutral-100 object-cover"
-              />
-            ))
-          ) : (
-            <div className="aspect-[3/4] bg-neutral-100" />
-          )}
-        </div>
+        <ProductGallery images={product.image_urls ?? []} alt={product.title} />
 
         <div className="self-start md:sticky md:top-8">
           <div className="space-y-3">

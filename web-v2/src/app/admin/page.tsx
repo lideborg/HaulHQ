@@ -19,6 +19,9 @@ export default async function AdminHome() {
         <p>{products ?? 0} products ({pub ?? 0} visible)</p>
         <p>{requests ?? 0} open requests</p>
       </div>
+      <a href="/admin/products" className="mt-8 inline-block text-xs uppercase tracking-widest underline">
+        Manage products →
+      </a>
     </main>
   );
 }

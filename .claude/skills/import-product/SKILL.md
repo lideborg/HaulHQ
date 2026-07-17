@@ -1,0 +1,62 @@
+---
+name: import-product
+description: Scrape a rep-fashion link (Superbuy/Taobao/Weidian/Yupoo) into a COMPLETE v2 shop product — every size, every colorway, all images re-hosted in Supabase storage, structured size_guide — then upsert the products row. Use when Hampus says "import <link> to the shop", when processing a friend request from the admin inbox, or to enrich a bare `requested` item. Supersedes add-haul-item for v2 (add-haul-item writes v1 JSON favorites; this writes Supabase).
+---
+
+# Import a product into the HaulHQ v2 shop
+
+Goal per link: a `products` row with title, brand, seller, `source_platform`,
+`cost_cny` + `price_usd` (× FX_CNY_USD × 1.20), ALL `size_options`
+(`["One Size"]` when the listing has no size selector), `colors` when there
+are colorways, `size_guide` JSON read from the size-chart image, and
+`image_urls` pointing at Supabase storage. Default `published = true`.
+
+## Procedure
+
+1. **Resolve & scrape** — follow `add-haul-item`'s link-type table (same
+   gotchas: Superbuy/e.tb.cn need Chrome MCP; Yupoo/weidian direct pages can
+   WebFetch; filter images to the hero seller id; strip `_NxN` suffixes).
+   Additionally capture from the buy page: every size-selector button label
+   → `size_options`; every color-selector label → `colors`.
+2. **Size guide** — download the size-chart detail image (usually first
+   detail image), Read it, transcribe into `size_guide` JSON:
+   `{"unit":"cm","note":"...","sizes":[...],"measurements":{"length":[...],...}}`
+   Keys: length, chest or pit_to_pit, shoulder, sleeve, waist, hip, thigh,
+   outer_length. Half-measurements: keep as-is but name them (`pit_to_pit`,
+   `half_waist`) — the UI labels them correctly. No chart → `size_guide = null`.
+3. **Upsert the row** — via the Management-API curl pattern (see
+   `docs/superpowers/plans/2026-07-17-scrape-import-pipeline.md` Global
+   Constraints). Template:
+
+   ```sql
+   insert into products (brand, title, description, category, seller,
+     source_link, source_platform, image_urls, cost_cny, markup, price_usd,
+     size_options, colors, size_guide, admin_sizing_note, published)
+   values (..., 0.20, ..., true)
+   on conflict (source_link) do update set
+     size_options = excluded.size_options,
+     colors = excluded.colors,
+     size_guide = excluded.size_guide,
+     image_urls = excluded.image_urls,
+     cost_cny = excluded.cost_cny,
+     price_usd = excluded.price_usd;
+   ```
+
+   Then `select id from products where source_link = '...'`.
+4. **Images to storage** — download to a temp dir (curl; Referer header for
+   Yupoo), then from `web-v2/`:
+   `node scripts/upload-product-images.mjs <productId> <tmpdir>`
+   (uploads sorted, updates `image_urls`, prints URLs). Hero shot must sort
+   first — name files `000.jpg, 001.jpg, …`.
+5. **Friend-request link-back** — if this came from a `requested` item:
+   `update items set product_id='<id>', title='<clean title>', quoted_price_usd=<price> where id='<itemId>';`
+6. **Verify** — open `http://localhost:3000/product/<id>`: all sizes render,
+   gallery thumbnails work, size guide table shows. Fix before declaring done.
+
+## Rules
+
+- Never leave images on Yupoo/Weidian URLs (hotlink-protected — they will
+  break). alicdn also gets migrated for consistency.
+- Junk source titles are fine at scrape time — Hampus renames in
+  /admin/products. Don't skip the row for a bad title.
+- Price unparseable → `price_usd = null` (renders "Quote on request").

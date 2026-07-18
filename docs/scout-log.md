@@ -25,3 +25,11 @@ SOLD OUT: ERD 25SS LS (157Club) · Luo YW polo (moved shops) · Coffee Aur NIKKE
 LIVE: ERD green ink hoodie ¥258 M-XL (PV shop) · ERD splash tee ¥99 L-XXL (Leeuwenhoek) · Acne A90 shirt ¥340 (FashionBroda) · MM003 ¥295 + MM114 ¥228 (GodsGlasses) · Vujade Otis pants ¥448 XS-L (B197)
 SOLD OUT: MMM CDDD LS · OL belt
 RECHECK (throttled): ERD 50s ribbed · ERD court coat · MM crossbody · ROW Ken tote
+ERD 50s ribbed: sold_out (Superbuy 'virtual product — not supported')
+recheck results: MM crossbody sold_out · ROW Ken (footwear!) live ¥649 sizes 35-48 · ERD court coat -> manual list (3 failed reads)
+## Scout batch 8 (2026-07-18)
+LIVE: Spice Girl gearbag ¥858 · i795 Scimitar ¥268 S-XL · ERD Nettspend boots ¥1299 40-45 · ERD Christiane F ¥249 M-XL · ERD cowhide silver ¥1699 · ERD tree loafers ¥999 40-45 (all Calm K8) · ERD nightshade ¥129 S-XL (537cute) · Lem parachute ¥699 S-XL · Row Franz ¥760 S-XL (TheWang)
+SOLD OUT: Lemaire canvas tote · OL slub trousers · Row Tiago polo
+## Scout batch 9 (2026-07-18)
+LIVE x11: Row Donatello ¥359 · Vujade IRA bag ¥888 · SS25 duffle ¥1550 · Prada triangle knit ¥280 46/48 · Row Ophelia ¥689 · T row tee ¥298 · Lem pullover ¥368 · CTRL CCCC ¥288 S-XL (EIDOS) · LEM silk blazer ¥898 · LEM silk 34/36 ¥598 · TR60 suede shoes ¥458 39-45
+RECHECK: OG ETERNAL pants (partial load)

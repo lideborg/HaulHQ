@@ -1,3 +1,9 @@
+// Keep in sync with src/lib/categories.ts (CATEGORIES).
+export const VALID_CATEGORIES = new Set([
+  "t-shirts", "shirts", "knitwear", "hoodies", "outerwear", "pants",
+  "shorts", "shoes", "bags", "accessories", "glasses",
+]);
+
 export function parseCostCny(price) {
   if (!price) return null;
   const m = String(price).match(/[¥￥]\s*([\d,]+(?:\.\d+)?)/);
@@ -35,7 +41,7 @@ export function mapFavorite(fav, fxCnyUsd, markup = 0.2) {
     brand: (fav.brand || "").replace(/\s*\(rep\)\s*$/i, "").trim() || null,
     title: fav.title || fav.user_label || "Untitled",
     description: firstSentence(fav.notes),
-    category: fav.category ?? null,
+    category: VALID_CATEGORIES.has(fav.category) ? fav.category : null,
     seller: fav.seller ?? null,
     source_link: fav.source_url || fav.yupoo_url || fav.url || null,
     source_platform: fav.source ?? null,

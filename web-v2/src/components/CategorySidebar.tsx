@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { CATEGORY_LABEL } from "@/lib/categories";
 
-// Builds a shop URL keeping the current category while changing the brand.
+// Builds a shop URL keeping the current brand while changing the category.
 function href(brand?: string, category?: string) {
   const p = new URLSearchParams();
   if (brand) p.set("brand", brand);
@@ -12,43 +13,43 @@ function href(brand?: string, category?: string) {
   return s ? `/?${s}` : "/";
 }
 
-export function BrandSidebar({
-  brands,
+export function CategorySidebar({
+  categories,
+  activeBrand,
   active,
-  activeCategory,
 }: {
-  brands: string[];
+  categories: string[];
+  activeBrand?: string;
   active?: string;
-  activeCategory?: string;
 }) {
   const [open, setOpen] = useState(true);
   return (
-    <div>
+    <div className="mt-6">
       <button
         onClick={() => setOpen((o) => !o)}
         className="flex w-full items-center justify-between border-b border-neutral-200 pb-2 text-[11px] font-semibold uppercase tracking-widest"
       >
-        Designers <span className="text-neutral-400">{open ? "−" : "+"}</span>
+        Category <span className="text-neutral-400">{open ? "−" : "+"}</span>
       </button>
       {open && (
         <nav className="mt-3 flex flex-col gap-1.5">
           <Link
-            href={href(undefined, activeCategory)}
+            href={href(activeBrand, undefined)}
             className={`text-[11px] uppercase tracking-wide ${
               !active ? "font-semibold" : "text-neutral-500 hover:text-black"
             }`}
           >
             All
           </Link>
-          {brands.map((b) => (
+          {categories.map((c) => (
             <Link
-              key={b}
-              href={href(b, activeCategory)}
+              key={c}
+              href={href(activeBrand, c)}
               className={`text-[11px] uppercase tracking-wide ${
-                active === b ? "font-semibold" : "text-neutral-500 hover:text-black"
+                active === c ? "font-semibold" : "text-neutral-500 hover:text-black"
               }`}
             >
-              {b}
+              {CATEGORY_LABEL[c] ?? c}
             </Link>
           ))}
         </nav>

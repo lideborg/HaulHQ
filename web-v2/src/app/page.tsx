@@ -1,30 +1,44 @@
 import { Header } from "@/components/Header";
 import { BrandSidebar } from "@/components/BrandSidebar";
+import { CategorySidebar } from "@/components/CategorySidebar";
 import { ProductCard } from "@/components/ProductCard";
-import { getPublishedProducts, getBrands } from "@/lib/data";
+import { getPublishedProducts, getBrands, getCategories } from "@/lib/data";
+import { CATEGORY_LABEL } from "@/lib/categories";
 
 export const dynamic = "force-dynamic";
 
 export default async function ShopPage({
   searchParams,
 }: {
-  searchParams: Promise<{ brand?: string }>;
+  searchParams: Promise<{ brand?: string; category?: string }>;
 }) {
-  const { brand } = await searchParams;
-  const [products, brands] = await Promise.all([
-    getPublishedProducts(brand),
+  const { brand, category } = await searchParams;
+  const [products, brands, categories] = await Promise.all([
+    getPublishedProducts(brand, category),
     getBrands(),
+    getCategories(),
   ]);
+
+  const label = [brand, category ? CATEGORY_LABEL[category] ?? category : null]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <>
       <Header />
       <main className="mx-auto flex max-w-[1400px] flex-col gap-8 px-6 py-8 md:flex-row">
-        <BrandSidebar brands={brands} active={brand} />
+        <aside className="w-full shrink-0 md:w-52 md:pr-6">
+          <BrandSidebar brands={brands} active={brand} activeCategory={category} />
+          <CategorySidebar
+            categories={categories}
+            activeBrand={brand}
+            active={category}
+          />
+        </aside>
         <section className="flex-1">
-          {brand && (
+          {label && (
             <p className="mb-6 text-[11px] uppercase tracking-widest text-neutral-500">
-              {brand} · {products.length} item{products.length === 1 ? "" : "s"}
+              {label} · {products.length} item{products.length === 1 ? "" : "s"}
             </p>
           )}
           {products.length === 0 ? (

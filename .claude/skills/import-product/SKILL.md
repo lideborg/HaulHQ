@@ -24,7 +24,17 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    Keys: length, chest or pit_to_pit, shoulder, sleeve, waist, hip, thigh,
    outer_length. Half-measurements: keep as-is but name them (`pit_to_pit`,
    `half_waist`) — the UI labels them correctly. No chart → `size_guide = null`.
-3. **Upsert the row** — via the Management-API curl pattern (see
+3. **Categorize** — assign exactly one `category` slug by looking at the hero
+   image + title. The 11 slugs (keep in sync with `web-v2/src/lib/categories.ts`):
+   `t-shirts` (short-sleeve tee, no collar), `shirts` (button-ups, overshirts,
+   AND polos), `knitwear` (knitted sweaters/cardigans/knit pullovers),
+   `hoodies` (hoodies + fleece/jersey sweatshirts), `outerwear` (jackets, coats,
+   blazers, parkas, puffer vests), `pants`, `shorts`, `shoes` (any footwear),
+   `bags` (any bag), `accessories` (belts, hats, scarves, jewelry, wallets,
+   ties, socks), `glasses` (sunglasses/eyewear). Polo → `shirts`. Blazer →
+   `outerwear`. If genuinely unsure, set `category = null` — it surfaces on
+   /admin/cleanup for a manual pick.
+4. **Upsert the row** — via the Management-API curl pattern (see
    `docs/superpowers/plans/2026-07-17-scrape-import-pipeline.md` Global
    Constraints). Template:
 
@@ -43,14 +53,14 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    ```
 
    Then `select id from products where source_link = '...'`.
-4. **Images to storage** — download to a temp dir (curl; Referer header for
+5. **Images to storage** — download to a temp dir (curl; Referer header for
    Yupoo), then from `web-v2/`:
    `node scripts/upload-product-images.mjs <productId> <tmpdir>`
    (uploads sorted, updates `image_urls`, prints URLs). Hero shot must sort
    first — name files `000.jpg, 001.jpg, …`.
-5. **Friend-request link-back** — if this came from a `requested` item:
+6. **Friend-request link-back** — if this came from a `requested` item:
    `update items set product_id='<id>', title='<clean title>', quoted_price_usd=<price> where id='<itemId>';`
-6. **Verify** — open `http://localhost:3000/product/<id>`: all sizes render,
+7. **Verify** — open `http://localhost:3000/product/<id>`: all sizes render,
    gallery thumbnails work, size guide table shows. Fix before declaring done.
 
 ## Rules

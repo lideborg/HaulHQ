@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { CATEGORY_SLUGS } from "@/lib/categories";
 
 // Temporary data-cleanup helpers — delete this folder when the pass is done.
 export async function setBrand(formData: FormData) {
@@ -20,6 +21,16 @@ export async function setTitle(formData: FormData) {
   if (!id || !title) return;
   const sb = createAdminClient();
   await sb.from("products").update({ title }).eq("id", id);
+  revalidatePath("/admin/cleanup");
+  revalidatePath("/");
+}
+
+export async function setCategory(formData: FormData) {
+  const id = String(formData.get("id"));
+  const category = String(formData.get("category") ?? "").trim();
+  if (!id || !CATEGORY_SLUGS.includes(category)) return;
+  const sb = createAdminClient();
+  await sb.from("products").update({ category }).eq("id", id);
   revalidatePath("/admin/cleanup");
   revalidatePath("/");
 }

@@ -44,16 +44,23 @@ test("localImagePaths drops size-chart images", () => {
 
 test("mapFavorite computes usd price and strips (rep)", () => {
   const row = mapFavorite({
-    title: "T", brand: "Prada (rep)", category: "bag", seller: "S",
+    title: "T", brand: "Prada (rep)", category: "bags", seller: "S",
     source_url: "https://x", source: "taobao", price: "¥100",
     notes: "One. Two.", sizing: "note",
   }, 0.14);
   assert.equal(row.brand, "Prada");
   assert.equal(row.cost_cny, 100);
   assert.equal(row.price_usd, 17); // round(100 * 0.14 * 1.2 = 16.8)
+  assert.equal(row.category, "bags"); // valid slug passes through
   assert.equal(row.source_link, "https://x");
   assert.equal(row.source_platform, "taobao");
   assert.deepEqual(row.size_options, ["One Size"]);
   assert.equal(row.admin_sizing_note, "note");
   assert.equal(row.published, true);
+});
+
+test("mapFavorite nulls out unknown category slugs", () => {
+  assert.equal(mapFavorite({ title: "T", category: "apparel-top" }, 0.14).category, null);
+  assert.equal(mapFavorite({ title: "T", category: "bag" }, 0.14).category, null);
+  assert.equal(mapFavorite({ title: "T" }, 0.14).category, null);
 });

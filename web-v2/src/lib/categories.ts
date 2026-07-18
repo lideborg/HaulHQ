@@ -1,0 +1,28 @@
+// Single source of truth for product categories.
+// Stored value on products.category is the SLUG; UI renders the LABEL.
+export const CATEGORIES = [
+  { slug: "t-shirts", label: "T-Shirts" },
+  { slug: "shirts", label: "Shirts" },
+  { slug: "knitwear", label: "Sweaters & Knitwear" },
+  { slug: "hoodies", label: "Hoodies & Sweatshirts" },
+  { slug: "outerwear", label: "Jackets & Coats" },
+  { slug: "pants", label: "Pants" },
+  { slug: "shorts", label: "Shorts" },
+  { slug: "shoes", label: "Shoes" },
+  { slug: "bags", label: "Bags" },
+  { slug: "accessories", label: "Accessories" },
+  { slug: "glasses", label: "Glasses" },
+] as const;
+
+export type CategorySlug = (typeof CATEGORIES)[number]["slug"];
+
+export const CATEGORY_SLUGS: readonly string[] = CATEGORIES.map((c) => c.slug);
+
+export const CATEGORY_LABEL: Record<string, string> = Object.fromEntries(
+  CATEGORIES.map((c) => [c.slug, c.label]),
+);
+
+// Canonical display/sort order (index in CATEGORIES).
+export const CATEGORY_ORDER: Record<string, number> = Object.fromEntries(
+  CATEGORIES.map((c, i) => [c.slug, i]),
+);

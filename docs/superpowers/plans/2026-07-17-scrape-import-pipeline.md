@@ -166,7 +166,7 @@ test("mapFavorite computes usd price and strips (rep)", () => {
 });
 ```
 
-- [ ] **Step 2: Run to verify failure** — `cd web-v2 && node --test scripts/lib/`. Expected: FAIL (`Cannot find module ... map-favorite.mjs`).
+- [ ] **Step 2: Run to verify failure** — `cd web-v2 && node --test 'scripts/lib/*.test.mjs'`. Expected: FAIL (`Cannot find module ... map-favorite.mjs`).
 
 - [ ] **Step 3: Implement** `web-v2/scripts/lib/map-favorite.mjs`:
 
@@ -225,7 +225,7 @@ export function mapFavorite(fav, fxCnyUsd, markup = 0.2) {
 
 Note: `deriveSizeGuide` returns keys in a fixed order and omits nothing silently — `note` is `undefined` when absent, which `JSON.stringify` drops.
 
-- [ ] **Step 4: Run tests** — `cd web-v2 && node --test scripts/lib/`. Expected: all pass (`# fail 0`).
+- [ ] **Step 4: Run tests** — `cd web-v2 && node --test 'scripts/lib/*.test.mjs'`. Expected: all pass (`# fail 0`).
 
 - [ ] **Step 5: Commit**
 
@@ -1090,7 +1090,7 @@ git commit -m "feat(v2): import-product skill + storage upload CLI"
 
 ```bash
 cd web-v2
-node --test scripts/lib/
+node --test 'scripts/lib/*.test.mjs'
 npx tsc --noEmit
 npm run build
 ```

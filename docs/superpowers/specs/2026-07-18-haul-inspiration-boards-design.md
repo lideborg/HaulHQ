@@ -16,8 +16,7 @@ into.
 - **No payments** — the `payments` table stays untouched; no money handling anywhere.
 - **No order lifecycle** — no quoted/ordered/shipped/delivered statuses. Friends never
   see any status.
-- **No deployment / hosting / domain** — runs on `localhost` only. No Vercel, no DNS.
-- Nothing about traceability/anonymity.
+- ** Deploy on vercel when ready
 
 ## Architecture Overview
 

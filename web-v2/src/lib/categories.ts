@@ -3,8 +3,8 @@
 export const CATEGORIES = [
   { slug: "t-shirts", label: "T-Shirts" },
   { slug: "shirts", label: "Shirts" },
-  { slug: "knitwear", label: "Sweaters & Knitwear" },
-  { slug: "hoodies", label: "Hoodies & Sweatshirts" },
+  { slug: "knitwear", label: "Knitted" },
+  { slug: "hoodies", label: "Hoodies & Long Sleeves" },
   { slug: "outerwear", label: "Jackets & Coats" },
   { slug: "pants", label: "Pants" },
   { slug: "shorts", label: "Shorts" },

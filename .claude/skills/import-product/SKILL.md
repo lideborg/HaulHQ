@@ -26,14 +26,18 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    `half_waist`) — the UI labels them correctly. No chart → `size_guide = null`.
 3. **Categorize** — assign exactly one `category` slug by looking at the hero
    image + title. The 11 slugs (keep in sync with `web-v2/src/lib/categories.ts`):
-   `t-shirts` (short-sleeve tee, no collar), `shirts` (button-ups, overshirts,
-   AND polos), `knitwear` (knitted sweaters/cardigans/knit pullovers),
-   `hoodies` (hoodies + fleece/jersey sweatshirts), `outerwear` (jackets, coats,
-   blazers, parkas, puffer vests), `pants`, `shorts`, `shoes` (any footwear),
-   `bags` (any bag), `accessories` (belts, hats, scarves, jewelry, wallets,
-   ties, socks), `glasses` (sunglasses/eyewear). Polo → `shirts`. Blazer →
-   `outerwear`. If genuinely unsure, set `category = null` — it surfaces on
-   /admin/cleanup for a manual pick.
+   `t-shirts` (SHORT-sleeve tee only, no collar), `shirts` (button-ups,
+   overshirts, AND polos), `knitwear` (label "Knitted" — anything with visible
+   knit stitches: sweaters, cardigans, knit pullovers), `hoodies` (label
+   "Hoodies & Long Sleeves" — hoodies, fleece/jersey sweatshirts, AND ANY
+   non-knit long-sleeve top incl. long-sleeve tees), `outerwear` (jackets,
+   coats, blazers, parkas, puffer vests), `pants`, `shorts`, `shoes` (any
+   footwear), `bags` (any bag), `accessories` (belts, hats, scarves, jewelry,
+   wallets, ties, socks), `glasses` (sunglasses/eyewear). Decision rules:
+   polo → `shirts`; blazer → `outerwear`; long-sleeve tee → `hoodies` (NOT
+   t-shirts); visible knit stitches → `knitwear`, smooth fabric → `hoodies`.
+   If genuinely unsure, set `category = null` — it surfaces on /admin/cleanup
+   for a manual pick.
 4. **Upsert the row** — via the Management-API curl pattern (see
    `docs/superpowers/plans/2026-07-17-scrape-import-pipeline.md` Global
    Constraints). Template:

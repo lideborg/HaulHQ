@@ -24,6 +24,8 @@ export interface Product {
   admin_sizing_note: string | null;
   source_platform: string | null;
   colors: string[];
+  sold_out: boolean;
+  yupoo_url: string | null;
 }
 
 export interface Friend {

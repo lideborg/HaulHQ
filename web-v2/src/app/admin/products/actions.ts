@@ -22,3 +22,12 @@ export async function togglePublished(formData: FormData) {
   revalidatePath("/admin/products");
   revalidatePath("/");
 }
+
+export async function toggleSoldOut(formData: FormData) {
+  const id = String(formData.get("id"));
+  const sold_out = String(formData.get("sold_out")) === "true";
+  const sb = createAdminClient();
+  await sb.from("products").update({ sold_out: !sold_out }).eq("id", id);
+  revalidatePath("/admin/products");
+  revalidatePath("/");
+}

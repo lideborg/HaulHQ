@@ -16,8 +16,9 @@ export default async function ProductPage({
   const product = await getProductById(id);
   if (!product) notFound();
 
-  const price =
-    product.price_usd != null
+  const price = product.sold_out
+    ? "Sold out"
+    : product.price_usd != null
       ? `US$ ${product.price_usd.toFixed(2)}`
       : "Quote on request";
 
@@ -41,7 +42,9 @@ export default async function ProductPage({
             )}
           </div>
           <div className="mt-6">
-            <AddToCart productId={product.id} sizes={product.size_options ?? []} />
+            {!product.sold_out && (
+              <AddToCart productId={product.id} sizes={product.size_options ?? []} />
+            )}
             {product.size_guide && <SizeGuide guide={product.size_guide} />}
           </div>
         </div>

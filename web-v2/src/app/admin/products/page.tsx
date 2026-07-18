@@ -1,8 +1,14 @@
 import { createAdminClient } from "@/lib/supabase/admin";
-import { updateProduct, togglePublished } from "./actions";
+import { updateProduct, togglePublished, toggleSoldOut } from "./actions";
 import type { Product } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
+
+function superbuyLink(source: string | null) {
+  if (!source) return null;
+  if (source.includes("superbuy.com")) return source;
+  return `https://www.superbuy.com/en/page/buy/?url=${encodeURIComponent(source)}`;
+}
 
 export default async function AdminProducts() {
   const sb = createAdminClient();
@@ -18,27 +24,57 @@ export default async function AdminProducts() {
       </h1>
       <div className="space-y-2">
         {products.map((p) => (
-          <div key={p.id} className="flex items-center gap-3 border-b border-neutral-100 py-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.image_urls?.[0]} alt="" className="h-12 w-12 bg-neutral-100 object-cover" />
-            <form action={updateProduct} className="flex flex-1 items-center gap-2">
-              <input type="hidden" name="id" value={p.id} />
-              <input name="title" defaultValue={p.title} className="flex-1 border border-neutral-200 px-2 py-1 text-xs" />
-              <span className="text-[10px] uppercase text-neutral-400">{p.brand}</span>
-              <input name="price_usd" defaultValue={p.price_usd ?? ""} className="w-20 border border-neutral-200 px-2 py-1 text-right text-xs" />
-              <button className="border border-neutral-300 px-2 py-1 text-[10px] uppercase">Save</button>
-            </form>
-            <form action={togglePublished}>
-              <input type="hidden" name="id" value={p.id} />
-              <input type="hidden" name="published" value={String(p.published)} />
-              <button
-                className={`px-2 py-1 text-[10px] uppercase ${
-                  p.published ? "bg-black text-white" : "border border-neutral-300 text-neutral-400"
-                }`}
-              >
-                {p.published ? "Visible" : "Hidden"}
-              </button>
-            </form>
+          <div key={p.id} className="border-b border-neutral-100 py-2">
+            <div className="flex items-center gap-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.image_urls?.[0]} alt="" className="h-12 w-12 bg-neutral-100 object-cover" />
+              <form action={updateProduct} className="flex flex-1 items-center gap-2">
+                <input type="hidden" name="id" value={p.id} />
+                <input name="title" defaultValue={p.title} className="flex-1 border border-neutral-200 px-2 py-1 text-xs" />
+                <span className="text-[10px] uppercase text-neutral-400">{p.brand}</span>
+                <input name="price_usd" defaultValue={p.price_usd ?? ""} className="w-20 border border-neutral-200 px-2 py-1 text-right text-xs" />
+                <button className="border border-neutral-300 px-2 py-1 text-[10px] uppercase">Save</button>
+              </form>
+              <form action={toggleSoldOut}>
+                <input type="hidden" name="id" value={p.id} />
+                <input type="hidden" name="sold_out" value={String(p.sold_out)} />
+                <button
+                  className={`px-2 py-1 text-[10px] uppercase ${
+                    p.sold_out ? "bg-red-600 text-white" : "border border-neutral-300 text-neutral-400"
+                  }`}
+                >
+                  {p.sold_out ? "Sold out" : "In stock"}
+                </button>
+              </form>
+              <form action={togglePublished}>
+                <input type="hidden" name="id" value={p.id} />
+                <input type="hidden" name="published" value={String(p.published)} />
+                <button
+                  className={`px-2 py-1 text-[10px] uppercase ${
+                    p.published ? "bg-black text-white" : "border border-neutral-300 text-neutral-400"
+                  }`}
+                >
+                  {p.published ? "Visible" : "Hidden"}
+                </button>
+              </form>
+            </div>
+            <div className="ml-[60px] mt-1 flex gap-4 text-[10px] uppercase tracking-wide">
+              {p.source_link && (
+                <a href={p.source_link} target="_blank" rel="noreferrer" className="text-neutral-400 underline hover:text-black">
+                  {p.source_platform ?? "source"}
+                </a>
+              )}
+              {p.yupoo_url && (
+                <a href={p.yupoo_url} target="_blank" rel="noreferrer" className="text-neutral-400 underline hover:text-black">
+                  yupoo
+                </a>
+              )}
+              {superbuyLink(p.source_link) && (
+                <a href={superbuyLink(p.source_link)!} target="_blank" rel="noreferrer" className="text-neutral-400 underline hover:text-black">
+                  superbuy
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>

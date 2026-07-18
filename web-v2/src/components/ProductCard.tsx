@@ -3,8 +3,9 @@ import type { Product } from "@/lib/types";
 
 export function ProductCard({ product }: { product: Product }) {
   const img = product.image_urls?.[0];
-  const price =
-    product.price_usd != null
+  const price = product.sold_out
+    ? "Sold out"
+    : product.price_usd != null
       ? `US$ ${product.price_usd.toFixed(2)}`
       : "Quote on request";
   return (

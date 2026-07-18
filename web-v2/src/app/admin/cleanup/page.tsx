@@ -1,5 +1,6 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { setBrand, setTitle } from "./actions";
+import { LightboxImage } from "@/components/LightboxImage";
 import type { Product } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
@@ -41,8 +42,7 @@ export default async function CleanupPage() {
             <span className="w-12 shrink-0 text-2xl font-semibold tabular-nums text-neutral-300">
               {i + 1}
             </span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.image_urls?.[0]} alt="" className="h-56 w-56 shrink-0 bg-neutral-100 object-contain" />
+            <LightboxImage src={p.image_urls?.[0]} className="h-56 w-56 shrink-0 bg-neutral-100 object-contain" />
             <div className="min-w-0 flex-1">
               <p className="text-sm">{p.title}</p>
               <p className="mt-1 text-[11px] text-neutral-400">
@@ -76,8 +76,7 @@ export default async function CleanupPage() {
             <span className="w-12 shrink-0 text-2xl font-semibold tabular-nums text-neutral-300">
               {noBrand.length + i + 1}
             </span>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.image_urls?.[0]} alt="" className="h-56 w-56 shrink-0 bg-neutral-100 object-contain" />
+            <LightboxImage src={p.image_urls?.[0]} className="h-56 w-56 shrink-0 bg-neutral-100 object-contain" />
             <div className="min-w-0 flex-1">
               <p className="text-[11px] text-neutral-400">
                 {p.brand ?? "no brand"} · {p.title.length} chars

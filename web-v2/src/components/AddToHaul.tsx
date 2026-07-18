@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { addToCart } from "@/app/product/[id]/actions";
+import { addToHaul } from "@/app/[handle]/haul-actions";
 
-export function AddToCart({
+export function AddToHaul({
+  handle,
   productId,
   sizes,
 }: {
+  handle: string;
   productId: string;
   sizes: string[];
 }) {
@@ -18,7 +20,7 @@ export function AddToCart({
   function submit() {
     setError(null);
     startTransition(async () => {
-      const res = await addToCart(productId, size);
+      const res = await addToHaul(handle, productId, size);
       if (res.ok) setAdded(true);
       else setError(res.error ?? "Something went wrong.");
     });
@@ -54,15 +56,15 @@ export function AddToCart({
         disabled={pending || added}
         className="w-full bg-black py-3 text-xs uppercase tracking-widest text-white disabled:opacity-50"
       >
-        {added ? "Added to cart ✓" : pending ? "Adding…" : "Add to cart"}
+        {added ? "In your haul ✓" : pending ? "Adding…" : "+ Add to haul"}
       </button>
       {error && <p className="text-xs text-red-600">{error}</p>}
       {added && (
         <a
-          href="/orders"
+          href={`/${handle}/haul`}
           className="block text-center text-[11px] uppercase tracking-widest text-neutral-500 underline"
         >
-          View my orders
+          View your haul
         </a>
       )}
     </div>

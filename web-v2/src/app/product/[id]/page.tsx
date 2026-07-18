@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
-import { AddToCart } from "@/components/AddToCart";
 import { SizeGuide } from "@/components/SizeGuide";
 import { ProductGallery } from "@/components/ProductGallery";
 import { getProductById } from "@/lib/data";
 
+// Admin/import preview only (the import-product skill opens this to verify a row).
 export const dynamic = "force-dynamic";
 
 export default async function ProductPage({
@@ -42,9 +42,6 @@ export default async function ProductPage({
             )}
           </div>
           <div className="mt-6">
-            {!product.sold_out && (
-              <AddToCart productId={product.id} sizes={product.size_options ?? []} />
-            )}
             {product.size_guide && <SizeGuide guide={product.size_guide} />}
           </div>
         </div>

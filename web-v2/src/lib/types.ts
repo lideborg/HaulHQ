@@ -11,6 +11,8 @@ export interface Product {
   title: string;
   description: string | null;
   category: string | null;
+  code: string | null;
+  brand_slug: string | null;
   seller: string | null;
   source_link: string | null;
   image_urls: string[];
@@ -31,6 +33,7 @@ export interface Product {
 export interface Friend {
   id: string;
   name: string;
+  handle: string | null;
   email: string | null;
   access_token: string;
   shipping_address: Record<string, unknown> | null;
@@ -38,6 +41,20 @@ export interface Friend {
   is_admin: boolean;
   active: boolean;
   measurements: Record<string, number> | null;
+}
+
+export interface HaulItem {
+  id: string;
+  owner_id: string;
+  product_id: string | null;
+  title: string | null;
+  brand: string | null;
+  image_urls: string[] | null;
+  chosen_size: string | null;
+  quoted_price_usd: number | null;
+  to_source: boolean;
+  admin_note: string | null;
+  created_at: string;
 }
 
 export interface Seller {

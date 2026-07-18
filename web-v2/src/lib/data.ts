@@ -1,5 +1,5 @@
 import { createAdminClient } from "./supabase/admin";
-import type { Product, Seller } from "./types";
+import type { Product, Seller, Friend, HaulItem } from "./types";
 import { CATEGORY_ORDER } from "./categories";
 
 // Server-only reads (service role). Friends only ever see published products.
@@ -56,6 +56,62 @@ export async function getBrands(): Promise<string[]> {
   const set = new Set<string>();
   for (const r of data ?? []) if (r.brand) set.add(r.brand as string);
   return [...set].sort();
+}
+
+// ---- Haul / friends ----
+
+export async function getFriendByHandle(handle: string): Promise<Friend | null> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("friends")
+    .select("*")
+    .eq("handle", handle)
+    .eq("active", true)
+    .maybeSingle();
+  if (error) throw error;
+  return (data as Friend) ?? null;
+}
+
+export async function getProductByCode(code: string): Promise<Product | null> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("products")
+    .select("*")
+    .eq("code", code)
+    .maybeSingle();
+  if (error) throw error;
+  return (data as Product) ?? null;
+}
+
+export async function getHaul(friendId: string): Promise<HaulItem[]> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("items")
+    .select("*")
+    .eq("owner_id", friendId)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as HaulItem[];
+}
+
+export async function getFriendsWithHaulCounts(): Promise<
+  Array<Friend & { haul_count: number }>
+> {
+  const sb = createAdminClient();
+  const { data: friends, error } = await sb
+    .from("friends")
+    .select("*")
+    .order("created_at", { ascending: true });
+  if (error) throw error;
+  const out: Array<Friend & { haul_count: number }> = [];
+  for (const f of (friends ?? []) as Friend[]) {
+    const { count } = await sb
+      .from("items")
+      .select("*", { count: "exact", head: true })
+      .eq("owner_id", f.id);
+    out.push({ ...f, haul_count: count ?? 0 });
+  }
+  return out;
 }
 
 // Fallback search: which sellers carry a brand friends searched for.

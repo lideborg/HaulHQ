@@ -50,7 +50,7 @@ test("mapFavorite computes usd price and strips (rep)", () => {
   }, 0.14);
   assert.equal(row.brand, "Prada");
   assert.equal(row.cost_cny, 100);
-  assert.equal(row.price_usd, 16.8); // 100 * 0.14 * 1.2
+  assert.equal(row.price_usd, 17); // round(100 * 0.14 * 1.2 = 16.8)
   assert.equal(row.source_link, "https://x");
   assert.equal(row.source_platform, "taobao");
   assert.deepEqual(row.size_options, ["One Size"]);

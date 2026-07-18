@@ -41,7 +41,7 @@ export function mapFavorite(fav, fxCnyUsd, markup = 0.2) {
     source_platform: fav.source ?? null,
     cost_cny: cost,
     markup,
-    price_usd: cost != null ? Math.round(cost * fxCnyUsd * (1 + markup) * 100) / 100 : null,
+    price_usd: cost != null ? Math.round(cost * fxCnyUsd * (1 + markup)) : null,
     size_options: deriveSizes(fav),
     size_guide: deriveSizeGuide(fav),
     admin_sizing_note: fav.sizing ?? null,

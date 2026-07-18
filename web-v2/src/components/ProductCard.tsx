@@ -6,7 +6,7 @@ export function ProductCard({ product }: { product: Product }) {
   const price = product.sold_out
     ? "Sold out"
     : product.price_usd != null
-      ? `US$ ${product.price_usd.toFixed(2)}`
+      ? `US$ ${Math.round(product.price_usd)}`
       : "Quote on request";
   return (
     <Link href={`/product/${product.id}`} className="group block">

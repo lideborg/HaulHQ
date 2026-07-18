@@ -1,0 +1,15 @@
+HaulHQ v2 — full catalog import report (2026-07-17)
+Run: node scripts/import-favorites.mjs (all favorites; idempotent re-run over earlier partial)
+
+=== IMPORT REPORT ===
+ok: 25
+updated: 217
+skipped: 1
+errors: 0
+
+
+Post-run DB state (published): products=242 storage_hosted=241 with_guide=29 one_size=212
+Post-run fixup: ERD loafers + engineer boots size_options restored to 40-45 (scraped range; v1 JSON had no chart).
+
+-- flagged (data quirks, no action needed; full detail in /tmp/import-run.log at run time) --
+flag lines: 380

@@ -22,6 +22,9 @@ export default async function AdminHome() {
       <a href="/admin/products" className="mt-8 inline-block text-xs uppercase tracking-widest underline">
         Manage products →
       </a>
+      <a href="/admin/cleanup" className="ml-6 mt-8 inline-block text-xs uppercase tracking-widest underline">
+        Cleanup: brands & titles →
+      </a>
     </main>
   );
 }

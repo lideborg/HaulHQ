@@ -23,17 +23,20 @@ export function BrandSidebar({
   active?: string;
   activeCategory?: string;
 }) {
-  const [open, setOpen] = useState(true);
+  // Collapsed by default on mobile (tap to expand); always open on desktop (md+).
+  const [open, setOpen] = useState(false);
   return (
     <div>
       <button
         onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-center justify-between border-b border-neutral-200 pb-2 text-[11px] font-semibold uppercase tracking-widest"
+        className="flex w-full items-center justify-between border-b border-neutral-200 pb-2 text-[11px] font-semibold uppercase tracking-widest md:cursor-default"
       >
-        Designers <span className="text-neutral-400">{open ? "−" : "+"}</span>
+        Designers{" "}
+        <span className="text-neutral-400 md:hidden">{open ? "−" : "+"}</span>
       </button>
-      {open && (
-        <nav className="mt-3 flex flex-col gap-1.5">
+      <nav
+        className={`mt-3 flex-col gap-1.5 ${open ? "flex" : "hidden"} md:flex`}
+      >
           <Link
             href={href(handle, undefined, activeCategory)}
             className={`text-[11px] uppercase tracking-wide ${
@@ -53,8 +56,7 @@ export function BrandSidebar({
               {b}
             </Link>
           ))}
-        </nav>
-      )}
+      </nav>
     </div>
   );
 }

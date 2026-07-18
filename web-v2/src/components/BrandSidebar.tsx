@@ -4,19 +4,21 @@ import { useState } from "react";
 import Link from "next/link";
 
 // Builds a shop URL keeping the current category while changing the brand.
-function href(brand?: string, category?: string) {
+function href(handle: string, brand?: string, category?: string) {
   const p = new URLSearchParams();
   if (brand) p.set("brand", brand);
   if (category) p.set("category", category);
   const s = p.toString();
-  return s ? `/?${s}` : "/";
+  return s ? `/${handle}/shop?${s}` : `/${handle}/shop`;
 }
 
 export function BrandSidebar({
+  handle,
   brands,
   active,
   activeCategory,
 }: {
+  handle: string;
   brands: string[];
   active?: string;
   activeCategory?: string;
@@ -33,7 +35,7 @@ export function BrandSidebar({
       {open && (
         <nav className="mt-3 flex flex-col gap-1.5">
           <Link
-            href={href(undefined, activeCategory)}
+            href={href(handle, undefined, activeCategory)}
             className={`text-[11px] uppercase tracking-wide ${
               !active ? "font-semibold" : "text-neutral-500 hover:text-black"
             }`}
@@ -43,7 +45,7 @@ export function BrandSidebar({
           {brands.map((b) => (
             <Link
               key={b}
-              href={href(b, activeCategory)}
+              href={href(handle, b, activeCategory)}
               className={`text-[11px] uppercase tracking-wide ${
                 active === b ? "font-semibold" : "text-neutral-500 hover:text-black"
               }`}

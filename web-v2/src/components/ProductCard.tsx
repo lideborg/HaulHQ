@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Product } from "@/lib/types";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ handle, product }: { handle: string; product: Product }) {
   const img = product.image_urls?.[0];
   const price = product.sold_out
     ? "Sold out"
@@ -9,7 +9,7 @@ export function ProductCard({ product }: { product: Product }) {
       ? `US$ ${Math.round(product.price_usd)}`
       : "Quote on request";
   return (
-    <Link href={`/product/${product.id}`} className="group block">
+    <Link href={`/${handle}/product/${product.brand_slug}/${product.code}`} className="group block">
       <div className="aspect-[3/4] overflow-hidden bg-neutral-100">
         {img ? (
           // eslint-disable-next-line @next/next/no-img-element

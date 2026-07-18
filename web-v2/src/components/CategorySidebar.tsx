@@ -5,19 +5,21 @@ import Link from "next/link";
 import { CATEGORY_LABEL } from "@/lib/categories";
 
 // Builds a shop URL keeping the current brand while changing the category.
-function href(brand?: string, category?: string) {
+function href(handle: string, brand?: string, category?: string) {
   const p = new URLSearchParams();
   if (brand) p.set("brand", brand);
   if (category) p.set("category", category);
   const s = p.toString();
-  return s ? `/?${s}` : "/";
+  return s ? `/${handle}/shop?${s}` : `/${handle}/shop`;
 }
 
 export function CategorySidebar({
+  handle,
   categories,
   activeBrand,
   active,
 }: {
+  handle: string;
   categories: string[];
   activeBrand?: string;
   active?: string;
@@ -34,7 +36,7 @@ export function CategorySidebar({
       {open && (
         <nav className="mt-3 flex flex-col gap-1.5">
           <Link
-            href={href(activeBrand, undefined)}
+            href={href(handle, activeBrand, undefined)}
             className={`text-[11px] uppercase tracking-wide ${
               !active ? "font-semibold" : "text-neutral-500 hover:text-black"
             }`}
@@ -44,7 +46,7 @@ export function CategorySidebar({
           {categories.map((c) => (
             <Link
               key={c}
-              href={href(activeBrand, c)}
+              href={href(handle, activeBrand, c)}
               className={`text-[11px] uppercase tracking-wide ${
                 active === c ? "font-semibold" : "text-neutral-500 hover:text-black"
               }`}

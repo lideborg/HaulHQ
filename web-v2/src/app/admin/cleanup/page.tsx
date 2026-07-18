@@ -42,7 +42,7 @@ export default async function CleanupPage() {
               {i + 1}
             </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.image_urls?.[0]} alt="" className="h-48 w-48 shrink-0 bg-neutral-100 object-cover" />
+            <img src={p.image_urls?.[0]} alt="" className="h-56 w-56 shrink-0 bg-neutral-100 object-contain" />
             <div className="min-w-0 flex-1">
               <p className="text-sm">{p.title}</p>
               <p className="mt-1 text-[11px] text-neutral-400">
@@ -77,7 +77,7 @@ export default async function CleanupPage() {
               {noBrand.length + i + 1}
             </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={p.image_urls?.[0]} alt="" className="h-48 w-48 shrink-0 bg-neutral-100 object-cover" />
+            <img src={p.image_urls?.[0]} alt="" className="h-56 w-56 shrink-0 bg-neutral-100 object-contain" />
             <div className="min-w-0 flex-1">
               <p className="text-[11px] text-neutral-400">
                 {p.brand ?? "no brand"} · {p.title.length} chars

@@ -39,3 +39,7 @@ ALL 12 LIVE: sososry knit ¥369 · Row Henri ¥1299 · GAO coat ¥1680 · MM206 
 ## Scout batch 11 (2026-07-18)
 LIVE x11: Margaux15 pebbled ¥1950 · NOMA jacket ¥788 S-L · NOMA linen 28-34 ¥530 · Yohji rayon ¥368 · MM6 splash shoes ¥360 38-44 · Row Zev ¥488 (sososry) · Prada tire loafers ¥529 (XWCL) · MVT Gats#2 ¥409 40-47 (gatsvt) · ERD Court Love ¥799 M-XL · ERD 25fw crypto ¥169 S-XL · EIX GNOD loafers ¥955
 SOLD OUT: MM cowhide crossbody (peopleism)
+## Scout batch 12 partial (2026-07-18)
+LIVE: ERD TJ ¥265 S-XL · ERD portrait shoes ¥269 40-44 (track made, size-down note) · ERD cupro ¥429 S-XL · ERD checkerboard silk ¥499 S-XL (sososry)
+SOLD OUT: ERD violent trousers · sososry archival
+Throttled at i795 OL mini jacket — 13 remain

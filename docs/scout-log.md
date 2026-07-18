@@ -33,3 +33,9 @@ SOLD OUT: Lemaire canvas tote · OL slub trousers · Row Tiago polo
 ## Scout batch 9 (2026-07-18)
 LIVE x11: Row Donatello ¥359 · Vujade IRA bag ¥888 · SS25 duffle ¥1550 · Prada triangle knit ¥280 46/48 · Row Ophelia ¥689 · T row tee ¥298 · Lem pullover ¥368 · CTRL CCCC ¥288 S-XL (EIDOS) · LEM silk blazer ¥898 · LEM silk 34/36 ¥598 · TR60 suede shoes ¥458 39-45
 RECHECK: OG ETERNAL pants (partial load)
+batch 10 partial: sososry dahlia knit LIVE ¥369 1-3. Throttled again at item 2 — remaining 42 queued (Row bags cluster + sunglasses cluster).
+## Scout batch 10 (2026-07-18)
+ALL 12 LIVE: sososry knit ¥369 · Row Henri ¥1299 · GAO coat ¥1680 · MM206 ¥255 · marlo14 ¥829 · Row bucket ¥658 · Margaux10 ¥669 · Margaux15 ¥1650 · Bandoneon ¥235 · Piana ¥225 · GM Jackbye ¥188 · JMM Quentin ¥370
+## Scout batch 11 (2026-07-18)
+LIVE x11: Margaux15 pebbled ¥1950 · NOMA jacket ¥788 S-L · NOMA linen 28-34 ¥530 · Yohji rayon ¥368 · MM6 splash shoes ¥360 38-44 · Row Zev ¥488 (sososry) · Prada tire loafers ¥529 (XWCL) · MVT Gats#2 ¥409 40-47 (gatsvt) · ERD Court Love ¥799 M-XL · ERD 25fw crypto ¥169 S-XL · EIX GNOD loafers ¥955
+SOLD OUT: MM cowhide crossbody (peopleism)

@@ -52,6 +52,9 @@ export interface HaulItem {
   image_urls: string[] | null;
   chosen_size: string | null;
   quoted_price_usd: number | null;
+  status: string | null;
+  source_link: string | null;
+  notes: string | null;
   to_source: boolean;
   admin_note: string | null;
   created_at: string;

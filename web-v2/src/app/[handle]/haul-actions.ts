@@ -2,22 +2,27 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getFriendByHandle } from "@/lib/data";
+import { getCurrentFriend } from "@/lib/friend";
 
 // A friend adds a product to their haul (idempotent per owner+product).
+// Ownership is derived from the authenticated `friend_token` cookie, NOT from the
+// URL handle — otherwise anyone could write to another friend's haul (IDOR).
 export async function addToHaul(
   handle: string,
   productId: string,
   size: string | null,
 ): Promise<{ ok: boolean; error?: string }> {
-  const friend = await getFriendByHandle(handle);
-  if (!friend) return { ok: false, error: "Unknown friend." };
+  const friend = await getCurrentFriend();
+  if (!friend || friend.handle !== handle) {
+    return { ok: false, error: "Open your personal invite link first." };
+  }
 
   const sb = createAdminClient();
   const { data: product } = await sb
     .from("products")
     .select("*")
     .eq("id", productId)
+    .eq("published", true)
     .maybeSingle();
   if (!product) return { ok: false, error: "Product not found." };
 
@@ -44,8 +49,8 @@ export async function removeFromHaul(
   handle: string,
   itemId: string,
 ): Promise<void> {
-  const friend = await getFriendByHandle(handle);
-  if (!friend) return;
+  const friend = await getCurrentFriend();
+  if (!friend || friend.handle !== handle) return;
   const sb = createAdminClient();
   await sb.from("items").delete().eq("id", itemId).eq("owner_id", friend.id);
   revalidatePath(`/${handle}/haul`);

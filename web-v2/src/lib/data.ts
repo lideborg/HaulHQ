@@ -78,6 +78,7 @@ export async function getProductByCode(code: string): Promise<Product | null> {
     .from("products")
     .select("*")
     .eq("code", code)
+    .eq("published", true)
     .maybeSingle();
   if (error) throw error;
   return (data as Product) ?? null;

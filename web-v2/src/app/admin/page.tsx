@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getFriendsWithHaulCounts } from "@/lib/data";
 import { createFriend } from "@/app/admin/friends/actions";
@@ -148,18 +149,18 @@ export default async function AdminHome({
         <h2 className="mb-4 text-xs font-semibold uppercase tracking-widest">
           Manage
         </h2>
-        <a
+        <Link
           href="/admin/products"
           className="inline-block text-xs uppercase tracking-widest underline"
         >
           Manage products →
-        </a>
-        <a
+        </Link>
+        <Link
           href="/admin/cleanup"
           className="ml-6 inline-block text-xs uppercase tracking-widest underline"
         >
           Cleanup: brands & titles →
-        </a>
+        </Link>
       </section>
     </main>
   );

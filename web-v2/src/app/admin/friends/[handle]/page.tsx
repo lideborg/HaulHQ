@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getFriendByHandle, getHaul } from "@/lib/data";
 import { toggleSource, setAdminNote } from "@/app/admin/friends/actions";
@@ -16,12 +17,12 @@ export default async function FriendHaulPage({
 
   return (
     <main className="mx-auto max-w-[1100px] px-6 py-10">
-      <a
+      <Link
         href="/admin"
         className="text-[11px] uppercase tracking-widest text-neutral-400 underline"
       >
         ← Back to HQ
-      </a>
+      </Link>
       <h1 className="mb-2 mt-3 text-sm font-semibold uppercase tracking-[0.25em]">
         {friend.name}&rsquo;s haul
       </h1>

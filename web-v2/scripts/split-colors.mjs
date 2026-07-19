@@ -17,6 +17,7 @@
 import { readFileSync } from "node:fs";
 import { loadEnv } from "./lib/env.mjs";
 import { adminClient, uploadProductImages } from "./lib/storage.mjs";
+import { retagProducts } from "./retag-heroes.mjs";
 
 const spec = JSON.parse(readFileSync(process.argv[2], "utf8"));
 const env = loadEnv(".env.local");
@@ -27,6 +28,7 @@ const slug = (s) =>
     .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const brandSlug = slug(spec.brand);
 
+const createdIds = [];
 for (let i = 0; i < spec.colors.length; i++) {
   const c = spec.colors[i];
   const source_link = `${spec.source_link_base}#${slug(c.label)}`;
@@ -66,6 +68,15 @@ for (let i = 0; i < spec.colors.length; i++) {
 
   const urls = await uploadProductImages(sb, env, id, [c.image]);
   await sb.from("products").update({ image_urls: urls }).eq("id", id);
+  createdIds.push(id);
   console.log(`[${String(i).padStart(2)}] ${c.label.padEnd(28)} id=${id.slice(0, 8)} img=${urls.length}`);
+}
+
+// Tag each colorway's image (kind + hero) for a consistent image_meta.
+if (createdIds.length && process.env.GEMINI_API_KEY) {
+  console.log(`\ntagging ${createdIds.length} colorway product(s)…`);
+  await retagProducts(sb, env, process.env.GEMINI_API_KEY, { ids: createdIds, log: (m) => console.log(m) });
+} else if (createdIds.length) {
+  console.log(`\n(set GEMINI_API_KEY to auto-tag; or: node scripts/retag-heroes.mjs --ids ${createdIds.join(",")})`);
 }
 console.log("done. Backfill any null codes: update products set code=substr(md5(id::text),1,7) where code is null;");

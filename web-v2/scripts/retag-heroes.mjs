@@ -1,39 +1,28 @@
-// Re-tag every product's ALREADY-HOSTED images with Gemini: classify each image
+// Tag a product's ALREADY-HOSTED images with Gemini: classify each image
 // (flat_lay/front/worn/detail/size_chart/logo_text/other), pick the best hero
 // (flat-lay > clean front > worn), reorder image_urls hero-first with non-photos
 // demoted to the end, and persist the tags in products.image_meta. No scraping,
 // no uploads, no deletions — pure reorder + tag over images we already store.
 //
-// Usage (run from web-v2/):
-//   GEMINI_API_KEY=... node scripts/retag-heroes.mjs [--dry] [--multi] [--limit N] [--ids a,b,c]
-//     --dry     classify + print, write nothing
-//     --multi   only products with >=2 images (where reordering matters)
-//     --limit N cap the number of products processed
-//     --ids ..  comma-separated product ids (overrides other filters)
+// Used two ways:
+//   1. CLI batch (run from web-v2/):
+//        GEMINI_API_KEY=... node scripts/retag-heroes.mjs [--dry] [--multi] [--limit N] [--ids a,b]
+//   2. Imported by the import pipeline (import-batch.mjs / split-colors.mjs) so
+//      freshly-scraped products get the SAME tags at import time:
+//        import { retagProducts } from "./retag-heroes.mjs";
+//        await retagProducts(sb, env, key, { ids });
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
-import { loadEnv } from "./lib/env.mjs";
-import { adminClient } from "./lib/storage.mjs";
-
-const env = loadEnv(".env.local");
-const sb = adminClient(env);
-const KEY = process.env.GEMINI_API_KEY;
-if (!KEY) { console.error("set GEMINI_API_KEY"); process.exit(1); }
 
 const MODEL = "gemini-2.5-flash";
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
-const CONC = 8;
-
-const A = process.argv.slice(2);
-const DRY = A.includes("--dry");
-const MULTI = A.includes("--multi");
-const LIMIT = A.includes("--limit") ? +A[A.indexOf("--limit") + 1] : null;
-const IDS = A.includes("--ids") ? A[A.indexOf("--ids") + 1].split(",") : null;
+const DEFAULT_CONC = 8;
 
 // hero preference + gallery ordering: lower = earlier
-const KIND_RANK = { flat_lay: 0, front: 1, worn: 2, detail: 3, other: 4, size_chart: 5, logo_text: 6 };
+export const KIND_RANK = { flat_lay: 0, front: 1, worn: 2, detail: 3, other: 4, size_chart: 5, logo_text: 6 };
 
 const SCHEMA = {
   type: "OBJECT",
@@ -80,10 +69,11 @@ function shrink(buf) {
   finally { try { fs.unlinkSync(inF); } catch {} try { fs.unlinkSync(outF); } catch {} }
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const imgPart = (buf) => ({ inline_data: { mime_type: mediaType(buf), data: buf.toString("base64") } });
 
-async function gemini(parts, tries = 4) {
+async function gemini(key, parts, tries = 4) {
   for (let t = 0; t < tries; t++) {
-    const res = await fetch(`${ENDPOINT}?key=${KEY}`, {
+    const res = await fetch(`${ENDPOINT}?key=${key}`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
@@ -102,9 +92,9 @@ async function gemini(parts, tries = 4) {
   throw new Error("Gemini: retries exhausted");
 }
 
-const imgPart = (buf) => ({ inline_data: { mime_type: mediaType(buf), data: buf.toString("base64") } });
-
-async function processProduct(p) {
+// Classify + compute the reordered urls and aligned image_meta for one product.
+// Returns null-ish {skip} when there are no usable images.
+export async function tagProduct(key, p) {
   const urls = p.image_urls || [];
   if (!urls.length) return { id: p.id, skip: "no-images" };
 
@@ -122,54 +112,71 @@ async function processProduct(p) {
     { text: `Product: ${p.brand || ""} ${p.title || ""} (${p.category || "?"}). ${usable.length} images, index 0..${usable.length - 1}. Classify each and pick the best hero thumbnail.` },
     ...usable.flatMap((i, n) => [{ text: `image ${n}:` }, imgPart(bufs[i])]),
   ];
-  const cls = await gemini(parts);
+  const cls = await gemini(key, parts);
 
-  // map compact indices (n) back to original url indices
   const kindByOrig = {};
   for (const r of cls.images || []) {
     const orig = usable[r.index];
     if (orig != null) kindByOrig[orig] = r.kind;
   }
   const heroOrig = usable[cls.hero_index] ?? usable[0];
-
-  // new order: hero first, then remaining by kind rank (stable on original order)
   const rest = urls.map((_, i) => i).filter((i) => i !== heroOrig);
   rest.sort((a, b) => (KIND_RANK[kindByOrig[a]] ?? 4) - (KIND_RANK[kindByOrig[b]] ?? 4) || a - b);
   const order = [heroOrig, ...rest];
 
   const new_urls = order.map((i) => urls[i]);
   const image_meta = order.map((i) => ({ url: urls[i], kind: kindByOrig[i] || "other", hero: i === heroOrig }));
-  const changed = new_urls[0] !== urls[0];
-  return { id: p.id, title: p.title, changed, heroKind: kindByOrig[heroOrig] || "other", n: urls.length, new_urls, image_meta };
+  return { id: p.id, title: p.title, changed: new_urls[0] !== urls[0], heroKind: kindByOrig[heroOrig] || "other", n: urls.length, new_urls, image_meta };
 }
 
-async function main() {
+// Batch-tag products. opts: { ids?, multi?, limit?, dry?, conc?, log? }.
+export async function retagProducts(sb, env, key, opts = {}) {
+  const { ids = null, multi = false, limit = null, dry = false, conc = DEFAULT_CONC, log = () => {} } = opts;
   let q = sb.from("products").select("id,brand,title,category,image_urls").order("created_at", { ascending: true });
-  if (IDS) q = q.in("id", IDS);
+  if (ids) q = q.in("id", ids);
   const { data: products, error } = await q;
-  if (error) { console.error(error.message); process.exit(1); }
+  if (error) throw new Error(error.message);
 
-  let list = products.filter((p) => (p.image_urls || []).length >= (MULTI ? 2 : 1));
-  if (LIMIT) list = list.slice(0, LIMIT);
-  console.log(`${list.length} products to process${DRY ? " (dry)" : ""}, concurrency ${CONC}\n`);
+  let list = products.filter((p) => (p.image_urls || []).length >= (multi ? 2 : 1));
+  if (limit) list = list.slice(0, limit);
+  log(`${list.length} products to tag${dry ? " (dry)" : ""}, concurrency ${conc}`);
 
-  let done = 0, changed = 0, failed = 0;
-  for (let i = 0; i < list.length; i += CONC) {
-    const batch = list.slice(i, i + CONC);
-    const results = await Promise.all(batch.map((p) => processProduct(p).catch((e) => ({ id: p.id, err: e.message }))));
+  const stats = { done: 0, changed: 0, failed: 0, total: list.length };
+  for (let i = 0; i < list.length; i += conc) {
+    const batch = list.slice(i, i + conc);
+    const results = await Promise.all(batch.map((p) => tagProduct(key, p).catch((e) => ({ id: p.id, err: e.message }))));
     for (const r of results) {
-      done++;
-      if (r.err) { failed++; console.log(`  ERR  ${r.id.slice(0, 8)} ${r.err}`); continue; }
-      if (r.skip) { console.log(`  skip ${r.id.slice(0, 8)} ${r.skip}`); continue; }
-      if (!DRY) {
+      stats.done++;
+      if (r.err) { stats.failed++; log(`  ERR  ${r.id.slice(0, 8)} ${r.err}`); continue; }
+      if (r.skip) { log(`  skip ${r.id.slice(0, 8)} ${r.skip}`); continue; }
+      if (!dry) {
         const { error: ue } = await sb.from("products").update({ image_urls: r.new_urls, image_meta: r.image_meta }).eq("id", r.id);
-        if (ue) { failed++; console.log(`  WRITE-ERR ${r.id.slice(0, 8)} ${ue.message}`); continue; }
+        if (ue) { stats.failed++; log(`  WRITE-ERR ${r.id.slice(0, 8)} ${ue.message}`); continue; }
       }
-      if (r.changed) changed++;
-      console.log(`  ${r.changed ? "MOVED" : "ok   "} hero=${r.heroKind.padEnd(10)} n=${r.n}  ${(r.title || "").slice(0, 46)}`);
+      if (r.changed) stats.changed++;
+      log(`  ${r.changed ? "MOVED" : "ok   "} hero=${r.heroKind.padEnd(10)} n=${r.n}  ${(r.title || "").slice(0, 46)}`);
     }
-    console.log(`  -- ${done}/${list.length} (${changed} hero moved, ${failed} failed) --`);
+    log(`  -- ${stats.done}/${stats.total} (${stats.changed} hero moved, ${stats.failed} failed) --`);
   }
-  console.log(`\ndone. ${done} processed, ${changed} heroes reordered, ${failed} failed.${DRY ? " (dry run — nothing written)" : ""}`);
+  return stats;
 }
-main().catch((e) => { console.error(e); process.exit(1); });
+
+// ---- CLI ----
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  const { loadEnv } = await import("./lib/env.mjs");
+  const { adminClient } = await import("./lib/storage.mjs");
+  const env = loadEnv(".env.local");
+  const sb = adminClient(env);
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) { console.error("set GEMINI_API_KEY"); process.exit(1); }
+  const A = process.argv.slice(2);
+  const opts = {
+    dry: A.includes("--dry"),
+    multi: A.includes("--multi"),
+    limit: A.includes("--limit") ? +A[A.indexOf("--limit") + 1] : null,
+    ids: A.includes("--ids") ? A[A.indexOf("--ids") + 1].split(",") : null,
+    log: (m) => console.log(m),
+  };
+  const s = await retagProducts(sb, env, key, opts);
+  console.log(`\ndone. ${s.done} processed, ${s.changed} heroes reordered, ${s.failed} failed.${opts.dry ? " (dry run — nothing written)" : ""}`);
+}

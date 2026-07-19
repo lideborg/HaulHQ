@@ -6,6 +6,7 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { loadEnv } from "./lib/env.mjs";
 import { adminClient, uploadProductImages } from "./lib/storage.mjs";
+import { retagProducts } from "./retag-heroes.mjs";
 
 const BATCH = "/tmp/haul-batch";
 const STAGE = "/tmp/haul-stage";
@@ -22,6 +23,7 @@ const only = process.argv.slice(2);
 const files = only.length
   ? only.map((n) => `${n}.json`)
   : readdirSync(BATCH).filter((f) => /^\d+\.json$/.test(f)).sort();
+const importedIds = [];
 for (const f of files) {
   const n = f.replace(".json", "");
   const p = JSON.parse(readFileSync(join(BATCH, f), "utf8"));
@@ -69,6 +71,17 @@ for (const f of files) {
       nimg = urls.length;
     }
   }
+  if (nimg) importedIds.push(data.id);
   console.log(`[${n}] ${p.title.slice(0, 42).padEnd(42)} $${p.price_usd}  id=${data.id.slice(0, 8)} code=${data.code} imgs=${nimg} sg=${size_guide ? "y" : "n"}`);
+}
+
+// Tag the freshly-imported images (flat_lay/front/worn/detail/... + hero) so new
+// products carry the same image_meta as the rest of the catalog. Runs only if a
+// GEMINI_API_KEY is present; otherwise skip (backfill later with retag-heroes).
+if (importedIds.length && process.env.GEMINI_API_KEY) {
+  console.log(`\ntagging ${importedIds.length} imported product(s)…`);
+  await retagProducts(sb, env, process.env.GEMINI_API_KEY, { ids: importedIds, log: (m) => console.log(m) });
+} else if (importedIds.length) {
+  console.log(`\n(set GEMINI_API_KEY to auto-tag; or: node scripts/retag-heroes.mjs --ids ${importedIds.join(",")})`);
 }
 console.log("done.");

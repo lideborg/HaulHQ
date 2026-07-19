@@ -11,7 +11,8 @@
 //                               // appended per color to keep source_link unique
 //   reuse_id?,                  // existing product row to repurpose as the first
 //                               // color (avoids leaving the old combined listing)
-//   colors: [ { label, image } ]   // image = absolute local file path
+//   colors: [ { label, image, sizes? } ]  // image = absolute local file path;
+//                                          // per-color sizes override spec.sizes
 // }
 import { readFileSync } from "node:fs";
 import { loadEnv } from "./lib/env.mjs";
@@ -41,7 +42,7 @@ for (let i = 0; i < spec.colors.length; i++) {
     cost_cny: spec.cost_cny ?? null,
     markup: 0.2,
     price_usd: spec.price_usd ?? null,
-    size_options: spec.sizes || [],
+    size_options: c.sizes || spec.sizes || [],
     colors: [c.label],
     size_guide: spec.size_guide ?? null,
     published: true,

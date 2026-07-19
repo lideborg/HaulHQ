@@ -36,6 +36,11 @@ Every PR — human-authored or AI-authored — goes through this loop **before m
   (e.g. parent PR was merged) **before** posting any review activity. The rule's purpose is preserving
   review history, not banning rebases.
 
+## Shop catalog (v2 products)
+
+- **Unavailable source → mark `sold_out`, never delete.** Whenever you look up or re-check a product's source link and the listing is gone — Superbuy "no longer available / unable to purchase", Weidian `商品已下架` (off-shelves), Yupoo "This Album Is Not Exist", or any other delisting — set that product's `sold_out = true` in the Supabase `products` table (project ref `pqfiwdscftwhmcutspay`). The shop card then renders "Sold out". Keep the row — it stays visible and re-listable. Only leave a product active/buyable when its buy page still loads with a real price/stock.
+- Hero image is `image_urls[0]`; per-image tags live in `image_meta` (`flat_lay/front/worn/detail/size_chart/logo_text/other` + `hero`). Re-tag after any image change with `web-v2/scripts/retag-heroes.mjs --ids <id>`.
+
 ## Repo layout
 
 - `data/` — catalog content (JSON files + mirrored images). Source of truth for Phase 1.

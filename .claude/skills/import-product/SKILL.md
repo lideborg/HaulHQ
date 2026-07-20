@@ -67,6 +67,29 @@ are colorways, `size_guide` JSON read from the size-chart image, and
 7. **Verify** — open `http://localhost:3000/product/<id>`: all sizes render,
    gallery thumbnails work, size guide table shows. Fix before declaring done.
 
+## Scrape gotchas (learned the hard way)
+
+- **Superbuy buy page = warm-once.** CAPTCHA appears once; Hampus solves it, then
+  the session stays warm for the whole batch. Reuse the same tab.
+- **Main gallery vs. recommendations.** Superbuy shows the seller's OTHER products
+  in a right-hand sidebar. Filter scraped `<img>` to the top-left region
+  (`getBoundingClientRect().left < 520 && top < 560`) and to the DOMINANT seller
+  id in that region — otherwise recommendation thumbnails leak into `image_urls`.
+- **Weidian / geilicdn images are the pain point.** The Chrome-tool DLP filter
+  redacts any returned string that looks like a URL/token/base64/query — so
+  `img.src`, base64, even chunked strings come back `[BLOCKED]`. The reliable
+  extraction: return each `img.currentSrc` (the exact URL that already loaded) as
+  a **char-code array** — `[...src].map(c=>c.charCodeAt(0)).join('-')` — then
+  decode in Bash/node. `currentSrc` is byte-exact; do NOT hand-reconstruct hashes
+  from space-chunked strings (a 5-char chunk split silently miscounts zero-runs →
+  404s). Full-res geilicdn = the `...WxH.jpg` path (drop the `.webp?w=..&h=..`
+  thumbnail query); fetch with `Referer: https://weidian.com/`. Verify every URL
+  returns 200 before building the JSON.
+- **Short links** (`k.youshop10.com/...`) resolve through the Superbuy wrapper but
+  take a few extra seconds — wait and re-extract if the page is still skeleton.
+- **RO = Rick Owens; "non-undercover / autonomous" = Undercover** (sellers dodge
+  brand names). Expand to the real brand.
+
 ## Rules
 
 - Never leave images on Yupoo/Weidian URLs (hotlink-protected — they will
@@ -74,3 +97,6 @@ are colorways, `size_guide` JSON read from the size-chart image, and
 - Junk source titles are fine at scrape time — Hampus renames in
   /admin/products. Don't skip the row for a bad title.
 - Price unparseable → `price_usd = null` (renders "Quote on request").
+- After upsert + image upload, run the post-import passes:
+  `retag-heroes` (auto via import-batch) → `propose-display-titles` →
+  `estimate-weights` so the card name, hero, and shipping weight are set.

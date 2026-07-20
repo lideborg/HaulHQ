@@ -24,13 +24,17 @@ function label(key: string) {
   );
 }
 
-function display(v: number | null, unit: "cm" | "in") {
+// Stored values are in guide.unit; convert only when displaying the other unit.
+function display(v: number | null, from: "cm" | "in", to: "cm" | "in") {
   if (v == null) return "—";
-  return unit === "cm" ? String(v) : (Math.round((v / 2.54) * 10) / 10).toFixed(1);
+  if (from === to) return String(v);
+  const converted = from === "cm" ? v / 2.54 : v * 2.54;
+  return (Math.round(converted * 10) / 10).toFixed(1);
 }
 
 export function SizeGuide({ guide }: { guide: SizeGuideData }) {
-  const [unit, setUnit] = useState<"cm" | "in">("cm");
+  const source = guide.unit === "in" ? "in" : "cm";
+  const [unit, setUnit] = useState<"cm" | "in">(source);
   return (
     <div className="mt-8">
       <div className="mb-2 flex items-center justify-between">
@@ -65,7 +69,7 @@ export function SizeGuide({ guide }: { guide: SizeGuideData }) {
             <tr key={key} className="border-b border-neutral-100">
               <td className="py-1.5 pr-2 text-neutral-500">{label(key)}</td>
               {guide.sizes.map((_, i) => (
-                <td key={i} className="py-1.5 pr-2">{display(vals[i] ?? null, unit)}</td>
+                <td key={i} className="py-1.5 pr-2">{display(vals[i] ?? null, source, unit)}</td>
               ))}
             </tr>
           ))}

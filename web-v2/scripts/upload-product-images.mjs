@@ -22,6 +22,8 @@ if (!files.length) {
   process.exit(1);
 }
 const urls = await uploadProductImages(sb, env, productId, files);
-const { error } = await sb.from("products").update({ image_urls: urls }).eq("id", productId);
+// image_meta is aligned 1:1 with image_urls — null it so a retag repopulates.
+const { error } = await sb.from("products").update({ image_urls: urls, image_meta: null }).eq("id", productId);
 if (error) throw error;
 console.log(JSON.stringify(urls, null, 2));
+console.log(`(image_meta cleared — retag with: node scripts/retag-heroes.mjs --ids ${productId})`);

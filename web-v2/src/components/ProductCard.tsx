@@ -25,7 +25,7 @@ export function ProductCard({ handle, product }: { handle: string; product: Prod
           {product.brand}
         </p>
         <p className="line-clamp-1 text-[11px] text-neutral-500">
-          {product.title}
+          {product.display_title ?? product.title}
         </p>
         <p className="text-[11px]">{price}</p>
       </div>

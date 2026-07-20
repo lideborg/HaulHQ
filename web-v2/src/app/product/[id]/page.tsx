@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { SizeGuide } from "@/components/SizeGuide";
 import { ProductGallery } from "@/components/ProductGallery";
 import { getProductById } from "@/lib/data";
+import { isAdmin } from "@/lib/adminAuth";
 
 // Admin/import preview only (the import-product skill opens this to verify a row).
 export const dynamic = "force-dynamic";
@@ -15,6 +16,8 @@ export default async function ProductPage({
   const { id } = await params;
   const product = await getProductById(id);
   if (!product) notFound();
+  // Drafts are admin-only; this route sits outside the /admin proxy matcher.
+  if (!product.published && !(await isAdmin())) notFound();
 
   const price = product.sold_out
     ? "Sold out"
@@ -33,8 +36,15 @@ export default async function ProductPage({
             <p className="text-xs font-semibold uppercase tracking-widest">
               {product.brand}
             </p>
-            <p className="text-sm text-neutral-600">{product.title}</p>
+            <p className="text-sm text-neutral-600">
+              {product.display_title ?? product.title}
+            </p>
             <p className="text-sm">{price}</p>
+            {product.display_title && (
+              <p className="text-xs leading-relaxed text-neutral-400">
+                {product.title}
+              </p>
+            )}
             {product.description && (
               <p className="text-xs leading-relaxed text-neutral-500">
                 {product.description}

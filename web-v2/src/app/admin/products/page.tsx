@@ -10,7 +10,17 @@ function superbuyLink(source: string | null) {
   return `https://www.superbuy.com/en/page/buy/?url=${encodeURIComponent(source)}`;
 }
 
-export default async function AdminProducts() {
+const ERRORS: Record<string, string> = {
+  price: "Price wasn't a number — use plain digits like 89 or 89.5. Nothing saved.",
+  save: "Save failed — try again.",
+};
+
+export default async function AdminProducts({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
   const sb = createAdminClient();
   const { data } = await sb
     .from("products")
@@ -22,6 +32,11 @@ export default async function AdminProducts() {
       <h1 className="mb-8 text-sm font-semibold uppercase tracking-[0.25em]">
         Products ({products.length})
       </h1>
+      {error && (
+        <p className="mb-6 border border-red-200 bg-red-50 px-4 py-3 text-xs text-red-700">
+          {ERRORS[error] ?? "Something went wrong — nothing saved."}
+        </p>
+      )}
       <div className="space-y-2">
         {products.map((p) => (
           <div key={p.id} className="border-b border-neutral-100 py-2">
@@ -30,6 +45,12 @@ export default async function AdminProducts() {
               <img src={p.image_urls?.[0]} alt="" className="h-12 w-12 bg-neutral-100 object-cover" />
               <form action={updateProduct} className="flex flex-1 items-center gap-2">
                 <input type="hidden" name="id" value={p.id} />
+                <input
+                  name="display_title"
+                  defaultValue={p.display_title ?? ""}
+                  placeholder="Card name (e.g. White Tee)"
+                  className="w-44 border border-neutral-200 px-2 py-1 text-xs"
+                />
                 <input name="title" defaultValue={p.title} className="flex-1 border border-neutral-200 px-2 py-1 text-xs" />
                 <span className="text-[10px] uppercase text-neutral-400">{p.brand}</span>
                 <input name="price_usd" defaultValue={p.price_usd ?? ""} className="w-20 border border-neutral-200 px-2 py-1 text-right text-xs" />

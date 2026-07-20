@@ -1,6 +1,12 @@
 import Link from "next/link";
 
-export function FriendHeader({ handle }: { handle: string }) {
+export function FriendHeader({
+  handle,
+  haulCount,
+}: {
+  handle: string;
+  haulCount: number;
+}) {
   return (
     <header className="border-b border-neutral-200">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
@@ -15,7 +21,7 @@ export function FriendHeader({ handle }: { handle: string }) {
             Shop
           </Link>
           <Link href={`/${handle}/haul`} className="hover:text-black">
-            Your Haul
+            Haul{haulCount > 0 ? ` (${haulCount})` : ""}
           </Link>
         </nav>
       </div>

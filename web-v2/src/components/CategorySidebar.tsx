@@ -5,24 +5,54 @@ import Link from "next/link";
 import { CATEGORY_LABEL } from "@/lib/categories";
 
 // Builds a shop URL keeping the current brand while changing the category.
-function href(handle: string, brand?: string, category?: string) {
+function href(handle: string, brand?: string, category?: string, showAll?: boolean) {
   const p = new URLSearchParams();
   if (brand) p.set("brand", brand);
   if (category) p.set("category", category);
+  if (showAll) p.set("all", "1");
   const s = p.toString();
   return s ? `/${handle}/shop?${s}` : `/${handle}/shop`;
+}
+
+// One sidebar row: label left, item count right-aligned in muted figures.
+function Row({
+  href: to,
+  label,
+  count,
+  isActive,
+}: {
+  href: string;
+  label: string;
+  count: number;
+  isActive: boolean;
+}) {
+  return (
+    <Link
+      href={to}
+      className={`flex items-baseline justify-between gap-2 text-[11px] uppercase tracking-wide ${
+        isActive ? "font-semibold" : "text-neutral-500 hover:text-black"
+      }`}
+    >
+      <span className="truncate">{label}</span>
+      <span className="tabular-nums text-[10px] text-neutral-400">[{count}]</span>
+    </Link>
+  );
 }
 
 export function CategorySidebar({
   handle,
   categories,
+  total,
   activeBrand,
   active,
+  showAll,
 }: {
   handle: string;
-  categories: string[];
+  categories: Array<{ slug: string; count: number }>;
+  total: number;
   activeBrand?: string;
   active?: string;
+  showAll?: boolean;
 }) {
   // Collapsed by default on mobile (tap to expand); always open on desktop (md+).
   const [open, setOpen] = useState(false);
@@ -38,25 +68,21 @@ export function CategorySidebar({
       <nav
         className={`mt-3 flex-col gap-1.5 ${open ? "flex" : "hidden"} md:flex`}
       >
-          <Link
-            href={href(handle, activeBrand, undefined)}
-            className={`text-[11px] uppercase tracking-wide ${
-              !active ? "font-semibold" : "text-neutral-500 hover:text-black"
-            }`}
-          >
-            All
-          </Link>
-          {categories.map((c) => (
-            <Link
-              key={c}
-              href={href(handle, activeBrand, c)}
-              className={`text-[11px] uppercase tracking-wide ${
-                active === c ? "font-semibold" : "text-neutral-500 hover:text-black"
-              }`}
-            >
-              {CATEGORY_LABEL[c] ?? c}
-            </Link>
-          ))}
+        <Row
+          href={href(handle, activeBrand, undefined, showAll)}
+          label="All"
+          count={total}
+          isActive={!active}
+        />
+        {categories.map((c) => (
+          <Row
+            key={c.slug}
+            href={href(handle, activeBrand, c.slug, showAll)}
+            label={CATEGORY_LABEL[c.slug] ?? c.slug}
+            count={c.count}
+            isActive={active === c.slug}
+          />
+        ))}
       </nav>
     </div>
   );

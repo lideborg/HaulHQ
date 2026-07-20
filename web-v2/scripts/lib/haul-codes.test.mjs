@@ -2,9 +2,9 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { slugify, makeCode, isValidHandle } from "./haul-codes.mjs";
 
-test("slugify lowercases, dashes non-alnum, trims", () => {
+test("slugify lowercases, strips accents, dashes non-alnum, trims", () => {
   assert.equal(slugify("Saint Laurent"), "saint-laurent");
-  assert.equal(slugify("Enfants Riches Déprimés"), "enfants-riches-d-prim-s");
+  assert.equal(slugify("Enfants Riches Déprimés"), "enfants-riches-deprimes");
   assert.equal(slugify("  The Row  "), "the-row");
   assert.equal(slugify("Miu Miu x New Balance"), "miu-miu-x-new-balance");
 });

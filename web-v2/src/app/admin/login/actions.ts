@@ -10,6 +10,7 @@ export async function login(formData: FormData) {
     (await cookies()).set("admin_session", await sha256Hex(pw), {
       httpOnly: true,
       sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
     });

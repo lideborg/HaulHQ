@@ -36,19 +36,25 @@ Every PR — human-authored or AI-authored — goes through this loop **before m
   (e.g. parent PR was merged) **before** posting any review activity. The rule's purpose is preserving
   review history, not banning rebases.
 
+## Catalog & scraping
+
+Detail lives with its domain so this file stays lean:
+- **Shop-product data rules** (dead source → `sold_out`; hero = `image_urls[0]`; `image_meta` tags) → **`web-v2/AGENTS.md`**.
+- **Rep-fashion scraping gotchas** (main-gallery vs detail crops, Superbuy CAPTCHA/risk-blocks, Weidian `geilicdn` DLP + swatch-preview trick, size-based pricing) → **`research/scraping-playbook.md`** and the **`import-product`** skill.
+
 ## Repo layout
 
 - `data/` — catalog content (JSON files + mirrored images). Source of truth for Phase 1.
 - `research/` — markdown notes (sizing, shipping, customs, sellers, scraping playbook).
 - `scripts/` — Python helpers for scraping, image download, sizing parse.
-- `web-next/` — Next.js 16 + TypeScript + Tailwind app.
+- `web-v2/` — the live app: Next.js 16 + TypeScript + Tailwind + Supabase (invite-only shop). The legacy Phase-1 app (`web-next/`) was removed 2026-07-20; its history is in git.
 - `supabase/` — Phase 2 backend: project config + SQL migrations. See `supabase/README.md`.
 
 ## Code style
 
 - TypeScript: strict mode, no `any` without a `// reason` comment.
-- Components live in `web-next/src/components/`. Server vs client split is explicit (`"use client"` directive) and noted in a header comment.
-- Pure helpers in `web-next/src/lib/`. If a module is server-only (reads filesystem, uses secrets), it imports `"server-only"`.
+- Components live in `web-v2/src/components/`. Server vs client split is explicit (`"use client"` directive).
+- Pure helpers in `web-v2/src/lib/`; server-only modules (secrets, service-role client) stay out of client bundles.
 - Avoid feature-flag soup. Code that doesn't ship gets deleted, not gated.
 
 ## Phase plan (2026-05-04)

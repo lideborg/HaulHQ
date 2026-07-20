@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
-import { getHaul } from "@/lib/data";
+import { getFriendByHandle, getHaul } from "@/lib/data";
 import { getCurrentFriend } from "@/lib/friend";
+import { isAdmin } from "@/lib/adminAuth";
 import { removeFromHaul } from "@/app/[handle]/haul-actions";
 
 export const dynamic = "force-dynamic";
@@ -11,10 +12,13 @@ export default async function HaulPage({
   params: Promise<{ handle: string }>;
 }) {
   const { handle } = await params;
-  // Identity from the cookie, not the URL — same ownership rule as the
-  // write actions. The layout gates too; this keeps the page safe standalone.
-  const friend = await getCurrentFriend();
-  if (!friend || friend.handle !== handle) redirect("/");
+  // Identity from the cookie, not the URL — same ownership rule as the write
+  // actions. An admin session may view (not edit) any friend's haul.
+  let friend = await getCurrentFriend();
+  if (!friend || friend.handle !== handle) {
+    friend = (await isAdmin()) ? await getFriendByHandle(handle) : null;
+  }
+  if (!friend) redirect("/");
   const items = await getHaul(friend.id);
 
   return (

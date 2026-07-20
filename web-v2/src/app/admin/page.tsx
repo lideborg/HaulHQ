@@ -63,7 +63,9 @@ export default async function AdminHome({
         <p>
           {products ?? 0} products ({pub ?? 0} visible)
         </p>
-        <p>{requests ?? 0} open requests</p>
+        <Link href="/admin/inbox" className="underline">
+          {requests ?? 0} open requests
+        </Link>
       </div>
 
       <section className="mb-12">

@@ -47,14 +47,14 @@ Detail lives with its domain so this file stays lean:
 - `data/` — catalog content (JSON files + mirrored images). Source of truth for Phase 1.
 - `research/` — markdown notes (sizing, shipping, customs, sellers, scraping playbook).
 - `scripts/` — Python helpers for scraping, image download, sizing parse.
-- `web-next/` — Next.js 16 + TypeScript + Tailwind app.
+- `web-v2/` — the live app: Next.js 16 + TypeScript + Tailwind + Supabase (invite-only shop). The legacy Phase-1 app (`web-next/`) was removed 2026-07-20; its history is in git.
 - `supabase/` — Phase 2 backend: project config + SQL migrations. See `supabase/README.md`.
 
 ## Code style
 
 - TypeScript: strict mode, no `any` without a `// reason` comment.
-- Components live in `web-next/src/components/`. Server vs client split is explicit (`"use client"` directive) and noted in a header comment.
-- Pure helpers in `web-next/src/lib/`. If a module is server-only (reads filesystem, uses secrets), it imports `"server-only"`.
+- Components live in `web-v2/src/components/`. Server vs client split is explicit (`"use client"` directive).
+- Pure helpers in `web-v2/src/lib/`; server-only modules (secrets, service-role client) stay out of client bundles.
 - Avoid feature-flag soup. Code that doesn't ship gets deleted, not gated.
 
 ## Phase plan (2026-05-04)

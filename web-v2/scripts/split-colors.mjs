@@ -66,10 +66,15 @@ for (let i = 0; i < spec.colors.length; i++) {
     id = data.id;
   }
 
-  const urls = await uploadProductImages(sb, env, id, [c.image]);
-  await sb.from("products").update({ image_urls: urls }).eq("id", id);
-  createdIds.push(id);
-  console.log(`[${String(i).padStart(2)}] ${c.label.padEnd(28)} id=${id.slice(0, 8)} img=${urls.length}`);
+  try {
+    const urls = await uploadProductImages(sb, env, id, [c.image]);
+    // image_meta must stay 1:1 with image_urls — null until the retag below.
+    await sb.from("products").update({ image_urls: urls, image_meta: null }).eq("id", id);
+    createdIds.push(id);
+    console.log(`[${String(i).padStart(2)}] ${c.label.padEnd(28)} id=${id.slice(0, 8)} img=${urls.length}`);
+  } catch (e) {
+    console.log(`[${c.label}] UPLOAD ERROR (row kept, images unchanged): ${e.message}`);
+  }
 }
 
 // Tag each colorway's image (kind + hero) for a consistent image_meta.

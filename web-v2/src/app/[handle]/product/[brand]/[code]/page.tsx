@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { SizeGuide } from "@/components/SizeGuide";
 import { ProductGallery } from "@/components/ProductGallery";
 import { AddToHaul } from "@/components/AddToHaul";
@@ -11,9 +11,13 @@ export default async function FriendProductPage({
 }: {
   params: Promise<{ handle: string; brand: string; code: string }>;
 }) {
-  const { handle, code } = await params;
+  const { handle, brand, code } = await params;
   const product = await getProductByCode(code);
   if (!product) notFound();
+  // The code alone resolves the product; keep the brand segment canonical.
+  if (product.brand_slug && brand !== product.brand_slug) {
+    redirect(`/${handle}/product/${product.brand_slug}/${code}`);
+  }
 
   const price = product.sold_out
     ? "Sold out"

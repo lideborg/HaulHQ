@@ -20,12 +20,16 @@ export default async function RequestPage({
         </p>
         {ok && (
           <p className="mb-6 border border-neutral-200 p-3 text-xs">
-            Request received — you&apos;ll see it in My Orders once priced.
+            Request received — it&apos;ll appear in your haul once Hampus has priced it.
           </p>
         )}
         {error && (
           <p className="mb-6 border border-red-200 p-3 text-xs text-red-600">
-            {error === "link" ? "That doesn't look like a link." : "Something went wrong — try again."}
+            {error === "link"
+              ? "That doesn't look like a link."
+              : error === "session"
+                ? "You're not signed in — open your personal invite link first, then resend."
+                : "Something went wrong — try again."}
           </p>
         )}
         <form action={submitRequest} className="space-y-3">

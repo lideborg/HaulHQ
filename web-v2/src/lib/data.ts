@@ -60,16 +60,18 @@ export async function getBrands(): Promise<string[]> {
 
 // ---- Haul / friends ----
 
+// Deliberately excludes access_token (the login credential) — resolve identity
+// from the friend_token cookie via getCurrentFriend() instead.
 export async function getFriendByHandle(handle: string): Promise<Friend | null> {
   const sb = createAdminClient();
   const { data, error } = await sb
     .from("friends")
-    .select("*")
+    .select("id, name, handle, email, shipping_address, currency, is_admin, active, measurements")
     .eq("handle", handle)
     .eq("active", true)
     .maybeSingle();
   if (error) throw error;
-  return (data as Friend) ?? null;
+  return (data as unknown as Friend) ?? null;
 }
 
 export async function getProductByCode(code: string): Promise<Product | null> {

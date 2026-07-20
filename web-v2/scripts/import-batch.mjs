@@ -54,21 +54,45 @@ for (const f of files) {
     sold_out: false,
   };
 
-  const { data, error } = await sb
+  // Re-imports must not stomp curated state (renamed titles, sold_out flags,
+  // unpublished drafts): update only scrape-owned fields on existing rows.
+  const { data: existing } = await sb
     .from("products")
-    .upsert(row, { onConflict: "source_link" })
     .select("id,code")
-    .single();
-  if (error) { console.log(`[${n}] INSERT ERROR: ${error.message}`); continue; }
+    .eq("source_link", p.source_link)
+    .maybeSingle();
+
+  let data;
+  if (existing) {
+    const refresh = {
+      cost_cny: row.cost_cny, price_usd: row.price_usd,
+      size_options: row.size_options, colors: row.colors,
+      size_guide: row.size_guide, seller: row.seller,
+      source_platform: row.source_platform, yupoo_url: row.yupoo_url,
+    };
+    const { error } = await sb.from("products").update(refresh).eq("id", existing.id);
+    if (error) { console.log(`[${n}] UPDATE ERROR: ${error.message}`); continue; }
+    data = existing;
+  } else {
+    const { data: inserted, error } = await sb
+      .from("products").insert(row).select("id,code").single();
+    if (error) { console.log(`[${n}] INSERT ERROR: ${error.message}`); continue; }
+    data = inserted;
+  }
 
   const dir = join(STAGE, n);
   let nimg = 0;
   if (existsSync(dir)) {
     const imgs = readdirSync(dir).filter((x) => /\.(jpe?g|png|webp)$/i.test(x)).sort().map((x) => join(dir, x));
     if (imgs.length) {
-      const urls = await uploadProductImages(sb, env, data.id, imgs);
-      await sb.from("products").update({ image_urls: urls }).eq("id", data.id);
-      nimg = urls.length;
+      try {
+        const urls = await uploadProductImages(sb, env, data.id, imgs);
+        // image_meta is aligned 1:1 with image_urls — null it until retag runs.
+        await sb.from("products").update({ image_urls: urls, image_meta: null }).eq("id", data.id);
+        nimg = urls.length;
+      } catch (e) {
+        console.log(`[${n}] UPLOAD ERROR (row kept, images unchanged): ${e.message}`);
+      }
     }
   }
   if (nimg) importedIds.push(data.id);

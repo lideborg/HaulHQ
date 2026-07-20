@@ -70,8 +70,10 @@ for (const job of jobs) {
   try {
     const bufs = [];
     for (const u of job.urls) {
-      const r = await fetch(u, { headers: { "User-Agent": "Mozilla/5.0", Referer: job.referer || new URL(u).origin + "/" } });
-      if (r.ok) bufs.push(shrink(Buffer.from(await r.arrayBuffer())));
+      try {
+        const r = await fetch(u, { headers: { "User-Agent": "Mozilla/5.0", Referer: job.referer || new URL(u).origin + "/" } });
+        if (r.ok) bufs.push(shrink(Buffer.from(await r.arrayBuffer())));
+      } catch { /* skip unreachable image, keep the rest of the job */ }
     }
     if (!bufs.length) { failed++; console.log(`[${job.code}] no images fetched`); continue; }
     const parts = [

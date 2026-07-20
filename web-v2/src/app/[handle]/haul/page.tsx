@@ -1,5 +1,6 @@
-import { notFound } from "next/navigation";
-import { getFriendByHandle, getHaul } from "@/lib/data";
+import { redirect } from "next/navigation";
+import { getHaul } from "@/lib/data";
+import { getCurrentFriend } from "@/lib/friend";
 import { removeFromHaul } from "@/app/[handle]/haul-actions";
 
 export const dynamic = "force-dynamic";
@@ -10,8 +11,10 @@ export default async function HaulPage({
   params: Promise<{ handle: string }>;
 }) {
   const { handle } = await params;
-  const friend = await getFriendByHandle(handle);
-  if (!friend) notFound();
+  // Identity from the cookie, not the URL — same ownership rule as the
+  // write actions. The layout gates too; this keeps the page safe standalone.
+  const friend = await getCurrentFriend();
+  if (!friend || friend.handle !== handle) redirect("/");
   const items = await getHaul(friend.id);
 
   return (

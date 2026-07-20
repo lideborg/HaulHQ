@@ -8,14 +8,8 @@ export function Header() {
           HaulHQ
         </Link>
         <nav className="flex gap-6 text-[11px] uppercase tracking-widest text-neutral-500">
-          <Link href="/" className="hover:text-black">
-            Shop
-          </Link>
           <Link href="/request" className="hover:text-black">
             Request
-          </Link>
-          <Link href="/orders" className="hover:text-black">
-            My Orders
           </Link>
         </nav>
       </div>

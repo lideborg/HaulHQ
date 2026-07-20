@@ -5,6 +5,14 @@ export interface SizeGuide {
   measurements: Record<string, (number | null)[]>;
 }
 
+// One entry per image, aligned 1:1 with Product.image_urls (hero first).
+// Written by scripts/retag-heroes.mjs; null on a product = not yet tagged.
+export interface ImageMeta {
+  url: string;
+  kind: "flat_lay" | "front" | "worn" | "detail" | "size_chart" | "logo_text" | "other";
+  hero: boolean;
+}
+
 export interface Product {
   id: string;
   brand: string | null;
@@ -28,6 +36,7 @@ export interface Product {
   colors: string[];
   sold_out: boolean;
   yupoo_url: string | null;
+  image_meta: ImageMeta[] | null;
 }
 
 export interface Friend {

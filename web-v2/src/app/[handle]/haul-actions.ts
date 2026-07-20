@@ -25,6 +25,7 @@ export async function addToHaul(
     .eq("published", true)
     .maybeSingle();
   if (!product) return { ok: false, error: "Product not found." };
+  if (product.sold_out) return { ok: false, error: "This one's sold out." };
 
   const { error } = await sb.from("items").upsert(
     {

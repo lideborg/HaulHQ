@@ -14,10 +14,13 @@ export default async function HaulPage({
   const { handle } = await params;
   // Identity from the cookie, not the URL — same ownership rule as the write
   // actions. An admin session may view (not edit) any friend's haul.
-  let friend = await getCurrentFriend();
-  if (!friend || friend.handle !== handle) {
-    friend = (await isAdmin()) ? await getFriendByHandle(handle) : null;
-  }
+  const cookieFriend = await getCurrentFriend();
+  const own = cookieFriend != null && cookieFriend.handle === handle;
+  const friend = own
+    ? cookieFriend
+    : (await isAdmin())
+      ? await getFriendByHandle(handle)
+      : null;
   if (!friend) redirect("/");
   const items = await getHaul(friend.id);
 
@@ -61,14 +64,18 @@ export default async function HaulPage({
                     </p>
                   ) : null}
                 </div>
-                <form action={removeFromHaul.bind(null, handle, item.id)}>
-                  <button
-                    type="submit"
-                    className="mt-2 text-[11px] uppercase tracking-widest text-neutral-500 hover:text-black"
-                  >
-                    Remove
-                  </button>
-                </form>
+                {/* removeFromHaul requires the owner's cookie — hide it on the
+                    admin's read-only view so the button can't silently no-op. */}
+                {own && (
+                  <form action={removeFromHaul.bind(null, handle, item.id)}>
+                    <button
+                      type="submit"
+                      className="mt-2 text-[11px] uppercase tracking-widest text-neutral-500 hover:text-black"
+                    >
+                      Remove
+                    </button>
+                  </form>
+                )}
               </div>
             );
           })}

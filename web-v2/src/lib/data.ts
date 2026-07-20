@@ -2,6 +2,16 @@ import { createAdminClient } from "./supabase/admin";
 import type { Product, Seller, Friend, HaulItem } from "./types";
 import { CATEGORY_ORDER } from "./categories";
 
+// Make user input safe inside a PostgREST or(...ilike...) filter: , ( ) are
+// or()-syntax, and % _ \ are LIKE wildcards that would match everything.
+function searchTerm(search?: string): string {
+  if (!search) return "";
+  return search
+    .replace(/[,()]/g, " ")
+    .replace(/[\\%_]/g, (c) => `\\${c}`)
+    .trim();
+}
+
 // Server-only reads (service role). Friends only ever see published products.
 export async function getPublishedProducts(
   brand?: string,
@@ -17,11 +27,8 @@ export async function getPublishedProducts(
     .order("created_at", { ascending: false });
   if (brand) q = q.eq("brand", brand);
   if (category) q = q.eq("category", category);
-  if (search) {
-    // PostgREST or() treats , ( ) as syntax — strip them from user input.
-    const term = search.replace(/[,()]/g, " ").trim();
-    if (term) q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%`);
-  }
+  const term = searchTerm(search);
+  if (term) q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%`);
   if (inStockOnly) q = q.eq("sold_out", false);
   const { data, error } = await q;
   if (error) throw error;
@@ -38,7 +45,7 @@ export interface SellerBrandLink {
   url: string;
 }
 export async function getSellerBrandLinks(search: string): Promise<SellerBrandLink[]> {
-  const term = search.replace(/[,()]/g, " ").trim();
+  const term = searchTerm(search);
   if (!term) return [];
   const sb = createAdminClient();
   const { data, error } = await sb
@@ -92,8 +99,11 @@ export async function getBrands(): Promise<string[]> {
 // ---- Haul / friends ----
 
 // Deliberately excludes access_token (the login credential) — resolve identity
-// from the friend_token cookie via getCurrentFriend() instead.
-export async function getFriendByHandle(handle: string): Promise<Friend | null> {
+// from the friend_token cookie via getCurrentFriend() instead. The return type
+// reflects that so callers can't compile against the missing field.
+export async function getFriendByHandle(
+  handle: string,
+): Promise<Omit<Friend, "access_token"> | null> {
   const sb = createAdminClient();
   const { data, error } = await sb
     .from("friends")
@@ -102,7 +112,7 @@ export async function getFriendByHandle(handle: string): Promise<Friend | null> 
     .eq("active", true)
     .maybeSingle();
   if (error) throw error;
-  return (data as unknown as Friend) ?? null;
+  return (data as unknown as Omit<Friend, "access_token">) ?? null;
 }
 
 export async function getProductByCode(code: string): Promise<Product | null> {

@@ -17,15 +17,12 @@
 import { readFileSync } from "node:fs";
 import { loadEnv } from "./lib/env.mjs";
 import { adminClient, uploadProductImages } from "./lib/storage.mjs";
+import { slugify as slug } from "./lib/haul-codes.mjs";
 import { retagProducts } from "./retag-heroes.mjs";
 
 const spec = JSON.parse(readFileSync(process.argv[2], "utf8"));
 const env = loadEnv(".env.local");
 const sb = adminClient(env);
-
-const slug = (s) =>
-  (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const brandSlug = slug(spec.brand);
 
 const createdIds = [];
@@ -69,7 +66,9 @@ for (let i = 0; i < spec.colors.length; i++) {
   try {
     const urls = await uploadProductImages(sb, env, id, [c.image]);
     // image_meta must stay 1:1 with image_urls — null until the retag below.
-    await sb.from("products").update({ image_urls: urls, image_meta: null }).eq("id", id);
+    const { error: ie } = await sb
+      .from("products").update({ image_urls: urls, image_meta: null }).eq("id", id);
+    if (ie) throw new Error(`image_urls update: ${ie.message}`);
     createdIds.push(id);
     console.log(`[${String(i).padStart(2)}] ${c.label.padEnd(28)} id=${id.slice(0, 8)} img=${urls.length}`);
   } catch (e) {

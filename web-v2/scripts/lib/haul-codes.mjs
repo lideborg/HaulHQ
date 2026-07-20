@@ -9,6 +9,8 @@ const ALPHABET =
 export function slugify(s) {
   return String(s ?? "")
     .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "") // Déprimés -> deprimes, not d-prim-s
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }

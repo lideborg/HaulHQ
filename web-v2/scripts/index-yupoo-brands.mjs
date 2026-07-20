@@ -178,6 +178,7 @@ async function indexSeller(seller) {
     return { seller, dead: true, note: "not found page" };
 
   const rows = new Map(); // name(lower) -> row
+  const seenUrls = new Set(); // unique(seller,url) in the DB — never emit dup URLs
   const re = /<a[^>]*href="([^"]*\/categories\/(\d+)[^"]*)"[^>]*>([\s\S]*?)<\/a>/g;
   let m;
   while ((m = re.exec(html))) {
@@ -189,16 +190,21 @@ async function indexSeller(seller) {
     const brand = canonicalize(cleaned) ?? cleaned;
     const key = brand.toLowerCase();
     if (rows.has(key)) continue; // first link per brand per seller
-    const url = m[1].startsWith("http") ? m[1] : base + m[1];
+    const url = (m[1].startsWith("http") ? m[1] : base + m[1]).split("&")[0];
+    if (seenUrls.has(url)) continue; // two labels for one category page
+    seenUrls.add(url);
     rows.set(key, {
       seller: `${seller} (Yupoo)`,
       brand,
       alias: cleaned.toLowerCase() === brand.toLowerCase() ? null : cleaned,
-      url: url.split("&")[0],
+      url,
       active: true,
     });
   }
   const list = [...rows.values()];
+  // A 200 that parsed to nothing (anti-bot interstitial, layout change) must
+  // not wipe the seller's existing index.
+  if (!list.length) return { seller, dead: false, n: 0, note: "0 parsed — kept existing rows" };
 
   await sb.from("seller_brand_links").delete().eq("seller", `${seller} (Yupoo)`);
   for (let i = 0; i < list.length; i += 200) {

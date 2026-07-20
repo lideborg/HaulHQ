@@ -12,15 +12,22 @@ import { CATEGORY_LABEL } from "@/lib/categories";
 
 export const dynamic = "force-dynamic";
 
+// Next delivers repeated query params as arrays (?q=a&q=b) — take the first.
+const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
+
 export default async function ShopPage({
   params,
   searchParams,
 }: {
   params: Promise<{ handle: string }>;
-  searchParams: Promise<{ brand?: string; category?: string; q?: string; instock?: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { handle } = await params;
-  const { brand, category, q, instock } = await searchParams;
+  const sp = await searchParams;
+  const brand = one(sp.brand);
+  const category = one(sp.category);
+  const q = one(sp.q);
+  const instock = one(sp.instock) === "1" ? "1" : undefined;
   const [products, brands, categories, sellerLinks] = await Promise.all([
     getPublishedProducts(brand, category, q, instock === "1"),
     getBrands(),

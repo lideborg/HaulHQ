@@ -22,12 +22,6 @@ const APPLY = process.argv.includes("--apply");
 const MODEL = "gemini-2.5-flash";
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
-// same junk-title heuristic used to scope the batch
-const JUNK = `not sold_out and (
-  title ~ '^[A-Z]{2,4}[0-9]{2,}' or title ~* '^item [A-Z0-9]' or title ~ '^[0-9]{3,}'
-  or title ~* 'wholesale|no middleman|madman|new arrival'
-  or title ~* '(men|women)''?s (casual|jeans|shoes|shirt|sneaker)')`;
-
 const SCHEMA = {
   type: "OBJECT",
   properties: { title: { type: "STRING" }, reason: { type: "STRING" } },
@@ -90,7 +84,9 @@ console.log(`${list.length} junk-titled products to propose\n`);
 const proposals = [];
 for (const p of list) {
   try {
-    const r = await fetch(p.image_urls[0]); const buf = shrink(Buffer.from(await r.arrayBuffer()));
+    const r = await fetch(p.image_urls[0]);
+    if (!r.ok) throw new Error(`hero fetch ${r.status}`); // don't send an error page to Gemini as "the image"
+    const buf = shrink(Buffer.from(await r.arrayBuffer()));
     const d = await gemini([{ text: PROMPT(p) }, { inline_data: { mime_type: "image/jpeg", data: buf.toString("base64") } }]);
     proposals.push({ id: p.id, code: p.code, brand: p.brand, old: p.title, proposed: d.title, reason: d.reason || "" });
     console.log(`[${p.code}] ${p.brand}\n   OLD: ${p.title}\n   NEW: ${d.title}\n`);

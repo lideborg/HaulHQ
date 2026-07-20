@@ -6,16 +6,13 @@ import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { loadEnv } from "./lib/env.mjs";
 import { adminClient, uploadProductImages } from "./lib/storage.mjs";
+import { slugify as slug } from "./lib/haul-codes.mjs";
 import { retagProducts } from "./retag-heroes.mjs";
 
 const BATCH = "/tmp/haul-batch";
 const STAGE = "/tmp/haul-stage";
 const env = loadEnv(".env.local");
 const sb = adminClient(env);
-
-const slug = (s) =>
-  (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 // Optional CLI args pick specific products (e.g. `import-batch.mjs y1 y2 y3`);
 // with no args it imports every NN.json in the batch dir.
@@ -88,7 +85,9 @@ for (const f of files) {
       try {
         const urls = await uploadProductImages(sb, env, data.id, imgs);
         // image_meta is aligned 1:1 with image_urls — null it until retag runs.
-        await sb.from("products").update({ image_urls: urls, image_meta: null }).eq("id", data.id);
+        const { error: ie } = await sb
+          .from("products").update({ image_urls: urls, image_meta: null }).eq("id", data.id);
+        if (ie) throw new Error(`image_urls update: ${ie.message}`);
         nimg = urls.length;
       } catch (e) {
         console.log(`[${n}] UPLOAD ERROR (row kept, images unchanged): ${e.message}`);

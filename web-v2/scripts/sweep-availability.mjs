@@ -34,14 +34,18 @@ for (let i = 0; i < bases.length; i += CONC) {
   await Promise.all(bases.slice(i, i + CONC).map(async (base) => {
     const items = byBase.get(base);
     try {
-      const r = await fetch(base, { headers: { "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15" }, redirect: "follow" });
+      const r = await fetch(base, {
+        headers: { "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15" },
+        redirect: "follow",
+        signal: AbortSignal.timeout(10_000), // black-holing hosts must not hang the sweep
+      });
       const html = await r.text();
       const isDead = /商品已下架|该商品不存在|宝贝不存在|商品不存在/.test(html);
       const looksReal = /商品|价格|itemInfo|weidian/i.test(html);
       if (isDead) { dead.push(...items); console.log(`DEAD  ${items.map(p => p.code).join(",")}  ${items[0].brand} — ${(items[0].title || "").slice(0, 40)}`); }
-      else if (!looksReal || html.length < 500) { uncertain++; console.log(`?     ${items.map(p => p.code).join(",")}  (unclear — ${r.status}, ${html.length}b)`); }
+      else if (!looksReal || html.length < 500) { uncertain += items.length; console.log(`?     ${items.map(p => p.code).join(",")}  (unclear — ${r.status}, ${html.length}b)`); }
       else alive += items.length;
-    } catch (e) { uncertain++; console.log(`?     ${items.map(p => p.code).join(",")}  (fetch err: ${e.message})`); }
+    } catch (e) { uncertain += items.length; console.log(`?     ${items.map(p => p.code).join(",")}  (fetch err: ${e.message})`); }
   }));
 }
 

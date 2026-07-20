@@ -10,6 +10,9 @@ export function adminClient(env) {
 const MIME = { png: "image/png", webp: "image/webp", jpeg: "image/jpeg", jpg: "image/jpeg" };
 
 export async function uploadProductImages(sb, env, productId, absFilePaths) {
+  // Guard the orphan sweep below: an empty batch must be a no-op, not a
+  // "delete every stored image for this product".
+  if (!absFilePaths.length) return [];
   const urls = [];
   const kept = new Set();
   for (let i = 0; i < absFilePaths.length; i++) {

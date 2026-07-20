@@ -6,10 +6,10 @@ import { getProductByCode } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
-// Editorial split layout: left half is the hero, full viewport height and
-// sticky, with a white info card overlaid ~80% down; right half is a white
-// page the rest of the gallery scrolls through. -mx/-my escape the layout's
-// container padding for a flush split.
+// Editorial split: on desktop the page itself never scrolls — the left half
+// holds a framed hero (~80% of the half) with a compact white info card
+// overlaid; only the right half scrolls, through smaller centered gallery
+// images. Stacks and scrolls normally on mobile.
 export default async function FriendProductPage({
   params,
 }: {
@@ -33,71 +33,96 @@ export default async function FriendProductPage({
   const rest = (product.image_urls ?? []).slice(1);
 
   return (
-    <div className="-mx-6 -my-8 grid md:grid-cols-2">
-      {/* left: full-height hero with overlaid card */}
-      <div className="relative h-[70vh] bg-neutral-100 md:sticky md:top-0 md:h-screen">
-        {hero ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={hero} alt={name} className="h-full w-full object-cover" />
-        ) : null}
-
+    <div className="-mx-6 -my-8 md:grid md:h-[calc(100vh-54px)] md:grid-cols-2 md:overflow-hidden">
+      {/* left: framed hero, fixed on desktop */}
+      <div className="relative flex items-center justify-center p-6 md:h-full md:p-10">
         <Link
           href={`/${handle}/shop`}
-          className="absolute left-4 top-4 bg-white/85 px-3 py-1.5 text-[11px] uppercase tracking-widest text-black backdrop-blur-sm hover:bg-white"
+          className="absolute left-6 top-5 text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black"
         >
           ← Shop
         </Link>
 
-        <div className="absolute bottom-[6%] left-1/2 w-[80%] max-w-md -translate-x-1/2 bg-white p-6 text-black shadow-[0_2px_24px_rgba(0,0,0,0.08)]">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.25em]">
-            {product.brand}
-          </p>
-          <p className="mt-1.5 text-lg font-medium tracking-tight">{name}</p>
-          <p className="mt-1 text-sm text-neutral-600">{price}</p>
-          {!product.sold_out && (
-            <div className="mt-5">
-              <AddToHaul
-                handle={handle}
-                productId={product.id}
-                sizes={product.size_options ?? []}
-              />
+        <div className="relative w-[80%] border border-neutral-200 bg-neutral-50 p-2">
+          {hero ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={hero}
+              alt={name}
+              className="max-h-[72vh] w-full object-cover"
+            />
+          ) : (
+            <div className="flex h-72 items-center justify-center text-[10px] uppercase tracking-widest text-neutral-300">
+              No image
             </div>
           )}
+
+          {/* compact info card straddling the frame's bottom edge */}
+          <div className="absolute bottom-0 left-1/2 w-[78%] max-w-[280px] -translate-x-1/2 translate-y-[35%] bg-white p-4 text-left text-black shadow-[0_2px_20px_rgba(0,0,0,0.10)]">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.22em]">
+              {product.brand}
+            </p>
+            <p className="mt-1 text-sm font-medium tracking-tight">{name}</p>
+            <p className="mt-0.5 text-xs text-neutral-600">{price}</p>
+            {!product.sold_out && (
+              <div className="mt-3">
+                <AddToHaul
+                  handle={handle}
+                  productId={product.id}
+                  sizes={product.size_options ?? []}
+                />
+              </div>
+            )}
+            <details className="group mt-3 border-t border-neutral-100 pt-2">
+              <summary className="cursor-pointer list-none text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black">
+                Size guide{" "}
+                <span className="text-neutral-300 group-open:hidden">+</span>
+                <span className="hidden text-neutral-300 group-open:inline">−</span>
+              </summary>
+              {product.size_guide ? (
+                <div className="mt-1 max-h-48 overflow-y-auto">
+                  <SizeGuide guide={product.size_guide} />
+                </div>
+              ) : (
+                <p className="mt-2 text-[10px] text-neutral-400">
+                  Size guide not available yet.
+                </p>
+              )}
+            </details>
+          </div>
         </div>
       </div>
 
-      {/* right: white page — rest of the gallery, then the details */}
-      <div className="bg-white">
-        <div className="flex flex-col gap-2 p-2 md:p-6">
+      {/* right: only this pane scrolls on desktop */}
+      <div className="bg-white md:h-full md:overflow-y-auto">
+        <div className="flex flex-col items-center gap-10 px-6 py-10">
           {rest.map((src, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={i}
               src={src}
               alt={`${name} — ${i + 2}`}
-              className="w-full bg-neutral-100 object-cover"
+              className="w-[65%] bg-neutral-100 object-cover"
               loading="lazy"
             />
           ))}
           {rest.length === 0 && (
-            <div className="flex h-64 items-center justify-center text-[11px] uppercase tracking-widest text-neutral-300">
+            <div className="flex h-40 items-center justify-center text-[10px] uppercase tracking-widest text-neutral-300">
               One photo for this one
             </div>
           )}
         </div>
-
-        <div className="space-y-4 px-6 pb-16 md:px-10">
+        <div className="space-y-3 px-10 pb-16">
           {product.display_title && (
-            <p className="text-xs leading-relaxed text-neutral-400">
+            <p className="text-[11px] leading-relaxed text-neutral-400">
               {product.title}
             </p>
           )}
           {product.description && (
-            <p className="text-xs leading-relaxed text-neutral-500">
+            <p className="text-[11px] leading-relaxed text-neutral-500">
               {product.description}
             </p>
           )}
-          {product.size_guide && <SizeGuide guide={product.size_guide} />}
         </div>
       </div>
     </div>

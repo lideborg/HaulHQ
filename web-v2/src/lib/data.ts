@@ -6,6 +6,8 @@ import { CATEGORY_ORDER } from "./categories";
 export async function getPublishedProducts(
   brand?: string,
   category?: string,
+  search?: string,
+  inStockOnly = false,
 ): Promise<Product[]> {
   const sb = createAdminClient();
   let q = sb
@@ -15,9 +17,38 @@ export async function getPublishedProducts(
     .order("created_at", { ascending: false });
   if (brand) q = q.eq("brand", brand);
   if (category) q = q.eq("category", category);
+  if (search) {
+    // PostgREST or() treats , ( ) as syntax — strip them from user input.
+    const term = search.replace(/[,()]/g, " ").trim();
+    if (term) q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%`);
+  }
+  if (inStockOnly) q = q.eq("sold_out", false);
   const { data, error } = await q;
   if (error) throw error;
   return (data ?? []) as Product[];
+}
+
+// Yupoo seller categories matching a searched brand (canonical name or seller
+// alias like "LEM" / "Pra"). Lets search fall through to "browse this brand at
+// the seller" links even when we carry no matching product.
+export interface SellerBrandLink {
+  seller: string;
+  brand: string;
+  alias: string | null;
+  url: string;
+}
+export async function getSellerBrandLinks(search: string): Promise<SellerBrandLink[]> {
+  const term = search.replace(/[,()]/g, " ").trim();
+  if (!term) return [];
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("seller_brand_links")
+    .select("seller, brand, alias, url")
+    .eq("active", true)
+    .or(`brand.ilike.%${term}%,alias.ilike.%${term}%`)
+    .order("brand");
+  if (error) throw error;
+  return (data ?? []) as SellerBrandLink[];
 }
 
 // Category slugs present among published products, in canonical display order.

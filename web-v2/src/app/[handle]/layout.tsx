@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { FriendHeader } from "@/components/FriendHeader";
 import { getCurrentFriend } from "@/lib/friend";
 import { isAdmin } from "@/lib/adminAuth";
+import { getFriendByHandle, getHaulCount } from "@/lib/data";
 
 // The whole /[handle] surface is private to the signed-in friend: identity
 // comes from the friend_token cookie (set by /f/<token>), never from the URL —
@@ -17,12 +18,16 @@ export default async function FriendLayout({
 }) {
   const { handle } = await params;
   const friend = await getCurrentFriend();
-  const authorized = (friend && friend.handle === handle) || (await isAdmin());
+  const own = friend != null && friend.handle === handle;
+  const authorized = own || (await isAdmin());
   if (!authorized) redirect("/");
+
+  const viewed = own ? friend : await getFriendByHandle(handle);
+  const haulCount = viewed ? await getHaulCount(viewed.id) : 0;
 
   return (
     <>
-      <FriendHeader handle={handle} />
+      <FriendHeader handle={handle} haulCount={haulCount} />
       <main className="mx-auto max-w-[1400px] px-6 py-8">{children}</main>
     </>
   );

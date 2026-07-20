@@ -66,12 +66,11 @@ export interface ShopFacets {
   brands: Array<{ name: string; count: number }>;
   categories: Array<{ slug: string; count: number }>;
 }
-export async function getShopFacets(): Promise<ShopFacets> {
+export async function getShopFacets(inStockOnly = false): Promise<ShopFacets> {
   const sb = createAdminClient();
-  const { data, error } = await sb
-    .from("products")
-    .select("brand, category")
-    .eq("published", true);
+  let fq = sb.from("products").select("brand, category").eq("published", true);
+  if (inStockOnly) fq = fq.eq("sold_out", false);
+  const { data, error } = await fq;
   if (error) throw error;
   const brandCount = new Map<string, number>();
   const catCount = new Map<string, number>();
@@ -134,13 +133,24 @@ export async function getProductByCode(code: string): Promise<Product | null> {
 
 export async function getHaul(friendId: string): Promise<HaulItem[]> {
   const sb = createAdminClient();
+  // Embed the live product for weight + card name (null for link-only requests).
   const { data, error } = await sb
     .from("items")
-    .select("*")
+    .select("*, products (weight_g, display_title, brand_slug, code)")
     .eq("owner_id", friendId)
     .order("created_at", { ascending: false });
   if (error) throw error;
   return (data ?? []) as HaulItem[];
+}
+
+export async function getHaulCount(friendId: string): Promise<number> {
+  const sb = createAdminClient();
+  const { count, error } = await sb
+    .from("items")
+    .select("*", { count: "exact", head: true })
+    .eq("owner_id", friendId);
+  if (error) throw error;
+  return count ?? 0;
 }
 
 export async function getFriendsWithHaulCounts(): Promise<

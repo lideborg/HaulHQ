@@ -4,10 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 
 // Builds a shop URL keeping the current category while changing the brand.
-function href(handle: string, brand?: string, category?: string) {
+function href(handle: string, brand?: string, category?: string, showAll?: boolean) {
   const p = new URLSearchParams();
   if (brand) p.set("brand", brand);
   if (category) p.set("category", category);
+  if (showAll) p.set("all", "1");
   const s = p.toString();
   return s ? `/${handle}/shop?${s}` : `/${handle}/shop`;
 }
@@ -32,7 +33,7 @@ function Row({
       }`}
     >
       <span className="truncate">{label}</span>
-      <span className="tabular-nums text-[10px] text-neutral-400">{count}</span>
+      <span className="tabular-nums text-[10px] text-neutral-400">[{count}]</span>
     </Link>
   );
 }
@@ -43,12 +44,14 @@ export function BrandSidebar({
   total,
   active,
   activeCategory,
+  showAll,
 }: {
   handle: string;
   brands: Array<{ name: string; count: number }>;
   total: number;
   active?: string;
   activeCategory?: string;
+  showAll?: boolean;
 }) {
   // Collapsed by default on mobile (tap to expand); always open on desktop (md+).
   const [open, setOpen] = useState(false);
@@ -65,7 +68,7 @@ export function BrandSidebar({
         className={`mt-3 flex-col gap-1.5 ${open ? "flex" : "hidden"} md:flex`}
       >
         <Row
-          href={href(handle, undefined, activeCategory)}
+          href={href(handle, undefined, activeCategory, showAll)}
           label="All"
           count={total}
           isActive={!active}
@@ -73,7 +76,7 @@ export function BrandSidebar({
         {brands.map((b) => (
           <Row
             key={b.name}
-            href={href(handle, b.name, activeCategory)}
+            href={href(handle, b.name, activeCategory, showAll)}
             label={b.name}
             count={b.count}
             isActive={active === b.name}

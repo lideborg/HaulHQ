@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { SizeGuide } from "@/components/SizeGuide";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -26,7 +27,14 @@ export default async function FriendProductPage({
       : "Quote on request";
 
   return (
-    <div className="mx-auto grid max-w-[1100px] gap-10 md:grid-cols-2">
+    <div className="mx-auto max-w-[1100px]">
+      <Link
+        href={`/${handle}/shop`}
+        className="mb-6 inline-block text-[11px] uppercase tracking-widest text-neutral-400 hover:text-black"
+      >
+        ← Back to shop
+      </Link>
+      <div className="grid gap-10 md:grid-cols-2">
       <ProductGallery images={product.image_urls ?? []} alt={product.title} />
 
       <div className="self-start md:sticky md:top-8">
@@ -63,6 +71,7 @@ export default async function FriendProductPage({
             <SizeGuide guide={product.size_guide} />
           </div>
         )}
+      </div>
       </div>
     </div>
   );

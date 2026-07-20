@@ -59,6 +59,13 @@ export interface HaulItem {
   id: string;
   owner_id: string;
   product_id: string | null;
+  // Embedded live product (from getHaul's join); null for link-only requests.
+  products?: {
+    weight_g: number | null;
+    display_title: string | null;
+    brand_slug: string | null;
+    code: string | null;
+  } | null;
   title: string | null;
   brand: string | null;
   image_urls: string[] | null;

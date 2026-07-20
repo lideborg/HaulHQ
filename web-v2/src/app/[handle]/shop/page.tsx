@@ -1,7 +1,7 @@
 import { BrandSidebar } from "@/components/BrandSidebar";
 import { CategorySidebar } from "@/components/CategorySidebar";
 import { ProductCard } from "@/components/ProductCard";
-import { ShopControls } from "@/components/ShopControls";
+import { SoldOutToggle, SearchBox } from "@/components/ShopControls";
 import {
   getPublishedProducts,
   getShopFacets,
@@ -26,10 +26,11 @@ export default async function ShopPage({
   const brand = one(sp.brand);
   const category = one(sp.category);
   const q = one(sp.q);
-  const instock = one(sp.instock) === "1" ? "1" : undefined;
+  // Sold-out items are hidden by default; ?all=1 shows everything.
+  const showAll = one(sp.all) === "1";
   const [products, facets, sellerLinks] = await Promise.all([
-    getPublishedProducts(brand, category, q, instock === "1"),
-    getShopFacets(),
+    getPublishedProducts(brand, category, q, !showAll),
+    getShopFacets(!showAll),
     q ? getSellerBrandLinks(q) : Promise.resolve([]),
   ]);
   const label = [
@@ -42,12 +43,16 @@ export default async function ShopPage({
   return (
     <div className="flex flex-col gap-8 md:flex-row">
       <aside className="w-full shrink-0 md:w-52 md:pr-6">
+        <div className="mb-6">
+          <SoldOutToggle handle={handle} brand={brand} category={category} q={q} showAll={showAll} />
+        </div>
         <BrandSidebar
           handle={handle}
           brands={facets.brands}
           total={facets.total}
           active={brand}
           activeCategory={category}
+          showAll={showAll}
         />
         <CategorySidebar
           handle={handle}
@@ -55,15 +60,17 @@ export default async function ShopPage({
           total={facets.total}
           activeBrand={brand}
           active={category}
+          showAll={showAll}
         />
       </aside>
       <section className="flex-1">
-        <ShopControls handle={handle} brand={brand} category={category} q={q} instock={instock} />
-        {label && (
-          <p className="mb-6 text-[11px] uppercase tracking-widest text-neutral-500">
-            {label} · {products.length} item{products.length === 1 ? "" : "s"}
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[11px] uppercase tracking-widest text-neutral-500">
+            {label ? `${label} · ` : ""}
+            {products.length} item{products.length === 1 ? "" : "s"}
           </p>
-        )}
+          <SearchBox handle={handle} brand={brand} category={category} q={q} showAll={showAll} />
+        </div>
         {products.length === 0 ? (
           <p className="text-sm text-neutral-500">
             {q ? "No catalog matches." : "Nothing here yet."}

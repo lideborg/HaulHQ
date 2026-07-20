@@ -1,62 +1,87 @@
 import Link from "next/link";
 
-// Search box + "hide sold out" toggle for the shop grid. Entirely URL-driven:
-// the form GETs ?q=…, the toggle links to ?instock=1 — no client JS.
-export function ShopControls({
+function shopHref(
+  handle: string,
+  params: Record<string, string | undefined>,
+) {
+  const p = new URLSearchParams();
+  for (const [k, v] of Object.entries(params)) if (v) p.set(k, v);
+  const s = p.toString();
+  return `/${handle}/shop${s ? `?${s}` : ""}`;
+}
+
+// SSENSE-style checkbox at the top of the sidebar. Checked (default) = sold-out
+// items hidden; unchecking adds ?all=1 to show everything. URL-driven.
+export function SoldOutToggle({
   handle,
   brand,
   category,
   q,
-  instock,
+  showAll,
 }: {
   handle: string;
   brand?: string;
   category?: string;
   q?: string;
-  instock?: string;
+  showAll: boolean;
 }) {
-  const href = (over: Record<string, string | undefined>) => {
-    const merged: Record<string, string | undefined> = { brand, category, q, instock, ...over };
-    const p = new URLSearchParams();
-    for (const [k, v] of Object.entries(merged)) if (v) p.set(k, v);
-    const s = p.toString();
-    return `/${handle}/shop${s ? `?${s}` : ""}`;
-  };
-
+  const hiding = !showAll;
   return (
-    <div className="mb-6 flex flex-wrap items-center gap-3">
+    <Link
+      href={shopHref(handle, { brand, category, q, all: hiding ? "1" : undefined })}
+      className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-neutral-700 hover:text-black"
+    >
+      <span
+        className={`flex h-3 w-3 items-center justify-center border text-[9px] leading-none ${
+          hiding ? "border-black bg-black text-white" : "border-neutral-400 bg-white"
+        }`}
+      >
+        {hiding ? "✓" : ""}
+      </span>
+      Hide sold out
+    </Link>
+  );
+}
+
+// Search box for the shop header (upper right). Plain GET form, no client JS;
+// hidden inputs carry the active filters.
+export function SearchBox({
+  handle,
+  brand,
+  category,
+  q,
+  showAll,
+}: {
+  handle: string;
+  brand?: string;
+  category?: string;
+  q?: string;
+  showAll: boolean;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      {q && (
+        <Link
+          href={shopHref(handle, { brand, category, all: showAll ? "1" : undefined })}
+          className="text-[11px] uppercase tracking-widest text-neutral-400 underline hover:text-black"
+        >
+          Clear
+        </Link>
+      )}
       <form action={`/${handle}/shop`} method="get" className="flex">
         {brand && <input type="hidden" name="brand" value={brand} />}
         {category && <input type="hidden" name="category" value={category} />}
-        {instock && <input type="hidden" name="instock" value={instock} />}
+        {showAll && <input type="hidden" name="all" value="1" />}
         <input
           name="q"
           defaultValue={q ?? ""}
-          placeholder="Search brand or item…"
+          placeholder="Search any item or brand…"
           className="w-56 border border-neutral-300 px-3 py-1.5 text-xs outline-none focus:border-black"
         />
         <button className="border border-l-0 border-neutral-300 px-3 py-1.5 text-[11px] uppercase tracking-widest hover:border-black">
           Search
         </button>
       </form>
-      <Link
-        href={href({ instock: instock ? undefined : "1" })}
-        className={`border px-3 py-1.5 text-[11px] uppercase tracking-widest ${
-          instock
-            ? "border-black bg-black text-white"
-            : "border-neutral-300 text-neutral-500 hover:border-black hover:text-black"
-        }`}
-      >
-        {instock ? "✓ Hiding sold out" : "Hide sold out"}
-      </Link>
-      {q && (
-        <Link
-          href={href({ q: undefined })}
-          className="text-[11px] uppercase tracking-widest text-neutral-400 underline hover:text-black"
-        >
-          Clear &ldquo;{q}&rdquo;
-        </Link>
-      )}
     </div>
   );
 }

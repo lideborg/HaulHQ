@@ -15,6 +15,9 @@ const sb = adminClient(env);
 const SELLERS = [
   "happywhale", "cn--made", "loganhere", "718made", "mvt-shop01",
   "swaggymade", "charlesking77", "i795", "niuyue688", "yolo66", "fashionbroda",
+  // r/QualityReps recommended sellers with validated Yupoos (2026-07-19 hunt;
+  // most QR sellers are Weidian/WeChat-only and have none)
+  "rmism", "atomu", "ashmade", "kj-made", "b197",
 ];
 
 const HEADERS = {
@@ -64,7 +67,7 @@ const CANON = {
   "Chrome Hearts": ["chrome heart", "chrome hearts", "ch"],
   "New Balance": ["nb", "new balance"],
   "Arc'teryx": ["arc'teryx", "arc'tery", "arcteryx", "λrc'teryx"],
-  "Rick Owens": ["ro", "rick owens", "rick"],
+  "Rick Owens": ["ro", "rick owens", "rick", "rick oens"],
   "Raf Simons": ["raf", "raf simons"],
   "Comme des Garçons": ["cdg", "comme des garcons"],
   "Fear of God": ["fog", "fear of god", "essentials"],

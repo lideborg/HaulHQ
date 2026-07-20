@@ -4,8 +4,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { ShopControls } from "@/components/ShopControls";
 import {
   getPublishedProducts,
-  getBrands,
-  getCategories,
+  getShopFacets,
   getSellerBrandLinks,
 } from "@/lib/data";
 import { CATEGORY_LABEL } from "@/lib/categories";
@@ -28,10 +27,9 @@ export default async function ShopPage({
   const category = one(sp.category);
   const q = one(sp.q);
   const instock = one(sp.instock) === "1" ? "1" : undefined;
-  const [products, brands, categories, sellerLinks] = await Promise.all([
+  const [products, facets, sellerLinks] = await Promise.all([
     getPublishedProducts(brand, category, q, instock === "1"),
-    getBrands(),
-    getCategories(),
+    getShopFacets(),
     q ? getSellerBrandLinks(q) : Promise.resolve([]),
   ]);
   const label = [
@@ -44,8 +42,20 @@ export default async function ShopPage({
   return (
     <div className="flex flex-col gap-8 md:flex-row">
       <aside className="w-full shrink-0 md:w-52 md:pr-6">
-        <BrandSidebar handle={handle} brands={brands} active={brand} activeCategory={category} />
-        <CategorySidebar handle={handle} categories={categories} activeBrand={brand} active={category} />
+        <BrandSidebar
+          handle={handle}
+          brands={facets.brands}
+          total={facets.total}
+          active={brand}
+          activeCategory={category}
+        />
+        <CategorySidebar
+          handle={handle}
+          categories={facets.categories}
+          total={facets.total}
+          activeBrand={brand}
+          active={category}
+        />
       </aside>
       <section className="flex-1">
         <ShopControls handle={handle} brand={brand} category={category} q={q} instock={instock} />

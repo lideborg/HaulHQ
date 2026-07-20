@@ -12,14 +12,41 @@ function href(handle: string, brand?: string, category?: string) {
   return s ? `/${handle}/shop?${s}` : `/${handle}/shop`;
 }
 
+// One sidebar row: label left, item count right-aligned in muted figures.
+function Row({
+  href: to,
+  label,
+  count,
+  isActive,
+}: {
+  href: string;
+  label: string;
+  count: number;
+  isActive: boolean;
+}) {
+  return (
+    <Link
+      href={to}
+      className={`flex items-baseline justify-between gap-2 text-[11px] uppercase tracking-wide ${
+        isActive ? "font-semibold" : "text-neutral-500 hover:text-black"
+      }`}
+    >
+      <span className="truncate">{label}</span>
+      <span className="tabular-nums text-[10px] text-neutral-400">{count}</span>
+    </Link>
+  );
+}
+
 export function BrandSidebar({
   handle,
   brands,
+  total,
   active,
   activeCategory,
 }: {
   handle: string;
-  brands: string[];
+  brands: Array<{ name: string; count: number }>;
+  total: number;
   active?: string;
   activeCategory?: string;
 }) {
@@ -37,25 +64,21 @@ export function BrandSidebar({
       <nav
         className={`mt-3 flex-col gap-1.5 ${open ? "flex" : "hidden"} md:flex`}
       >
-          <Link
-            href={href(handle, undefined, activeCategory)}
-            className={`text-[11px] uppercase tracking-wide ${
-              !active ? "font-semibold" : "text-neutral-500 hover:text-black"
-            }`}
-          >
-            All
-          </Link>
-          {brands.map((b) => (
-            <Link
-              key={b}
-              href={href(handle, b, activeCategory)}
-              className={`text-[11px] uppercase tracking-wide ${
-                active === b ? "font-semibold" : "text-neutral-500 hover:text-black"
-              }`}
-            >
-              {b}
-            </Link>
-          ))}
+        <Row
+          href={href(handle, undefined, activeCategory)}
+          label="All"
+          count={total}
+          isActive={!active}
+        />
+        {brands.map((b) => (
+          <Row
+            key={b.name}
+            href={href(handle, b.name, activeCategory)}
+            label={b.name}
+            count={b.count}
+            isActive={active === b.name}
+          />
+        ))}
       </nav>
     </div>
   );

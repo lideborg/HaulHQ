@@ -59,19 +59,35 @@ export async function getSellerBrandLinks(search: string): Promise<SellerBrandLi
   return (data ?? []) as SellerBrandLink[];
 }
 
-// Category slugs present among published products, in canonical display order.
-export async function getCategories(): Promise<string[]> {
+// Sidebar facets in one query: every published product's brand + category,
+// tallied. Counts are catalog-wide (not narrowed by the active filter).
+export interface ShopFacets {
+  total: number;
+  brands: Array<{ name: string; count: number }>;
+  categories: Array<{ slug: string; count: number }>;
+}
+export async function getShopFacets(): Promise<ShopFacets> {
   const sb = createAdminClient();
   const { data, error } = await sb
     .from("products")
-    .select("category")
+    .select("brand, category")
     .eq("published", true);
   if (error) throw error;
-  const set = new Set<string>();
-  for (const r of data ?? []) if (r.category) set.add(r.category as string);
-  return [...set].sort(
-    (a, b) => (CATEGORY_ORDER[a] ?? 99) - (CATEGORY_ORDER[b] ?? 99),
-  );
+  const brandCount = new Map<string, number>();
+  const catCount = new Map<string, number>();
+  for (const r of data ?? []) {
+    if (r.brand) brandCount.set(r.brand, (brandCount.get(r.brand) ?? 0) + 1);
+    if (r.category) catCount.set(r.category, (catCount.get(r.category) ?? 0) + 1);
+  }
+  return {
+    total: (data ?? []).length,
+    brands: [...brandCount.entries()]
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
+    categories: [...catCount.entries()]
+      .map(([slug, count]) => ({ slug, count }))
+      .sort((a, b) => (CATEGORY_ORDER[a.slug] ?? 99) - (CATEGORY_ORDER[b.slug] ?? 99)),
+  };
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
@@ -83,18 +99,6 @@ export async function getProductById(id: string): Promise<Product | null> {
     .maybeSingle();
   if (error) throw error;
   return (data as Product) ?? null;
-}
-
-export async function getBrands(): Promise<string[]> {
-  const sb = createAdminClient();
-  const { data, error } = await sb
-    .from("products")
-    .select("brand")
-    .eq("published", true);
-  if (error) throw error;
-  const set = new Set<string>();
-  for (const r of data ?? []) if (r.brand) set.add(r.brand as string);
-  return [...set].sort();
 }
 
 // ---- Haul / friends ----

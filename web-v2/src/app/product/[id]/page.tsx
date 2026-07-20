@@ -36,8 +36,15 @@ export default async function ProductPage({
             <p className="text-xs font-semibold uppercase tracking-widest">
               {product.brand}
             </p>
-            <p className="text-sm text-neutral-600">{product.title}</p>
+            <p className="text-sm text-neutral-600">
+              {product.display_title ?? product.title}
+            </p>
             <p className="text-sm">{price}</p>
+            {product.display_title && (
+              <p className="text-xs leading-relaxed text-neutral-400">
+                {product.title}
+              </p>
+            )}
             {product.description && (
               <p className="text-xs leading-relaxed text-neutral-500">
                 {product.description}

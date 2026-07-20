@@ -7,6 +7,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 export async function updateProduct(formData: FormData) {
   const id = String(formData.get("id"));
   const title = String(formData.get("title") ?? "").trim();
+  const display_title = String(formData.get("display_title") ?? "").trim() || null;
   const priceRaw = String(formData.get("price_usd") ?? "").trim();
   const price_usd = priceRaw === "" ? null : Number(priceRaw);
   // Guard against persisting NaN, which renders as "US$ NaN" on product cards.
@@ -16,7 +17,7 @@ export async function updateProduct(formData: FormData) {
   const sb = createAdminClient();
   const { error } = await sb
     .from("products")
-    .update({ title, price_usd })
+    .update({ title, display_title, price_usd })
     .eq("id", id);
   if (error) {
     console.error("updateProduct failed:", error);

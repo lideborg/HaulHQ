@@ -28,7 +28,8 @@ export async function getPublishedProducts(
   if (brand) q = q.eq("brand", brand);
   if (category) q = q.eq("category", category);
   const term = searchTerm(search);
-  if (term) q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%`);
+  if (term)
+    q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%,display_title.ilike.%${term}%`);
   if (inStockOnly) q = q.eq("sold_out", false);
   const { data, error } = await q;
   if (error) throw error;

@@ -45,6 +45,12 @@ export default async function AdminProducts({
               <img src={p.image_urls?.[0]} alt="" className="h-12 w-12 bg-neutral-100 object-cover" />
               <form action={updateProduct} className="flex flex-1 items-center gap-2">
                 <input type="hidden" name="id" value={p.id} />
+                <input
+                  name="display_title"
+                  defaultValue={p.display_title ?? ""}
+                  placeholder="Card name (e.g. White Tee)"
+                  className="w-44 border border-neutral-200 px-2 py-1 text-xs"
+                />
                 <input name="title" defaultValue={p.title} className="flex-1 border border-neutral-200 px-2 py-1 text-xs" />
                 <span className="text-[10px] uppercase text-neutral-400">{p.brand}</span>
                 <input name="price_usd" defaultValue={p.price_usd ?? ""} className="w-20 border border-neutral-200 px-2 py-1 text-right text-xs" />

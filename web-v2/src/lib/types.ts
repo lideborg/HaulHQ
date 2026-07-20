@@ -17,6 +17,9 @@ export interface Product {
   id: string;
   brand: string | null;
   title: string;
+  // Short card name "[Color] [Material?] [Garment]" (<= 4 words); `title`
+  // keeps the full scraped description.
+  display_title: string | null;
   description: string | null;
   category: string | null;
   code: string | null;

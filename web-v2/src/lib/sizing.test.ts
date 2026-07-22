@@ -48,3 +48,106 @@ test("estimateWaistCm and estimateFootCm fall back to null", () => {
   assert.equal(estimateWaistCm({}), null);
   assert.equal(estimateFootCm({}), null);
 });
+
+import { recommendSize } from "./sizing.ts";
+
+const HAMPUS = {
+  gender: "male" as const, height_cm: 183, weight_kg: 72,
+  jeans_waist_in: 31, shoe: { system: "eu" as const, value: 41 },
+  fit_pref: "true" as const,
+};
+
+test("recommendSize: top via chest chart, true-to-size ease band", () => {
+  const rec = recommendSize(HAMPUS, {
+    category: "t-shirts",
+    size_options: ["S", "M", "L", "XL"],
+    size_guide: {
+      unit: "cm", sizes: ["S", "M", "L", "XL"],
+      measurements: { chest: [104, 108, 112, 116], length: [68, 70, 72, 74] },
+    },
+  });
+  // body chest ≈ 98; true band mid = +11 → 108–112 closest ⇒ M (108, ease 10)
+  assert.equal(rec!.size, "M");
+  assert.match(rec!.reason, /chest 108cm/);
+  assert.match(rec!.reason, /~98(\.\d)?cm/); // estimate lands at 98.1
+});
+
+test("recommendSize: bust + half_chest aliases and inch charts normalize", () => {
+  const bust = recommendSize(HAMPUS, {
+    category: "shirts", size_options: ["M", "L"],
+    size_guide: { unit: "cm", sizes: ["M", "L"], measurements: { bust: [108, 112] } },
+  });
+  assert.equal(bust!.size, "M");
+  const half = recommendSize(HAMPUS, {
+    category: "shirts", size_options: ["M", "L"],
+    size_guide: { unit: "cm", sizes: ["M", "L"], measurements: { pit_to_pit: [54, 56] } },
+  });
+  assert.equal(half!.size, "M"); // 54×2 = 108
+  const inches = recommendSize(HAMPUS, {
+    category: "shirts", size_options: ["M", "L"],
+    size_guide: { unit: "in", sizes: ["M", "L"], measurements: { chest: [42.5, 44] } },
+  });
+  assert.equal(inches!.size, "M"); // 42.5in = 108cm
+});
+
+test("recommendSize: fit preference shifts the pick", () => {
+  const chart = {
+    category: "hoodies", size_options: ["S", "M", "L", "XL"],
+    size_guide: {
+      unit: "cm" as const, sizes: ["S", "M", "L", "XL"],
+      measurements: { chest: [104, 110, 116, 122] },
+    },
+  };
+  assert.equal(recommendSize({ ...HAMPUS, fit_pref: "slim" }, chart)!.size, "S");
+  assert.equal(recommendSize({ ...HAMPUS, fit_pref: "oversized" }, chart)!.size, "L");
+});
+
+test("recommendSize: pants match on waist", () => {
+  const rec = recommendSize(HAMPUS, {
+    category: "pants", size_options: ["46", "48", "50"],
+    size_guide: {
+      unit: "cm", sizes: ["46", "48", "50"],
+      measurements: { waist: [80, 84, 88], length: [100, 102, 104] },
+    },
+  });
+  // jeans 31 → body waist 83.8 → 84 waist +ease band 0–4 ⇒ 48
+  assert.equal(rec!.size, "48");
+  assert.match(rec!.reason, /waist/);
+});
+
+test("recommendSize: shoes work from EU size_options without a chart", () => {
+  const rec = recommendSize(HAMPUS, {
+    category: "shoes", size_options: ["40", "41", "42", "43"],
+    size_guide: null,
+  });
+  assert.equal(rec!.size, "41"); // EU41 = 26.0cm = his foot
+});
+
+test("recommendSize: best chart size missing from size_options → nearest available", () => {
+  const rec = recommendSize(HAMPUS, {
+    category: "t-shirts",
+    size_options: ["S", "L"], // M gone
+    size_guide: {
+      unit: "cm", sizes: ["S", "M", "L"],
+      measurements: { chest: [104, 108, 112] },
+    },
+  });
+  assert.equal(rec!.size, "L");
+  assert.match(rec!.reason, /closest available/);
+});
+
+test("recommendSize: no guessing", () => {
+  const noChart = recommendSize(HAMPUS, {
+    category: "t-shirts", size_options: ["S", "M"], size_guide: null,
+  });
+  assert.equal(noChart, null);
+  const noProfile = recommendSize(null, {
+    category: "t-shirts", size_options: ["S", "M"],
+    size_guide: { unit: "cm", sizes: ["S"], measurements: { chest: [108] } },
+  });
+  assert.equal(noProfile, null);
+  const accessory = recommendSize(HAMPUS, {
+    category: "accessories", size_options: [], size_guide: null,
+  });
+  assert.equal(accessory, null);
+});

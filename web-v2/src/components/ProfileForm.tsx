@@ -93,8 +93,11 @@ export function ProfileForm({
       const cm = num(heightCm);
       if (cm != null && num(heightFt) == null && num(heightIn) == null) {
         const totalIn = cm / 2.54;
-        setHeightFt(Math.floor(totalIn / 12).toString());
-        setHeightIn(Math.round(totalIn % 12).toString());
+        let ftPart = Math.floor(totalIn / 12);
+        let inPart = Math.round(totalIn % 12);
+        if (inPart === 12) { ftPart += 1; inPart = 0; }
+        setHeightFt(ftPart.toString());
+        setHeightIn(inPart.toString());
       }
       setHeightUnit("ftin");
     } else {

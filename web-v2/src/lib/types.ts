@@ -42,17 +42,41 @@ export interface Product {
   image_meta: ImageMeta[] | null;
 }
 
+export interface ShippingAddress {
+  name?: string;
+  line1?: string;
+  line2?: string;
+  city?: string;
+  region?: string;
+  postal?: string;
+  country?: string;
+  phone?: string;
+}
+
+// All fields optional — friends fill in as much as they want.
+export interface Measurements {
+  gender?: "male" | "female" | "na";
+  height_cm?: number;
+  weight_kg?: number;
+  jeans_waist_in?: number;
+  shoe?: { system: "us" | "eu"; value: number };
+  fit_pref?: "slim" | "true" | "oversized";
+  // Explicit tape-measure values; when present they override estimates.
+  explicit?: { chest_cm?: number; shoulder_cm?: number; foot_cm?: number };
+}
+
 export interface Friend {
   id: string;
   name: string;
   handle: string | null;
   email: string | null;
   access_token: string;
-  shipping_address: Record<string, unknown> | null;
+  shipping_address: ShippingAddress | null;
   currency: string;
   is_admin: boolean;
   active: boolean;
-  measurements: Record<string, number> | null;
+  measurements: Measurements | null;
+  onboarded_at: string | null;
 }
 
 export interface HaulItem {

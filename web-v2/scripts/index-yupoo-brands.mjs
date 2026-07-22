@@ -18,6 +18,9 @@ const SELLERS = [
   // r/QualityReps recommended sellers with validated Yupoos (2026-07-19 hunt;
   // most QR sellers are Weidian/WeChat-only and have none)
   "rmism", "atomu", "ashmade", "kj-made", "b197",
+  // makemood — archive/designer specialist (Celine, Saint Laurent, Undercover,
+  // Dior Homme, Junya Watanabe, Balenciaga, Chrome Hearts); 2026-07-20
+  "makemood",
 ];
 
 const HEADERS = {
@@ -81,6 +84,8 @@ const CANON = {
   "Alexander Wang": ["aw", "alexander wang"],
   "Y-3": ["y3", "y-3"],
   "Yohji Yamamoto": ["yohji", "yohji yamamoto"],
+  "Junya Watanabe": ["junya", "junya watanabe"],
+  "Undercover": ["undercover", "undercover 02", "non-undercover", "autonomous"],
   "Issey Miyake": ["issey", "issey miyake"],
   "Vetements": ["vtm", "vetements"],
   "Ami Paris": ["ami", "ami paris"],

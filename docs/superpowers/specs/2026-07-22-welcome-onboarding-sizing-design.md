@@ -57,7 +57,7 @@ Disclaimer copy at the top of the block:
 
 > Sizing on these pieces can run a little off from what you're used to.
 > Enter your details and we'll guide you to the most accurate size on every
-> product. If you know your real measurements, even better — those win.
+> product. If you know your real measurements, even better.
 
 Fields (all optional, saved as filled):
 

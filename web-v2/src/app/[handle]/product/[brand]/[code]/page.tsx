@@ -3,6 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { SizeGuide } from "@/components/SizeGuide";
 import { AddToHaul } from "@/components/AddToHaul";
 import { getProductByCode } from "@/lib/data";
+import { getCurrentFriend } from "@/lib/friend";
+import { recommendSize } from "@/lib/sizing";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +24,13 @@ export default async function FriendProductPage({
   if (product.brand_slug && brand !== product.brand_slug) {
     redirect(`/${handle}/product/${product.brand_slug}/${code}`);
   }
+
+  const friend = await getCurrentFriend();
+  const hasProfile =
+    friend?.measurements != null && Object.keys(friend.measurements).length > 0;
+  const recommended = hasProfile
+    ? recommendSize(friend!.measurements, product)
+    : null;
 
   const price = product.sold_out
     ? "Sold out"
@@ -70,6 +79,10 @@ export default async function FriendProductPage({
                   handle={handle}
                   productId={product.id}
                   sizes={product.size_options ?? []}
+                  recommended={recommended}
+                  profileHref={
+                    friend && !hasProfile ? `/${handle}/profile` : null
+                  }
                 />
               </div>
             )}

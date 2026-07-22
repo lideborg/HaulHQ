@@ -23,6 +23,9 @@ export function FriendHeader({
           <Link href={`/${handle}/haul`} className="hover:text-black">
             Haul{haulCount > 0 ? ` (${haulCount})` : ""}
           </Link>
+          <Link href={`/${handle}/profile`} className="hover:text-black">
+            Profile
+          </Link>
         </nav>
       </div>
     </header>

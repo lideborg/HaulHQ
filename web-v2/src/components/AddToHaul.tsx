@@ -2,17 +2,26 @@
 
 import { useState, useTransition } from "react";
 import { addToHaul } from "@/app/[handle]/haul-actions";
+import type { SizeRec } from "@/lib/sizing";
 
 export function AddToHaul({
   handle,
   productId,
   sizes,
+  recommended = null,
+  profileHref = null,
 }: {
   handle: string;
   productId: string;
   sizes: string[];
+  recommended?: SizeRec | null;
+  profileHref?: string | null;
 }) {
-  const [size, setSize] = useState<string | null>(sizes[0] ?? null);
+  const [size, setSize] = useState<string | null>(
+    recommended && sizes.includes(recommended.size)
+      ? recommended.size
+      : (sizes[0] ?? null),
+  );
   const [pending, startTransition] = useTransition();
   const [added, setAdded] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +57,15 @@ export function AddToHaul({
               </button>
             ))}
           </div>
+          {recommended ? (
+            <p className="mt-1.5 text-[10px] leading-relaxed text-neutral-500">
+              Recommended: {recommended.reason}
+            </p>
+          ) : profileHref ? (
+            <a href={profileHref} className="mt-1.5 block text-[10px] text-neutral-400 underline hover:text-black">
+              Add your sizes for a recommendation →
+            </a>
+          ) : null}
         </div>
       )}
 

@@ -85,6 +85,27 @@ export function ProfileForm({
     });
   }
 
+  // Height keeps separate state per unit; back-fill on toggle so a saved value
+  // in the other unit isn't silently dropped when the user saves without retyping.
+  function toggleHeightUnit() {
+    const num = (s: string) => (s.trim() === "" || Number.isNaN(+s) ? undefined : +s);
+    if (heightUnit === "cm") {
+      const cm = num(heightCm);
+      if (cm != null && num(heightFt) == null && num(heightIn) == null) {
+        const totalIn = cm / 2.54;
+        setHeightFt(Math.floor(totalIn / 12).toString());
+        setHeightIn(Math.round(totalIn % 12).toString());
+      }
+      setHeightUnit("ftin");
+    } else {
+      const ft = num(heightFt);
+      if (ft != null && num(heightCm) == null) {
+        setHeightCm(ftInToCm(ft, num(heightIn) ?? 0).toString());
+      }
+      setHeightUnit("cm");
+    }
+  }
+
   const setA = (k: keyof ShippingAddress) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setAddr((a) => ({ ...a, [k]: e.target.value }));
 
@@ -147,7 +168,7 @@ export function ProfileForm({
           </div>
           <div><span className={label}>
               Height{" "}
-              <button type="button" className="underline" onClick={() => setHeightUnit(heightUnit === "cm" ? "ftin" : "cm")}>
+              <button type="button" className="underline" onClick={toggleHeightUnit}>
                 {heightUnit === "cm" ? "cm · switch to ft/in" : "ft/in · switch to cm"}
               </button></span>
             {heightUnit === "cm" ? (

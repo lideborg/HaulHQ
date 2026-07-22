@@ -13,7 +13,7 @@ export async function GET(
   const sb = createAdminClient();
   const { data } = await sb
     .from("friends")
-    .select("id, handle")
+    .select("id, handle, onboarded_at")
     .eq("access_token", token)
     .eq("active", true)
     .maybeSingle();
@@ -26,7 +26,11 @@ export async function GET(
       path: "/",
       maxAge: 60 * 60 * 24 * 365,
     });
-    if (data.handle) redirect(`/${data.handle}/shop`);
+    if (data.handle) {
+      redirect(
+        data.onboarded_at ? `/${data.handle}/shop` : `/${data.handle}/welcome`,
+      );
+    }
   }
   redirect("/");
 }

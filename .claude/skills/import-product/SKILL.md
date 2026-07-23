@@ -40,7 +40,10 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    for a manual pick.
 4. **Upsert the row** — via the Management-API curl pattern (see
    `docs/superpowers/plans/2026-07-17-scrape-import-pipeline.md` Global
-   Constraints). Template:
+   Constraints). **ALWAYS set `brand_slug = slugify(brand)`** on manual/raw
+   inserts (import `slugify` from `scripts/lib/haul-codes.mjs`) — the raw upsert
+   path does NOT auto-generate it, and a null `brand_slug` makes the friend
+   product URL render as `/product/null/<code>` (broken). Template:
 
    ```sql
    insert into products (brand, title, description, category, seller,
@@ -121,6 +124,16 @@ next import is faster and more reliable than this one.
   transcribe it, don't gallery it. Some albums omit the price → `price_usd = null`
   (quote on request). curl of the album page returns only a JS skeleton — use the
   browser. Store `source_link` as the album URL and `seller = "makemood (Yupoo)"`.
+- **Generic Yupoo sellers ≠ agent-catalogs.** makemood/i795 are agent catalogs WITH a
+  Taobao `Link:` + price. Most other Yupoo shops (paypalshop, andy879, sunglasses-brand,
+  etc.) are photo-only: images + a WhatsApp number, NO buy link, NO price. For those:
+  store `source_link` = the Yupoo album URL, `source_platform = "yupoo"`, `seller =
+  "<shop> (Yupoo)"`, `price_usd = null` (renders "Quote on request" / ask-for-price —
+  friend adds to haul, admin sources + quotes). Same `big.jpg` + `Referer: https://
+  <shop>.x.yupoo.com/` download pattern. Google-indexed `/categories/<id>` URLs are
+  flaky (often bounce to "All categories") — direct `/albums/<id>` URLs are reliable.
+  For pure seller-index requests, write the shop into the `sellers` table (name, brands
+  array, yupoo_url, notes), not a product per item.
 - **Taobao "<X> style" seller slang → real brand** (the minimalist Taobao sellers
   like "Coffee"/"1AM Shop" prefix every title with a code): `Row style`=The Row,
   `OL style`=Our Legacy, `Aur`=Auralee, `Le`/`Lemai style`=Lemaire, `AC`/`Ac style`
@@ -148,12 +161,20 @@ next import is faster and more reliable than this one.
   acceptable. Not every landscape hit is a table: descriptive-text blurbs, fabric
   banners, foot-measuring diagrams, and brand storefronts also land here → Read then
   set `size_guide=null` if there's no measurement table.
+- **ALWAYS split distinct colourways into separate products — no exceptions.** If the
+  images show the item in visibly different colours/finishes (e.g. a beaded bag in
+  yellow / white-blue / black-pink), each colour is its OWN product row, even when
+  they all live in ONE Yupoo album or ONE Taobao listing. Never lump colourways into
+  a single product with a `colors` array of many — that array is for shades of the
+  SAME hero shot; genuinely different-looking pieces get their own row + own hero.
+  Shared title + " — <Colour>", distinct `source_link` via `#<colour-slug>` anchor.
 - **Colour-splitting mixed listings — contact sheet.** A multi-colour listing's
-  images are usually SHARED (selecting a colour doesn't swap the gallery). To split
-  into one-product-per-colour, `montage *.jpg -tile 4x2 -geometry 240x320 -background
-  white sheet.jpg` and Read the sheet ONCE to classify white/black/etc, then re-stage
-  each colour's shots into its own dir with a `#<colour>` source_link anchor. (macOS
-  has no ghostscript, so montage `-label`/`-title` fail — omit them, use grid order.)
+  images are usually SHARED (selecting a colour doesn't swap the gallery). To split,
+  `magick montage *.jpg -tile 4x4 -geometry 220x220+4+4 -background white sheet.jpg`
+  and Read the sheet ONCE to group images by colourway, then re-stage each colour's
+  shots into its own dir (pick that colour's cleanest full shot as `000.jpg` hero).
+  (macOS ImageMagick has no ghostscript: `-label`/`-title` print `gs: command not
+  found` warnings but the grid STILL renders fine — ignore them, use grid order.)
 - **Chinese pants-chart headers:** 裤长=length, 腰围=waist, 臀围=hip, 腿围=thigh,
   脚口=hem/leg-opening.
 - **Taobao `imgextra` serves WebP for a `.jpg` URL.** `curl`-ing the `_!!<id>.jpg`

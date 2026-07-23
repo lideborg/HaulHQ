@@ -44,3 +44,10 @@ img-card-structure.json
 test-output.json
 .mcp.json
 .superpowers/
+
+# local-only review/scratch tools (never ship to public shop)
+web-v2/public/brand-review.html
+web-v2/public/brand-review/
+web-v2/public/catalog-review.html
+web-v2/public/category-review.html
+web-v2/public/erd-color-review.html

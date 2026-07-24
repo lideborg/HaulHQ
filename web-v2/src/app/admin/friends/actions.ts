@@ -13,7 +13,7 @@ async function uniqueUserId(
     const id = randomUserId();
     const { data } = await sb
       .from("friends")
-      .select("id")
+      .select("handle")
       .eq("handle", id)
       .maybeSingle();
     if (!data) return id;
@@ -40,7 +40,7 @@ export async function createFriend(formData: FormData) {
   });
   if (error) redirect("/admin?error=save");
   revalidatePath("/admin");
-  redirect(`/admin?setup=${setup_token}&id=${handle}`);
+  redirect(`/admin?setup=${setup_token}&id=${handle}&action=create`);
 }
 
 // Issue a fresh setup link so the friend can set a new password. The old
@@ -52,7 +52,7 @@ export async function resetFriendPassword(formData: FormData) {
   const setup_token = randomToken();
   await sb.from("friends").update({ setup_token }).eq("handle", id);
   revalidatePath("/admin");
-  redirect(`/admin?setup=${setup_token}&id=${id}`);
+  redirect(`/admin?setup=${setup_token}&id=${id}&action=reset`);
 }
 
 export async function deleteFriend(formData: FormData) {

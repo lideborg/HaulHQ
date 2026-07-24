@@ -17,9 +17,9 @@ const ERROR_MESSAGES: Record<string, string> = {
 export default async function AdminHome({
   searchParams,
 }: {
-  searchParams: Promise<{ setup?: string; id?: string; error?: string }>;
+  searchParams: Promise<{ setup?: string; id?: string; error?: string; action?: string }>;
 }) {
-  const { setup, id, error } = await searchParams;
+  const { setup, id, error, action } = await searchParams;
 
   const sb = createAdminClient();
   const [{ count: products }, { count: pub }, { count: requests }, friends] =
@@ -49,8 +49,16 @@ export default async function AdminHome({
       {setup && id && (
         <div className="mb-6 border border-neutral-300 p-3 text-sm">
           <p>
-            Created <span className="font-medium">{id}</span>. Send them this
-            one-time setup link:
+            {action === "reset" ? (
+              <>
+                New setup link for <span className="font-medium">{id}</span>. Send it to them:
+              </>
+            ) : (
+              <>
+                Created <span className="font-medium">{id}</span>. Send them this
+                one-time setup link:
+              </>
+            )}
           </p>
           <code className="mt-2 block break-all rounded bg-neutral-100 px-2 py-1 text-xs">
             https://haulhq.shop/setup/{setup}

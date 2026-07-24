@@ -16,15 +16,19 @@ export default async function LoginPage({
       <form action={loginFriend} className="space-y-3">
         <input
           name="id"
-          placeholder="Your ID (e.g. u28736)"
+          placeholder="Your username or ID"
           autoFocus
           autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          autoComplete="username"
           className="w-full border border-neutral-300 px-3 py-2 text-sm"
         />
         <input
           type="password"
           name="password"
           placeholder="Password"
+          autoComplete="current-password"
           className="w-full border border-neutral-300 px-3 py-2 text-sm"
         />
         {error && <p className="text-xs text-red-600">Wrong ID or password.</p>}

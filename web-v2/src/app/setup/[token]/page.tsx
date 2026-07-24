@@ -32,38 +32,60 @@ export default async function SetupPage({
       ? "Password must be at least 6 characters."
       : error === "match"
         ? "Passwords don't match."
-        : error === "invalid"
-          ? "This link is no longer valid."
-          : null;
+        : error === "format"
+          ? "Username must be 3-20 characters: lowercase letters, numbers, dashes."
+          : error === "reserved"
+            ? "That username is reserved. Pick another."
+            : error === "taken"
+              ? "That username is taken. Pick another."
+              : error === "invalid"
+                ? "This link is no longer valid."
+                : null;
 
   return (
     <main className="mx-auto max-w-xs px-6 py-24">
       <h1 className="mb-2 text-sm font-semibold uppercase tracking-[0.25em]">
-        Create your password
+        Set up your account
       </h1>
       <p className="mb-6 text-xs text-neutral-500">
-        Your ID is <span className="font-medium text-black">{data.handle}</span>.
-        You&apos;ll use it to sign in.
+        Pick a username to sign in with, or keep the private one below. Then
+        choose a password.
       </p>
       <form action={setPassword} className="space-y-3">
         <input type="hidden" name="token" value={token} />
+        <div>
+          <input
+            name="username"
+            defaultValue={data.handle ?? ""}
+            autoComplete="username"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            className="w-full border border-neutral-300 px-3 py-2 text-sm"
+          />
+          <p className="mt-1 text-[10px] text-neutral-400">
+            Keep this for a private, hard-to-guess sign-in, or replace it with
+            your own.
+          </p>
+        </div>
         <input
           type="password"
           name="password"
           placeholder="Password"
-          autoFocus
+          autoComplete="new-password"
           className="w-full border border-neutral-300 px-3 py-2 text-sm"
         />
         <input
           type="password"
           name="confirm"
           placeholder="Confirm password"
+          autoComplete="new-password"
           className="w-full border border-neutral-300 px-3 py-2 text-sm"
         />
-        <button className="w-full bg-black py-2 text-xs uppercase tracking-widest text-white">
-          Set password
-        </button>
         {msg && <p className="text-xs text-red-600">{msg}</p>}
+        <button className="w-full bg-black py-2 text-xs uppercase tracking-widest text-white">
+          Create account
+        </button>
       </form>
     </main>
   );

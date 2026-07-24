@@ -4,11 +4,13 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { hashPassword } from "@/lib/auth";
+import { usernameError } from "@/lib/username";
 
 export async function setPassword(formData: FormData) {
   const token = String(formData.get("token") ?? "");
   const pw = String(formData.get("password") ?? "");
   const confirm = String(formData.get("confirm") ?? "");
+  const username = String(formData.get("username") ?? "").trim().toLowerCase();
   if (pw.length < 6) redirect(`/setup/${token}?error=short`);
   if (pw !== confirm) redirect(`/setup/${token}?error=match`);
 
@@ -20,9 +22,24 @@ export async function setPassword(formData: FormData) {
     .maybeSingle();
   if (!friend || !friend.active) redirect(`/setup/${token}?error=invalid`);
 
+  // The friend may keep their auto-generated id or pick their own username.
+  // Empty or unchanged keeps the current handle.
+  let handle = friend.handle;
+  if (username && username !== friend.handle) {
+    const err = usernameError(username);
+    if (err) redirect(`/setup/${token}?error=${err}`);
+    const { data: taken } = await sb
+      .from("friends")
+      .select("id")
+      .eq("handle", username)
+      .maybeSingle();
+    if (taken) redirect(`/setup/${token}?error=taken`);
+    handle = username;
+  }
+
   await sb
     .from("friends")
-    .update({ password_hash: await hashPassword(pw), setup_token: null })
+    .update({ password_hash: await hashPassword(pw), setup_token: null, handle })
     .eq("id", friend.id);
 
   (await cookies()).set("friend_token", friend.access_token, {
@@ -32,7 +49,5 @@ export async function setPassword(formData: FormData) {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
   });
-  redirect(
-    friend.onboarded_at ? `/${friend.handle}/shop` : `/${friend.handle}/welcome`,
-  );
+  redirect(friend.onboarded_at ? `/${handle}/shop` : `/${handle}/welcome`);
 }

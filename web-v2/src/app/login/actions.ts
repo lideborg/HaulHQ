@@ -39,6 +39,15 @@ export async function loginFriend(formData: FormData) {
 }
 
 export async function logout() {
-  (await cookies()).delete("friend_token");
+  // Expire with the SAME attributes it was set with (esp. path: "/"). A bare
+  // cookies().delete("friend_token") defaults Path to the current request path,
+  // which won't match the path-"/" login cookie, so the browser keeps it.
+  (await cookies()).set("friend_token", "", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    path: "/",
+    maxAge: 0,
+  });
   redirect("/login");
 }

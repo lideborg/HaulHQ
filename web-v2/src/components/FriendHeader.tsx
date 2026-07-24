@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { logout } from "@/app/login/actions";
 
 export function FriendHeader({
   handle,
@@ -26,6 +27,11 @@ export function FriendHeader({
           <Link href={`/${handle}/profile`} className="hover:text-black">
             Profile
           </Link>
+          <form action={logout} className="inline">
+            <button className="uppercase tracking-widest text-neutral-500 hover:text-black">
+              Sign out
+            </button>
+          </form>
         </nav>
       </div>
     </header>

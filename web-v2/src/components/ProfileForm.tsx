@@ -121,8 +121,6 @@ export function ProfileForm({
           For easy delivery, enter your address and we&apos;ll save it for your orders.
         </p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="sm:col-span-2"><span className={label}>Full name</span>
-            <input className={input} value={addr.name ?? ""} onChange={setA("name")} /></div>
           <div className="sm:col-span-2"><span className={label}>Street address</span>
             <input className={input} value={addr.line1 ?? ""} onChange={setA("line1")} /></div>
           <div className="sm:col-span-2"><span className={label}>Apt / unit (optional)</span>

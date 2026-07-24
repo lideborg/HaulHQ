@@ -20,7 +20,7 @@ export default async function FriendLayout({
   const friend = await getCurrentFriend();
   const own = friend != null && friend.handle === handle;
   const authorized = own || (await isAdmin());
-  if (!authorized) redirect("/");
+  if (!authorized) redirect("/login");
 
   const viewed = own ? friend : await getFriendByHandle(handle);
   const haulCount = viewed ? await getHaulCount(viewed.id) : 0;

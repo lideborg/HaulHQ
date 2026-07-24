@@ -14,10 +14,9 @@ export default async function WelcomePage({
   // Admin previews and already-onboarded friends go straight to the shop.
   if (!friend || friend.handle !== handle) redirect(`/${handle}/shop`);
 
-  const firstName = friend.name?.split(" ")[0] ?? "there";
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="text-lg font-semibold tracking-tight">Hi {firstName} — welcome.</h1>
+      <h1 className="text-lg font-semibold tracking-tight">Welcome.</h1>
       <p className="mt-3 text-sm leading-relaxed text-neutral-600">
         This is a small, invite-only shop of pieces that have been hunted down
         and quality-checked. Everything is ordered together in group hauls, so

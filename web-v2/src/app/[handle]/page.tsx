@@ -16,7 +16,7 @@ export default async function FriendHomePage({
   return (
     <div className="flex min-h-[50vh] flex-col items-center justify-center gap-6 text-center">
       <h1 className="text-3xl font-semibold tracking-tight">
-        Hey {friend.name} 👋
+        Welcome 👋
       </h1>
       <Link
         href={`/${handle}/shop`}

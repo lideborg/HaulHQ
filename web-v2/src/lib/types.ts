@@ -69,7 +69,9 @@ export interface Friend {
   id: string;
   name: string;
   handle: string | null;
-  email: string | null;
+  // email removed — no personal data stored.
+  password_hash: string | null;
+  setup_token: string | null;
   access_token: string;
   shipping_address: ShippingAddress | null;
   currency: string;

@@ -27,10 +27,10 @@ export default async function LoginPage({
           placeholder="Password"
           className="w-full border border-neutral-300 px-3 py-2 text-sm"
         />
+        {error && <p className="text-xs text-red-600">Wrong ID or password.</p>}
         <button className="w-full bg-black py-2 text-xs uppercase tracking-widest text-white">
           Sign in
         </button>
-        {error && <p className="text-xs text-red-600">Wrong ID or password.</p>}
       </form>
     </main>
   );

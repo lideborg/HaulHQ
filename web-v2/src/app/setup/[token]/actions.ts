@@ -15,15 +15,15 @@ export async function setPassword(formData: FormData) {
   const sb = createAdminClient();
   const { data: friend } = await sb
     .from("friends")
-    .select("access_token, handle, onboarded_at")
+    .select("id, access_token, handle, onboarded_at, active")
     .eq("setup_token", token)
     .maybeSingle();
-  if (!friend) redirect(`/setup/${token}?error=invalid`);
+  if (!friend || !friend.active) redirect(`/setup/${token}?error=invalid`);
 
   await sb
     .from("friends")
     .update({ password_hash: await hashPassword(pw), setup_token: null })
-    .eq("setup_token", token);
+    .eq("id", friend.id);
 
   (await cookies()).set("friend_token", friend.access_token, {
     httpOnly: true,

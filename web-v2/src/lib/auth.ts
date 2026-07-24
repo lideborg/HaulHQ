@@ -2,8 +2,8 @@
 // Passwords are bcrypt-hashed; the admin/db never sees plaintext.
 import bcrypt from "bcryptjs";
 
-// Anonymous login id: "u" + 5 digits (10000-99999). Not a secret — it's a
-// username; the password is the secret. `rand` is injectable for tests.
+// Anonymous login id: "u" + 5 digits (10000-99999). Not a secret (it's a
+// username; the password is the secret). `rand` is injectable for tests.
 export function randomUserId(rand: () => number = Math.random): string {
   return "u" + String(10000 + Math.floor(rand() * 90000));
 }

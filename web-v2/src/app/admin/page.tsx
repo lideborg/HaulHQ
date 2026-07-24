@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 const ERROR_MESSAGES: Record<string, string> = {
   name: "Name is required",
-  save: "Something went wrong saving — try again",
+  save: "Something went wrong saving, try again",
 };
 
 export default async function AdminHome({

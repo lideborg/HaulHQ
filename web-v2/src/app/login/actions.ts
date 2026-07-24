@@ -16,7 +16,7 @@ export async function loginFriend(formData: FormData) {
     .eq("handle", id)
     .maybeSingle();
 
-  // Generic failure for missing user / no password / wrong password — no enumeration.
+  // Generic failure for missing user / no password / wrong password (no enumeration).
   if (
     !friend ||
     !friend.active ||

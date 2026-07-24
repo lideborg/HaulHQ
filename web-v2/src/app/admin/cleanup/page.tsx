@@ -6,7 +6,7 @@ import type { Product } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
-// Temporary cleanup page — delete this folder when Hampus is done.
+// Temporary cleanup page — delete this folder when Admin is done.
 // Numbering is continuous across both sections so "number 7" is unambiguous.
 const JUNK_BRANDS = ["i795", "Unbranded", "VC (archive-style rep)"];
 const LONG_TITLE = 60;

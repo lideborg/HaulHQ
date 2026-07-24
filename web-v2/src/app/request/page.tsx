@@ -15,12 +15,12 @@ export default async function RequestPage({
           Request an item
         </h1>
         <p className="mb-8 text-xs text-neutral-500">
-          Found something elsewhere? Paste the link — Hampus will source it,
+          Found something elsewhere? Paste the link — Admin will source it,
           price it, and add it to your orders.
         </p>
         {ok && (
           <p className="mb-6 border border-neutral-200 p-3 text-xs">
-            Request received — it&apos;ll appear in your haul once Hampus has priced it.
+            Request received — it&apos;ll appear in your haul once Admin has priced it.
           </p>
         )}
         {error && (

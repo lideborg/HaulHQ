@@ -139,7 +139,7 @@ export default async function HaulPage({
             </div>
             <p className="pt-2 text-[10px] leading-relaxed text-neutral-400">
               Weights are estimates; shipping is based on past EMS parcels to the
-              US and settles at the real parcel weight. Final quote from Hampus
+              US and settles at the real parcel weight. Final quote from Admin
               before anything ships.
             </p>
           </div>

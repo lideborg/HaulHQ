@@ -106,7 +106,7 @@ export default async function ShopPage({
               ))}
             </ul>
             <p className="mt-2 text-[10px] text-neutral-400">
-              Found something? Paste the link on the Request page and Hampus will price it.
+              Found something? Paste the link on the Request page and Admin will price it.
             </p>
           </div>
         )}

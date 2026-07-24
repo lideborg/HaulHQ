@@ -4,28 +4,64 @@ import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { isValidHandle } from "@/lib/handles";
+import { randomUserId, randomToken } from "@/lib/auth";
 
-// Create a friend + their handle; returns them to /admin with a banner.
+async function uniqueUserId(
+  sb: ReturnType<typeof createAdminClient>,
+): Promise<string> {
+  for (let i = 0; i < 25; i++) {
+    const id = randomUserId();
+    const { data } = await sb
+      .from("friends")
+      .select("id")
+      .eq("handle", id)
+      .maybeSingle();
+    if (!data) return id;
+  }
+  throw new Error("could not generate a unique id");
+}
+
+// Create a friend: `name` is a PRIVATE admin-only label (never shown publicly).
+// Generates the anonymous u##### id + a one-time setup token, then shows the
+// admin a /setup/<token> link to send.
 export async function createFriend(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
-  const handle = String(formData.get("handle") ?? "").trim().toLowerCase();
   if (!name) redirect("/admin?error=name");
-  if (!isValidHandle(handle)) redirect("/admin?error=handle");
 
   const sb = createAdminClient();
+  const handle = await uniqueUserId(sb);
+  const setup_token = randomToken();
   const { error } = await sb.from("friends").insert({
     name,
     handle,
     active: true,
     access_token: randomUUID(),
+    setup_token,
   });
-  if (error) {
-    if (error.code === "23505") redirect("/admin?error=taken");
-    redirect("/admin?error=save");
-  }
+  if (error) redirect("/admin?error=save");
   revalidatePath("/admin");
-  redirect(`/admin?created=${handle}`);
+  redirect(`/admin?setup=${setup_token}&id=${handle}`);
+}
+
+// Issue a fresh setup link so the friend can set a new password. The old
+// password keeps working until they complete the new setup (we don't clear it).
+export async function resetFriendPassword(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  const sb = createAdminClient();
+  const setup_token = randomToken();
+  await sb.from("friends").update({ setup_token }).eq("handle", id);
+  revalidatePath("/admin");
+  redirect(`/admin?setup=${setup_token}&id=${id}`);
+}
+
+export async function deleteFriend(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+  const sb = createAdminClient();
+  await sb.from("friends").delete().eq("handle", id).eq("is_admin", false);
+  revalidatePath("/admin");
+  redirect("/admin");
 }
 
 // Admin-only: flip the "I'll source this" flag on a haul item.

@@ -1,23 +1,25 @@
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getFriendsWithHaulCounts } from "@/lib/data";
-import { createFriend } from "@/app/admin/friends/actions";
+import {
+  createFriend,
+  resetFriendPassword,
+  deleteFriend,
+} from "@/app/admin/friends/actions";
 
 export const dynamic = "force-dynamic";
 
 const ERROR_MESSAGES: Record<string, string> = {
-  handle:
-    "Handle must be lowercase letters/numbers/dashes, 2–20 chars, and not reserved",
-  taken: "That handle is already taken",
   name: "Name is required",
+  save: "Something went wrong saving — try again",
 };
 
 export default async function AdminHome({
   searchParams,
 }: {
-  searchParams: Promise<{ created?: string; error?: string }>;
+  searchParams: Promise<{ setup?: string; id?: string; error?: string }>;
 }) {
-  const { created, error } = await searchParams;
+  const { setup, id, error } = await searchParams;
 
   const sb = createAdminClient();
   const [{ count: products }, { count: pub }, { count: requests }, friends] =
@@ -44,12 +46,15 @@ export default async function AdminHome({
         HaulHQ — HQ
       </h1>
 
-      {created && (
-        <div className="mb-6 rounded border border-green-600/40 bg-green-50 px-4 py-3 text-sm text-green-800">
-          Friend added — their link:{" "}
-          <a href={`/${created}`} className="font-medium underline">
-            /{created}
-          </a>
+      {setup && id && (
+        <div className="mb-6 border border-neutral-300 p-3 text-sm">
+          <p>
+            Created <span className="font-medium">{id}</span>. Send them this
+            one-time setup link:
+          </p>
+          <code className="mt-2 block break-all rounded bg-neutral-100 px-2 py-1 text-xs">
+            https://haulhq.shop/setup/{setup}
+          </code>
         </div>
       )}
 
@@ -82,7 +87,8 @@ export default async function AdminHome({
                 <th className="py-2 pr-4 font-medium">Handle</th>
                 <th className="py-2 pr-4 font-medium">Link</th>
                 <th className="py-2 pr-4 font-medium">Items</th>
-                <th className="py-2 font-medium">Haul</th>
+                <th className="py-2 pr-4 font-medium">Haul</th>
+                <th className="py-2 font-medium">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -102,7 +108,7 @@ export default async function AdminHome({
                     )}
                   </td>
                   <td className="py-2 pr-4">{f.haul_count}</td>
-                  <td className="py-2">
+                  <td className="py-2 pr-4">
                     {f.handle ? (
                       <a
                         href={`/admin/friends/${f.handle}`}
@@ -113,6 +119,22 @@ export default async function AdminHome({
                     ) : (
                       "—"
                     )}
+                  </td>
+                  <td className="py-2">
+                    <div className="flex gap-3">
+                      <form action={resetFriendPassword} className="inline">
+                        <input type="hidden" name="id" value={f.handle ?? ""} />
+                        <button className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black">
+                          Reset password
+                        </button>
+                      </form>
+                      <form action={deleteFriend} className="inline">
+                        <input type="hidden" name="id" value={f.handle ?? ""} />
+                        <button className="text-[10px] uppercase tracking-widest text-red-400 hover:text-red-700">
+                          Delete
+                        </button>
+                      </form>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -129,13 +151,7 @@ export default async function AdminHome({
           <input
             type="text"
             name="name"
-            placeholder="Name"
-            className="rounded border border-neutral-300 px-3 py-2 text-sm"
-          />
-          <input
-            type="text"
-            name="handle"
-            placeholder="handle (e.g. jan)"
+            placeholder="Name (private, only you see this)"
             className="rounded border border-neutral-300 px-3 py-2 text-sm"
           />
           <button
@@ -161,7 +177,7 @@ export default async function AdminHome({
           href="/admin/cleanup"
           className="ml-6 inline-block text-xs uppercase tracking-widest underline"
         >
-          Cleanup: brands & titles →
+          Cleanup: brands &amp; titles →
         </Link>
       </section>
     </main>

@@ -25,9 +25,16 @@ export default async function FriendProductPage({
     redirect(`/${handle}/product/${product.brand_slug}/${code}`);
   }
 
+  // Size recommendations are personal to the friend on their OWN surface.
+  // When an admin previews another friend's handle (cookie handle !== URL
+  // handle), suppress the recommendation + "add your sizes" prompt — otherwise
+  // the prompt links to /<other-handle>/profile, which bounces back to the shop.
   const friend = await getCurrentFriend();
+  const own = friend != null && friend.handle === handle;
   const hasProfile =
-    friend?.measurements != null && Object.keys(friend.measurements).length > 0;
+    own &&
+    friend!.measurements != null &&
+    Object.keys(friend!.measurements).length > 0;
   const recommended = hasProfile
     ? recommendSize(friend!.measurements, product)
     : null;
@@ -80,9 +87,7 @@ export default async function FriendProductPage({
                   productId={product.id}
                   sizes={product.size_options ?? []}
                   recommended={recommended}
-                  profileHref={
-                    friend && !hasProfile ? `/${handle}/profile` : null
-                  }
+                  profileHref={own && !hasProfile ? `/${handle}/profile` : null}
                 />
               </div>
             )}

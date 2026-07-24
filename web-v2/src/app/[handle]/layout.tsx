@@ -8,7 +8,7 @@ import { getFriendByHandle, getHaulCount } from "@/lib/data";
 // comes from the friend_token cookie (set by /f/<token>), never from the URL —
 // handles are guessable, so a handle-only lookup would let anyone read a
 // friend's shop and haul. A valid admin session may view any friend's surface
-// (Hampus browsing the shop as his friends see it).
+// (Admin browsing the shop as his friends see it).
 export default async function FriendLayout({
   children,
   params,

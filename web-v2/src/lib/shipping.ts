@@ -1,4 +1,4 @@
-// Shipping estimate for a haul, calibrated to Hampus's real EMS Preferential
+// Shipping estimate for a haul, calibrated to Admin's real EMS Preferential
 // Line-XN parcels to the US (Superbuy parcel receipts, Jun–Jul 2026):
 //   9020 g → $214.21 · 6825 g → $178.48 · 11640 g → $287.70 · 12345 g → $297.49
 // The receipts show the exact rate: 1st 0.5 kg = $35.15, each additional
@@ -14,7 +14,7 @@ const STEP_G = 500; // billed in 0.5 kg increments
 // often volumetric-billed. This factor bridges summed-items → billed weight so
 // the midpoint lands at (or slightly above) what the parcel actually costs.
 const PACKAGING = 1.18;
-const MARGIN = 1.2; // Hampus's 20% on shipping (same as items)
+const MARGIN = 1.2; // Admin's 20% on shipping (same as items)
 const SPREAD = 0.12; // quoted range; also absorbs dense-vs-bulky variance
 
 export interface ShippingEstimate {

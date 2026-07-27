@@ -97,6 +97,30 @@ next import is faster and more reliable than this one.
   404s). Full-res geilicdn = the `...WxH.jpg` path (drop the `.webp?w=..&h=..`
   thumbnail query); fetch with `Referer: https://weidian.com/`. Verify every URL
   returns 200 before building the JSON.
+- **geilicdn many-image extraction — paginate via `window`, don't one-shot.** A
+  weidian listing can have ~18 gallery imgs; char-coding all their paths in one
+  `javascript_tool` return blows the tool's ~1k-char output cap and truncates.
+  Instead: one call filters imgs (`geilicdn`, strip `.webp?...`, `w>=500&&h>=300`,
+  dedupe by objid) into `window.__paths` and returns `n` + `slice(0,4)` char-coded;
+  then `browser_batch` the remaining `enc(window.__paths.slice(a,b).join('|'))`
+  slices of 4. Decode all in a node script → download. **Filter to the DOMINANT
+  path prefix** (`wdseller<id>-`): a lone `pcitem<other-id>-` image is a
+  recommendation/related item, drop it. **Drop Weibo/微博 screenshot frames** (a
+  `微博正文` phone-screenshot with text) that sellers pad galleries with — spot them
+  on the montage. No measurement-table image in the set → `size_guide = null`.
+- **`products` array columns are `text[]`, not jsonb**, and both `image_urls` AND
+  `colors` are NOT NULL — insert `'{}'::text[]` for colors when single-colourway
+  (not `null`), `'{XXS,XS,S,M}'::text[]` for sizes, `'{}'::text[]` for image_urls
+  (the upload script fills it). Only `size_guide` is nullable jsonb.
+- **Gemini post-passes need `GEMINI_API_KEY` exported** (it's vault-only, NOT in
+  `.env.local`), else `retag-heroes`/`propose-display-titles`/`estimate-weights`
+  all just print `set GEMINI_API_KEY`. Fallback without the key: hero is already
+  `image_urls[0]` (stage the cleanest shot as `000.jpg`), and set `display_title`
+  + `weight_g` (trousers ≈650g) manually via SQL.
+- **Public `/product/<id>` wants the UUID, not the `code`** — passing the 7-char
+  code 500s (Postgres uuid-cast error, not a clean 404). Verify a fresh import at
+  `/product/<uuid>`; the friend route `/[handle]/product/<brand_slug>/<code>` uses
+  the code.
 - **Short links** (`k.youshop10.com/...`) resolve through the Superbuy wrapper but
   take a few extra seconds — wait and re-extract if the page is still skeleton.
 - **Stale `NN.out.json` silently attaches a wrong size guide.** `import-batch.mjs`

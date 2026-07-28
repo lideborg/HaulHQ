@@ -40,16 +40,6 @@ export default async function ProductPage({
               {product.display_title ?? product.title}
             </p>
             <p className="text-sm">{price}</p>
-            {product.display_title && (
-              <p className="text-xs leading-relaxed text-neutral-400">
-                {product.title}
-              </p>
-            )}
-            {product.description && (
-              <p className="text-xs leading-relaxed text-neutral-500">
-                {product.description}
-              </p>
-            )}
           </div>
           <div className="mt-6">
             {product.size_guide && <SizeGuide guide={product.size_guide} />}

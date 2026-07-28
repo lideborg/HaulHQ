@@ -78,22 +78,14 @@ export default async function FriendProductPage({
             </div>
           )}
 
-          <details className="group mt-6 max-w-xs border-t border-neutral-200 pt-3">
-            <summary className="cursor-pointer list-none text-[10px] uppercase tracking-widest text-neutral-500 hover:text-black">
-              Size guide{" "}
-              <span className="text-neutral-300 group-open:hidden">+</span>
-              <span className="hidden text-neutral-300 group-open:inline">−</span>
-            </summary>
-            {product.size_guide ? (
-              <div className="mt-2">
-                <SizeGuide guide={product.size_guide} />
-              </div>
-            ) : (
-              <p className="mt-2 text-[10px] text-neutral-400">
-                Size guide not available yet.
+          {product.size_guide && (
+            <div className="mt-6 max-w-xs border-t border-neutral-200 pt-4">
+              <p className="mb-2 text-[10px] uppercase tracking-widest text-neutral-500">
+                Size guide
               </p>
-            )}
-          </details>
+              <SizeGuide guide={product.size_guide} />
+            </div>
+          )}
         </div>
       </div>
     </div>

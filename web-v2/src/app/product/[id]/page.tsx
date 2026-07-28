@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SizeGuide } from "@/components/SizeGuide";
-import { ProductGallery } from "@/components/ProductGallery";
+import { StackedGallery } from "@/components/StackedGallery";
 import { getProductById } from "@/lib/data";
 import { isAdmin } from "@/lib/adminAuth";
 
@@ -29,7 +29,7 @@ export default async function ProductPage({
     <>
       <Header />
       <main className="mx-auto grid max-w-[1100px] gap-10 px-6 py-8 md:grid-cols-2">
-        <ProductGallery images={product.image_urls ?? []} alt={product.title} />
+        <StackedGallery images={product.image_urls ?? []} alt={product.title} />
 
         <div className="self-start md:sticky md:top-8">
           <div className="space-y-3">

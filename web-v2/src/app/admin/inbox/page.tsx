@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { classifySourceLink, superbuyWrap } from "@/lib/sourceLink";
 import type { Friend, HaulItem } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
@@ -11,7 +12,7 @@ export default async function InboxPage() {
     sb
       .from("items")
       .select("*")
-      .eq("status", "requested")
+      .in("status", ["requested", "sourcing"])
       .order("created_at", { ascending: false }),
     sb.from("friends").select("id, name, handle"),
   ]);
@@ -37,6 +38,11 @@ export default async function InboxPage() {
         <div className="space-y-4">
           {items.map((item) => {
             const friend = friendById.get(item.owner_id);
+            const src = item.source_link ? classifySourceLink(item.source_link) : null;
+            const superbuy =
+              src && (src.kind === "weidian" || src.kind === "taobao")
+                ? superbuyWrap(src.url)
+                : null;
             return (
               <div key={item.id} className="border-b border-neutral-100 pb-4">
                 <p className="text-[11px] uppercase tracking-widest text-neutral-400">
@@ -46,6 +52,7 @@ export default async function InboxPage() {
                     month: "short",
                     day: "numeric",
                   })}
+                  {item.status === "sourcing" ? " · sourcing…" : ""}
                 </p>
                 <p className="mt-1 break-all text-sm">
                   {item.source_link ? (
@@ -65,6 +72,22 @@ export default async function InboxPage() {
                   {item.chosen_size ? `Size ${item.chosen_size}` : "No size given"}
                   {item.notes ? ` · “${item.notes}”` : ""}
                 </p>
+                {(item.admin_note || superbuy) && (
+                  <p className="mt-1 text-[11px] text-neutral-500">
+                    {item.admin_note}
+                    {item.admin_note && superbuy ? " · " : ""}
+                    {superbuy && (
+                      <a
+                        href={superbuy}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline hover:text-black"
+                      >
+                        Open in Superbuy →
+                      </a>
+                    )}
+                  </p>
+                )}
                 {friend?.handle && (
                   <Link
                     href={`/admin/friends/${friend.handle}`}

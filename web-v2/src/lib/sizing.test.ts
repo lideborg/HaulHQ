@@ -153,3 +153,26 @@ test("recommendSize: no guessing", () => {
   });
   assert.equal(accessory, null);
 });
+
+test("recommendSize: belt matches the jeans size to a US waist range", () => {
+  const belt = {
+    category: "accessories",
+    size_options: ["24-26", "26-28", "28-30", "30-33", "33-35"],
+    size_guide: null,
+  };
+  const rec = recommendSize(HAMPUS, belt); // jeans 31 → 30-33
+  assert.equal(rec!.size, "30-33");
+  assert.match(rec!.reason, /waist/);
+  // A measured waist (no jeans size) still works: 82cm ≈ 32in → 30-33.
+  assert.equal(
+    recommendSize({ explicit: { waist_cm: 82 } }, belt)!.size,
+    "30-33",
+  );
+  // Non-numeric accessory sizes (a cap) → no recommendation.
+  assert.equal(
+    recommendSize(HAMPUS, {
+      category: "accessories", size_options: ["One size"], size_guide: null,
+    }),
+    null,
+  );
+});

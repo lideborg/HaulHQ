@@ -9,9 +9,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-4">
           <Link
             href="/admin"
-            className="text-sm font-semibold uppercase tracking-[0.25em]"
+            className="text-sm font-semibold tracking-tight"
           >
-            HaulHQ · HQ
+            HaulHQ
           </Link>
           <nav className="flex gap-5 text-[11px] uppercase tracking-widest text-neutral-500">
             <Link href="/admin/inbox" className="hover:text-black">

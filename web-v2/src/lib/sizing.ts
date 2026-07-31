@@ -149,6 +149,40 @@ export function recommendSize(
     return { size: best.label, reason: `EU ${best.label} ≈ ${best.cm}cm — your foot ~${foot}cm` };
   }
 
+  // Belts (and any accessory sized by waist): the size labels are US pant/jeans
+  // sizes ("30-33") or plain numbers, so match the friend's jeans size directly
+  // (a measured waist in cm is the fallback). No size chart needed. estimateWaistCm
+  // is NOT used — it returns a garment waist with vanity ease that would inflate it.
+  if (cat === "accessories") {
+    const waistIn =
+      m.jeans_waist_in ??
+      (m.explicit?.waist_cm != null ? r1(m.explicit.waist_cm / 2.54) : null);
+    if (waistIn == null) return null;
+    const opts = product.size_options
+      .map((label) => {
+        const range = label.match(/^\s*(\d+(?:\.\d)?)\s*[-–]\s*(\d+(?:\.\d)?)\s*$/);
+        if (range) {
+          const lo = +range[1];
+          const hi = +range[2];
+          return { label, lo, hi, mid: (lo + hi) / 2 };
+        }
+        const one = label.match(/^\s*(\d+(?:\.\d)?)\s*$/);
+        if (one) return { label, lo: +one[1], hi: +one[1], mid: +one[1] };
+        return null;
+      })
+      .filter(
+        (o): o is { label: string; lo: number; hi: number; mid: number } => o != null,
+      );
+    if (opts.length === 0) return null; // caps, gloves, jewellery — not waist-sized
+    const hit = opts.find((o) => waistIn >= o.lo && waistIn <= o.hi);
+    const picked =
+      hit ??
+      opts.reduce((a, b) =>
+        Math.abs(b.mid - waistIn) < Math.abs(a.mid - waistIn) ? b : a,
+      );
+    return { size: picked.label, reason: `${picked.label} — your waist ~${waistIn}in` };
+  }
+
   if (!product.size_guide) return null;
   const guide = product.size_guide;
 
@@ -202,5 +236,5 @@ export function recommendSize(
     };
   }
 
-  return null; // bags / accessories / glasses: no sizing
+  return null; // bags / other accessories / glasses: no sizing
 }

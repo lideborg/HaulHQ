@@ -37,7 +37,7 @@ export default async function ProfilePage({
           initialMeasurements={viewed.measurements}
         />
       </div>
-      {own && friend?.handle && <UsernameForm current={friend.handle} />}
+      {viewed.handle && <UsernameForm current={viewed.handle} />}
       {own && (
         <form action={logout} className="mt-10 border-t border-neutral-100 pt-6">
           <button className="text-[11px] uppercase tracking-widest text-neutral-400 hover:text-black">

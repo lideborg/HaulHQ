@@ -59,7 +59,8 @@ export function AddToHaul({
           </div>
           {recommended ? (
             <p className="mt-1.5 text-[10px] leading-relaxed text-neutral-500">
-              Recommended: {recommended.reason}
+              Based on your measurements, your size should be{" "}
+              <span className="font-semibold text-black">{recommended.size}</span>.
             </p>
           ) : profileHref ? (
             <a href={profileHref} className="mt-1.5 block text-[10px] text-neutral-400 underline hover:text-black">

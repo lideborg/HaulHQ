@@ -90,6 +90,10 @@ export default async function SetupPage({
           Create account
         </button>
       </form>
+      <p className="mt-6 text-[11px] text-neutral-400">
+        You can always come back and sign in at{" "}
+        <span className="text-neutral-600">haulhq.shop</span> with these.
+      </p>
     </main>
   );
 }

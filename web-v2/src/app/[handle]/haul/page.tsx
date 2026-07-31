@@ -55,7 +55,16 @@ export default async function HaulPage({
           <div className="border-t border-neutral-200">
             {items.map((item) => {
               const img = item.image_urls?.[0];
-              const name = item.products?.display_title ?? item.title ?? "Untitled";
+              const sourcing = item.status === "sourcing";
+              const linkHost = (() => {
+                try {
+                  return item.source_link ? new URL(item.source_link).hostname : null;
+                } catch {
+                  return null;
+                }
+              })();
+              const name =
+                item.products?.display_title ?? item.title ?? linkHost ?? "Untitled";
               const productHref =
                 item.products?.brand_slug && item.products?.code
                   ? `/${handle}/product/${item.products.brand_slug}/${item.products.code}`
@@ -83,13 +92,18 @@ export default async function HaulPage({
                       <p className="truncate text-sm">{name}</p>
                     )}
                     <p className="mt-0.5 text-[11px] text-neutral-500">
-                      {item.chosen_size ? `Size ${item.chosen_size}` : "No size"}
-                      {" · "}~{grams(item.products?.weight_g)}
+                      {sourcing
+                        ? "Finding the details…"
+                        : `${item.chosen_size ? `Size ${item.chosen_size}` : "No size"} · ~${grams(item.products?.weight_g)}`}
                     </p>
                   </div>
                   <div className="shrink-0 text-right">
                     <p className="text-sm tabular-nums">
-                      {item.quoted_price_usd != null ? usd(item.quoted_price_usd) : "Quote"}
+                      {item.quoted_price_usd != null
+                        ? usd(item.quoted_price_usd)
+                        : sourcing
+                          ? "Price coming"
+                          : "Quote"}
                     </p>
                     {own && (
                       <form action={removeFromHaul.bind(null, handle, item.id)}>

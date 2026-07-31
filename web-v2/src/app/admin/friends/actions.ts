@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireAdmin } from "@/lib/adminAuth";
 import { randomUserId, randomToken } from "@/lib/auth";
 
 async function uniqueUserId(
@@ -25,6 +26,7 @@ async function uniqueUserId(
 // Generates the anonymous u##### id + a one-time setup token, then shows the
 // admin a /setup/<token> link to send.
 export async function createFriend(formData: FormData) {
+  await requireAdmin();
   const name = String(formData.get("name") ?? "").trim();
   if (!name) redirect("/admin?error=name");
 
@@ -46,6 +48,7 @@ export async function createFriend(formData: FormData) {
 // Issue a fresh setup link so the friend can set a new password. The old
 // password keeps working until they complete the new setup (we don't clear it).
 export async function resetFriendPassword(formData: FormData) {
+  await requireAdmin();
   const id = String(formData.get("id") ?? "");
   if (!id) return;
   const sb = createAdminClient();
@@ -56,6 +59,7 @@ export async function resetFriendPassword(formData: FormData) {
 }
 
 export async function deleteFriend(formData: FormData) {
+  await requireAdmin();
   const id = String(formData.get("id") ?? "");
   if (!id) return;
   const sb = createAdminClient();
@@ -66,6 +70,7 @@ export async function deleteFriend(formData: FormData) {
 
 // Admin-only: flip the "I'll source this" flag on a haul item.
 export async function toggleSource(formData: FormData) {
+  await requireAdmin();
   const id = String(formData.get("id"));
   const handle = String(formData.get("handle"));
   if (!id) return;
@@ -77,6 +82,7 @@ export async function toggleSource(formData: FormData) {
 
 // Admin-only: save a private note on a haul item.
 export async function setAdminNote(formData: FormData) {
+  await requireAdmin();
   const id = String(formData.get("id"));
   const handle = String(formData.get("handle"));
   const note = String(formData.get("note") ?? "").trim() || null;

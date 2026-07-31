@@ -4,10 +4,17 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { verifyPassword } from "@/lib/auth";
+import { clientIp, isThrottled, recordFailure, failureDelay } from "@/lib/rateLimit";
 
 export async function loginFriend(formData: FormData) {
   const id = String(formData.get("id") ?? "").trim().toLowerCase();
   const pw = String(formData.get("password") ?? "");
+
+  const throttleKey = `login:${id}:${await clientIp()}`;
+  if (isThrottled(throttleKey)) {
+    await failureDelay();
+    redirect("/login?error=1");
+  }
 
   const sb = createAdminClient();
   const { data: friend } = await sb
@@ -23,6 +30,8 @@ export async function loginFriend(formData: FormData) {
     !friend.password_hash ||
     !(await verifyPassword(pw, friend.password_hash))
   ) {
+    recordFailure(throttleKey);
+    await failureDelay();
     redirect("/login?error=1");
   }
 

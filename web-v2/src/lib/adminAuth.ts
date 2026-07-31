@@ -1,5 +1,6 @@
 import { cache } from "react";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function sha256Hex(s: string): Promise<string> {
   const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
@@ -16,3 +17,10 @@ export const isAdmin = cache(async (): Promise<boolean> => {
   const cookie = (await cookies()).get("admin_session")?.value;
   return cookie === (await sha256Hex(pw));
 });
+
+// Server actions are public POST endpoints no matter what page hosts the
+// form — the /admin proxy matcher alone must not be trusted to gate them.
+// First line of every admin action.
+export async function requireAdmin(): Promise<void> {
+  if (!(await isAdmin())) redirect("/admin/login");
+}

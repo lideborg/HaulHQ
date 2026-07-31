@@ -3,8 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireAdmin } from "@/lib/adminAuth";
 
 export async function updateProduct(formData: FormData) {
+  await requireAdmin();
   const id = String(formData.get("id"));
   const title = String(formData.get("title") ?? "").trim();
   const display_title = String(formData.get("display_title") ?? "").trim() || null;
@@ -27,6 +29,7 @@ export async function updateProduct(formData: FormData) {
 }
 
 export async function togglePublished(formData: FormData) {
+  await requireAdmin();
   const id = String(formData.get("id"));
   const published = String(formData.get("published")) === "true";
   const sb = createAdminClient();
@@ -42,6 +45,7 @@ export async function togglePublished(formData: FormData) {
 }
 
 export async function toggleSoldOut(formData: FormData) {
+  await requireAdmin();
   const id = String(formData.get("id"));
   const sold_out = String(formData.get("sold_out")) === "true";
   const sb = createAdminClient();

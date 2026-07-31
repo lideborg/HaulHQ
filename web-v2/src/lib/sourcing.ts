@@ -10,7 +10,7 @@ const UA =
 const CNY_PER_USD = 7.2;
 // Only fetch images from the stores' own hosts/CDNs - og:image is
 // attacker-controllable content, and redirects are refused below (SSRF).
-const IMAGE_HOSTS = /(^|\.)(yupoo\.com|weidian\.com|geilicdn\.com)$/i;
+const IMAGE_HOSTS = /(^|\.)(yupoo\.com|weidian\.com|geilicdn\.com|alicdn\.com)$/i;
 
 export async function resolveSourcingItem(itemId: string): Promise<void> {
   const sb = createAdminClient();
@@ -22,7 +22,9 @@ export async function resolveSourcingItem(itemId: string): Promise<void> {
       .eq("id", itemId)
       .single();
     const src = item?.source_link ? classifySourceLink(item.source_link) : null;
-    if (src) {
+    // "other" hosts (Goofish, 1688) and idless short links have nothing we can
+    // parse — skip straight to filing the plain request.
+    if (src && src.kind !== "other") {
       // Yupoo 404s album pages without a uid param — force uid=1 when missing.
       const fetchUrl = new URL(src.url);
       if (src.kind.startsWith("yupoo") && !fetchUrl.searchParams.has("uid"))

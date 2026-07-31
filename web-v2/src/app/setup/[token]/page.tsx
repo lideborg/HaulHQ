@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { setPassword } from "./actions";
 
@@ -23,9 +24,21 @@ export default async function SetupPage({
   if (dbError) throw dbError;
 
   if (!data) {
+    // A spent setup link is the common case here: the friend already finished
+    // setup and re-tapped the same link. Don't dead-end them; send them to
+    // sign in with the account they already made.
     return (
-      <main className="mx-auto max-w-xs px-6 py-24 text-sm text-neutral-500">
-        This link is invalid or has already been used. Ask for a new one.
+      <main className="mx-auto max-w-xs px-6 py-24">
+        <p className="text-sm text-neutral-500">
+          This link has already been used. If you already set up your account,
+          just sign in below. Otherwise ask the admin for a new link.
+        </p>
+        <Link
+          href="/login"
+          className="mt-6 block w-full bg-black py-2 text-center text-xs uppercase tracking-widest text-white"
+        >
+          Sign in
+        </Link>
       </main>
     );
   }

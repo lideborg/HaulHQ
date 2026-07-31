@@ -97,6 +97,8 @@ export async function getProductById(id: string): Promise<Product | null> {
     .select("*")
     .eq("id", id)
     .maybeSingle();
+  // 22P02 = malformed uuid in the URL — that's a 404, not a 500.
+  if (error?.code === "22P02") return null;
   if (error) throw error;
   return (data as Product) ?? null;
 }

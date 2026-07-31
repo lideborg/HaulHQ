@@ -6,7 +6,8 @@ export default function NotFound() {
     <div className="mx-auto flex max-w-md flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">
       <h1 className="text-lg font-medium">Page not found</h1>
       <p className="text-sm text-neutral-500">
-        This link may be broken, or the item is no longer available.
+        This link may be broken, or the item is no longer available. If
+        something seems off, message Hampus.
       </p>
       <Link
         href="/"

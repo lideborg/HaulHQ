@@ -102,6 +102,7 @@ export interface HaulItem {
   notes: string | null;
   to_source: boolean;
   admin_note: string | null;
+  sourcing_note: string | null;
   created_at: string;
 }
 

@@ -63,7 +63,24 @@ export async function deleteFriend(formData: FormData) {
   const id = String(formData.get("id") ?? "");
   if (!id) return;
   const sb = createAdminClient();
-  await sb.from("friends").delete().eq("handle", id).eq("is_admin", false);
+  const { data: friend } = await sb
+    .from("friends")
+    .select("id")
+    .eq("handle", id)
+    .eq("is_admin", false)
+    .maybeSingle();
+  if (!friend) redirect("/admin");
+  // items cascade on friend delete, but notifications/orders/payments are
+  // NO ACTION - a friend with any of those would 500 the delete. Notifications
+  // are disposable; real order/payment history must block with a message.
+  const [{ count: orders }, { count: payments }] = await Promise.all([
+    sb.from("orders").select("*", { count: "exact", head: true }).eq("owner_id", friend.id),
+    sb.from("payments").select("*", { count: "exact", head: true }).eq("owner_id", friend.id),
+  ]);
+  if ((orders ?? 0) > 0 || (payments ?? 0) > 0)
+    redirect("/admin?error=has-orders");
+  await sb.from("notifications").delete().eq("friend_id", friend.id);
+  await sb.from("friends").delete().eq("id", friend.id);
   revalidatePath("/admin");
   redirect("/admin");
 }

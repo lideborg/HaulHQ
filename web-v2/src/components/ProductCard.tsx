@@ -16,6 +16,7 @@ export function ProductCard({ handle, product }: { handle: string; product: Prod
           <img
             src={img}
             alt={product.title}
+            loading="lazy"
             className="h-full w-full object-cover transition duration-300 group-hover:opacity-90"
           />
         ) : null}

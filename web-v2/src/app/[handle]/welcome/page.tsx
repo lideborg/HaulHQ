@@ -27,7 +27,8 @@ export default async function WelcomePage({
       <p className="mt-3 text-sm leading-relaxed text-neutral-600">
         This is a small, invite-only shop of pieces that have been hunted down
         and quality-checked. Everything is ordered together in group hauls, so
-        prices stay low and shipping is shared.
+        prices stay low and shipping is shared. You can always come back by
+        signing in at haulhq.shop.
       </p>
       <div className="mt-10">
         <ProfileForm

@@ -138,7 +138,7 @@ export function recommendSize(
         if (Math.abs(v - foot) < Math.abs(insole[best] - foot)) best = i;
       });
       const size = product.size_guide.sizes[best];
-      return { size, reason: `${size} — insole ${r1(insole[best])}cm vs your foot ~${foot}cm` };
+      return { size, reason: `This ${size} has a ${r1(insole[best])}cm insole against your ~${foot}cm foot.` };
     }
     const eus = product.size_options
       .map((label) => ({ label, cm: euFromLabel(label) != null ? shoeToFootCm("eu", euFromLabel(label)!) : null }))
@@ -146,7 +146,7 @@ export function recommendSize(
     if (eus.length === 0) return null;
     const best = eus.reduce((a, b) =>
       Math.abs(b.cm - foot) < Math.abs(a.cm - foot) ? b : a);
-    return { size: best.label, reason: `EU ${best.label} ≈ ${best.cm}cm — your foot ~${foot}cm` };
+    return { size: best.label, reason: `EU ${best.label} runs about ${best.cm}cm against your ~${foot}cm foot.` };
   }
 
   // Belts (and any accessory sized by waist): the size labels are US pant/jeans
@@ -180,7 +180,7 @@ export function recommendSize(
       opts.reduce((a, b) =>
         Math.abs(b.mid - waistIn) < Math.abs(a.mid - waistIn) ? b : a,
       );
-    return { size: picked.label, reason: `${picked.label} — your waist ~${waistIn}in` };
+    return { size: picked.label, reason: `${picked.label} matches your ~${waistIn}in waist.` };
   }
 
   if (!product.size_guide) return null;
@@ -205,12 +205,12 @@ export function recommendSize(
     if (best === -1) return null;
     const picked = nearestAvailable(guide.sizes[best], guide.sizes, product.size_options);
     const ease = chest[guide.sizes.indexOf(picked.size)] - body;
-    const feel = ease < 4 ? "snug" : ease > 14 ? "relaxed" : "regular fit";
+    const feel = ease < 4 ? "a snug fit" : ease > 14 ? "a relaxed fit" : "a regular fit";
     const chartCm = r1(chest[guide.sizes.indexOf(picked.size)]);
     const note = picked.fallback ? " (closest available)" : "";
     return {
       size: picked.size,
-      reason: `${picked.size} — chart chest ${chartCm}cm vs your ~${body}cm, ${feel}${note}`,
+      reason: `This ${picked.size} measures chest ${chartCm}cm against your ~${body}cm, so expect ${feel}${note}. Sizes here follow the chart, not the label.`,
     };
   }
 
@@ -232,7 +232,7 @@ export function recommendSize(
     const note = picked.fallback ? " (closest available)" : "";
     return {
       size: picked.size,
-      reason: `${picked.size} — chart waist ${chartCm}cm vs your ~${body}cm${note}`,
+      reason: `This ${picked.size} measures waist ${chartCm}cm against your ~${body}cm${note}.`,
     };
   }
 

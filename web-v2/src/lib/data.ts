@@ -146,34 +146,40 @@ export async function getHaul(friendId: string): Promise<HaulItem[]> {
   return (data ?? []) as HaulItem[];
 }
 
+// Counts UNITS (sum of quantities), matching the haul page heading — two of
+// the same tee reads "Haul (2)" everywhere.
 export async function getHaulCount(friendId: string): Promise<number> {
   const sb = createAdminClient();
-  const { count, error } = await sb
+  const { data, error } = await sb
     .from("items")
-    .select("*", { count: "exact", head: true })
+    .select("quantity")
     .eq("owner_id", friendId);
   if (error) throw error;
-  return count ?? 0;
+  return (data ?? []).reduce((s, r) => s + ((r.quantity as number) ?? 1), 0);
 }
 
 export async function getFriendsWithHaulCounts(): Promise<
   Array<Friend & { haul_count: number }>
 > {
   const sb = createAdminClient();
-  const { data: friends, error } = await sb
-    .from("friends")
-    .select("*")
-    .order("created_at", { ascending: true });
+  // Two queries total (was one count query per friend). haul_count is UNITS
+  // (sum of quantities), matching getHaulCount and the haul page heading.
+  const [{ data: friends, error }, { data: items, error: itemsError }] =
+    await Promise.all([
+      sb.from("friends").select("*").order("created_at", { ascending: true }),
+      sb.from("items").select("owner_id, quantity"),
+    ]);
   if (error) throw error;
-  const out: Array<Friend & { haul_count: number }> = [];
-  for (const f of (friends ?? []) as Friend[]) {
-    const { count } = await sb
-      .from("items")
-      .select("*", { count: "exact", head: true })
-      .eq("owner_id", f.id);
-    out.push({ ...f, haul_count: count ?? 0 });
+  if (itemsError) throw itemsError;
+  const units = new Map<string, number>();
+  for (const i of items ?? []) {
+    const id = i.owner_id as string;
+    units.set(id, (units.get(id) ?? 0) + ((i.quantity as number) ?? 1));
   }
-  return out;
+  return ((friends ?? []) as Friend[]).map((f) => ({
+    ...f,
+    haul_count: units.get(f.id) ?? 0,
+  }));
 }
 
 // Factories page: all curated sellers, plus (when searching) direct brand

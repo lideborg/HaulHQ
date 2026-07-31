@@ -9,14 +9,14 @@ export function FriendHeader({
 }) {
   return (
     <header className="border-b border-neutral-200">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
+      <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-y-2 px-4 py-4 sm:px-6">
         <Link
           href={`/${handle}`}
           className="text-sm font-semibold tracking-tight"
         >
           HaulHQ.shop
         </Link>
-        <nav className="flex gap-6 text-[11px] uppercase tracking-widest text-neutral-500">
+        <nav className="flex flex-wrap gap-3 text-[11px] uppercase tracking-widest text-neutral-500 sm:gap-6">
           <Link href={`/${handle}/shop`} className="hover:text-black">
             Shop
           </Link>

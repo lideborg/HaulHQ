@@ -40,7 +40,10 @@ function AddButton() {
 
 export function AddLinkForm({ handle }: { handle: string }) {
   return (
-    <form action={addLinkToHaul.bind(null, handle)} className="flex gap-2">
+    <form
+      action={addLinkToHaul.bind(null, handle)}
+      className="flex flex-col gap-2 sm:flex-row"
+    >
       <input
         type="url"
         name="link"

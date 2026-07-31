@@ -56,3 +56,15 @@ test("yupooSubdomain", () => {
   assert.equal(yupooSubdomain("https://weidian.com/item.html?itemID=1"), null);
   assert.equal(yupooSubdomain(null), null);
 });
+
+test("taobao short links accepted as taobao", () => {
+  const r = classifySourceLink("https://e.tb.cn/h.hg66Nab2zkpGkNL?tk=x");
+  assert.equal(r?.kind, "taobao");
+  assert.equal(r?.itemId, null);
+  assert.equal(classifySourceLink("https://m.tb.cn/h.abc")?.kind, "taobao");
+});
+
+test("goofish and 1688 accepted as other", () => {
+  assert.equal(classifySourceLink("https://www.goofish.com/item?id=1")?.kind, "other");
+  assert.equal(classifySourceLink("https://detail.1688.com/offer/123.html")?.kind, "other");
+});

@@ -7,11 +7,6 @@ export function Header() {
         <Link href="/" className="text-sm font-semibold tracking-tight">
           HaulHQ.shop
         </Link>
-        <nav className="flex gap-6 text-[11px] uppercase tracking-widest text-neutral-500">
-          <Link href="/request" className="hover:text-black">
-            Request
-          </Link>
-        </nav>
       </div>
     </header>
   );

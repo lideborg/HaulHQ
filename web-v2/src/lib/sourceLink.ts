@@ -1,7 +1,14 @@
 // Classify a pasted product link. Pure — no framework imports, unit-tested.
 // Superbuy "buy page" wrappers are unwrapped to the underlying store link so
 // we always persist the canonical source (spec §4.1).
-export type SourceKind = "yupoo_album" | "yupoo_shop" | "weidian" | "taobao";
+// "other" = a recognized China-commerce host we can't auto-enrich (Goofish,
+// 1688) — the item still files as a plain request for the admin.
+export type SourceKind =
+  | "yupoo_album"
+  | "yupoo_shop"
+  | "weidian"
+  | "taobao"
+  | "other";
 
 export interface SourceLink {
   kind: SourceKind;
@@ -43,6 +50,16 @@ export function classifySourceLink(raw: string): SourceLink | null {
 
   if (/(^|\.)(taobao|tmall)\.com$/i.test(u.hostname)) {
     return { kind: "taobao", url: u.toString(), itemId: u.searchParams.get("id"), shop: null };
+  }
+
+  // Taobao short links (e.tb.cn / m.tb.cn) — what the app's share sheet
+  // actually produces. No item id until the admin expands it.
+  if (/(^|\.)tb\.cn$/i.test(u.hostname)) {
+    return { kind: "taobao", url: u.toString(), itemId: null, shop: null };
+  }
+
+  if (/(^|\.)(goofish\.com|1688\.com|xianyu\.com)$/i.test(u.hostname)) {
+    return { kind: "other", url: u.toString(), itemId: null, shop: null };
   }
 
   return null;

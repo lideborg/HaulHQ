@@ -20,6 +20,9 @@ export function FriendHeader({
           <Link href={`/${handle}/shop`} className="hover:text-black">
             Shop
           </Link>
+          <Link href={`/${handle}/factories`} className="hover:text-black">
+            Factories
+          </Link>
           <Link href={`/${handle}/profile`} className="hover:text-black">
             Profile
           </Link>

@@ -4,8 +4,8 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { changeUsername } from "@/app/[handle]/profile-actions";
 
-// A friend's handle is their login and their public link, so renames are
-// gated behind a confirm() prompt — no accidental or constant changes.
+// A friend's handle is their login and their public link — renaming updates
+// every URL, so the server re-checks format, reservations, and uniqueness.
 export function UsernameForm({ current }: { current: string }) {
   const router = useRouter();
   const [value, setValue] = useState(current);

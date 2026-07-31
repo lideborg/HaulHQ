@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BrandSidebar } from "@/components/BrandSidebar";
 import { CategorySidebar } from "@/components/CategorySidebar";
 import { ProductCard } from "@/components/ProductCard";
@@ -106,9 +107,21 @@ export default async function ShopPage({
               ))}
             </ul>
             <p className="mt-2 text-[10px] text-neutral-400">
-              Found something? Paste the link on the Request page and Admin will price it.
+              Found something? Paste the link on the Factories page and it goes
+              straight into your haul.
             </p>
           </div>
+        )}
+        {q && (
+          <p className="mt-6 text-xs text-neutral-500">
+            Can&rsquo;t find it?{" "}
+            <Link
+              href={`/${handle}/factories?q=${encodeURIComponent(q)}`}
+              className="underline hover:text-black"
+            >
+              Search our factories →
+            </Link>
+          </p>
         )}
       </section>
     </div>

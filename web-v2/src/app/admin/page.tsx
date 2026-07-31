@@ -12,6 +12,8 @@ export const dynamic = "force-dynamic";
 const ERROR_MESSAGES: Record<string, string> = {
   name: "Name is required",
   save: "Something went wrong saving, try again",
+  "has-orders":
+    "That friend has order or payment history, so they can't be deleted. Deactivate them instead if needed.",
 };
 
 export default async function AdminHome({
@@ -129,20 +131,28 @@ export default async function AdminHome({
                     )}
                   </td>
                   <td className="py-2">
-                    <div className="flex gap-3">
-                      <form action={resetFriendPassword} className="inline">
-                        <input type="hidden" name="id" value={f.handle ?? ""} />
-                        <button className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black">
-                          Reset password
-                        </button>
-                      </form>
-                      <form action={deleteFriend} className="inline">
-                        <input type="hidden" name="id" value={f.handle ?? ""} />
-                        <button className="text-[10px] uppercase tracking-widest text-red-400 hover:text-red-700">
-                          Delete
-                        </button>
-                      </form>
-                    </div>
+                    {/* The delete action refuses admin rows — don't render a
+                        button that silently no-ops. */}
+                    {f.is_admin ? (
+                      <span className="text-[10px] uppercase tracking-widest text-neutral-300">
+                        You
+                      </span>
+                    ) : (
+                      <div className="flex gap-3">
+                        <form action={resetFriendPassword} className="inline">
+                          <input type="hidden" name="id" value={f.handle ?? ""} />
+                          <button className="text-[10px] uppercase tracking-widest text-neutral-400 hover:text-black">
+                            Reset password
+                          </button>
+                        </form>
+                        <form action={deleteFriend} className="inline">
+                          <input type="hidden" name="id" value={f.handle ?? ""} />
+                          <button className="text-[10px] uppercase tracking-widest text-red-400 hover:text-red-700">
+                            Delete
+                          </button>
+                        </form>
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -180,12 +190,6 @@ export default async function AdminHome({
           className="inline-block text-xs uppercase tracking-widest underline"
         >
           Manage products →
-        </Link>
-        <Link
-          href="/admin/cleanup"
-          className="ml-6 inline-block text-xs uppercase tracking-widest underline"
-        >
-          Cleanup: brands &amp; titles →
         </Link>
       </section>
     </main>

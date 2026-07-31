@@ -62,7 +62,7 @@ export interface Measurements {
   shoe?: { system: "us" | "eu"; value: number };
   fit_pref?: "slim" | "true" | "oversized";
   // Explicit tape-measure values; when present they override estimates.
-  explicit?: { chest_cm?: number; shoulder_cm?: number; foot_cm?: number };
+  explicit?: { chest_cm?: number; waist_cm?: number; shoulder_cm?: number; foot_cm?: number };
 }
 
 export interface Friend {

@@ -14,16 +14,20 @@ export default async function FriendHomePage({
   if (!friend) notFound();
 
   return (
-    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-6 text-center">
-      <h1 className="text-3xl font-semibold tracking-tight">
-        Welcome 👋
-      </h1>
-      <Link
-        href={`/${handle}/shop`}
-        className="text-[11px] uppercase tracking-widest text-neutral-500 hover:text-black"
-      >
-        Browse the shop →
-      </Link>
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="relative w-full max-w-[724px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/hero-clean.png" alt="" className="block w-full" />
+        <div className="absolute inset-0 bg-black/25" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Link
+            href={`/${handle}/shop`}
+            className="border border-white px-8 py-3 text-[11px] uppercase tracking-widest text-white transition hover:bg-white hover:text-black"
+          >
+            Browse the shop
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

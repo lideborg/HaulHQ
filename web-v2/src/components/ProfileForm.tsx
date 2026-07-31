@@ -38,10 +38,12 @@ export function ProfileForm({
   const [weightUnit, setWeightUnit] = useState<"kg" | "lbs">("kg");
   const [weight, setWeight] = useState(m0.weight_kg?.toString() ?? "");
   const [jeans, setJeans] = useState(m0.jeans_waist_in?.toString() ?? "");
+  const [waistUnit, setWaistUnit] = useState<"in" | "cm">("in");
   const [shoeSystem, setShoeSystem] = useState<"us" | "eu">(m0.shoe?.system ?? "us");
   const [shoeVal, setShoeVal] = useState(m0.shoe?.value?.toString() ?? "");
   const [fitPref, setFitPref] = useState(m0.fit_pref ?? "");
   const [chest, setChest] = useState(m0.explicit?.chest_cm?.toString() ?? "");
+  const [waistM, setWaistM] = useState(m0.explicit?.waist_cm?.toString() ?? "");
   const [shoulder, setShoulder] = useState(m0.explicit?.shoulder_cm?.toString() ?? "");
   const [foot, setFoot] = useState(m0.explicit?.foot_cm?.toString() ?? "");
 
@@ -55,8 +57,16 @@ export function ProfileForm({
           ? ftInToCm(num(heightFt)!, num(heightIn) ?? 0)
           : undefined;
     const w = weightUnit === "kg" ? num(weight) : num(weight) != null ? lbsToKg(num(weight)!) : undefined;
+    // Waist is stored canonically in inches; convert if entered in cm.
+    const waistIn =
+      waistUnit === "in"
+        ? num(jeans)
+        : num(jeans) != null
+          ? Math.round((num(jeans)! / 2.54) * 10) / 10
+          : undefined;
     const explicit = {
       ...(num(chest) != null && { chest_cm: num(chest) }),
+      ...(num(waistM) != null && { waist_cm: num(waistM) }),
       ...(num(shoulder) != null && { shoulder_cm: num(shoulder) }),
       ...(num(foot) != null && { foot_cm: num(foot) }),
     };
@@ -64,7 +74,7 @@ export function ProfileForm({
       ...(gender && { gender: gender as Measurements["gender"] }),
       ...(h != null && { height_cm: h }),
       ...(w != null && { weight_kg: w }),
-      ...(num(jeans) != null && { jeans_waist_in: num(jeans) }),
+      ...(waistIn != null && { jeans_waist_in: waistIn }),
       ...(num(shoeVal) != null && { shoe: { system: shoeSystem, value: num(shoeVal)! } }),
       ...(fitPref && { fit_pref: fitPref as Measurements["fit_pref"] }),
       ...(Object.keys(explicit).length > 0 && { explicit }),
@@ -106,6 +116,18 @@ export function ProfileForm({
         setHeightCm(ftInToCm(ft, num(heightIn) ?? 0).toString());
       }
       setHeightUnit("cm");
+    }
+  }
+
+  // Convert the entered value when switching units so the number keeps meaning.
+  function toggleWaistUnit() {
+    const n = jeans.trim() === "" || Number.isNaN(+jeans) ? undefined : +jeans;
+    if (waistUnit === "in") {
+      if (n != null) setJeans((Math.round(n * 2.54 * 10) / 10).toString());
+      setWaistUnit("cm");
+    } else {
+      if (n != null) setJeans((Math.round((n / 2.54) * 10) / 10).toString());
+      setWaistUnit("in");
     }
   }
 
@@ -188,8 +210,12 @@ export function ProfileForm({
               </button></span>
             <input className={input} inputMode="decimal" placeholder={weightUnit === "kg" ? "75" : "165"} value={weight} onChange={(e) => setWeight(e.target.value)} />
           </div>
-          <div><span className={label}>Jeans waist (inches)</span>
-            <input className={input} inputMode="numeric" placeholder="32" value={jeans} onChange={(e) => setJeans(e.target.value)} /></div>
+          <div><span className={label}>
+              Waist size{" "}
+              <button type="button" className="underline" onClick={toggleWaistUnit}>
+                {waistUnit} · switch to {waistUnit === "in" ? "cm" : "in"}
+              </button></span>
+            <input className={input} inputMode="decimal" placeholder={waistUnit === "in" ? "32" : "81"} value={jeans} onChange={(e) => setJeans(e.target.value)} /></div>
           <div><span className={label}>Shoe size</span>
             <div className="flex gap-2">
               <select className={input + " w-20"} value={shoeSystem} onChange={(e) => setShoeSystem(e.target.value as "us" | "eu")}>
@@ -208,9 +234,11 @@ export function ProfileForm({
           <p className="mt-2 text-[11px] text-neutral-400">
             These override the estimates — measure over a thin layer, tape snug but not tight.
           </p>
-          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div><span className={label}>Chest (cm) — around the widest part</span>
               <input className={input} inputMode="decimal" value={chest} onChange={(e) => setChest(e.target.value)} /></div>
+            <div><span className={label}>Waist (cm) — around the narrowest part</span>
+              <input className={input} inputMode="decimal" value={waistM} onChange={(e) => setWaistM(e.target.value)} /></div>
             <div><span className={label}>Shoulder (cm) — seam to seam across the back</span>
               <input className={input} inputMode="decimal" value={shoulder} onChange={(e) => setShoulder(e.target.value)} /></div>
             <div><span className={label}>Foot length (cm) — heel to longest toe</span>

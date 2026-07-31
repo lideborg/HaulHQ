@@ -13,8 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://haulhq.shop"),
   title: "HaulHQ",
   description: "Curated rep-fashion sourcing for friends.",
+  openGraph: {
+    title: "HaulHQ",
+    description: "Invite-only rep-fashion sourcing.",
+    url: "https://haulhq.shop",
+    siteName: "HaulHQ",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "HaulHQ",
+    description: "Invite-only rep-fashion sourcing.",
+  },
 };
 
 export default function RootLayout({

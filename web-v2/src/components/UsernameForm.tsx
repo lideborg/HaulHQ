@@ -19,9 +19,8 @@ export function UsernameForm({ current }: { current: string }) {
       setError("That's already your username.");
       return;
     }
-    if (!window.confirm(`Change your username to "${next}"?`)) return;
     start(async () => {
-      const res = await changeUsername(next);
+      const res = await changeUsername(next, current);
       if (!res.ok) {
         setError(res.error ?? "Something went wrong.");
         return;

@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getCurrentFriend } from "@/lib/friend";
+import { isAdmin } from "@/lib/adminAuth";
+import { getFriendByHandle } from "@/lib/data";
 import { usernameError } from "@/lib/username";
 import type { Measurements, ShippingAddress } from "@/lib/types";
 
@@ -39,13 +41,21 @@ export async function saveProfile(input: {
 // session (friend_token = access_token) is unaffected, so no re-auth is needed.
 export async function changeUsername(
   next: string,
+  targetHandle: string,
 ): Promise<{ ok: boolean; error?: string; handle?: string }> {
+  // The friend may rename themselves; an admin may rename any friend they're
+  // viewing. Either way the target is resolved server-side, never trusted blindly.
   const friend = await getCurrentFriend();
-  if (!friend) return { ok: false, error: "Open your personal invite link first." };
+  const own = friend != null && friend.handle === targetHandle;
+  if (!own && !(await isAdmin()))
+    return { ok: false, error: "Open your personal invite link first." };
+
+  const target = own ? friend : await getFriendByHandle(targetHandle);
+  if (!target) return { ok: false, error: "Friend not found." };
 
   const handle = next.trim().toLowerCase();
-  if (!handle || handle === friend.handle)
-    return { ok: false, error: "That's already your username." };
+  if (!handle || handle === target.handle)
+    return { ok: false, error: "That's already the username." };
 
   const err = usernameError(handle);
   if (err === "format")
@@ -60,12 +70,12 @@ export async function changeUsername(
     .maybeSingle();
   if (taken) return { ok: false, error: "That username is taken." };
 
-  const { error } = await sb.from("friends").update({ handle }).eq("id", friend.id);
+  const { error } = await sb.from("friends").update({ handle }).eq("id", target.id);
   // A concurrent rename to the same handle trips the friends.handle unique index.
   if (error?.code === "23505") return { ok: false, error: "That username is taken." };
   if (error) return { ok: false, error: error.message };
 
-  if (friend.handle) revalidatePath(`/${friend.handle}`, "layout");
+  if (target.handle) revalidatePath(`/${target.handle}`, "layout");
   revalidatePath(`/${handle}`, "layout");
   return { ok: true, handle };
 }

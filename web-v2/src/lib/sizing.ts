@@ -42,6 +42,8 @@ export function estimateChestCm(m: Measurements): number | null {
 }
 
 export function estimateWaistCm(m: Measurements): number | null {
+  // A measured waist is exact; a jeans size is a vanity-sized proxy.
+  if (m.explicit?.waist_cm) return r1(m.explicit.waist_cm);
   if (m.jeans_waist_in) return jeansWaistToCm(m.jeans_waist_in);
   return null;
 }

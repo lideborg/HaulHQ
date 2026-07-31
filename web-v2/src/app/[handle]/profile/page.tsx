@@ -1,6 +1,9 @@
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ProfileForm } from "@/components/ProfileForm";
+import { logout } from "@/app/login/actions";
 import { getCurrentFriend } from "@/lib/friend";
+import { isAdmin } from "@/lib/adminAuth";
+import { getFriendByHandle } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -11,7 +14,12 @@ export default async function ProfilePage({
 }) {
   const { handle } = await params;
   const friend = await getCurrentFriend();
-  if (!friend || friend.handle !== handle) redirect(`/${handle}/shop`);
+  const own = friend != null && friend.handle === handle;
+  // The friend edits their own profile; an admin may view any friend's page
+  // exactly as that friend sees it (to troubleshoot), same as shop/haul.
+  if (!own && !(await isAdmin())) redirect("/login");
+  const viewed = own ? friend : await getFriendByHandle(handle);
+  if (!viewed) notFound();
 
   return (
     <div className="mx-auto max-w-xl">
@@ -24,10 +32,17 @@ export default async function ProfilePage({
         <ProfileForm
           handle={handle}
           mode="profile"
-          initialAddress={friend.shipping_address}
-          initialMeasurements={friend.measurements}
+          initialAddress={viewed.shipping_address}
+          initialMeasurements={viewed.measurements}
         />
       </div>
+      {own && (
+        <form action={logout} className="mt-10 border-t border-neutral-100 pt-6">
+          <button className="text-[11px] uppercase tracking-widest text-neutral-400 hover:text-black">
+            Sign out
+          </button>
+        </form>
+      )}
     </div>
   );
 }

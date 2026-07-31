@@ -42,6 +42,8 @@ test("explicit measurements override estimates", () => {
   assert.equal(estimateChestCm(m), 104);
   assert.equal(estimateFootCm(m), 27.2);
   assert.equal(estimateWaistCm(m), 86.4); // no explicit waist → jeans-derived
+  // A measured waist takes priority over the jeans-size proxy.
+  assert.equal(estimateWaistCm({ ...m, explicit: { ...m.explicit, waist_cm: 82 } }), 82);
 });
 
 test("estimateWaistCm and estimateFootCm fall back to null", () => {

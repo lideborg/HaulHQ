@@ -1,6 +1,8 @@
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ProfileForm } from "@/components/ProfileForm";
 import { getCurrentFriend } from "@/lib/friend";
+import { isAdmin } from "@/lib/adminAuth";
+import { getFriendByHandle } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -11,8 +13,13 @@ export default async function WelcomePage({
 }) {
   const { handle } = await params;
   const friend = await getCurrentFriend();
-  // Admin previews and already-onboarded friends go straight to the shop.
-  if (!friend || friend.handle !== handle) redirect(`/${handle}/shop`);
+  const own = friend != null && friend.handle === handle;
+  // Admin may preview any friend's onboarding screen (to troubleshoot);
+  // an actual friend who is already onboarded skips it and goes to the shop.
+  if (!own && !(await isAdmin())) redirect("/login");
+  if (own && friend.onboarded_at) redirect(`/${handle}/shop`);
+  const viewed = own ? friend : await getFriendByHandle(handle);
+  if (!viewed) notFound();
 
   return (
     <div className="mx-auto max-w-xl">
@@ -26,8 +33,8 @@ export default async function WelcomePage({
         <ProfileForm
           handle={handle}
           mode="welcome"
-          initialAddress={friend.shipping_address}
-          initialMeasurements={friend.measurements}
+          initialAddress={viewed.shipping_address}
+          initialMeasurements={viewed.measurements}
         />
       </div>
     </div>

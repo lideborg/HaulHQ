@@ -72,10 +72,10 @@ export default async function InboxPage() {
                   {item.chosen_size ? `Size ${item.chosen_size}` : "No size given"}
                   {item.notes ? ` · “${item.notes}”` : ""}
                 </p>
-                {(item.admin_note || superbuy) && (
+                {(item.sourcing_note || superbuy) && (
                   <p className="mt-1 text-[11px] text-neutral-500">
-                    {item.admin_note}
-                    {item.admin_note && superbuy ? " · " : ""}
+                    {item.sourcing_note}
+                    {item.sourcing_note && superbuy ? " · " : ""}
                     {superbuy && (
                       <a
                         href={superbuy}

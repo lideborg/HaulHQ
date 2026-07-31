@@ -54,12 +54,14 @@ export async function resolveSourcingItem(itemId: string): Promise<void> {
           if (stored) patch.image_urls = [stored];
         }
         if (parsed.priceCny != null) {
-          patch.admin_note = `listed ¥${parsed.priceCny} ≈ $${Math.round(parsed.priceCny / CNY_PER_USD)}`;
+          patch.sourcing_note = `listed ¥${parsed.priceCny} ≈ $${Math.round(parsed.priceCny / CNY_PER_USD)}`;
         }
       }
     }
-  } catch {
-    // fall through — the finally below still files the request
+  } catch (err) {
+    // Best-effort, but not silent: this is the only signal in the Vercel
+    // function logs when sourcing breaks (blocked host, markup change).
+    console.error(`sourcing failed for item ${itemId}:`, err);
   } finally {
     // .eq status guard: never clobber an item the admin already moved on.
     await sb

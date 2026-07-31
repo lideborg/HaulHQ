@@ -13,11 +13,14 @@ export default async function SetupPage({
   const { token } = await params;
   const { error } = await searchParams;
   const sb = createAdminClient();
-  const { data } = await sb
+  const { data, error: dbError } = await sb
     .from("friends")
     .select("handle")
     .eq("setup_token", token)
     .maybeSingle();
+  // A transient DB error must NOT tell the friend their valid link is dead —
+  // throw to the error boundary ("try again") instead.
+  if (dbError) throw dbError;
 
   if (!data) {
     return (

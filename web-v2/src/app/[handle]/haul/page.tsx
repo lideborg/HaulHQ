@@ -146,6 +146,9 @@ export default async function HaulPage({
             <div className="flex justify-between pt-1 font-semibold">
               <span>Estimated total</span>
               <span className="tabular-nums">
+                {/* Unweighed/unpriced items contribute 0, so the number is a
+                    floor, not a range midpoint — say "from". */}
+                {unweighed > 0 || unpriced > 0 ? "from " : ""}
                 {shipping
                   ? `${usd(totalCost + shipping.lowUsd)}–${usd(totalCost + shipping.highUsd)}`
                   : usd(totalCost)}

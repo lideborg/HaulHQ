@@ -2,6 +2,10 @@ import { getFactories } from "@/lib/data";
 import { FactorySearch, AddLinkForm } from "@/components/FactoriesControls";
 
 export const dynamic = "force-dynamic";
+// addLinkToHaul's after() enrichment runs up to ~30s of sequential fetches;
+// without this, Vercel's default function cap can kill it mid-flight and
+// strand the item in status "sourcing".
+export const maxDuration = 60;
 
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 

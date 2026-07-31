@@ -8,6 +8,9 @@ import { parseYupooAlbum, parseWeidianItem, type ParsedSource } from "./sourcePa
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 const CNY_PER_USD = 7.2;
+// Only fetch images from the stores' own hosts/CDNs - og:image is
+// attacker-controllable content, and redirects are refused below (SSRF).
+const IMAGE_HOSTS = /(^|\.)(yupoo\.com|weidian\.com|geilicdn\.com)$/i;
 
 export async function resolveSourcingItem(itemId: string): Promise<void> {
   const sb = createAdminClient();
@@ -27,6 +30,10 @@ export async function resolveSourcingItem(itemId: string): Promise<void> {
       const res = await fetch(fetchUrl.toString(), {
         headers: { "user-agent": UA },
         signal: AbortSignal.timeout(15000),
+        // Refuse redirects on purpose: the host allowlist only validates the
+        // initial host, so a 30x could bounce us to an internal address (SSRF).
+        // A 3xx then has res.ok === false, so the guard below skips it.
+        redirect: "manual",
       });
       if (res.ok) {
         const html = await res.text();
@@ -68,15 +75,22 @@ async function mirrorItemImage(
   isYupoo: boolean,
 ): Promise<string | null> {
   try {
+    if (!IMAGE_HOSTS.test(new URL(imageUrl).hostname)) return null;
     const headers: Record<string, string> = { "user-agent": UA };
     if (isYupoo) headers.referer = "https://x.yupoo.com/";
-    const res = await fetch(imageUrl, { headers, signal: AbortSignal.timeout(15000) });
+    const res = await fetch(imageUrl, {
+      headers,
+      signal: AbortSignal.timeout(15000),
+      redirect: "manual", // refuse redirects: allowlist only checks the initial host (SSRF)
+    });
     if (!res.ok) return null;
     const buf = Buffer.from(await res.arrayBuffer());
     if (buf.length < 5_000) return null; // anti-hotlink placeholder, not a photo
     const key = `items/${itemId}/000.jpg`;
     const { error } = await sb.storage.from("product-images").upload(key, buf, {
-      contentType: res.headers.get("content-type") ?? "image/jpeg",
+      // Key is always 000.jpg; don't trust the source's content-type header
+      // (a hostile source could claim text/html).
+      contentType: "image/jpeg",
       upsert: true,
     });
     if (error) return null;

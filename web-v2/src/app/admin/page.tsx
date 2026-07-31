@@ -25,7 +25,7 @@ export default async function AdminHome({
   const { setup, id, error, action } = await searchParams;
 
   const sb = createAdminClient();
-  const [{ count: products }, { count: pub }, { count: requests }, friends] =
+  const [{ count: products }, { count: pub }, { count: requests }, friends, confirmedRows] =
     await Promise.all([
       sb.from("products").select("*", { count: "exact", head: true }),
       sb
@@ -37,7 +37,13 @@ export default async function AdminHome({
         .select("*", { count: "exact", head: true })
         .eq("status", "requested"),
       getFriendsWithHaulCounts(),
+      sb.from("items").select("owner_id").eq("status", "confirmed"),
     ]);
+  // Approved hauls must be visible from the dashboard, not only after
+  // opening each friend.
+  const confirmedOwners = new Set(
+    (confirmedRows.data ?? []).map((r) => r.owner_id as string),
+  );
 
   const errorMessage = error
     ? (ERROR_MESSAGES[error] ?? "Something went wrong")
@@ -132,6 +138,11 @@ export default async function AdminHome({
                       </a>
                     ) : (
                       "—"
+                    )}
+                    {confirmedOwners.has(f.id) && (
+                      <span className="ml-2 bg-black px-1.5 py-0.5 text-[9px] uppercase tracking-tight text-white">
+                        Confirmed
+                      </span>
                     )}
                   </td>
                   <td className="py-2">

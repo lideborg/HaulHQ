@@ -33,7 +33,7 @@ function priceFromText(text: string): number | null {
 
 export function parseYupooAlbum(html: string): ParsedSource {
   let title = metaContent(html, "og:title") ?? /<title>([^<]*)<\/title>/i.exec(html)?.[1] ?? null;
-  if (title) title = title.replace(/\s*\|[^|]*$/, "").trim() || null;
+  if (title) title = title.replace(/\s*\|.*$/, "").trim() || null;
   let imageUrl = metaContent(html, "og:image");
   if (!imageUrl) {
     imageUrl = /(?:https?:)?\/\/photo\.yupoo\.com\/[^"'\s]+/i.exec(html)?.[0] ?? null;

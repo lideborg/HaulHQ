@@ -15,6 +15,14 @@ test("yupoo: title from og:title, pipe-suffix stripped, price from ¥", () => {
   assert.equal(r.priceCny, 560);
 });
 
+test("yupoo: strips full multi-pipe suffix from real og:title", () => {
+  const html = `<html><head>
+<meta property="og:title" content="item OF0391 Crochet tote bag | 相册 | happywhale | Supplier Product Catalog">
+</head></html>`;
+  const r = parseYupooAlbum(html);
+  assert.equal(r.title, "item OF0391 Crochet tote bag");
+});
+
 test("yupoo: falls back to <title>, null price when absent", () => {
   const html = `<html><head><title>Plain album | Yupoo</title></head></html>`;
   const r = parseYupooAlbum(html);

@@ -20,7 +20,11 @@ export async function resolveSourcingItem(itemId: string): Promise<void> {
       .single();
     const src = item?.source_link ? classifySourceLink(item.source_link) : null;
     if (src) {
-      const res = await fetch(src.url, {
+      // Yupoo 404s album pages without a uid param — force uid=1 when missing.
+      const fetchUrl = new URL(src.url);
+      if (src.kind.startsWith("yupoo") && !fetchUrl.searchParams.has("uid"))
+        fetchUrl.searchParams.set("uid", "1");
+      const res = await fetch(fetchUrl.toString(), {
         headers: { "user-agent": UA },
         signal: AbortSignal.timeout(15000),
       });

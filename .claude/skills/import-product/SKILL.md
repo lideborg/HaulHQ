@@ -123,6 +123,31 @@ next import is faster and more reliable than this one.
   the code.
 - **Short links** (`k.youshop10.com/...`) resolve through the Superbuy wrapper but
   take a few extra seconds — wait and re-extract if the page is still skeleton.
+- **Superbuy buy-wrapper now hard-blocks rep items** with a "Risk Alert — the product
+  you submitted may involve legal risks, so we are temporarily unable to process your
+  order" page (no gallery, price, or SKU). When you hit this, DON'T fight it — navigate
+  the tab straight to the `k.youshop10.com/...` short link, which 302s to the real
+  `weidian.com/item.html?itemID=...` page, and scrape that directly (char-code image
+  method + screenshot-the-SKU-drawer below both work there).
+- **Weidian desktop SKU drawer = screenshot it, don't script it.** The embedded mobile
+  buy widget's price header stays stuck on `¥0 / Please select the model` even after you
+  click a variant + size (render bug in the scaled desktop view), and the `thor.weidian.
+  com/decorate/detail.getItemInfo` API returns a ~99-byte error blob. So: read the SKU
+  dimensions (e.g. Length L80/L85/L90/L100, or "Top and bottom set: Jacket/Pants" + Size
+  44-50) by clicking the `请选择型号/Choice` row and screenshotting the drawer; take the
+  price from the main-page `¥NNN` (trailing `起` = "from" → variants differ; if the widget
+  won't reveal per-variant prices, price them equal and flag it to Hampus).
+- **One weidian listing can be two products.** A "jacket&jeans" set lists Jacket and
+  Pants as a `Top and bottom set` SKU dimension at one base price — split into two rows
+  (`#jacket` / `#jeans` source_link anchors), each with its own size chart (the
+  description image usually stacks BOTH charts) and its own clean flat-lay hero.
+- **i795 (`i795 produce`) is a minimalist Weidian agent-store** whose titles carry the
+  brand tell: `Le`=Lemaire, `OL`=Our Legacy, `Autonomy`=house prefix (ignore it), a belt
+  titled "Intrecciato / Woven Check" = Bottega Veneta. Description ends with a b&w
+  line-drawing illustration of the item — fine as a secondary image, not the hero. Belt
+  charts give three numbers per length = min/mid/max waist at the holes → store
+  `waist_min`/`waist_max` arrays. QR-code frames (`_540_540`) and the store avatar are
+  junk — the `w>=500&&h>=500` filter still lets the 540² QR through, so drop it by eye.
 - **Stale `NN.out.json` silently attaches a wrong size guide.** `import-batch.mjs`
   reads `/tmp/haul-batch/NN.out.json` for `size_guide` by filename — so reusing a
   batch number (`01`,`02`…) from an earlier run picks up the PREVIOUS product's
@@ -241,3 +266,12 @@ next import is faster and more reliable than this one.
 - After upsert + image upload, run the post-import passes:
   `retag-heroes` (auto via import-batch) → `propose-display-titles` →
   `estimate-weights` so the card name, hero, and shipping weight are set.
+- **Yupoo hides colorways — ALWAYS cross-check the buy link on Superbuy/Weidian.**
+  A Yupoo album typically shows ONE colorway even when the listing sells several
+  (Hampus's rule, 2026-07-31: "when you see a Yupoo album that might have two
+  colors, paste the weidian link into Superbuy and see the colorways so you can
+  snatch them from there"). Procedure: read the SKU color list from the buy page
+  (Weidian SKU picker or the Superbuy wrapper), and take the per-color photos
+  from whichever source has the better resolution — Superbuy SKU thumbnails are
+  often low-res, so prefer Yupoo/weidian gallery shots per color when available.
+  Split each color into its own product row per the colorway rule.

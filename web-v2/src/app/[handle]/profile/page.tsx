@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { ProfileForm } from "@/components/ProfileForm";
+import { UsernameForm } from "@/components/UsernameForm";
 import { logout } from "@/app/login/actions";
 import { getCurrentFriend } from "@/lib/friend";
 import { isAdmin } from "@/lib/adminAuth";
@@ -36,6 +37,7 @@ export default async function ProfilePage({
           initialMeasurements={viewed.measurements}
         />
       </div>
+      {own && friend?.handle && <UsernameForm current={friend.handle} />}
       {own && (
         <form action={logout} className="mt-10 border-t border-neutral-100 pt-6">
           <button className="text-[11px] uppercase tracking-widest text-neutral-400 hover:text-black">

@@ -58,10 +58,15 @@ export function AddToHaul({
             ))}
           </div>
           {recommended ? (
-            <p className="mt-1.5 text-[10px] leading-relaxed text-neutral-500">
-              Based on your measurements, your size should be{" "}
-              <span className="font-semibold text-black">{recommended.size}</span>.
-            </p>
+            <div className="mt-1.5 text-[10px] leading-relaxed text-neutral-500">
+              <p>
+                Based on your measurements, your size should be{" "}
+                <span className="font-semibold text-black">{recommended.size}</span>.
+              </p>
+              {/* Rep charts often run big, so the letter alone looks wrong —
+                  show the chart math so the pick can be sanity-checked. */}
+              <p className="text-neutral-400">{recommended.reason}</p>
+            </div>
           ) : profileHref ? (
             <a href={profileHref} className="mt-1.5 block text-[10px] text-neutral-400 underline hover:text-black">
               Add your sizes for a recommendation →

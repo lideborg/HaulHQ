@@ -15,6 +15,12 @@ export const dynamic = "force-dynamic";
 // Next delivers repeated query params as arrays (?q=a&q=b) — take the first.
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
+// seller_brand_links.seller looks like "deateath (Yupoo)" — show "Deateath".
+const prettySeller = (s: string) => {
+  const name = s.replace(/\s*\(yupoo\)\s*$/i, "");
+  return name ? name.charAt(0).toUpperCase() + name.slice(1) : s;
+};
+
 export default async function ShopPage({
   params,
   searchParams,
@@ -41,6 +47,16 @@ export default async function ShopPage({
   ]
     .filter(Boolean)
     .join(" · ");
+  // One line per seller (first matching category + count) keeps the fallback
+  // readable now that big shops carry dozens of links per brand; the full
+  // list lives on the Factories page.
+  const bySeller = new Map<string, typeof sellerLinks>();
+  for (const l of sellerLinks) {
+    const list = bySeller.get(l.seller) ?? [];
+    list.push(l);
+    bySeller.set(l.seller, list);
+  }
+  const sellerGroups = [...bySeller.entries()].slice(0, 6);
   return (
     <div className="flex flex-col gap-8 md:flex-row">
       <aside className="w-full shrink-0 md:w-52 md:pr-6">
@@ -83,26 +99,25 @@ export default async function ShopPage({
             ))}
           </div>
         )}
-        {sellerLinks.length > 0 && (
+        {sellerGroups.length > 0 && (
           <div className="mt-10 border-t border-neutral-200 pt-6">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest">
               Browse this brand at our sellers
             </p>
             <ul className="space-y-1.5">
-              {sellerLinks.map((l) => (
-                <li key={l.url} className="text-xs">
+              {sellerGroups.map(([seller, links]) => (
+                <li key={seller} className="text-xs">
                   <a
-                    href={l.url}
+                    href={links[0].url}
                     target="_blank"
                     rel="noreferrer"
                     className="underline hover:text-neutral-500"
                   >
-                    {l.brand}
-                    {l.alias && l.alias.toLowerCase() !== l.brand.toLowerCase()
-                      ? ` (“${l.alias}”)`
-                      : ""}{" "}
-                    @ {l.seller}
+                    {links[0].brand} at {prettySeller(seller)} →
                   </a>
+                  {links.length > 1 && (
+                    <span className="text-neutral-400"> +{links.length - 1} more</span>
+                  )}
                 </li>
               ))}
             </ul>

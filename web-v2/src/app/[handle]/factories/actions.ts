@@ -13,6 +13,7 @@ import { resolveSourcingItem } from "@/lib/sourcing";
 // title/image/price lookup once the redirect has been sent.
 export async function addLinkToHaul(handle: string, formData: FormData) {
   const raw = String(formData.get("link") ?? "").trim();
+  const size = String(formData.get("size") ?? "").trim() || null;
   const src = classifySourceLink(raw);
   if (!src) redirect(`/${handle}/factories?error=link`);
 
@@ -25,6 +26,7 @@ export async function addLinkToHaul(handle: string, formData: FormData) {
     .insert({
       owner_id: friend.id,
       source_link: src.url,
+      chosen_size: size,
       status: "sourcing",
     })
     .select("id")
@@ -35,7 +37,7 @@ export async function addLinkToHaul(handle: string, formData: FormData) {
     kind: "new_request",
     item_id: item.id,
     friend_id: friend.id,
-    payload: { link: src.url, friend: friend.name, via: "factories" },
+    payload: { link: src.url, size, friend: friend.name, via: "factories" },
   });
   await sb.from("status_events").insert({
     item_id: item.id,

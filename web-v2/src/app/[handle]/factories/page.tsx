@@ -26,8 +26,10 @@ export default async function FactoriesPage({
         These factories and sellers have been curated. Most we have researched
         or ordered from. Looking for a brand that is not in the shop? Search it
         here and we will show you which factories carry it. They open in a
-        separate site. Browse, and when you find something you like, paste the
-        link below and it is added to your haul. You can remove it any time.
+        separate site: browse their categories and pick the brand you want.
+        Brand names are often disguised there, like P⭐A⭐A for Prada. When you
+        find something you like, paste the link below and it is added to your
+        haul. You can remove it any time.
       </p>
 
       <FactorySearch handle={handle} initial={q} />
@@ -75,7 +77,7 @@ export default async function FactoriesPage({
                 </p>
               )}
               <div className="mt-3 space-y-1">
-                {c.links.map((l) => (
+                {c.links.slice(0, 5).map((l) => (
                   <a
                     key={l.url}
                     href={l.url}
@@ -83,9 +85,23 @@ export default async function FactoriesPage({
                     rel="noreferrer"
                     className="block text-xs underline hover:text-neutral-500"
                   >
-                    {l.brand} at {c.displayName} →
+                    {l.brand}
+                    {l.alias && l.alias.toLowerCase() !== l.brand.toLowerCase()
+                      ? ` (${l.alias})`
+                      : ""}{" "}
+                    at {c.displayName} →
                   </a>
                 ))}
+                {c.links.length > 5 && (
+                  <a
+                    href={`${new URL(c.links[0].url).origin}/categories`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block text-xs text-neutral-500 underline hover:text-black"
+                  >
+                    +{c.links.length - 5} more in their categories →
+                  </a>
+                )}
                 {c.links.length === 0 && c.yupooUrl && (
                   <a
                     href={c.yupooUrl}

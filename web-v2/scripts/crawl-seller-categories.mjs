@@ -127,7 +127,7 @@ for (const t of targets) {
         seller: label,
         brand: byTitle.get(c.title) ?? null,
         alias: c.title,
-        url: `https://${t.sub}.x.yupoo.com/categories/${c.id}`,
+        url: `https://${t.sub}.x.yupoo.com/categories/${c.id}${c.sub ? "?isSubCate=true" : ""}`,
         active: true,
       }))
       .filter((r) => r.brand);

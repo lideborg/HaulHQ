@@ -24,7 +24,7 @@ export default async function InboxPage() {
 
   return (
     <main className="mx-auto max-w-[1100px] px-6 py-10">
-      <h1 className="mb-2 text-sm font-semibold uppercase tracking-[0.25em]">
+      <h1 className="mb-2 text-sm font-semibold uppercase tracking-tight">
         Inbox
       </h1>
       <p className="mb-8 text-xs text-neutral-500">
@@ -45,7 +45,7 @@ export default async function InboxPage() {
                 : null;
             return (
               <div key={item.id} className="border-b border-neutral-100 pb-4">
-                <p className="text-[11px] uppercase tracking-widest text-neutral-400">
+                <p className="text-[11px] uppercase tracking-tight text-neutral-400">
                   {friend?.name ?? "Unknown friend"}
                   {friend?.handle ? ` · @${friend.handle}` : ""} ·{" "}
                   {new Date(item.created_at).toLocaleDateString("en-US", {
@@ -91,7 +91,7 @@ export default async function InboxPage() {
                 {friend?.handle && (
                   <Link
                     href={`/admin/friends/${friend.handle}`}
-                    className="mt-2 inline-block text-[11px] uppercase tracking-widest underline"
+                    className="mt-2 inline-block text-[11px] uppercase tracking-tight underline"
                   >
                     Open {friend.name}&rsquo;s haul →
                   </Link>

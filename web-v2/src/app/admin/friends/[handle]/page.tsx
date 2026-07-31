@@ -19,11 +19,11 @@ export default async function FriendHaulPage({
     <main className="mx-auto max-w-[1100px] px-6 py-10">
       <Link
         href="/admin"
-        className="text-[11px] uppercase tracking-widest text-neutral-400 underline"
+        className="text-[11px] uppercase tracking-tight text-neutral-400 underline"
       >
         ← Back to HQ
       </Link>
-      <h1 className="mb-2 mt-3 text-sm font-semibold uppercase tracking-[0.25em]">
+      <h1 className="mb-2 mt-3 text-sm font-semibold uppercase tracking-tight">
         {friend.name}&rsquo;s haul
       </h1>
       <p className="mb-10 text-xs text-neutral-500">
@@ -47,7 +47,7 @@ export default async function FriendHaulPage({
               <div className="h-56 w-56 shrink-0 bg-neutral-100" />
             )}
             <div className="min-w-0 flex-1">
-              <p className="text-[11px] uppercase tracking-widest text-neutral-400">
+              <p className="text-[11px] uppercase tracking-tight text-neutral-400">
                 {item.brand ?? "—"}
               </p>
               <p className="mt-1 text-sm">{item.title ?? "Untitled"}</p>
@@ -65,8 +65,8 @@ export default async function FriendHaulPage({
                   <button
                     className={
                       item.to_source
-                        ? "bg-black px-5 py-2 text-[11px] uppercase tracking-widest text-white"
-                        : "border border-neutral-300 px-5 py-2 text-[11px] uppercase tracking-widest"
+                        ? "bg-black px-5 py-2 text-[11px] uppercase tracking-tight text-white"
+                        : "border border-neutral-300 px-5 py-2 text-[11px] uppercase tracking-tight"
                     }
                   >
                     {item.to_source ? "✓ Sourcing" : "I'll source this"}
@@ -83,7 +83,7 @@ export default async function FriendHaulPage({
                     placeholder="Private note…"
                     className="min-w-0 flex-1 border border-neutral-300 px-3 py-2 text-sm"
                   />
-                  <button className="self-start bg-black px-5 py-2 text-[11px] uppercase tracking-widest text-white">
+                  <button className="self-start bg-black px-5 py-2 text-[11px] uppercase tracking-tight text-white">
                     Save note
                   </button>
                 </form>

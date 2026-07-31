@@ -7,7 +7,7 @@ export default function NotFound() {
       <h1 className="text-lg font-medium">Page not found</h1>
       <p className="text-sm text-neutral-500">
         This link may be broken, or the item is no longer available. If
-        something seems off, message Hampus.
+        something seems off, message the admin.
       </p>
       <Link
         href="/"

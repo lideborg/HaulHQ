@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getFriendByHandle, getHaul } from "@/lib/data";
-import { toggleSource, setAdminNote } from "@/app/admin/friends/actions";
+import { toggleSource, setAdminNote, unlockHaul } from "@/app/admin/friends/actions";
 
 export const dynamic = "force-dynamic";
 
@@ -26,9 +26,27 @@ export default async function FriendHaulPage({
       <h1 className="mb-2 mt-3 text-sm font-semibold uppercase tracking-tight">
         {friend.name}&rsquo;s haul
       </h1>
-      <p className="mb-10 text-xs text-neutral-500">
+      <p className="mb-6 text-xs text-neutral-500">
         {items.length} {items.length === 1 ? "pick" : "picks"}
       </p>
+
+      {items.some((i) => i.status === "confirmed") && (
+        <div className="mb-10 flex flex-wrap items-center gap-4 border border-neutral-300 bg-neutral-50 px-4 py-3 text-xs">
+          <span className="font-semibold uppercase tracking-tight">
+            Haul confirmed
+          </span>
+          <span className="text-neutral-500">
+            {items.filter((i) => i.status === "confirmed").length} item(s)
+            approved by {friend.name} — locked on their side.
+          </span>
+          <form action={unlockHaul}>
+            <input type="hidden" name="handle" value={handle} />
+            <button className="border border-neutral-300 px-3 py-1 text-[10px] uppercase tracking-tight hover:border-black">
+              Unlock haul
+            </button>
+          </form>
+        </div>
+      )}
 
       <div className="space-y-4">
         {items.map((item) => (
@@ -53,9 +71,11 @@ export default async function FriendHaulPage({
               <p className="mt-1 text-sm">{item.title ?? "Untitled"}</p>
               <p className="mt-1 text-[11px] text-neutral-400">
                 {item.chosen_size ? `Size ${item.chosen_size} · ` : ""}
+                {(item.quantity ?? 1) > 1 ? `Qty ${item.quantity} · ` : ""}
                 {item.quoted_price_usd != null
                   ? `US$ ${Math.round(item.quoted_price_usd)}`
                   : "Quote on request"}
+                {item.status === "confirmed" ? " · CONFIRMED" : ""}
               </p>
 
               <div className="mt-3 flex flex-wrap items-start gap-3">

@@ -15,11 +15,15 @@ const decode = (s) =>
 export function parseCategories(html) {
   const out = [];
   const seen = new Set();
-  for (const m of html.matchAll(/categories\/(\d+)[^>]*?title=['"]([^'"]+)['"]/g)) {
+  // Subcategory hrefs carry ?isSubCate=true and 404 without it (top-level
+  // ids 404 WITH it), so the flag must survive into the stored url.
+  for (const m of html.matchAll(
+    /categories\/(\d+)(\?isSubCate=true)?[^>]*?title=['"]([^'"]+)['"]/g,
+  )) {
     const id = m[1];
     if (id === "0" || seen.has(id)) continue;
     seen.add(id);
-    out.push({ id, title: decode(m[2]) });
+    out.push({ id, title: decode(m[3]), sub: m[2] != null });
   }
   return out;
 }

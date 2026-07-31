@@ -80,6 +80,14 @@ export function AddLinkForm({ handle }: { handle: string }) {
         placeholder="Paste the product link"
         className="w-full border border-neutral-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
       />
+      <input
+        type="text"
+        name="size"
+        placeholder="Size"
+        spellCheck={false}
+        autoComplete="off"
+        className="w-20 shrink-0 border border-neutral-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
+      />
       <AddButton />
     </form>
   );

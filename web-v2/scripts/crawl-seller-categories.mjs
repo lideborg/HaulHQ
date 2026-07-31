@@ -37,19 +37,28 @@ const SCHEMA = {
 
 async function gemini(parts, tries = 4) {
   for (let t = 0; t < tries; t++) {
-    const res = await fetch(`${ENDPOINT}?key=${KEY}`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts }],
-        generationConfig: {
-          temperature: 0.1,
-          maxOutputTokens: 16384,
-          responseMimeType: "application/json",
-          responseSchema: SCHEMA,
-        },
-      }),
-    });
+    let res;
+    try {
+      // Without a timeout one stalled connection hangs the whole sequential
+      // crawl (observed in the first full run) - treat like a 5xx and retry.
+      res = await fetch(`${ENDPOINT}?key=${KEY}`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        signal: AbortSignal.timeout(90000),
+        body: JSON.stringify({
+          contents: [{ parts }],
+          generationConfig: {
+            temperature: 0.1,
+            maxOutputTokens: 16384,
+            responseMimeType: "application/json",
+            responseSchema: SCHEMA,
+          },
+        }),
+      });
+    } catch {
+      await new Promise((r) => setTimeout(r, 1500 * (t + 1)));
+      continue;
+    }
     const j = await res.json().catch(() => ({}));
     if (res.ok && !j.error) {
       const txt = j.candidates?.[0]?.content?.parts?.[0]?.text;

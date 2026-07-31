@@ -14,7 +14,7 @@ export default function Error({
       <h1 className="text-lg font-medium">Something went wrong</h1>
       <p className="text-sm text-neutral-500">
         We hit a snag loading this page. Try again in a moment. If it
-        keeps happening, message Hampus.
+        keeps happening, message the admin.
       </p>
       <button
         onClick={reset}

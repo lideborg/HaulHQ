@@ -37,7 +37,7 @@ export default async function LoginPage({
         </button>
       </form>
       <p className="mt-6 text-[11px] text-neutral-400">
-        Forgot your password? Ask Hampus for a reset link.
+        Forgot your password? Ask the admin for a reset link.
       </p>
     </main>
   );

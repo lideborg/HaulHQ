@@ -85,6 +85,29 @@ export async function deleteFriend(formData: FormData) {
   redirect("/admin");
 }
 
+// Admin-only: reopen a friend's approved haul so they can edit it again.
+// Confirmed items go back to "saved" (the friend-editable state); items the
+// admin already moved to ordered/shipped are untouched.
+export async function unlockHaul(formData: FormData) {
+  await requireAdmin();
+  const handle = String(formData.get("handle") ?? "");
+  if (!handle) return;
+  const sb = createAdminClient();
+  const { data: friend } = await sb
+    .from("friends")
+    .select("id")
+    .eq("handle", handle)
+    .maybeSingle();
+  if (!friend) return;
+  await sb
+    .from("items")
+    .update({ status: "saved" })
+    .eq("owner_id", friend.id)
+    .eq("status", "confirmed");
+  revalidatePath(`/admin/friends/${handle}`);
+  revalidatePath(`/${handle}/haul`);
+}
+
 // Admin-only: flip the "I'll source this" flag on a haul item.
 export async function toggleSource(formData: FormData) {
   await requireAdmin();

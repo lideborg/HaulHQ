@@ -96,6 +96,7 @@ export interface HaulItem {
   brand: string | null;
   image_urls: string[] | null;
   chosen_size: string | null;
+  quantity: number;
   quoted_price_usd: number | null;
   status: string | null;
   source_link: string | null;

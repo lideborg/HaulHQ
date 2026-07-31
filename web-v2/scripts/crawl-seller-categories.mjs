@@ -53,7 +53,11 @@ async function gemini(parts, tries = 4) {
     const j = await res.json().catch(() => ({}));
     if (res.ok && !j.error) {
       const txt = j.candidates?.[0]?.content?.parts?.[0]?.text;
-      if (txt) return JSON.parse(txt);
+      // Malformed JSON from the model (unescaped quote, truncation) is
+      // retryable like a 5xx, not fatal.
+      if (txt) {
+        try { return JSON.parse(txt); } catch { continue; }
+      }
     }
     if (res.status === 429 || res.status >= 500) {
       await new Promise((r) => setTimeout(r, 1500 * (t + 1)));
@@ -100,7 +104,14 @@ for (const t of targets) {
     const cats = parseCategories(await res.text());
     if (!cats.length) { console.log(`${t.sub}: 0 categories, skipped`); continue; }
 
-    const mapped = await gemini([{ text: PROMPT(cats.map((c) => c.title)) }]);
+    // Chunk big shops (deateath has 350+ categories): one giant call makes
+    // the model emit malformed/truncated JSON far more often.
+    const CHUNK = 60;
+    const mapped = [];
+    for (let i = 0; i < cats.length; i += CHUNK) {
+      const slice = cats.slice(i, i + CHUNK);
+      mapped.push(...(await gemini([{ text: PROMPT(slice.map((c) => c.title)) }])));
+    }
     const byTitle = new Map(mapped.map((m) => [m.title, m.brand]));
     const rows = cats
       .map((c) => ({

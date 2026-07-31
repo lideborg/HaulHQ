@@ -29,7 +29,7 @@ export default async function AdminProducts({
   const products = (data ?? []) as Product[];
   return (
     <main className="mx-auto max-w-[1200px] px-6 py-10">
-      <h1 className="mb-8 text-sm font-semibold uppercase tracking-[0.25em]">
+      <h1 className="mb-8 text-sm font-semibold uppercase tracking-tight">
         Products ({products.length})
       </h1>
       {error && (

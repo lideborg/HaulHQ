@@ -13,7 +13,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             HaulHQ
           </Link>
-          <nav className="flex gap-5 text-[11px] uppercase tracking-widest text-neutral-500">
+          <nav className="flex gap-5 text-[11px] uppercase tracking-tight text-neutral-500">
             <Link href="/admin/inbox" className="hover:text-black">
               Inbox
             </Link>

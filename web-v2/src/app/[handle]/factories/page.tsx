@@ -1,5 +1,5 @@
 import { getFactories } from "@/lib/data";
-import { addLinkToHaul } from "./actions";
+import { FactorySearch, AddLinkForm } from "@/components/FactoriesControls";
 
 export const dynamic = "force-dynamic";
 
@@ -30,32 +30,13 @@ export default async function FactoriesPage({
         link below and it is added to your haul. You can remove it any time.
       </p>
 
-      <form method="get" className="mt-8">
-        <input
-          type="search"
-          name="q"
-          defaultValue={q}
-          placeholder="Search any brand, e.g. Prada"
-          className="w-full border border-neutral-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
-        />
-      </form>
+      <FactorySearch handle={handle} initial={q} />
 
       <div className="mt-4 border border-neutral-200 p-4">
         <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest">
           Found something? Add it to your haul
         </p>
-        <form action={addLinkToHaul.bind(null, handle)} className="flex gap-2">
-          <input
-            type="url"
-            name="link"
-            required
-            placeholder="Paste the product link"
-            className="w-full border border-neutral-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
-          />
-          <button className="whitespace-nowrap border border-black px-4 py-2 text-[10px] uppercase tracking-widest transition hover:bg-black hover:text-white">
-            Add product
-          </button>
-        </form>
+        <AddLinkForm handle={handle} />
         {added && (
           <p className="mt-2 text-xs text-neutral-600">
             Added to your haul. We are finding the details in the background.

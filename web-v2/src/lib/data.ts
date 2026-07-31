@@ -1,6 +1,7 @@
 import { createAdminClient } from "./supabase/admin";
 import type { Product, Seller, Friend, HaulItem } from "./types";
 import { CATEGORY_ORDER } from "./categories";
+import { groupFactories, type FactoryCard } from "./factories";
 
 // Make user input safe inside a PostgREST or(...ilike...) filter: , ( ) are
 // or()-syntax, and % _ \ are LIKE wildcards that would match everything.
@@ -171,6 +172,22 @@ export async function getFriendsWithHaulCounts(): Promise<
     out.push({ ...f, haul_count: count ?? 0 });
   }
   return out;
+}
+
+// Factories page: all curated sellers, plus (when searching) direct brand
+// category links grouped onto them by Yupoo subdomain. `searchTerm` here is
+// only a "is there a real query?" gate — `getSellerBrandLinks` escapes the raw
+// query itself, and the pure grouper does plain substring matching, so both
+// receive the raw (trimmed) `q` rather than the wildcard-escaped form.
+export async function getFactories(q?: string | null): Promise<FactoryCard[]> {
+  const term = searchTerm(q ?? "");
+  const sb = createAdminClient();
+  const [{ data: sellers, error }, links] = await Promise.all([
+    sb.from("sellers").select("*").order("name"),
+    term ? getSellerBrandLinks(q ?? "") : Promise.resolve([]),
+  ]);
+  if (error) throw error;
+  return groupFactories((sellers ?? []) as Seller[], links, (q ?? "").trim());
 }
 
 // Fallback search: which sellers carry a brand friends searched for.

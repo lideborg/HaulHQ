@@ -8,7 +8,7 @@ export default async function AdminLogin({
   const { error } = await searchParams;
   return (
     <main className="mx-auto max-w-xs px-6 py-24">
-      <h1 className="mb-6 text-sm font-semibold uppercase tracking-[0.25em]">
+      <h1 className="mb-6 text-sm font-semibold uppercase tracking-tight">
         HaulHQ Admin
       </h1>
       <form action={login} className="space-y-3">
@@ -19,7 +19,7 @@ export default async function AdminLogin({
           autoFocus
           className="w-full border border-neutral-300 px-3 py-2 text-sm"
         />
-        <button className="w-full bg-black py-2 text-xs uppercase tracking-widest text-white">
+        <button className="w-full bg-black py-2 text-xs uppercase tracking-tight text-white">
           Enter
         </button>
         {error && <p className="text-xs text-red-600">Wrong password.</p>}

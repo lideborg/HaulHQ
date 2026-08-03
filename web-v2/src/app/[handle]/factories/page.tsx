@@ -54,6 +54,11 @@ export default async function FactoriesPage({
             Paste the product page link.
           </p>
         )}
+        {error === "size" && (
+          <p className="mt-2 text-xs text-red-600">
+            Add a size, or tick “One size” for a bag or accessory.
+          </p>
+        )}
         {error === "save" && (
           <p className="mt-2 text-xs text-red-600">
             Could not save that just now. Try again in a moment.

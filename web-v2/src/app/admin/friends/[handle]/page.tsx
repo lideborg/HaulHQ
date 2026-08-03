@@ -1,9 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getFriendByHandle, getHaul } from "@/lib/data";
+import { getFriendByHandle, getHaulsWithItems } from "@/lib/data";
 import { toggleSource, setAdminNote, unlockHaul } from "@/app/admin/friends/actions";
+import { haulLabel } from "@/lib/hauls";
 
 export const dynamic = "force-dynamic";
+
+const approvedDate = (iso: string | null) =>
+  iso
+    ? new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    : "";
 
 export default async function FriendHaulPage({
   params,
@@ -13,7 +19,9 @@ export default async function FriendHaulPage({
   const { handle } = await params;
   const friend = await getFriendByHandle(handle);
   if (!friend) notFound();
-  const items = await getHaul(friend.id);
+  const { open, past } = await getHaulsWithItems(friend.id);
+  const sections = [...(open ? [open] : []), ...past];
+  const totalPicks = sections.reduce((s, g) => s + g.items.length, 0);
 
   return (
     <main className="mx-auto max-w-[1100px] px-6 py-10">
@@ -24,32 +32,41 @@ export default async function FriendHaulPage({
         ← Back to HQ
       </Link>
       <h1 className="mb-2 mt-3 text-sm font-semibold uppercase tracking-tight">
-        {friend.name}&rsquo;s haul
+        {friend.name}&rsquo;s hauls
       </h1>
       <p className="mb-6 text-xs text-neutral-500">
-        {items.length} {items.length === 1 ? "pick" : "picks"}
+        {totalPicks} {totalPicks === 1 ? "pick" : "picks"} across{" "}
+        {sections.length} {sections.length === 1 ? "haul" : "hauls"}
       </p>
 
-      {items.some((i) => i.status === "confirmed") && (
-        <div className="mb-10 flex flex-wrap items-center gap-4 border border-neutral-300 bg-neutral-50 px-4 py-3 text-xs">
-          <span className="font-semibold uppercase tracking-tight">
-            Haul confirmed
-          </span>
-          <span className="text-neutral-500">
-            {items.filter((i) => i.status === "confirmed").length} item(s)
-            approved by {friend.name} — locked on their side.
-          </span>
-          <form action={unlockHaul}>
-            <input type="hidden" name="handle" value={handle} />
-            <button className="border border-neutral-300 px-3 py-1 text-[10px] uppercase tracking-tight hover:border-black">
-              Unlock haul
-            </button>
-          </form>
-        </div>
-      )}
-
-      <div className="space-y-4">
-        {items.map((item) => (
+      {sections.map((group) => (
+        <section key={group.haul.id} className="mb-10">
+          <div className="mb-3 flex flex-wrap items-center gap-3 border-b border-neutral-300 pb-2">
+            <span className="text-xs font-semibold uppercase tracking-tight">
+              {haulLabel(group.haul.number)}
+            </span>
+            <span className="text-xs text-neutral-500">
+              {group.haul.status === "open"
+                ? "open · being built"
+                : `approved ${approvedDate(group.haul.approved_at)}`}
+              {" · "}
+              {group.items.length} {group.items.length === 1 ? "pick" : "picks"}
+            </span>
+            {group.haul.status === "approved" && (
+              <form action={unlockHaul}>
+                <input type="hidden" name="handle" value={handle} />
+                <input type="hidden" name="haul_id" value={group.haul.id} />
+                <button className="border border-neutral-300 px-3 py-1 text-[10px] uppercase tracking-tight hover:border-black">
+                  Unlock haul
+                </button>
+              </form>
+            )}
+          </div>
+          {group.items.length === 0 && (
+            <p className="text-xs text-neutral-400">Empty.</p>
+          )}
+          <div className="space-y-4">
+            {group.items.map((item) => (
           <div
             key={item.id}
             className="flex items-start gap-5 border-b border-neutral-100 pb-4"
@@ -134,11 +151,13 @@ export default async function FriendHaulPage({
               </div>
             </div>
           </div>
-        ))}
-        {items.length === 0 && (
-          <p className="text-xs text-neutral-400">No picks yet.</p>
-        )}
-      </div>
+            ))}
+          </div>
+        </section>
+      ))}
+      {sections.length === 0 && (
+        <p className="text-xs text-neutral-400">No picks yet.</p>
+      )}
     </main>
   );
 }

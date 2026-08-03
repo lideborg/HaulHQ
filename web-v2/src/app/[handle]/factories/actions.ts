@@ -7,6 +7,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { getCurrentFriend } from "@/lib/friend";
 import { classifySourceLink } from "@/lib/sourceLink";
 import { resolveSourcingItem } from "@/lib/sourcing";
+import { getOrCreateOpenHaul } from "@/lib/data";
 
 // Instant insert, background enrichment (spec §4). The item shows up in the
 // haul as "sourcing" before the response even lands; after() finishes the
@@ -24,10 +25,12 @@ export async function addLinkToHaul(handle: string, formData: FormData) {
   if (!friend || friend.handle !== handle) redirect("/login");
 
   const sb = createAdminClient();
+  const openHaul = await getOrCreateOpenHaul(sb, friend.id);
   const { data: item, error } = await sb
     .from("items")
     .insert({
       owner_id: friend.id,
+      haul_id: openHaul.id,
       source_link: src.url,
       chosen_size: size,
       status: "sourcing",

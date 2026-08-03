@@ -78,6 +78,30 @@ export default async function FriendHaulPage({
                 {item.status === "confirmed" ? " · CONFIRMED" : ""}
               </p>
 
+              {(item.source_link ||
+                (item.products?.code && item.products?.brand_slug)) && (
+                <p className="mt-1 flex flex-wrap items-center gap-3 text-[11px]">
+                  {item.source_link && (
+                    <a
+                      href={item.source_link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="max-w-full truncate text-blue-600 underline"
+                    >
+                      View source ↗
+                    </a>
+                  )}
+                  {item.products?.code && item.products?.brand_slug && (
+                    <Link
+                      href={`/${handle}/product/${item.products.brand_slug}/${item.products.code}`}
+                      className="text-neutral-500 underline"
+                    >
+                      View in shop ↗
+                    </Link>
+                  )}
+                </p>
+              )}
+
               <div className="mt-3 flex flex-wrap items-start gap-3">
                 <form action={toggleSource}>
                   <input type="hidden" name="id" value={item.id} />

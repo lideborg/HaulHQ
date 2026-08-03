@@ -81,9 +81,22 @@ export interface Friend {
   onboarded_at: string | null;
 }
 
+// A numbered batch of items ("Haul 01"). A friend has at most one open haul
+// (the one they're building); approving closes it and the next add starts
+// the next number.
+export interface Haul {
+  id: string;
+  owner_id: string;
+  number: number;
+  status: "open" | "approved";
+  approved_at: string | null;
+  created_at: string;
+}
+
 export interface HaulItem {
   id: string;
   owner_id: string;
+  haul_id: string | null;
   product_id: string | null;
   // Embedded live product (from getHaul's join); null for link-only requests.
   products?: {

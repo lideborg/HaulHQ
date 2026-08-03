@@ -1,28 +1,41 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getFriendByHandle, getHaul } from "@/lib/data";
+import { getFriendByHandle, getHaulsWithItems } from "@/lib/data";
 import { getCurrentFriend } from "@/lib/friend";
 import { isAdmin } from "@/lib/adminAuth";
 import { estimateShipping } from "@/lib/shipping";
 import { removeFromHaul, approveHaul } from "@/app/[handle]/haul-actions";
 import { QuantityStepper } from "@/components/QuantityStepper";
+import { haulLabel, LOCKED_STATUSES } from "@/lib/hauls";
+import type { HaulGroup } from "@/lib/hauls";
 
 export const dynamic = "force-dynamic";
 
 const usd = (n: number) => `US$ ${Math.round(n)}`;
 const grams = (g: number | null | undefined) =>
   g == null ? "—" : g >= 1000 ? `${(g / 1000).toFixed(1)} kg` : `${g} g`;
+const LOCKED = new Set(LOCKED_STATUSES);
+const approvedDate = (iso: string | null) =>
+  iso
+    ? new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    : "";
 
-// Confirmed (and beyond) items are locked: the friend approved the haul and
-// only the admin moves them from there.
-const LOCKED = new Set(["confirmed", "ordered", "shipped", "arrived"]);
+const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);
 
 export default async function HaulPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ handle: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const { handle } = await params;
+  const sp = await searchParams;
+  // Only trust a sane haul number in the success note (query param is
+  // user-editable).
+  const approvedNum = Number(one(sp.approved));
+  const justApproved =
+    Number.isInteger(approvedNum) && approvedNum > 0 ? approvedNum : null;
   // Identity from the cookie, not the URL — same ownership rule as the write
   // actions. An admin session may view (not edit) any friend's haul.
   const cookieFriend = await getCurrentFriend();
@@ -33,7 +46,11 @@ export default async function HaulPage({
       ? await getFriendByHandle(handle)
       : null;
   if (!friend) redirect("/");
-  const items = await getHaul(friend.id);
+  const { open, past } = await getHaulsWithItems(friend.id);
+  const items = open?.items ?? [];
+  // No open haul yet (fresh friend, or right after approving): show the
+  // number the next add will start.
+  const currentNumber = open?.haul.number ?? (past[0]?.haul.number ?? 0) + 1;
 
   const qty = (i: (typeof items)[number]) => i.quantity ?? 1;
   const totalCost = items.reduce((s, i) => s + (i.quoted_price_usd ?? 0) * qty(i), 0);
@@ -43,25 +60,33 @@ export default async function HaulPage({
   const unweighed = items.filter((i) => i.products?.weight_g == null).length;
   const shipping = estimateShipping(totalGrams);
   const editable = items.filter((i) => !LOCKED.has(i.status ?? ""));
-  const confirmed = items.filter((i) => i.status === "confirmed");
+
+  const pastSummary = (g: HaulGroup) => {
+    const units = g.items.reduce((s, i) => s + (i.quantity ?? 1), 0);
+    const cost = g.items.reduce(
+      (s, i) => s + (i.quoted_price_usd ?? 0) * (i.quantity ?? 1),
+      0,
+    );
+    return { units, cost };
+  };
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <h1 className="text-2xl font-semibold tracking-tight">
-        Haul{items.length > 0 ? ` (${totalUnits})` : ""}
+        {haulLabel(currentNumber)}
+        {totalUnits > 0 ? ` (${totalUnits})` : ""}
       </h1>
 
-      {confirmed.length > 0 && (
+      {justApproved != null && (
         <p className="border border-neutral-200 bg-neutral-50 px-4 py-3 text-xs text-neutral-600">
-          Haul approved and sent to admin — {confirmed.length} item
-          {confirmed.length === 1 ? "" : "s"} locked in. Anything new you add
-          starts a fresh batch.
+          {haulLabel(justApproved)} approved and sent to admin. Anything new
+          you add starts {haulLabel(currentNumber)}.
         </p>
       )}
 
       {items.length === 0 ? (
         <p className="text-sm text-neutral-500">
-          Nothing in your haul yet.{" "}
+          Nothing in {haulLabel(currentNumber)} yet.{" "}
           <Link href={`/${handle}/shop`} className="underline">
             Browse the shop →
           </Link>
@@ -154,6 +179,13 @@ export default async function HaulPage({
             })}
           </div>
 
+          <Link
+            href={`/${handle}/shop`}
+            className="inline-block text-[11px] uppercase tracking-widest text-neutral-500 underline hover:text-black"
+          >
+            + Add more from the shop
+          </Link>
+
           {/* totals, spreadsheet style */}
           <div className="ml-auto w-full max-w-sm space-y-1.5 text-sm">
             <div className="flex justify-between">
@@ -193,7 +225,7 @@ export default async function HaulPage({
                   type="submit"
                   className="w-full border border-black py-2.5 text-[11px] uppercase tracking-widest transition hover:bg-black hover:text-white"
                 >
-                  Approve haul
+                  Approve {haulLabel(currentNumber)}
                 </button>
                 <p className="mt-1.5 text-[10px] leading-relaxed text-neutral-400">
                   Locks in these items and sends your haul to admin for ordering.
@@ -207,6 +239,32 @@ export default async function HaulPage({
             </p>
           </div>
         </>
+      )}
+
+      {past.length > 0 && (
+        <div className="border-t border-neutral-200 pt-6">
+          <h2 className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-neutral-400">
+            Past hauls
+          </h2>
+          <div className="space-y-1">
+            {past.map((g) => {
+              const { units, cost } = pastSummary(g);
+              return (
+                <Link
+                  key={g.haul.id}
+                  href={`/${handle}/haul/${g.haul.number}`}
+                  className="flex items-baseline justify-between border-b border-neutral-100 py-2.5 text-sm hover:bg-neutral-50"
+                >
+                  <span className="font-medium">{haulLabel(g.haul.number)}</span>
+                  <span className="text-xs text-neutral-500">
+                    Approved {approvedDate(g.haul.approved_at)} · {units}{" "}
+                    {units === 1 ? "item" : "items"} · {usd(cost)} →
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       )}
     </div>
   );

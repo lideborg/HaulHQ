@@ -1,7 +1,13 @@
 import { createAdminClient } from "./supabase/admin";
-import type { Product, Seller, Friend, HaulItem } from "./types";
+import type { Product, Seller, Friend, Haul, HaulItem } from "./types";
 import { CATEGORY_ORDER } from "./categories";
 import { groupFactories, type FactoryCard } from "./factories";
+import {
+  UNLOCKED_STATUSES,
+  isUnlocked,
+  groupItemsByHaul,
+  type HaulGroup,
+} from "./hauls";
 
 // Make user input safe inside a PostgREST or(...ilike...) filter: , ( ) are
 // or()-syntax, and % _ \ are LIKE wildcards that would match everything.
@@ -134,26 +140,128 @@ export async function getProductByCode(code: string): Promise<Product | null> {
   return (data as Product) ?? null;
 }
 
-export async function getHaul(friendId: string): Promise<HaulItem[]> {
-  const sb = createAdminClient();
-  // Embed the live product for weight + card name (null for link-only requests).
-  const { data, error } = await sb
-    .from("items")
-    .select("*, products (weight_g, display_title, brand_slug, code)")
-    .eq("owner_id", friendId)
-    .order("created_at", { ascending: false });
-  if (error) throw error;
-  return (data ?? []) as HaulItem[];
+type AdminClient = ReturnType<typeof createAdminClient>;
+
+// The friend's one open haul, created lazily on first use. The partial unique
+// index (one open haul per owner) makes concurrent creates safe: losers of the
+// race fail the insert and re-select the winner.
+export async function getOrCreateOpenHaul(
+  sb: AdminClient,
+  ownerId: string,
+): Promise<Haul> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const { data: open } = await sb
+      .from("hauls")
+      .select("*")
+      .eq("owner_id", ownerId)
+      .eq("status", "open")
+      .maybeSingle();
+    if (open) return open as Haul;
+    const { data: maxRow } = await sb
+      .from("hauls")
+      .select("number")
+      .eq("owner_id", ownerId)
+      .order("number", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    const { data: created, error } = await sb
+      .from("hauls")
+      .insert({
+        owner_id: ownerId,
+        number: ((maxRow?.number as number) ?? 0) + 1,
+        status: "open",
+      })
+      .select("*")
+      .maybeSingle();
+    if (created) return created as Haul;
+    if (error && !/duplicate|unique/i.test(error.message)) throw error;
+  }
+  throw new Error("could not create an open haul");
 }
 
-// Counts UNITS (sum of quantities), matching the haul page heading — two of
-// the same tee reads "Haul (2)" everywhere.
+// Adopt items written without a haul_id (old code mid-deploy): unlocked ones
+// join the open haul, locked ones join the newest approved haul. Idempotent
+// and almost always a no-op, so it's safe to run on page loads.
+async function ensureHaulAssignments(sb: AdminClient, ownerId: string) {
+  const { data: orphans } = await sb
+    .from("items")
+    .select("id, status")
+    .eq("owner_id", ownerId)
+    .is("haul_id", null);
+  if (!orphans || orphans.length === 0) return;
+
+  const unlockedIds = orphans.filter((o) => isUnlocked(o.status)).map((o) => o.id);
+  const lockedIds = orphans.filter((o) => !isUnlocked(o.status)).map((o) => o.id);
+
+  if (unlockedIds.length > 0) {
+    const open = await getOrCreateOpenHaul(sb, ownerId);
+    await sb.from("items").update({ haul_id: open.id }).in("id", unlockedIds);
+  }
+  if (lockedIds.length > 0) {
+    const { data: approved } = await sb
+      .from("hauls")
+      .select("*")
+      .eq("owner_id", ownerId)
+      .eq("status", "approved")
+      .order("number", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    let target = approved as Haul | null;
+    if (!target) {
+      const { data: maxRow } = await sb
+        .from("hauls")
+        .select("number")
+        .eq("owner_id", ownerId)
+        .order("number", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      const { data: createdHaul } = await sb
+        .from("hauls")
+        .insert({
+          owner_id: ownerId,
+          number: ((maxRow?.number as number) ?? 0) + 1,
+          status: "approved",
+          approved_at: new Date().toISOString(),
+        })
+        .select("*")
+        .maybeSingle();
+      target = createdHaul as Haul | null;
+    }
+    if (target)
+      await sb.from("items").update({ haul_id: target.id }).in("id", lockedIds);
+  }
+}
+
+// Everything the haul surfaces need: the open haul being built plus the
+// approved archive, items embedded per haul.
+export async function getHaulsWithItems(
+  friendId: string,
+): Promise<{ open: HaulGroup | null; past: HaulGroup[] }> {
+  const sb = createAdminClient();
+  await ensureHaulAssignments(sb, friendId);
+  const [{ data: hauls, error }, { data: items, error: itemsError }] =
+    await Promise.all([
+      sb.from("hauls").select("*").eq("owner_id", friendId),
+      sb
+        .from("items")
+        .select("*, products (weight_g, display_title, brand_slug, code)")
+        .eq("owner_id", friendId),
+    ]);
+  if (error) throw error;
+  if (itemsError) throw itemsError;
+  return groupItemsByHaul((hauls ?? []) as Haul[], (items ?? []) as HaulItem[]);
+}
+
+// Units (sum of quantities) in the CURRENT haul — unlocked statuses only, so
+// the nav badge resets when a haul is approved and counts the new batch.
+// Null status counts as unlocked, matching isUnlocked.
 export async function getHaulCount(friendId: string): Promise<number> {
   const sb = createAdminClient();
   const { data, error } = await sb
     .from("items")
     .select("quantity")
-    .eq("owner_id", friendId);
+    .eq("owner_id", friendId)
+    .or(`status.is.null,status.in.(${UNLOCKED_STATUSES.join(",")})`);
   if (error) throw error;
   return (data ?? []).reduce((s, r) => s + ((r.quantity as number) ?? 1), 0);
 }

@@ -85,25 +85,47 @@ export async function deleteFriend(formData: FormData) {
   redirect("/admin");
 }
 
-// Admin-only: reopen a friend's approved haul so they can edit it again.
-// Confirmed items go back to "saved" (the friend-editable state); items the
-// admin already moved to ordered/shipped are untouched.
+// Admin-only: reopen a specific approved haul so the friend can edit it again.
+// Confirmed items go back to "saved"; items the admin already moved to
+// ordered/shipped are untouched. A friend has at most one open haul, so any
+// newer in-progress haul is folded into the reopened one and its (higher)
+// number is freed — the sequence stays clean.
 export async function unlockHaul(formData: FormData) {
   await requireAdmin();
   const handle = String(formData.get("handle") ?? "");
-  if (!handle) return;
+  const haulId = String(formData.get("haul_id") ?? "");
+  if (!handle || !haulId) return;
   const sb = createAdminClient();
-  const { data: friend } = await sb
-    .from("friends")
-    .select("id")
-    .eq("handle", handle)
+  const { data: haul } = await sb
+    .from("hauls")
+    .select("*")
+    .eq("id", haulId)
+    .eq("status", "approved")
     .maybeSingle();
-  if (!friend) return;
+  if (!haul) return;
   await sb
     .from("items")
     .update({ status: "saved" })
-    .eq("owner_id", friend.id)
+    .eq("haul_id", haul.id)
     .eq("status", "confirmed");
+  const { data: open } = await sb
+    .from("hauls")
+    .select("id")
+    .eq("owner_id", haul.owner_id)
+    .eq("status", "open")
+    .maybeSingle();
+  if (open) {
+    await sb.from("items").update({ haul_id: haul.id }).eq("haul_id", open.id);
+    await sb.from("hauls").delete().eq("id", open.id);
+  }
+  // Surface a failed flip (e.g. the friend created a fresh open haul in the
+  // window above; the one-open-haul index rejects a second) instead of
+  // silently leaving saved items inside an approved haul.
+  const { error: flipError } = await sb
+    .from("hauls")
+    .update({ status: "open", approved_at: null })
+    .eq("id", haul.id);
+  if (flipError) throw flipError;
   revalidatePath(`/admin/friends/${handle}`);
   revalidatePath(`/${handle}/haul`);
 }

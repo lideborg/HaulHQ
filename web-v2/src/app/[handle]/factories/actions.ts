@@ -13,9 +13,12 @@ import { resolveSourcingItem } from "@/lib/sourcing";
 // title/image/price lookup once the redirect has been sent.
 export async function addLinkToHaul(handle: string, formData: FormData) {
   const raw = String(formData.get("link") ?? "").trim();
-  const size = String(formData.get("size") ?? "").trim() || null;
+  // Size is required (the form enforces it too); bags/accessories submit
+  // "One size". Guard here so a size intent is always captured server-side.
+  const size = String(formData.get("size") ?? "").trim();
   const src = classifySourceLink(raw);
   if (!src) redirect(`/${handle}/factories?error=link`);
+  if (!size) redirect(`/${handle}/factories?error=size`);
 
   const friend = await getCurrentFriend();
   if (!friend || friend.handle !== handle) redirect("/login");

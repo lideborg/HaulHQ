@@ -6,7 +6,7 @@ import { isAdmin } from "@/lib/adminAuth";
 import { estimateShipping } from "@/lib/shipping";
 import { removeFromHaul, approveHaul } from "@/app/[handle]/haul-actions";
 import { QuantityStepper } from "@/components/QuantityStepper";
-import { haulLabel, LOCKED_STATUSES } from "@/lib/hauls";
+import { haulLabel, LOCKED_STATUSES, isUnavailable } from "@/lib/hauls";
 import type { HaulGroup } from "@/lib/hauls";
 
 export const dynamic = "force-dynamic";
@@ -53,13 +53,16 @@ export default async function HaulPage({
   const currentNumber = open?.haul.number ?? (past[0]?.haul.number ?? 0) + 1;
 
   const qty = (i: (typeof items)[number]) => i.quantity ?? 1;
-  const totalCost = items.reduce((s, i) => s + (i.quoted_price_usd ?? 0) * qty(i), 0);
-  const totalUnits = items.reduce((s, i) => s + qty(i), 0);
-  const unpriced = items.filter((i) => i.quoted_price_usd == null).length;
-  const totalGrams = items.reduce((s, i) => s + (i.products?.weight_g ?? 0) * qty(i), 0);
-  const unweighed = items.filter((i) => i.products?.weight_g == null).length;
+  // Items admin flagged "not available from seller" stay visible as a record
+  // but count toward nothing — totals, weight, and Approve all ignore them.
+  const counted = items.filter((i) => !isUnavailable(i.status));
+  const totalCost = counted.reduce((s, i) => s + (i.quoted_price_usd ?? 0) * qty(i), 0);
+  const totalUnits = counted.reduce((s, i) => s + qty(i), 0);
+  const unpriced = counted.filter((i) => i.quoted_price_usd == null).length;
+  const totalGrams = counted.reduce((s, i) => s + (i.products?.weight_g ?? 0) * qty(i), 0);
+  const unweighed = counted.filter((i) => i.products?.weight_g == null).length;
   const shipping = estimateShipping(totalGrams);
-  const editable = items.filter((i) => !LOCKED.has(i.status ?? ""));
+  const editable = counted.filter((i) => !LOCKED.has(i.status ?? ""));
 
   const pastSummary = (g: HaulGroup) => {
     const units = g.items.reduce((s, i) => s + (i.quantity ?? 1), 0);
@@ -99,6 +102,7 @@ export default async function HaulPage({
               const img = item.image_urls?.[0];
               const sourcing = item.status === "sourcing";
               const locked = LOCKED.has(item.status ?? "");
+              const unavailable = isUnavailable(item.status);
               const linkHost = (() => {
                 try {
                   return item.source_link ? new URL(item.source_link).hostname : null;
@@ -117,7 +121,9 @@ export default async function HaulPage({
                   key={item.id}
                   className="flex items-center gap-4 border-b border-neutral-100 py-3"
                 >
-                  <div className="h-16 w-16 shrink-0 overflow-hidden bg-neutral-100">
+                  <div
+                    className={`h-16 w-16 shrink-0 overflow-hidden bg-neutral-100${unavailable ? " opacity-40" : ""}`}
+                  >
                     {img ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={img} alt={name} className="h-full w-full object-cover" />
@@ -128,19 +134,31 @@ export default async function HaulPage({
                       {item.brand ?? "—"}
                     </p>
                     {productHref ? (
-                      <Link href={productHref} className="block truncate text-sm hover:underline">
+                      <Link
+                        href={productHref}
+                        className={`block truncate text-sm hover:underline${unavailable ? " text-neutral-400 line-through" : ""}`}
+                      >
                         {name}
                       </Link>
                     ) : (
-                      <p className="truncate text-sm">{name}</p>
+                      <p className={`truncate text-sm${unavailable ? " text-neutral-400 line-through" : ""}`}>
+                        {name}
+                      </p>
                     )}
-                    <p className="mt-0.5 text-[11px] text-neutral-500">
-                      {sourcing
-                        ? "Finding the details…"
-                        : `${item.chosen_size ? `Size ${item.chosen_size}` : "No size"} · ~${grams(item.products?.weight_g)}`}
-                      {locked ? " · locked in" : ""}
-                    </p>
-                    {own && !locked && (
+                    {unavailable ? (
+                      <p className="mt-0.5 text-[11px] text-neutral-500">
+                        {item.chosen_size ? `Size ${item.chosen_size} · ` : ""}Not
+                        available from seller
+                      </p>
+                    ) : (
+                      <p className="mt-0.5 text-[11px] text-neutral-500">
+                        {sourcing
+                          ? "Finding the details…"
+                          : `${item.chosen_size ? `Size ${item.chosen_size}` : "No size"} · ~${grams(item.products?.weight_g)}`}
+                        {locked ? " · locked in" : ""}
+                      </p>
+                    )}
+                    {own && !locked && !unavailable && (
                       <div className="mt-1.5">
                         <QuantityStepper
                           handle={handle}
@@ -154,16 +172,20 @@ export default async function HaulPage({
                     )}
                   </div>
                   <div className="shrink-0 text-right">
-                    <p className="text-sm tabular-nums">
-                      {item.quoted_price_usd != null
-                        ? qty(item) > 1
-                          ? `${usd(item.quoted_price_usd)} × ${qty(item)}`
-                          : usd(item.quoted_price_usd)
-                        : sourcing
-                          ? "Price coming"
-                          : "Quote"}
+                    <p
+                      className={`text-sm tabular-nums${unavailable ? " text-neutral-400" : ""}`}
+                    >
+                      {unavailable
+                        ? "—"
+                        : item.quoted_price_usd != null
+                          ? qty(item) > 1
+                            ? `${usd(item.quoted_price_usd)} × ${qty(item)}`
+                            : usd(item.quoted_price_usd)
+                          : sourcing
+                            ? "Price coming"
+                            : "Quote"}
                     </p>
-                    {own && !locked && (
+                    {own && (!locked || unavailable) && (
                       <form action={removeFromHaul.bind(null, handle, item.id)}>
                         <button
                           type="submit"

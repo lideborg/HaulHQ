@@ -7,10 +7,23 @@ import type { Haul, HaulItem } from "./types";
 export const UNLOCKED_STATUSES = ["saved", "requested", "sourcing", "quoted"];
 export const LOCKED_STATUSES = ["confirmed", "ordered", "shipped", "arrived"];
 
+// Admin reached out and the seller doesn't have it. The item stays in the haul
+// as a record for the friend, but greyed out, excluded from every total, and
+// never sent for ordering. A terminal state outside the unlocked/locked axis.
+export const UNAVAILABLE_STATUS = "unavailable";
+
+// Statuses a friend may delete from their haul: the editable ones, plus an
+// unavailable item they want to tidy away.
+export const REMOVABLE_STATUSES = [...UNLOCKED_STATUSES, UNAVAILABLE_STATUS];
+
 // Items written before the status column settled may carry null; treat those
 // as editable rather than silently locking them away from the friend.
 export function isUnlocked(status: string | null | undefined): boolean {
   return status == null || UNLOCKED_STATUSES.includes(status);
+}
+
+export function isUnavailable(status: string | null | undefined): boolean {
+  return status === UNAVAILABLE_STATUS;
 }
 
 // "Haul 01" — zero-padded to two digits so the list reads like a ledger.

@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getFriendByHandle, getHaulsWithItems } from "@/lib/data";
-import { toggleSource, setAdminNote, unlockHaul } from "@/app/admin/friends/actions";
-import { haulLabel } from "@/lib/hauls";
+import {
+  toggleSource,
+  setAdminNote,
+  unlockHaul,
+  toggleUnavailable,
+} from "@/app/admin/friends/actions";
+import { haulLabel, isUnavailable } from "@/lib/hauls";
 
 export const dynamic = "force-dynamic";
 
@@ -66,7 +71,9 @@ export default async function FriendHaulPage({
             <p className="text-xs text-neutral-400">Empty.</p>
           )}
           <div className="space-y-4">
-            {group.items.map((item) => (
+            {group.items.map((item) => {
+              const unavailable = isUnavailable(item.status);
+              return (
           <div
             key={item.id}
             className="flex items-start gap-5 border-b border-neutral-100 pb-4"
@@ -76,7 +83,7 @@ export default async function FriendHaulPage({
               <img
                 src={item.image_urls[0]}
                 alt={item.title ?? ""}
-                className="h-56 w-56 shrink-0 bg-neutral-100 object-contain"
+                className={`h-56 w-56 shrink-0 bg-neutral-100 object-contain${unavailable ? " opacity-40" : ""}`}
               />
             ) : (
               <div className="h-56 w-56 shrink-0 bg-neutral-100" />
@@ -85,7 +92,14 @@ export default async function FriendHaulPage({
               <p className="text-[11px] uppercase tracking-tight text-neutral-400">
                 {item.brand ?? "—"}
               </p>
-              <p className="mt-1 text-sm">{item.title ?? "Untitled"}</p>
+              <p className={`mt-1 text-sm${unavailable ? " text-neutral-400 line-through" : ""}`}>
+                {item.title ?? "Untitled"}
+              </p>
+              {unavailable && (
+                <p className="mt-1 text-[11px] font-semibold uppercase tracking-tight text-amber-700">
+                  Not available from seller
+                </p>
+              )}
               <p className="mt-1 text-[11px] text-neutral-400">
                 {item.chosen_size ? `Size ${item.chosen_size} · ` : ""}
                 {(item.quantity ?? 1) > 1 ? `Qty ${item.quantity} · ` : ""}
@@ -134,6 +148,20 @@ export default async function FriendHaulPage({
                   </button>
                 </form>
 
+                <form action={toggleUnavailable}>
+                  <input type="hidden" name="id" value={item.id} />
+                  <input type="hidden" name="handle" value={handle} />
+                  <button
+                    className={
+                      unavailable
+                        ? "border border-amber-600 px-5 py-2 text-[11px] uppercase tracking-tight text-amber-700"
+                        : "border border-neutral-300 px-5 py-2 text-[11px] uppercase tracking-tight text-neutral-500 hover:border-amber-600 hover:text-amber-700"
+                    }
+                  >
+                    {unavailable ? "↩ Restore" : "Mark unavailable"}
+                  </button>
+                </form>
+
                 <form action={setAdminNote} className="flex flex-1 gap-2">
                   <input type="hidden" name="id" value={item.id} />
                   <input type="hidden" name="handle" value={handle} />
@@ -151,7 +179,8 @@ export default async function FriendHaulPage({
               </div>
             </div>
           </div>
-            ))}
+              );
+            })}
           </div>
         </section>
       ))}

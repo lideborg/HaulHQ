@@ -4,7 +4,7 @@ import { getFriendByHandle, getHaulsWithItems } from "@/lib/data";
 import { getCurrentFriend } from "@/lib/friend";
 import { isAdmin } from "@/lib/adminAuth";
 import { estimateShipping } from "@/lib/shipping";
-import { haulLabel } from "@/lib/hauls";
+import { haulLabel, isUnavailable } from "@/lib/hauls";
 
 export const dynamic = "force-dynamic";
 
@@ -44,9 +44,12 @@ export default async function PastHaulPage({
 
   const items = group.items;
   const qty = (i: (typeof items)[number]) => i.quantity ?? 1;
-  const totalUnits = items.reduce((s, i) => s + qty(i), 0);
-  const totalCost = items.reduce((s, i) => s + (i.quoted_price_usd ?? 0) * qty(i), 0);
-  const totalGrams = items.reduce((s, i) => s + (i.products?.weight_g ?? 0) * qty(i), 0);
+  // Items admin flagged "not available from seller" stay listed but count
+  // toward nothing.
+  const counted = items.filter((i) => !isUnavailable(i.status));
+  const totalUnits = counted.reduce((s, i) => s + qty(i), 0);
+  const totalCost = counted.reduce((s, i) => s + (i.quoted_price_usd ?? 0) * qty(i), 0);
+  const totalGrams = counted.reduce((s, i) => s + (i.products?.weight_g ?? 0) * qty(i), 0);
   const shipping = estimateShipping(totalGrams);
   const approvedDate = group.haul.approved_at
     ? new Date(group.haul.approved_at).toLocaleDateString("en-US", {
@@ -78,6 +81,7 @@ export default async function PastHaulPage({
       <div className="border-t border-neutral-200">
         {items.map((item) => {
           const img = item.image_urls?.[0];
+          const unavailable = isUnavailable(item.status);
           const name =
             item.products?.display_title ?? item.title ?? "Untitled";
           const productHref =
@@ -89,7 +93,9 @@ export default async function PastHaulPage({
               key={item.id}
               className="flex items-center gap-4 border-b border-neutral-100 py-3"
             >
-              <div className="h-16 w-16 shrink-0 overflow-hidden bg-neutral-100">
+              <div
+                className={`h-16 w-16 shrink-0 overflow-hidden bg-neutral-100${unavailable ? " opacity-40" : ""}`}
+              >
                 {img ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={img} alt={name} className="h-full w-full object-cover" />
@@ -100,26 +106,35 @@ export default async function PastHaulPage({
                   {item.brand ?? "—"}
                 </p>
                 {productHref ? (
-                  <Link href={productHref} className="block truncate text-sm hover:underline">
+                  <Link
+                    href={productHref}
+                    className={`block truncate text-sm hover:underline${unavailable ? " text-neutral-400 line-through" : ""}`}
+                  >
                     {name}
                   </Link>
                 ) : (
-                  <p className="truncate text-sm">{name}</p>
+                  <p className={`truncate text-sm${unavailable ? " text-neutral-400 line-through" : ""}`}>
+                    {name}
+                  </p>
                 )}
                 <p className="mt-0.5 text-[11px] text-neutral-500">
                   {item.chosen_size ? `Size ${item.chosen_size}` : "No size"}
                   {qty(item) > 1 ? ` · × ${qty(item)}` : ""}
                   {" · "}
-                  {STATUS_LABEL[item.status ?? ""] ?? "Confirmed"}
+                  {unavailable
+                    ? "Not available from seller"
+                    : (STATUS_LABEL[item.status ?? ""] ?? "Confirmed")}
                 </p>
               </div>
               <div className="shrink-0 text-right">
-                <p className="text-sm tabular-nums">
-                  {item.quoted_price_usd != null
-                    ? qty(item) > 1
-                      ? `${usd(item.quoted_price_usd)} × ${qty(item)}`
-                      : usd(item.quoted_price_usd)
-                    : "Quote"}
+                <p className={`text-sm tabular-nums${unavailable ? " text-neutral-400" : ""}`}>
+                  {unavailable
+                    ? "—"
+                    : item.quoted_price_usd != null
+                      ? qty(item) > 1
+                        ? `${usd(item.quoted_price_usd)} × ${qty(item)}`
+                        : usd(item.quoted_price_usd)
+                      : "Quote"}
                 </p>
               </div>
             </div>

@@ -142,6 +142,41 @@ export async function toggleSource(formData: FormData) {
   revalidatePath(`/admin/friends/${handle}`);
 }
 
+// Admin-only: flip an item between "available" and "not available from
+// seller". Marking it unavailable keeps the row in the friend's haul but drops
+// it from every total and the order flow. Restoring returns it to the right
+// editable/locked state for its haul (a still-open haul → saved; an already
+// approved haul → confirmed).
+export async function toggleUnavailable(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id"));
+  const handle = String(formData.get("handle"));
+  if (!id) return;
+  const sb = createAdminClient();
+  const { data: item } = await sb
+    .from("items")
+    .select("status, haul_id")
+    .eq("id", id)
+    .maybeSingle();
+  if (!item) return;
+  let next: string;
+  if (item.status === "unavailable") {
+    const { data: haul } = item.haul_id
+      ? await sb
+          .from("hauls")
+          .select("status")
+          .eq("id", item.haul_id)
+          .maybeSingle()
+      : { data: null };
+    next = haul?.status === "approved" ? "confirmed" : "saved";
+  } else {
+    next = "unavailable";
+  }
+  await sb.from("items").update({ status: next }).eq("id", id);
+  revalidatePath(`/admin/friends/${handle}`);
+  revalidatePath(`/${handle}/haul`);
+}
+
 // Admin-only: save a private note on a haul item.
 export async function setAdminNote(formData: FormData) {
   await requireAdmin();

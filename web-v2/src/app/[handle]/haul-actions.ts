@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { getCurrentFriend } from "@/lib/friend";
 import { getOrCreateOpenHaul } from "@/lib/data";
-import { UNLOCKED_STATUSES } from "@/lib/hauls";
+import { UNLOCKED_STATUSES, REMOVABLE_STATUSES } from "@/lib/hauls";
 
 // A friend adds a product to their CURRENT haul (idempotent per open haul +
 // product; a copy in a past approved haul doesn't block re-ordering it).
@@ -68,13 +68,14 @@ export async function removeFromHaul(
   const friend = await getCurrentFriend();
   if (!friend || friend.handle !== handle) return;
   const sb = createAdminClient();
-  // Confirmed/ordered items are locked - the friend approved this haul.
+  // Confirmed/ordered items are locked - the friend approved this haul. An
+  // item admin marked "unavailable" can still be tidied away by the friend.
   await sb
     .from("items")
     .delete()
     .eq("id", itemId)
     .eq("owner_id", friend.id)
-    .in("status", UNLOCKED_STATUSES);
+    .in("status", REMOVABLE_STATUSES);
   revalidatePath(`/${handle}/haul`);
 }
 

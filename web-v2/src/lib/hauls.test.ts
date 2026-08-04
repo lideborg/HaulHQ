@@ -1,6 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { haulLabel, isUnlocked, groupItemsByHaul } from "./hauls.ts";
+import {
+  haulLabel,
+  isUnlocked,
+  isUnavailable,
+  REMOVABLE_STATUSES,
+  groupItemsByHaul,
+} from "./hauls.ts";
 import type { Haul, HaulItem } from "./types.ts";
 
 test("haulLabel zero-pads to two digits", () => {
@@ -16,6 +22,21 @@ test("isUnlocked treats null and friend-editable statuses as unlocked", () => {
   assert.equal(isUnlocked("sourcing"), true);
   assert.equal(isUnlocked("confirmed"), false);
   assert.equal(isUnlocked("shipped"), false);
+});
+
+test("isUnavailable matches only the unavailable status", () => {
+  assert.equal(isUnavailable("unavailable"), true);
+  assert.equal(isUnavailable("saved"), false);
+  assert.equal(isUnavailable(null), false);
+  assert.equal(isUnavailable(undefined), false);
+  // Not editable, and not part of the locked order flow either.
+  assert.equal(isUnlocked("unavailable"), false);
+});
+
+test("REMOVABLE_STATUSES lets a friend delete editable and unavailable items", () => {
+  assert.ok(REMOVABLE_STATUSES.includes("saved"));
+  assert.ok(REMOVABLE_STATUSES.includes("unavailable"));
+  assert.ok(!REMOVABLE_STATUSES.includes("confirmed"));
 });
 
 const haul = (id: string, number: number, status: Haul["status"]): Haul => ({

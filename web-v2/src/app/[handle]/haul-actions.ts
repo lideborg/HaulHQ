@@ -99,10 +99,20 @@ export async function setQuantity(
 
 // Single tap: closes the OPEN haul — its editable items lock in, the haul is
 // stamped approved, admin gets pinged. The next add starts the next number.
-export async function approveHaul(handle: string): Promise<void> {
+export async function approveHaul(
+  handle: string,
+  formData?: FormData,
+): Promise<void> {
   const friend = await getCurrentFriend();
   if (!friend || friend.handle !== handle) return;
   const sb = createAdminClient();
+  // Optional email captured at checkout so admin can send warehouse/order
+  // updates. Basic shape check; save only when it looks like an address and
+  // differs from what's on file.
+  const email = (formData?.get("email") as string | null)?.trim().toLowerCase();
+  if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email !== friend.email) {
+    await sb.from("friends").update({ email }).eq("id", friend.id);
+  }
   const { data: open } = await sb
     .from("hauls")
     .select("*")

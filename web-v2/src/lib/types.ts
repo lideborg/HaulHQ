@@ -69,7 +69,8 @@ export interface Friend {
   id: string;
   name: string;
   handle: string | null;
-  // email removed (no personal data stored).
+  // Optional — collected at haul approval so admin can email order updates.
+  email: string | null;
   password_hash: string | null;
   setup_token: string | null;
   access_token: string;

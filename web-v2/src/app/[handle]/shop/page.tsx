@@ -3,6 +3,7 @@ import { BrandSidebar } from "@/components/BrandSidebar";
 import { CategorySidebar } from "@/components/CategorySidebar";
 import { ProductCard } from "@/components/ProductCard";
 import { SoldOutToggle, SearchBox } from "@/components/ShopControls";
+import { ShopSortFilter } from "@/components/ShopSortFilter";
 import {
   getPublishedProducts,
   getShopFacets,
@@ -35,8 +36,14 @@ export default async function ShopPage({
   const q = one(sp.q);
   // Sold-out items are hidden by default; ?all=1 shows everything.
   const showAll = one(sp.all) === "1";
+  const sort = one(sp.sort);
+  const color = one(sp.color);
+  const minStr = one(sp.min);
+  const maxStr = one(sp.max);
+  const min = minStr ? Number(minStr) : undefined;
+  const max = maxStr ? Number(maxStr) : undefined;
   const [products, facets, sellerLinks] = await Promise.all([
-    getPublishedProducts(brand, category, q, !showAll),
+    getPublishedProducts(brand, category, q, !showAll, { sort, color, min, max }),
     getShopFacets(!showAll),
     q ? getSellerBrandLinks(q) : Promise.resolve([]),
   ]);
@@ -82,10 +89,23 @@ export default async function ShopPage({
       </aside>
       <section className="flex-1">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[11px] uppercase tracking-widest text-neutral-500">
-            {label ? `${label} · ` : ""}
-            {products.length} item{products.length === 1 ? "" : "s"}
-          </p>
+          <div className="flex items-center gap-3">
+            <ShopSortFilter
+              handle={handle}
+              brand={brand}
+              category={category}
+              q={q}
+              showAll={showAll}
+              sort={sort}
+              color={color}
+              min={minStr}
+              max={maxStr}
+            />
+            <p className="text-[11px] uppercase tracking-widest text-neutral-500">
+              {label ? `${label} · ` : ""}
+              {products.length} item{products.length === 1 ? "" : "s"}
+            </p>
+          </div>
           <SearchBox handle={handle} brand={brand} category={category} q={q} showAll={showAll} />
         </div>
         {products.length === 0 ? (

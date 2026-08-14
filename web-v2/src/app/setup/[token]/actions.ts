@@ -11,8 +11,12 @@ export async function setPassword(formData: FormData) {
   const pw = String(formData.get("password") ?? "");
   const confirm = String(formData.get("confirm") ?? "");
   const username = String(formData.get("username") ?? "").trim().toLowerCase();
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
   if (pw.length < 6) redirect(`/setup/${token}?error=short`);
   if (pw !== confirm) redirect(`/setup/${token}?error=match`);
+  // Email is required at onboarding so admin can always reach a friend with
+  // order updates. Basic shape check; the approve-haul field can update it later.
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect(`/setup/${token}?error=email`);
 
   const sb = createAdminClient();
   const { data: friend } = await sb
@@ -39,7 +43,7 @@ export async function setPassword(formData: FormData) {
 
   await sb
     .from("friends")
-    .update({ password_hash: await hashPassword(pw), setup_token: null, handle })
+    .update({ password_hash: await hashPassword(pw), setup_token: null, handle, email })
     .eq("id", friend.id);
 
   (await cookies()).set("friend_token", friend.access_token, {

@@ -12,6 +12,7 @@ export const CATEGORIES = [
   { slug: "shorts", label: "Shorts" },
   { slug: "shoes", label: "Shoes" },
   { slug: "bags", label: "Bags" },
+  { slug: "hats", label: "Hats" },
   { slug: "accessories", label: "Accessories" },
   { slug: "glasses", label: "Glasses" },
 ] as const;

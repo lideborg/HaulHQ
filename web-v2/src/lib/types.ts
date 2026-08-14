@@ -22,6 +22,8 @@ export interface Product {
   display_title: string | null;
   description: string | null;
   category: string | null;
+  // Normalized colour family (12 slugs) for the shop colour filter.
+  color: string | null;
   code: string | null;
   brand_slug: string | null;
   seller: string | null;

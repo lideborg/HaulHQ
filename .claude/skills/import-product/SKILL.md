@@ -60,6 +60,12 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    ```
 
    Then `select id from products where source_link = '...'`.
+   **Also set `color`** on every insert = the 12-family slug from
+   `normalizeColor(<the "— Colour" suffix of display_title>)` (see
+   `web-v2/src/lib/colors.ts`: black/white/grey/blue/brown/beige/green/red/
+   yellow/purple/pink/multi; two-tone or patterned → `multi`). It powers the
+   shop colour filter; a NULL colour drops the item out of every colour facet.
+   Bulk/raw SQL inserts must include it — the backfill script is one-off.
 5. **Images to storage** — download to a temp dir (curl; Referer header for
    Yupoo), then from `web-v2/`:
    `node scripts/upload-product-images.mjs <productId> <tmpdir>`

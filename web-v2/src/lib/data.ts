@@ -25,22 +25,45 @@ export async function getPublishedProducts(
   category?: string,
   search?: string,
   inStockOnly = false,
+  opts: { sort?: string; color?: string; min?: number; max?: number } = {},
 ): Promise<Product[]> {
   const sb = createAdminClient();
-  let q = sb
-    .from("products")
-    .select("*")
-    .eq("published", true)
-    .order("created_at", { ascending: false });
+  let q = sb.from("products").select("*").eq("published", true);
   if (brand) q = q.eq("brand", brand);
   if (category) q = q.eq("category", category);
+  if (opts.color) q = q.eq("color", opts.color);
   const term = searchTerm(search);
   if (term)
     q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%,display_title.ilike.%${term}%`);
   if (inStockOnly) q = q.eq("sold_out", false);
+  if (typeof opts.min === "number") q = q.gte("price_usd", opts.min);
+  if (typeof opts.max === "number") q = q.lte("price_usd", opts.max);
+
+  // Non-popular sorts map straight to an ORDER BY; popular needs the add-counts.
+  if (opts.sort === "price-asc")
+    q = q.order("price_usd", { ascending: true, nullsFirst: false });
+  else if (opts.sort === "price-desc")
+    q = q.order("price_usd", { ascending: false, nullsFirst: false });
+  else if (opts.sort === "brand")
+    q = q.order("brand", { ascending: true }).order("created_at", { ascending: false });
+  else q = q.order("created_at", { ascending: false }); // "new" and default
+
   const { data, error } = await q;
   if (error) throw error;
-  return (data ?? []) as Product[];
+  let rows = (data ?? []) as Product[];
+
+  if (opts.sort === "popular") {
+    const { data: pop } = await sb
+      .from("product_popularity")
+      .select("product_id, adds");
+    const rank = new Map(
+      (pop ?? []).map((r) => [r.product_id as string, r.adds as number]),
+    );
+    rows = [...rows].sort(
+      (a, b) => (rank.get(b.id) ?? 0) - (rank.get(a.id) ?? 0),
+    );
+  }
+  return rows;
 }
 
 // Yupoo seller categories matching a searched brand (canonical name or seller

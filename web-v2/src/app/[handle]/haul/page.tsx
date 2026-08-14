@@ -243,6 +243,20 @@ export default async function HaulPage({
             </div>
             {own && editable.length > 0 && (
               <form action={approveHaul.bind(null, handle)} className="pt-3">
+                <label className="block pb-2">
+                  <span className="mb-1 block text-[10px] leading-relaxed text-neutral-500">
+                    Add your email and we&apos;ll update you as your items
+                    arrive at the warehouse.
+                  </span>
+                  <input
+                    type="email"
+                    name="email"
+                    defaultValue={friend?.email ?? ""}
+                    placeholder="you@email.com"
+                    autoComplete="email"
+                    className="w-full border border-neutral-300 px-3 py-2 text-[12px] outline-none focus:border-black"
+                  />
+                </label>
                 <button
                   type="submit"
                   className="w-full border border-black py-2.5 text-[11px] uppercase tracking-widest transition hover:bg-black hover:text-white"

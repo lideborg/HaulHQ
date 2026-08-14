@@ -18,6 +18,13 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    WebFetch; filter images to the hero seller id; strip `_NxN` suffixes).
    Additionally capture from the buy page: every size-selector button label
    → `size_options`; every color-selector label → `colors`.
+   **IN-STOCK SIZES ONLY (every Superbuy import, no exceptions):** do NOT dump the
+   whole size range. On the Superbuy buy page each size button is SOLID-bordered
+   (in stock) or DASHED/faint-grey-bordered (out of stock, unselectable). Zoom the
+   size row and save ONLY the solid-bordered sizes. On a multi-color listing the
+   in-stock set can differ per color — re-check after each color swap. Superbuy's
+   cache can lag Taobao; if Hampus gives a size set from his own Taobao check,
+   trust his list over the border (better to under-list than sell an OOS size).
 2. **Size guide** — download the size-chart detail image (usually first
    detail image), Read it, transcribe into `size_guide` JSON:
    `{"unit":"cm","note":"...","sizes":[...],"measurements":{"length":[...],...}}`
@@ -25,17 +32,19 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    outer_length. Half-measurements: keep as-is but name them (`pit_to_pit`,
    `half_waist`) — the UI labels them correctly. No chart → `size_guide = null`.
 3. **Categorize** — assign exactly one `category` slug by looking at the hero
-   image + title. The 11 slugs (keep in sync with `web-v2/src/lib/categories.ts`):
+   image + title. The 12 slugs (keep in sync with `web-v2/src/lib/categories.ts`):
    `t-shirts` (SHORT-sleeve tee only, no collar), `shirts` (button-ups,
    overshirts, AND polos), `knitwear` (label "Knitted" — anything with visible
    knit stitches: sweaters, cardigans, knit pullovers), `hoodies` (label
    "Hoodies & Long Sleeves" — hoodies, fleece/jersey sweatshirts, AND ANY
    non-knit long-sleeve top incl. long-sleeve tees), `outerwear` (jackets,
    coats, blazers, parkas, puffer vests), `pants`, `shorts`, `shoes` (any
-   footwear), `bags` (any bag), `accessories` (belts, hats, scarves, jewelry,
-   wallets, ties, socks), `glasses` (sunglasses/eyewear). Decision rules:
+   footwear), `bags` (any bag), `hats` (any headwear — caps, bucket hats, beanies),
+   `accessories` (belts, scarves, jewelry, wallets, ties, socks — NOT hats),
+   `glasses` (sunglasses/eyewear). Decision rules:
    polo → `shirts`; blazer → `outerwear`; long-sleeve tee → `hoodies` (NOT
-   t-shirts); visible knit stitches → `knitwear`, smooth fabric → `hoodies`.
+   t-shirts); visible knit stitches → `knitwear`, smooth fabric → `hoodies`;
+   any cap/hat/beanie → `hats` (NOT accessories).
    If genuinely unsure, set `category = null` — it surfaces on /admin/cleanup
    for a manual pick.
 4. **Upsert the row** — via the Management-API curl pattern (see
@@ -87,6 +96,106 @@ next import is faster and more reliable than this one.
 
 ## Scrape gotchas (learned the hard way)
 
+- **STANDARD WORKFLOW for every Yupoo agent-catalog album (chaosmade, makemood,
+  Taurus, etc.): open the album's buy-link THROUGH Superbuy and treat that page as
+  the source of truth — NOT the Yupoo album.** The Yupoo album is only good for
+  clean images; everything else must be confirmed on Superbuy
+  (`superbuy.com/en/page/buy/?url=<encoded weidian-or-taobao buy-link>`, ~12s to
+  load a weidian link). On that page verify ALL of:
+  - **Availability** — if it says "unable to purchase… no longer available", the
+    item is dead → set `sold_out = true` (don't publish it as buyable). Yupoo keeps
+    showing sold-out albums forever, so this is the #1 thing it hides.
+  - **Price** — read the real `≈US$` (→ `round(usd*1.2)`), and store the ¥ as
+    `cost_cny`. Don't price off the Yupoo album ¥ (can differ from the live listing).
+  - **In-stock sizes** — solid-border = in stock, dashed = OOS (see the size-border
+    rule below). The album's size chart shows the size RUN, never the stock.
+  - **Colors + item type** — the Superbuy title/variant selector is authoritative.
+    A Yupoo montage routinely misreads: two stacked tees look like a "set" (it's a
+    2-color tee), a zip crewneck looks like a co-ord, a long-sleeve reads as a tee,
+    and the album's hero color can be a different variant than the buy-link defaults
+    to. Fix `colors`, `category`, and the color in `display_title` from what Superbuy
+    actually shows.
+  - **Multi-color = split, sourcing BOTH in parallel.** When Superbuy's color
+    selector lists 2+ colors, the Yupoo album almost always shot every colorway too.
+    Split into one product per color: pull THAT color's images from the Yupoo grid,
+    and take the authoritative name / color / size run / price from Superbuy. Don't
+    collapse a multi-color listing into one row with a `colors` array — that's a
+    stopgap, not the target (each color gets its own card + own hero).
+- **Image source priority: Yupoo grid > Superbuy > Weidian.** If the buy-link came
+  from a Yupoo album, ALWAYS use the album's grid images (clean, watermark-free) —
+  not the Superbuy or weidian photos. Only fall back to Superbuy's gallery images
+  when the Yupoo album has none for that colorway.
+  Only fall back to the Yupoo ¥ + a default size run if Superbuy hard-blocks the
+  item with a risk alert (rare). Bulk-importing straight from the album ¥/images
+  without this pass ships sold-out and mislabeled products — always do the pass.
+- **Availability + in-stock sizes are fully DOM-scriptable (no screenshots) — this
+  is how to sweep the catalog.** On a loaded Superbuy buy page, from an in-page
+  `javascript_tool`: dead item = body text contains `no longer available` /
+  `unable to purchase`; cost = `body.match(/CN\s*[¥￥]\s*([\d.]+)/)`; size buttons =
+  `.sku-item.text-li` (color swatches are `.sku-item.img-li`), and an OUT-OF-STOCK
+  size carries the class `disabled` (in-stock = `.sku-item.text-li` WITHOUT
+  `disabled`). Run this across a worklist to find dead + short-sized items cheaply.
+  Pace it with tabs. **Measured 2026-08-14: 41 sequential loads across 3 tabs
+  (~14 rounds, ~10s/round) with ZERO account ban** — Superbuy tolerates sustained
+  3-tab sweeping. The only "stops": (1) the color-click loop FREEZING the renderer
+  on a 20+ variant-swatch bag page → CAP the color loop, skip clicking when
+  `.sku-item.img-li` count > 8 (those are variant-SKU bags with no real sizes
+  anyway); (2) occasional per-ITEM "risk alert" blocks (`risk:true` — body has
+  "risk alert / temporarily unable to process") which are item-specific, NOT an
+  account ban (other tabs keep working) → flag that item unverifiable, move on.
+  So pace for renderer stability, not for bans. (curl/API won't work —
+  Superbuy's `front.superbuy.com/crawler` API needs signed params, the buy page
+  full-reloads so you can't hook it, and weidian/superbuy both block plain curl.)
+- **PER-COLORWAY: a multi-color listing has DIFFERENT in-stock sizes per color, so
+  click each color swatch and read that color's sizes.** In the sweep JS, loop
+  `.sku-item.img-li`, `.click()` each, `await` ~500ms, then read `.sku-item.text-li`
+  non-`disabled`. Map each Superbuy color to its split colorway row (`#<color>`
+  anchor / color in `display_title`) and write that color's sizes to THAT row.
+  Flag any Superbuy color with NO matching row — it's a colorway we're missing and
+  should add (e.g. an MVT jean had blue/black/white/grey but only 3 rows existed).
+- **In-stock size detection = read the Superbuy size-button BORDER, don't just
+  save the whole range.** On the Superbuy buy page each size button is either
+  SOLID-bordered (in stock) or DASHED/faint-grey-bordered (out of stock — clicking
+  it won't select). Only save the solid-bordered sizes to `size_options`. Zoom the
+  size row (`computer:zoom` a ~165x40 region) and eyeball it; the dashed ones are
+  visibly lighter. (Clicking a size shows `Stock: N` in the Quantity row too, but
+  the border tell is one glance for the whole row.) NOTE: Superbuy's cached stock
+  can lag the live Taobao listing — if Hampus says a specific size set from his own
+  Taobao check, trust HIS list over the border (better to under-list than sell OOS).
+- **alicdn/taobao image download recipe: `curl -H "User-Agent: Mozilla/5.0
+  (Macintosh)"` with NO Referer header.** Extract the exact `img.currentSrc` (the
+  bare `.../iN/<seller>/<objid>_!!<seller>.jpg` — do NOT strip/rebuild it), then
+  curl it with a browser UA and no referer → returns the real full-res JPEG
+  (~1200²). A Referer header makes alicdn serve a WebP-in-a-.jpg (still openable,
+  `sips -s format jpeg` fixes it); a wrong/rebuilt path or `Referer: item.taobao.com`
+  can return a 49-byte placeholder gif (`sz<3000` → skip). Strip any `~crop,a,b,c,d~`
+  segment from the objid before the `_!!seller` (take `${obj%%~*}`). Char-code the
+  compact `iN:objid` list to dodge DLP; color-swatch listings only swap the FIRST
+  gallery objid per color, the rest are shared worn shots — montage + split by eye.
+- **B197 SHOP / "Vujade0NN-…" (taobao seller `1105574384`) = a minimalist Korean-
+  style house line** (loose washed jeans, half-zip stand-collar knits, leather
+  crossbody bags, cashmere jackets). "Vujade" is the line name, brand is otherwise
+  unconfirmed — import with `brand='Vujade'` and flag for a rename. INFINITE Club
+  (seller `2510981490`) is the Martine-Rose / ERL / Our-Legacy rep store used for
+  most of this batch.
+- **XWCL / `weidian1413694634` (a rep-shoe store) = thin Superbuy gallery, rich
+  weidian description.** The Superbuy buy page shows only the promo BANNER (a
+  "P-rda Collapse / Dries / NEW" collage) + a disclaimer + the size chart — NO
+  clean product photos. The real per-color photos AND the size chart live in the
+  weidian item DESCRIPTION: navigate the tab to `weidian.com/item.html?itemID=<id>`,
+  scroll the whole page (see async-scroll note below), then extract
+  `geilicdn.com/weidian1413694634-<objid>_WxH.jpg` imgs with `w,h>=1000`. Those
+  description photos carry baked-in `xwcL`/`xw`/`zp` watermarks (unavoidable — pick
+  the least-intrusive). The promo banner is the CLEANEST source of heroes: it shows
+  every colorway stacked on pure white, so `magick <banner> -crop WxH+X+Y` it into
+  one clean side-profile hero per colour (top shoe vs bottom shoe). XWCL's Prada
+  size chart is `Nike our size → Pr-da → MM(mm insole)`; insole mm/10 = insole_cm
+  for a shoes `size_guide.measurements.insole_length`.
+- **Async full-page scroll-harvest can freeze the heavy Superbuy buy page** (CDP
+  `Runtime.evaluate` times out at 45s, renderer unresponsive). Run the
+  `window.scrollTo`-in-a-loop + `harvest()` accumulator on the LIGHTER weidian
+  item page, not the Superbuy wrapper. On Superbuy, prefer a single static
+  `querySelectorAll('img')` snapshot of the already-loaded gallery region.
 - **Superbuy buy page = warm-once.** CAPTCHA appears once; Hampus solves it, then
   the session stays warm for the whole batch. Reuse the same tab.
 - **Main gallery vs. recommendations.** Superbuy shows the seller's OTHER products
@@ -223,6 +332,16 @@ next import is faster and more reliable than this one.
   a single product with a `colors` array of many — that array is for shades of the
   SAME hero shot; genuinely different-looking pieces get their own row + own hero.
   Shared title + " — <Colour>", distinct `source_link` via `#<colour-slug>` anchor.
+- **Sunglasses = split into per-colour products BY DEFAULT.** Eyewear albums almost
+  always bundle many colourways of ONE frame (a family-grid shot + one clean shot per
+  colour). Unless Hampus names specific colours he wants, break every distinct colour
+  into its OWN product (own hero = that colour's individual shot; keep the family-grid
+  shots as secondary gallery images so the buyer sees the range). Re-fetch the FULL
+  album first — the 6-image import cap misses individual colour shots; pull every
+  `photo.yupoo.com/<shop>/<hash>/` hash, download all, montage, then one row per colour
+  with a `#<colour-slug>` source_link anchor. Two different FRAMES in one shop (e.g.
+  GG1558S rectangular vs GG1984SK round) are different products, not colourways — keep
+  both, but drop a redundant duplicate colour (e.g. a 2nd plain "Black") if Hampus flags it.
 - **Colour-splitting mixed listings — contact sheet.** A multi-colour listing's
   images are usually SHARED (selecting a colour doesn't swap the gallery). To split,
   `magick montage *.jpg -tile 4x4 -geometry 220x220+4+4 -background white sheet.jpg`
@@ -251,12 +370,19 @@ next import is faster and more reliable than this one.
 
 ## Rules
 
-- **Pricing uses the HOUSE FX ≈ 0.14, NOT Superbuy's shown "≈US$".** Superbuy pads
-  its displayed USD (~0.16 CNY→USD); the catalog is priced at the real rate.
-  `price_usd = round(cost_cny * 0.14 * 1.20) = round(cost_cny * 0.168)`. Read the
-  ¥ `cost_cny` from the buy page and compute from that — do NOT multiply Superbuy's
-  dollar figure. (Sanity-check against the catalog: `price_usd/cost_cny/1.2` should
-  land ~0.14.)
+- **`size_options` = in-stock sizes ONLY, read off the Superbuy button borders
+  (solid = in stock, dashed/faint = OOS). Never save the full selector range.**
+  Re-check per color on multi-color listings. If Hampus states a size set from his
+  own Taobao check, his list wins over Superbuy's (possibly stale) border. See
+  Procedure step 1.
+- **Pricing is based on Superbuy's shown "≈US$" (that is where Hampus actually
+  buys), × 1.20 margin.** `price_usd = round(superbuy_usd * 1.20)`. Read BOTH the
+  Superbuy `≈US$` figure and the ¥ `cost_cny` off the buy page; store `cost_cny`
+  as-is and set `price_usd` from the Superbuy USD. Superbuy's rate is ~0.1603
+  CNY→USD, so equivalently `price_usd ≈ round(cost_cny * 0.1603 * 1.20) =
+  round(cost_cny * 0.192)` — prefer computing from the actual Superbuy USD shown.
+  (Older catalog rows were priced at the retired house rate `cost_cny * 0.168`;
+  do not retro-reprice them unless asked.)
 - **De-dupe by item id, not raw `source_link`.** `import-batch` matches on exact
   `source_link`, but the SAME product saved once as `item.taobao.com/item.htm?id=X`
   and once as the `superbuy.com/...url=...X` wrapper are two different strings → a
@@ -269,9 +395,28 @@ next import is faster and more reliable than this one.
 - Junk source titles are fine at scrape time — Hampus renames in
   /admin/products. Don't skip the row for a bad title.
 - Price unparseable → `price_usd = null` (renders "Quote on request").
+- **`display_title` MUST follow the catalog format: `[Detail] [Garment] — [Color]`**
+  — tight (aim 2-4 words before the dash), Title Case, a simple garment noun
+  (Tee, Polo, Hoodie, Sweatshirt, Sweater, Cardigan, Jacket, Jeans, Trousers,
+  Cap, Bag, Belt, Sneakers…), NO brand, NO SKU, NO sizes, NO quotes-around-slogans.
+  Plain colors: Charcoal/Navy/Coffee/Grey — never "Dark Black Gray", "Navy Blue",
+  "Brown Coffee". **Colorway siblings share ONE identical base name**, only the
+  `— <Color>` differs (e.g. `Half-Zip Wool Sweater — Black` / `— Coffee` / `— Navy`).
+  If you hand-write titles, match this exactly; the canonical formatter is
+  `node scripts/retitle-format.mjs --ids <csv>` (needs GEMINI_API_KEY) — run it and
+  eyeball the result (it can leave messy colors / mismatched siblings, fix by SQL).
 - After upsert + image upload, run the post-import passes:
   `retag-heroes` (auto via import-batch) → `propose-display-titles` →
   `estimate-weights` so the card name, hero, and shipping weight are set.
+- **`display_title` is REQUIRED on every row — set it IN the insert.** The auto
+  post-import chain (retag → propose-display-titles → estimate-weights) ONLY fires
+  on the `import-batch.mjs` path. A hand-built **raw/bulk SQL `insert`** (e.g. many
+  rows at once) bypasses it, so `display_title` stays NULL and the card falls back
+  to the brand-included `title` — inconsistent with the catalog. When you bulk-insert,
+  either include `display_title` (brand-stripped `[Detail] [Garment] — [Color]`) in
+  the INSERT, or immediately run `propose-display-titles`/`retitle-format` on the new
+  ids. Quick brand-strip when the raw `title` is already `Brand [Detail] Garment — Color`:
+  `update products set display_title = btrim(substr(title, length(brand)+2)) where <new rows> and title like brand||' %';`
 - **Yupoo hides colorways — ALWAYS cross-check the buy link on Superbuy/Weidian.**
   A Yupoo album typically shows ONE colorway even when the listing sells several
   (Hampus's rule, 2026-07-31: "when you see a Yupoo album that might have two

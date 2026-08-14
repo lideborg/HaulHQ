@@ -56,7 +56,9 @@ export default async function SetupPage({
               ? "That username is taken. Pick another."
               : error === "invalid"
                 ? "This link is no longer valid."
-                : null;
+                : error === "email"
+                  ? "Enter a valid email so we can send order updates."
+                  : null;
 
   return (
     <main className="mx-auto max-w-xs px-6 py-24">
@@ -64,8 +66,8 @@ export default async function SetupPage({
         Set up your account
       </h1>
       <p className="mb-6 text-xs text-neutral-500">
-        Pick a username to sign in with, or keep the private one below. Then
-        choose a password.
+        Pick a username to sign in with, or keep the private one below. Add
+        your email for order updates, then choose a password.
       </p>
       <form action={setPassword} className="space-y-3">
         <input type="hidden" name="token" value={token} />
@@ -84,6 +86,15 @@ export default async function SetupPage({
             your own.
           </p>
         </div>
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Email"
+          autoComplete="email"
+          autoCapitalize="none"
+          className="w-full border border-neutral-300 px-3 py-2 text-sm"
+        />
         <input
           type="password"
           name="password"

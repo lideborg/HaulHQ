@@ -4,6 +4,7 @@ import { CategorySidebar } from "@/components/CategorySidebar";
 import { ProductCard } from "@/components/ProductCard";
 import { SoldOutToggle, SearchBox } from "@/components/ShopControls";
 import { ShopSortFilter } from "@/components/ShopSortFilter";
+import { ScrollRestorer } from "@/components/ScrollRestorer";
 import {
   getPublishedProducts,
   getShopFacets,
@@ -66,6 +67,7 @@ export default async function ShopPage({
   const sellerGroups = [...bySeller.entries()].slice(0, 6);
   return (
     <div className="flex flex-col gap-8 md:flex-row">
+      <ScrollRestorer />
       <aside className="w-full shrink-0 md:w-52 md:pr-6">
         <div className="mb-6">
           <SoldOutToggle handle={handle} brand={brand} category={category} q={q} showAll={showAll} />

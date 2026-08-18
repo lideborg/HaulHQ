@@ -61,7 +61,16 @@ export default async function FriendProductPage({
       <div className="mt-8 md:mt-0">
         <div className="md:sticky md:top-8">
           <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-neutral-500">
-            {product.brand}
+            {product.brand ? (
+              <Link
+                href={`/${handle}/shop?brand=${encodeURIComponent(product.brand)}`}
+                className="hover:text-black hover:underline"
+              >
+                {product.brand}
+              </Link>
+            ) : (
+              product.brand
+            )}
           </p>
           <h1 className="mt-2 text-lg font-medium tracking-tight">{name}</h1>
           <p className="mt-1 text-sm text-neutral-600">{price}</p>

@@ -139,8 +139,33 @@ function euFromLabel(label: string): number | null {
   return m ? parseFloat(m[1]) : null;
 }
 
-// Friend-facing copy for an out-of-range match. Keep it honest and specific.
-const NO_FIT_COPY = "Looks like we don't carry your size in this one.";
+// Out-of-range philosophy (Hampus, Aug 2026): never pretend the nearest size
+// fits, but never leave the friend with a dead end either. Name the extreme
+// size in their direction and say plainly how it would sit on them
+// ("XS is the smallest this comes in and it would fit loose on you: ...").
+// size stays null so the UI doesn't preselect a false match.
+
+// Index of the smallest/largest usable value in a chart row, restricted to
+// sizes that are actually orderable (in `available`, when it overlaps).
+function extremeIdx(
+  row: number[],
+  sizes: string[],
+  available: string[],
+  which: "min" | "max",
+): number {
+  const usable = (i: number) =>
+    !Number.isNaN(row[i]) && (available.length === 0 || available.includes(sizes[i]));
+  let pick = -1;
+  row.forEach((v, i) => {
+    if (!usable(i)) return;
+    if (pick === -1 || (which === "min" ? v < row[pick] : v > row[pick])) pick = i;
+  });
+  if (pick === -1) row.forEach((v, i) => {
+    if (Number.isNaN(v)) return;
+    if (pick === -1 || (which === "min" ? v < row[pick] : v > row[pick])) pick = i;
+  });
+  return pick;
+}
 
 export function recommendSize(
   m: Measurements | null,
@@ -169,8 +194,15 @@ export function recommendSize(
       if (best === -1) return null;
       const room = insole[best] - foot;
       if (room < 0.2 || room > 2.2) {
-        const dir = room < 0.2 ? "largest size is still too small" : "smallest size is still too big";
-        return { size: null, reason: `${NO_FIT_COPY} The ${dir} for your ~${foot}cm foot (closest insole is ${r1(insole[best])}cm).` };
+        const tooBig = room > 2.2;
+        const ex = extremeIdx(insole, product.size_guide.sizes, product.size_options, tooBig ? "min" : "max");
+        const exSize = product.size_guide.sizes[ex];
+        return {
+          size: null,
+          reason: tooBig
+            ? `${exSize} is the smallest this comes in and it would run roomy on you: ${r1(insole[ex])}cm insole against your ~${foot}cm foot.`
+            : `${exSize} is the biggest this comes in and it would run tight on you: ${r1(insole[ex])}cm insole against your ~${foot}cm foot.`,
+        };
       }
       const size = product.size_guide.sizes[best];
       return { size, reason: `This ${size} has a ${r1(insole[best])}cm insole against your ~${foot}cm foot.` };
@@ -183,8 +215,14 @@ export function recommendSize(
       Math.abs(b.cm - foot) < Math.abs(a.cm - foot) ? b : a);
     // More than ~one EU size (0.67cm) off at the end of the run = out of range.
     if (Math.abs(best.cm - foot) > 0.75) {
-      const dir = best.cm < foot ? "biggest size runs smaller than" : "smallest size runs bigger than";
-      return { size: null, reason: `${NO_FIT_COPY} The ${dir} your ~${foot}cm foot (closest is EU ${best.label} at ~${best.cm}cm).` };
+      const tooBig = best.cm > foot;
+      const ex = eus.reduce((a, b) => (tooBig ? (b.cm < a.cm ? b : a) : (b.cm > a.cm ? b : a)));
+      return {
+        size: null,
+        reason: tooBig
+          ? `EU ${ex.label} is the smallest this comes in and it would run roomy on you: ~${ex.cm}cm against your ~${foot}cm foot.`
+          : `EU ${ex.label} is the biggest this comes in and it would run tight on you: ~${ex.cm}cm against your ~${foot}cm foot.`,
+      };
     }
     return { size: best.label, reason: `EU ${best.label} runs about ${best.cm}cm against your ~${foot}cm foot.` };
   }
@@ -222,7 +260,11 @@ export function recommendSize(
       );
     // No exact range hit and the nearest range is >1.5in away = out of the run.
     if (!hit && (waistIn < picked.lo - 1.5 || waistIn > picked.hi + 1.5)) {
-      return { size: null, reason: `${NO_FIT_COPY} The sizes run ${opts[0].label}–${opts[opts.length - 1].label} against your ~${waistIn}in waist.` };
+      const fit = waistIn < picked.lo ? "run loose" : "run tight";
+      return {
+        size: null,
+        reason: `${picked.label} is the closest size this comes in and it would ${fit} on you: it fits a ${picked.lo}-${picked.hi}in waist against your ~${r1(waistIn)}in.`,
+      };
     }
     return { size: picked.label, reason: `${picked.label} matches your ~${waistIn}in waist.` };
   }
@@ -250,13 +292,17 @@ export function recommendSize(
     const picked = nearestAvailable(guide.sizes[best], guide.sizes, product.size_options);
     const ease = chest[guide.sizes.indexOf(picked.size)] - body;
     // Under ~2cm of ease it won't close comfortably; way past the preferred
-    // ease band it hangs like a tent. Either way, say so instead of guessing.
+    // ease band it hangs like a tent. Name the extreme size and how it sits.
     if (ease < 2 || ease > mid + 12) {
-      const dir =
-        ease < 2
-          ? `the largest size measures chest ${r1(chest[guide.sizes.indexOf(picked.size)])}cm against your ~${body}cm`
-          : `the smallest size measures chest ${r1(chest[guide.sizes.indexOf(picked.size)])}cm against your ~${body}cm`;
-      return { size: null, reason: `${NO_FIT_COPY} On the chart ${dir}.` };
+      const tooBig = ease > mid + 12;
+      const ex = extremeIdx(chest, guide.sizes, product.size_options, tooBig ? "min" : "max");
+      const exCm = r1(chest[ex]);
+      return {
+        size: null,
+        reason: tooBig
+          ? `${guide.sizes[ex]} is the smallest this comes in and it would fit loose on you: chest ${exCm}cm against your ~${body}cm.`
+          : `${guide.sizes[ex]} is the biggest this comes in and it would run tight on you: chest ${exCm}cm against your ~${body}cm.`,
+      };
     }
     const feel = ease < 4 ? "a snug fit" : ease > 14 ? "a relaxed fit" : "a regular fit";
     const chartCm = r1(chest[guide.sizes.indexOf(picked.size)]);
@@ -285,8 +331,15 @@ export function recommendSize(
     const ease = waist[guide.sizes.indexOf(picked.size)] - body;
     // Below −1cm it won't button; past +8cm it slides off even with a belt.
     if (ease < -1 || ease > 8) {
-      const dir = ease < -1 ? "largest" : "smallest";
-      return { size: null, reason: `${NO_FIT_COPY} The ${dir} size measures waist ${chartCm}cm against your ~${body}cm.` };
+      const tooBig = ease > 8;
+      const ex = extremeIdx(waist, guide.sizes, product.size_options, tooBig ? "min" : "max");
+      const exCm = r1(waist[ex]);
+      return {
+        size: null,
+        reason: tooBig
+          ? `${guide.sizes[ex]} is the smallest this comes in and it would sit loose on you: waist ${exCm}cm against your ~${body}cm.`
+          : `${guide.sizes[ex]} is the biggest this comes in and it likely won't close on you: waist ${exCm}cm against your ~${body}cm.`,
+      };
     }
     const note = picked.fallback ? " (closest available)" : "";
     return {

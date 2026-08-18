@@ -261,9 +261,10 @@ export function recommendSize(
     // No exact range hit and the nearest range is >1.5in away = out of the run.
     if (!hit && (waistIn < picked.lo - 1.5 || waistIn > picked.hi + 1.5)) {
       const fit = waistIn < picked.lo ? "run loose" : "run tight";
+      const range = picked.lo === picked.hi ? `${picked.lo}` : `${picked.lo}-${picked.hi}`;
       return {
         size: null,
-        reason: `${picked.label} is the closest size this comes in and it would ${fit} on you: it fits a ${picked.lo}-${picked.hi}in waist against your ~${r1(waistIn)}in.`,
+        reason: `${picked.label} is the closest size this comes in and it would ${fit} on you: it fits a ${range}in waist against your ~${r1(waistIn)}in.`,
       };
     }
     return { size: picked.label, reason: `${picked.label} matches your ~${waistIn}in waist.` };

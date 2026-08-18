@@ -25,12 +25,25 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    in-stock set can differ per color — re-check after each color swap. Superbuy's
    cache can lag Taobao; if Hampus gives a size set from his own Taobao check,
    trust his list over the border (better to under-list than sell an OOS size).
-2. **Size guide** — download the size-chart detail image (usually first
-   detail image), Read it, transcribe into `size_guide` JSON:
+2. **Size guide — MANDATORY when the source has ANY chart. Non-negotiable.**
+   If a measurement table exists anywhere on the listing (detail image, gallery
+   image, description), it MUST be transcribed into `size_guide` before the
+   import is done — the friend-facing right-side "Size guide" panel only renders
+   from this JSON, and an untranscribed chart image in the gallery does NOT count
+   (that was the root cause of a 400-product backfill in Aug 2026). Download the
+   chart image, Read it, transcribe:
    `{"unit":"cm","note":"...","sizes":[...],"measurements":{"length":[...],...}}`
    Keys: length, chest or pit_to_pit, shoulder, sleeve, waist, hip, thigh,
-   outer_length. Half-measurements: keep as-is but name them (`pit_to_pit`,
-   `half_waist`) — the UI labels them correctly. No chart → `size_guide = null`.
+   outer_length, hem, insole (shoes: EU size rows + insole cm). Magnitude rule:
+   a bust/chest value >=80 is a full circumference → `chest`; <80 is a flat half
+   measurement → `pit_to_pit`. Elastic/stretch ranges stay strings ("78-90") —
+   the UI passes them through. Half-measurements: keep as-is but name them
+   (`pit_to_pit`, `half_waist`) — the UI labels them correctly. Genuinely no
+   chart anywhere → `size_guide = null` and SAY SO in your import summary so it
+   can be sourced later. On BULK imports (Yupoo album batches), the chart is
+   usually album image index 1 — verify per album, sometimes it's last or absent.
+   Also reconcile `size_options` with the chart's real labels (numeric 44-52
+   charts get numeric options, short runs like M/L/XL only get those three).
 3. **Categorize** — assign exactly one `category` slug by looking at the hero
    image + title. The 12 slugs (keep in sync with `web-v2/src/lib/categories.ts`):
    `t-shirts` (SHORT-sleeve tee only, no collar), `shirts` (button-ups,
@@ -367,6 +380,25 @@ next import is faster and more reliable than this one.
   (circumference), 胸宽=chest width (half — but if the number is >100 it's really
   circumference, seller mislabel), 肩宽=shoulder, 袖长=sleeve, 腰围=waist, 臀围=hip.
   `喜欢宽松可拍大一码`=size up for loose; `手工测量1-3cm误差`=±1-3cm.
+- **NEVER leave `sheet.jpg` (a montage contact sheet) in a staging dir before
+  running `upload-product-images.mjs`** — the script uploads EVERY image in the
+  dir sorted, and "sheet.jpg" sorts after the numbered files, so the contact
+  sheet ships as the last gallery image. `rm` all sheets first. Also, parallel
+  bulk uploads can hit Supabase "Too many connections" — retry the failed
+  product with a short sleep; it succeeds on the second pass.
+- **steven-1989 (Yupoo) is fully curl-able**: album HTML contains the og:title
+  ("￥<price>  <brand slang + CN title> <size range S-XL>  <code>#") and all
+  photo hashes (`photo.yupoo.com/steven-1989/<hash>`). Brand slang there: MIU=
+  Miu Miu, M6=MM6 Maison Margiela (0-23 numbers logo confirms), ROW=The Row,
+  RO=Rick Owens, AC=Acne Studios; Goldwin/Needles/Noah written out. Download
+  needs `Referer: https://steven-1989.x.yupoo.com/`.
+- **Guidi factory shop (Taobao seller 131311848, "Ghost Emperor")** sells
+  788Z/PL1/PL2 horsehide boots with SEPARATE men's and women's lasts on one
+  listing: SKU labels like "38 men" and "38 women's models" coexist. Store
+  size_options with the gender marker ("38 M", "38 W"), keep only sizes without
+  a "needs to be customized" note, and note the excluded custom sizes in
+  `admin_sizing_note`. Superbuy's buy wrapper loaded these fine on a warm
+  session (no Risk Alert), gallery = `bao/uploaded` alicdn paths.
 
 ## Rules
 

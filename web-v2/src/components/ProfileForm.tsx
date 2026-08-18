@@ -39,7 +39,11 @@ export function ProfileForm({
   const [weight, setWeight] = useState(m0.weight_kg?.toString() ?? "");
   const [jeans, setJeans] = useState(m0.jeans_waist_in?.toString() ?? "");
   const [waistUnit, setWaistUnit] = useState<"in" | "cm">("in");
-  const [shoeSystem, setShoeSystem] = useState<"us" | "eu">(m0.shoe?.system ?? "us");
+  // Legacy rows saved plain "us" with the gender field disambiguating; surface
+  // those as the explicit US Women's option so what's shown matches the math.
+  const [shoeSystem, setShoeSystem] = useState<"us" | "us-w" | "eu">(
+    m0.shoe?.system === "us" && m0.gender === "female" ? "us-w" : (m0.shoe?.system ?? "us"),
+  );
   const [shoeVal, setShoeVal] = useState(m0.shoe?.value?.toString() ?? "");
   const [fitPref, setFitPref] = useState(m0.fit_pref ?? "");
   const [chest, setChest] = useState(m0.explicit?.chest_cm?.toString() ?? "");
@@ -218,11 +222,16 @@ export function ProfileForm({
             <input className={input} inputMode="decimal" placeholder={waistUnit === "in" ? "32" : "81"} value={jeans} onChange={(e) => setJeans(e.target.value)} /></div>
           <div><span className={label}>Shoe size</span>
             <div className="flex gap-2">
-              <select className={input + " w-20"} value={shoeSystem} onChange={(e) => setShoeSystem(e.target.value as "us" | "eu")}>
-                <option value="us">US</option><option value="eu">EU</option>
+              <select className={input + " w-28"} value={shoeSystem} onChange={(e) => setShoeSystem(e.target.value as "us" | "us-w" | "eu")}>
+                <option value="us">US Men&rsquo;s</option>
+                <option value="us-w">US Women&rsquo;s</option>
+                <option value="eu">EU</option>
               </select>
-              <input className={input} inputMode="decimal" placeholder={shoeSystem === "us" ? "9" : "42"} value={shoeVal} onChange={(e) => setShoeVal(e.target.value)} />
+              <input className={input} inputMode="decimal" placeholder={shoeSystem === "us" ? "9" : shoeSystem === "us-w" ? "7.5" : "42"} value={shoeVal} onChange={(e) => setShoeVal(e.target.value)} />
             </div>
+            <p className="mt-1 text-[10px] text-neutral-400">
+              US sizes differ for men and women, so pick the scale your size is in.
+            </p>
           </div>
         </div>
 

@@ -9,7 +9,22 @@ import { useEffect } from "react";
 export function ScrollRestorer() {
   useEffect(() => {
     const key = () => `scroll:${window.location.pathname}${window.location.search}`;
-    const saved = sessionStorage.getItem(key());
+    // sessionStorage can throw (private mode / quota) — never let it break the page.
+    const read = (k: string) => {
+      try {
+        return sessionStorage.getItem(k);
+      } catch {
+        return null;
+      }
+    };
+    const write = (k: string, v: string) => {
+      try {
+        sessionStorage.setItem(k, v);
+      } catch {
+        /* ignore */
+      }
+    };
+    const saved = read(key());
     if (saved != null) {
       const y = parseInt(saved, 10) || 0;
       // Wait for the grid to lay out before jumping.
@@ -19,7 +34,7 @@ export function ScrollRestorer() {
     const onScroll = () => {
       if (t) return;
       t = window.setTimeout(() => {
-        sessionStorage.setItem(key(), String(window.scrollY));
+        write(key(), String(window.scrollY));
         t = undefined;
       }, 150);
     };
@@ -28,7 +43,7 @@ export function ScrollRestorer() {
       window.removeEventListener("scroll", onScroll);
       if (t) clearTimeout(t);
       // Capture the final position when navigating away (into a product).
-      sessionStorage.setItem(key(), String(window.scrollY));
+      write(key(), String(window.scrollY));
     };
   }, []);
   return null;

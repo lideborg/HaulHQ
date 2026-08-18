@@ -164,7 +164,8 @@ test("recommendSize: out-of-range body → honest no-fit, not a nearest guess", 
     category: "shoes", size_options: ["39", "40", "41", "42", "43", "44"], size_guide: null,
   });
   assert.equal(shoes!.size, null);
-  assert.match(shoes!.reason, /don't carry your size/);
+  // Advice names the smallest size and how it would sit, never a false match.
+  assert.match(shoes!.reason, /EU 39 is the smallest this comes in and it would run roomy/);
   // Same foot against an insole chart that bottoms out at 25.7cm (2.5cm of
   // slop, past the 2.2cm tolerance): no fit.
   const insole = recommendSize(rebecca, {
@@ -184,13 +185,14 @@ test("recommendSize: out-of-range body → honest no-fit, not a nearest guess", 
     size_guide: { unit: "cm", sizes: ["S", "M"], measurements: { chest: [92, 96] } },
   });
   assert.equal(tooSmall!.size, null);
-  assert.match(tooSmall!.reason, /don't carry your size/);
+  assert.match(tooSmall!.reason, /M is the biggest this comes in and it would run tight/);
   // Tops: chart starting far above the preferred ease band → smallest is too big.
   const tooBig = recommendSize(HAMPUS, {
     category: "t-shirts", size_options: ["L", "XL"],
     size_guide: { unit: "cm", sizes: ["L", "XL"], measurements: { chest: [126, 132] } },
   });
   assert.equal(tooBig!.size, null);
+  assert.match(tooBig!.reason, /L is the smallest this comes in and it would fit loose/);
 
   // Pants: body waist ~84 vs chart maxing at 80 → won't button.
   const pants = recommendSize(HAMPUS, {

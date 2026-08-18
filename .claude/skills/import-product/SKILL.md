@@ -424,6 +424,16 @@ next import is faster and more reliable than this one.
 
 - Never leave images on Yupoo/Weidian URLs (hotlink-protected — they will
   break). alicdn also gets migrated for consistency.
+- **display_title name part = MAX 3 WORDS** (hyphenated compounds count as one:
+  "Long-Sleeve" is one word), then " — <Color>". "Reflective 3M Drawstring
+  Running Shorts" is WRONG; "Running Shorts — Black" is right. No brand in it.
+  Hampus has had to ask for this twice — treat it like a schema constraint.
+- **ALWAYS import every colorway as its own product with a per-color hero.**
+  When a listing/album shows multiple colors: one row per color, and the
+  thumbnail (image_urls[0]) must show ONLY that color — hunt the album for that
+  color's solo front shot (download the FULL album, the per-color shots are
+  often past the first few images); crop a group shot only as a last resort.
+  A group shot or a back shot as hero is a defect, not a fallback.
 - Junk source titles are fine at scrape time — Hampus renames in
   /admin/products. Don't skip the row for a bad title.
 - Price unparseable → `price_usd = null` (renders "Quote on request").

@@ -2,7 +2,9 @@ export interface SizeGuide {
   unit: "cm" | "in";
   note?: string;
   sizes: string[];
-  measurements: Record<string, (number | null)[]>;
+  // Values are usually numbers in `unit`, but a cell can be a string when the
+  // chart gives a stretch range (e.g. an elastic waist "78-90").
+  measurements: Record<string, (number | string | null)[]>;
 }
 
 // One entry per image, aligned 1:1 with Product.image_urls (hero first).
@@ -61,7 +63,10 @@ export interface Measurements {
   height_cm?: number;
   weight_kg?: number;
   jeans_waist_in?: number;
-  shoe?: { system: "us" | "eu"; value: number };
+  // "us" is US Men's; "us-w" is US Women's (same foot, number runs 1.5 higher).
+  // Legacy rows may hold {system:"us"} for a female friend — shoeToFootCm still
+  // applies the gender offset for those.
+  shoe?: { system: "us" | "us-w" | "eu"; value: number };
   fit_pref?: "slim" | "true" | "oversized";
   // Explicit tape-measure values; when present they override estimates.
   explicit?: { chest_cm?: number; waist_cm?: number; shoulder_cm?: number; foot_cm?: number };

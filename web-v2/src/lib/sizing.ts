@@ -19,15 +19,19 @@ export function jeansWaistToCm(waistIn: number): number {
 }
 
 // Linear shoe lasts: men's US 6 = 24.4cm, +0.8cm per full size.
-// Women's US = men's minus 1.5 on the same last. EU: (eu − 2) × 2⁄3.
+// US Women's = men's number + 1.5 on the same foot ("us-w", or a legacy
+// {system:"us"} row saved by a female friend). EU: (eu − 2) × 2⁄3.
 export function shoeToFootCm(
-  system: "us" | "eu",
+  system: "us" | "us-w" | "eu",
   value: number,
   gender?: Measurements["gender"],
 ): number | null {
   if (!Number.isFinite(value)) return null;
   if (system === "eu") return r1(((value - 2) * 2) / 3);
-  const menUs = gender === "female" ? value - 1.5 : value;
+  const menUs =
+    system === "us-w" || (system === "us" && gender === "female")
+      ? value - 1.5
+      : value;
   return r1(24.4 + (menUs - 6) * 0.8);
 }
 
@@ -59,6 +63,16 @@ export interface SizeRec {
   reason: string;
 }
 
+// Honest failure: we matched the chart and the friend's body falls outside the
+// run this piece comes in. size:null tells the UI to show "we don't carry your
+// size in this one" instead of a misleading nearest pick.
+export interface NoFit {
+  size: null;
+  reason: string;
+}
+
+export type SizeAdvice = SizeRec | NoFit;
+
 const TOP_CATS = new Set([
   "t-shirts", "shirts", "knitwear", "hoodies", "blazers", "jackets", "outerwear",
 ]);
@@ -66,6 +80,15 @@ const PANT_CATS = new Set(["pants", "shorts"]);
 
 // Desired garment−body ease (cm) per fit preference, tops.
 const EASE_MID = { slim: 6, true: 11, oversized: 18 } as const;
+
+// A chart cell can be a stretch range like "78-90" — use its midpoint.
+function cellToNumber(v: number | string | null): number {
+  if (v == null) return NaN;
+  if (typeof v === "number") return v;
+  const nums = v.match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+  if (nums.length === 0) return NaN;
+  return nums.length === 1 ? nums[0] : (nums[0] + nums[1]) / 2;
+}
 
 // Pull one normalized full-circumference row (cm) out of a chart.
 function chartRow(
@@ -79,8 +102,9 @@ function chartRow(
     if (!row) continue;
     const isHalf = aliases.half.includes(key);
     return row.map((v) => {
-      if (v == null) return NaN;
-      let cm = v * toCm;
+      const n = cellToNumber(v);
+      if (Number.isNaN(n)) return NaN;
+      let cm = n * toCm;
       if (isHalf || cm < doubleBelow) cm *= 2;
       return cm;
     });
@@ -115,6 +139,9 @@ function euFromLabel(label: string): number | null {
   return m ? parseFloat(m[1]) : null;
 }
 
+// Friend-facing copy for an out-of-range match. Keep it honest and specific.
+const NO_FIT_COPY = "Looks like we don't carry your size in this one.";
+
 export function recommendSize(
   m: Measurements | null,
   product: {
@@ -122,7 +149,7 @@ export function recommendSize(
     size_options: string[];
     size_guide: SizeGuide | null;
   },
-): SizeRec | null {
+): SizeAdvice | null {
   if (!m) return null;
   const cat = product.category ?? "";
 
@@ -131,12 +158,20 @@ export function recommendSize(
     if (foot == null) return null;
     // Prefer an insole row; otherwise the EU size labels ARE the chart.
     const insole =
-      product.size_guide ? chartRow(product.size_guide, { full: ["insole_length", "foot_length"], half: [] }, 0) : null;
+      product.size_guide ? chartRow(product.size_guide, { full: ["insole", "insole_length", "foot_length"], half: [] }, 0) : null;
     if (insole && product.size_guide) {
-      let best = 0;
+      // Want ~1cm of toe room over the bare foot (0.2–2.2cm acceptable).
+      let best = -1;
       insole.forEach((v, i) => {
-        if (Math.abs(v - foot) < Math.abs(insole[best] - foot)) best = i;
+        if (Number.isNaN(v)) return;
+        if (best === -1 || Math.abs(v - foot - 1) < Math.abs(insole[best] - foot - 1)) best = i;
       });
+      if (best === -1) return null;
+      const room = insole[best] - foot;
+      if (room < 0.2 || room > 2.2) {
+        const dir = room < 0.2 ? "largest size is still too small" : "smallest size is still too big";
+        return { size: null, reason: `${NO_FIT_COPY} The ${dir} for your ~${foot}cm foot (closest insole is ${r1(insole[best])}cm).` };
+      }
       const size = product.size_guide.sizes[best];
       return { size, reason: `This ${size} has a ${r1(insole[best])}cm insole against your ~${foot}cm foot.` };
     }
@@ -146,6 +181,11 @@ export function recommendSize(
     if (eus.length === 0) return null;
     const best = eus.reduce((a, b) =>
       Math.abs(b.cm - foot) < Math.abs(a.cm - foot) ? b : a);
+    // More than ~one EU size (0.67cm) off at the end of the run = out of range.
+    if (Math.abs(best.cm - foot) > 0.75) {
+      const dir = best.cm < foot ? "biggest size runs smaller than" : "smallest size runs bigger than";
+      return { size: null, reason: `${NO_FIT_COPY} The ${dir} your ~${foot}cm foot (closest is EU ${best.label} at ~${best.cm}cm).` };
+    }
     return { size: best.label, reason: `EU ${best.label} runs about ${best.cm}cm against your ~${foot}cm foot.` };
   }
 
@@ -180,6 +220,10 @@ export function recommendSize(
       opts.reduce((a, b) =>
         Math.abs(b.mid - waistIn) < Math.abs(a.mid - waistIn) ? b : a,
       );
+    // No exact range hit and the nearest range is >1.5in away = out of the run.
+    if (!hit && (waistIn < picked.lo - 1.5 || waistIn > picked.hi + 1.5)) {
+      return { size: null, reason: `${NO_FIT_COPY} The sizes run ${opts[0].label}–${opts[opts.length - 1].label} against your ~${waistIn}in waist.` };
+    }
     return { size: picked.label, reason: `${picked.label} matches your ~${waistIn}in waist.` };
   }
 
@@ -205,6 +249,15 @@ export function recommendSize(
     if (best === -1) return null;
     const picked = nearestAvailable(guide.sizes[best], guide.sizes, product.size_options);
     const ease = chest[guide.sizes.indexOf(picked.size)] - body;
+    // Under ~2cm of ease it won't close comfortably; way past the preferred
+    // ease band it hangs like a tent. Either way, say so instead of guessing.
+    if (ease < 2 || ease > mid + 12) {
+      const dir =
+        ease < 2
+          ? `the largest size measures chest ${r1(chest[guide.sizes.indexOf(picked.size)])}cm against your ~${body}cm`
+          : `the smallest size measures chest ${r1(chest[guide.sizes.indexOf(picked.size)])}cm against your ~${body}cm`;
+      return { size: null, reason: `${NO_FIT_COPY} On the chart ${dir}.` };
+    }
     const feel = ease < 4 ? "a snug fit" : ease > 14 ? "a relaxed fit" : "a regular fit";
     const chartCm = r1(chest[guide.sizes.indexOf(picked.size)]);
     const note = picked.fallback ? " (closest available)" : "";
@@ -229,6 +282,12 @@ export function recommendSize(
     if (best === -1) return null;
     const picked = nearestAvailable(guide.sizes[best], guide.sizes, product.size_options);
     const chartCm = r1(waist[guide.sizes.indexOf(picked.size)]);
+    const ease = waist[guide.sizes.indexOf(picked.size)] - body;
+    // Below −1cm it won't button; past +8cm it slides off even with a belt.
+    if (ease < -1 || ease > 8) {
+      const dir = ease < -1 ? "largest" : "smallest";
+      return { size: null, reason: `${NO_FIT_COPY} The ${dir} size measures waist ${chartCm}cm against your ~${body}cm.` };
+    }
     const note = picked.fallback ? " (closest available)" : "";
     return {
       size: picked.size,

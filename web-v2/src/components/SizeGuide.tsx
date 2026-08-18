@@ -25,9 +25,11 @@ function label(key: string) {
 }
 
 // Stored values are in guide.unit; convert only when displaying the other unit.
-function display(v: number | null, from: "cm" | "in", to: "cm" | "in") {
+// A cell can be a string range (e.g. an elastic waist "78-90") — pass those
+// through unchanged rather than coercing to NaN on unit toggle.
+function display(v: number | string | null, from: "cm" | "in", to: "cm" | "in") {
   if (v == null) return "—";
-  if (from === to) return String(v);
+  if (typeof v !== "number" || from === to) return String(v);
   const converted = from === "cm" ? v / 2.54 : v * 2.54;
   return (Math.round(converted * 10) / 10).toFixed(1);
 }

@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { addToHaul } from "@/app/[handle]/haul-actions";
-import type { SizeRec } from "@/lib/sizing";
+import type { SizeAdvice } from "@/lib/sizing";
 
 export function AddToHaul({
   handle,
@@ -14,11 +14,11 @@ export function AddToHaul({
   handle: string;
   productId: string;
   sizes: string[];
-  recommended?: SizeRec | null;
+  recommended?: SizeAdvice | null;
   profileHref?: string | null;
 }) {
   const [size, setSize] = useState<string | null>(
-    recommended && sizes.includes(recommended.size)
+    recommended?.size != null && sizes.includes(recommended.size)
       ? recommended.size
       : (sizes[0] ?? null),
   );
@@ -57,7 +57,12 @@ export function AddToHaul({
               </button>
             ))}
           </div>
-          {recommended ? (
+          {recommended && recommended.size == null ? (
+            // Out of range: an honest heads-up beats a wrong nearest pick.
+            <p className="mt-1.5 text-[10px] leading-relaxed text-amber-700">
+              {recommended.reason}
+            </p>
+          ) : recommended ? (
             <div className="mt-1.5 text-[10px] leading-relaxed text-neutral-500">
               <p>
                 Based on your measurements, your size should be{" "}

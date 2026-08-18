@@ -19,6 +19,9 @@ test("shoe size to foot cm", () => {
   // women's US runs 1.5 sizes offset from men's on the same last
   assert.equal(shoeToFootCm("us", 8, "female"), shoeToFootCm("us", 6.5, "male"));
   assert.equal(shoeToFootCm("us", NaN, "male"), null);
+  // explicit US Women's system needs no gender field to convert correctly
+  assert.equal(shoeToFootCm("us-w", 8), shoeToFootCm("us", 6.5, "male"));
+  assert.equal(shoeToFootCm("us-w", 9.5, "female"), shoeToFootCm("us", 8, "male"));
 });
 
 test("chest estimation from height/weight/gender", () => {
@@ -152,6 +155,67 @@ test("recommendSize: no guessing", () => {
     category: "accessories", size_options: [], size_guide: null,
   });
   assert.equal(accessory, null);
+});
+
+test("recommendSize: out-of-range body → honest no-fit, not a nearest guess", () => {
+  // Foot 23.2cm (US W 6) on a men's-run shoe starting EU 39 (~24.7cm): no fit.
+  const rebecca = { gender: "female" as const, shoe: { system: "us-w" as const, value: 6 } };
+  const shoes = recommendSize(rebecca, {
+    category: "shoes", size_options: ["39", "40", "41", "42", "43", "44"], size_guide: null,
+  });
+  assert.equal(shoes!.size, null);
+  assert.match(shoes!.reason, /don't carry your size/);
+  // Same foot against an insole chart that bottoms out at 25.7cm (2.5cm of
+  // slop, past the 2.2cm tolerance): no fit.
+  const insole = recommendSize(rebecca, {
+    category: "shoes", size_options: ["40", "41"],
+    size_guide: { unit: "cm", sizes: ["40", "41"], measurements: { insole: [25.7, 26.4] } },
+  });
+  assert.equal(insole!.size, null);
+  // In-range foot still recommends normally.
+  const ok = recommendSize(HAMPUS, {
+    category: "shoes", size_options: ["40", "41", "42"], size_guide: null,
+  });
+  assert.equal(ok!.size, "41");
+
+  // Tops: body chest ~98 vs a chart maxing out at 96 → largest is too small.
+  const tooSmall = recommendSize(HAMPUS, {
+    category: "t-shirts", size_options: ["S", "M"],
+    size_guide: { unit: "cm", sizes: ["S", "M"], measurements: { chest: [92, 96] } },
+  });
+  assert.equal(tooSmall!.size, null);
+  assert.match(tooSmall!.reason, /don't carry your size/);
+  // Tops: chart starting far above the preferred ease band → smallest is too big.
+  const tooBig = recommendSize(HAMPUS, {
+    category: "t-shirts", size_options: ["L", "XL"],
+    size_guide: { unit: "cm", sizes: ["L", "XL"], measurements: { chest: [126, 132] } },
+  });
+  assert.equal(tooBig!.size, null);
+
+  // Pants: body waist ~84 vs chart maxing at 80 → won't button.
+  const pants = recommendSize(HAMPUS, {
+    category: "pants", size_options: ["44", "46"],
+    size_guide: { unit: "cm", sizes: ["44", "46"], measurements: { waist: [76, 80] } },
+  });
+  assert.equal(pants!.size, null);
+
+  // Belts: waist 31in against a run ending at 26in → no fit.
+  const belt = recommendSize(HAMPUS, {
+    category: "accessories", size_options: ["22-24", "24-26"], size_guide: null,
+  });
+  assert.equal(belt!.size, null);
+});
+
+test("recommendSize: stretch-range chart cells parse as midpoints", () => {
+  // Elastic waist "78-90" midpoint 84 sits right at his ~83.8cm body waist.
+  const rec = recommendSize(HAMPUS, {
+    category: "shorts", size_options: ["44", "46"],
+    size_guide: {
+      unit: "cm", sizes: ["44", "46"],
+      measurements: { waist: ["78-90", "82-94"], length: [56, 57] },
+    },
+  });
+  assert.equal(rec!.size, "44");
 });
 
 test("recommendSize: belt matches the jeans size to a US waist range", () => {

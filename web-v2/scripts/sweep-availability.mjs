@@ -33,20 +33,31 @@ const CONC = 6;
 for (let i = 0; i < bases.length; i += CONC) {
   await Promise.all(bases.slice(i, i + CONC).map(async (base) => {
     const items = byBase.get(base);
-    try {
-      const r = await fetch(base, {
-        headers: { "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15" },
-        redirect: "follow",
-        signal: AbortSignal.timeout(10_000), // black-holing hosts must not hang the sweep
-      });
-      const html = await r.text();
-      const isDead = /商品已下架|该商品不存在|宝贝不存在|商品不存在/.test(html);
-      const looksReal = /商品|价格|itemInfo|weidian/i.test(html);
-      if (isDead) { dead.push(...items); console.log(`DEAD  ${items.map(p => p.code).join(",")}  ${items[0].brand} — ${(items[0].title || "").slice(0, 40)}`); }
-      else if (!looksReal || html.length < 500) { uncertain += items.length; console.log(`?     ${items.map(p => p.code).join(",")}  (unclear — ${r.status}, ${html.length}b)`); }
-      else alive += items.length;
-    } catch (e) { uncertain += items.length; console.log(`?     ${items.map(p => p.code).join(",")}  (fetch err: ${e.message})`); }
+    // Transient resets and rate limits are common when sweeping hundreds of
+    // listings — retry each fetch up to 3 times with backoff before giving up.
+    let html = null, status = 0, lastErr = null;
+    for (let attempt = 0; attempt < 3 && html == null; attempt++) {
+      if (attempt > 0) await new Promise((res) => setTimeout(res, 2000 * attempt));
+      try {
+        const r = await fetch(base, {
+          headers: { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36" },
+          redirect: "follow",
+          signal: AbortSignal.timeout(15_000), // black-holing hosts must not hang the sweep
+        });
+        status = r.status;
+        html = await r.text();
+      } catch (e) { lastErr = e; }
+    }
+    if (html == null) { uncertain += items.length; console.log(`?     ${items.map(p => p.code).join(",")}  (fetch err after retries: ${lastErr?.message})`); return; }
+    // "itemSellable":false in the embedded JSON = off-shelf even when the
+    // 已下架 banner text isn't server-rendered.
+    const isDead = /商品已下架|该商品不存在|宝贝不存在|商品不存在/.test(html) || /"itemSellable"\s*:\s*false|itemSellable&#34;:false/.test(html);
+    const looksReal = /商品|价格|itemInfo|weidian/i.test(html);
+    if (isDead) { dead.push(...items); console.log(`DEAD  ${items.map(p => p.code).join(",")}  ${items[0].brand} — ${(items[0].title || "").slice(0, 40)}`); }
+    else if (!looksReal || html.length < 500) { uncertain += items.length; console.log(`?     ${items.map(p => p.code).join(",")}  (unclear — ${status}, ${html.length}b)`); }
+    else alive += items.length;
   }));
+  await new Promise((res) => setTimeout(res, 800)); // pace batches to dodge rate limits
 }
 
 console.log(`\nalive ${alive} · dead ${dead.length} · uncertain ${uncertain}`);

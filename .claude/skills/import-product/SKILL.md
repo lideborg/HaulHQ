@@ -13,6 +13,17 @@ are colorways, `size_guide` JSON read from the size-chart image, and
 
 ## Procedure
 
+0. **BUYABLE GATE (do this FIRST — Hampus buys everything via Superbuy).** A
+   product is only worth listing if its source is purchasable through Superbuy
+   right now. Resolve the real item link (Weidian/Taobao/1688) and confirm it is
+   sellable BEFORE creating any row: Weidian embeds `"itemSellable":true` +
+   `"stock":N` in the page JSON (curl-able); off-shelf shows `itemSellable:false`
+   / stock 0 / 已下架. If it is NOT sellable, STOP — do not import; tell Hampus
+   it is dead and offer to find a live source. Yupoo scout-shop albums (e.g. the
+   suppliervortex shops) attach buy-links that rot fast, so this check fails
+   often on them — never surface a product he cannot buy. (Superbuy "Risk Alert"
+   is an intermittent block, NOT a delisting — that one is not a sold-out.)
+
 1. **Resolve & scrape** — follow `add-haul-item`'s link-type table (same
    gotchas: Superbuy/e.tb.cn need Chrome MCP; Yupoo/weidian direct pages can
    WebFetch; filter images to the hero seller id; strip `_NxN` suffixes).
@@ -26,13 +37,29 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    cache can lag Taobao; if Hampus gives a size set from his own Taobao check,
    trust his list over the border (better to under-list than sell an OOS size).
 2. **Size guide — MANDATORY when the source has ANY chart. Non-negotiable.**
+   **Lookup ORDER (Hampus, 2026-08-18): 1) the YUPOO album images first — sellers
+   like MartinReps put a chart in nearly every album (download the FULL album,
+   not just the first few; the chart can sit anywhere); 2) if not there, the
+   WEIDIAN listing's description images; 3) if not there, the Superbuy buy page.**
+   Only after all three come up empty may size_guide stay null. A product whose
+   source_link is weidian but that came from a Yupoo album (e.g. a `#a<albumid>`
+   anchor) still gets its chart from the Yupoo album — derive the album URL from
+   the anchor.
    If a measurement table exists anywhere on the listing (detail image, gallery
    image, description), it MUST be transcribed into `size_guide` before the
    import is done — the friend-facing right-side "Size guide" panel only renders
    from this JSON, and an untranscribed chart image in the gallery does NOT count
    (that was the root cause of a 400-product backfill in Aug 2026). Download the
-   chart image, Read it, transcribe:
-   `{"unit":"cm","note":"...","sizes":[...],"measurements":{"length":[...],...}}`
+   chart image, Read it, transcribe.
+   **EXACT SHAPE — no variations (a wrong shape crashes the product page):**
+   `{"unit":"cm","note":"...","sizes":["S","M","L"],"measurements":{"length":[54,56,58],"pit_to_pit":[47,49,51]}}`
+   `sizes` is a flat ARRAY of label strings; `measurements` is an OBJECT of
+   metric→array, each array aligned 1:1 with `sizes` (same length, same order).
+   NEVER emit `sizes` as an object keyed by label, never nest measurements inside
+   sizes, never use `rows`/`measurement`(singular)/measurements-as-string — an
+   agent batch did all of these in Aug 2026 and white-screened ~15 live pages.
+   Validate before insert: `Array.isArray(sizes)` and every measurements value is
+   an array of length `sizes.length`.
    Keys: length, chest or pit_to_pit, shoulder, sleeve, waist, hip, thigh,
    outer_length, hem, insole (shoes: EU size rows + insole cm). Magnitude rule:
    a bust/chest value >=80 is a full circumference → `chest`; <80 is a flat half
@@ -380,7 +407,25 @@ next import is faster and more reliable than this one.
   (circumference), 胸宽=chest width (half — but if the number is >100 it's really
   circumference, seller mislabel), 肩宽=shoulder, 袖长=sleeve, 腰围=waist, 臀围=hip.
   `喜欢宽松可拍大一码`=size up for loose; `手工测量1-3cm误差`=±1-3cm.
-- **NEVER leave `sheet.jpg` (a montage contact sheet) in a staging dir before
+- **Weidian listings ARE curl-able for charts (proven 2026-08-18).** The item
+  page embeds the gallery image list as JSON in the HTML (HTML-entity encoded;
+  decode before regex). Use `curl -L` (bare weidian.com 302s to the shop
+  subdomain; without -L you get a 159-byte stub). Charts usually sit in the
+  GALLERY (often 2nd or last image, landscape), not the description; the
+  description block is lazy-loaded and absent from server HTML for some shops
+  (browser fallback for those). Image URL prefixes vary: weidian/wdseller/
+  pcitem/pcset + `_W_H.jpg`. Delisted (已下架) pages often STILL embed the
+  chart, so a dead listing can still yield the size guide (then mark sold_out).
+- **Superbuy chart-hunt at browser scale (2026-08-18 sweep, ~200 items):**
+  charts often sit in the MAIN GALLERY, not just the description; galleries mix
+  `bao/uploaded` and `imgextra/i<n>/` paths; some charts are PNG-only (try
+  .jpg -> .png -> .jpeg, accept first >2KB) and downloads may need `Referer:
+  superbuy.com`; a $0-price page with no images = transient, reload once. UNIT
+  SANITY: shoulder/chest values 18-27 on a top are INCHES even when the header
+  says CM (store unit "in"); 脚口 is hem, not thigh. Never OCR-guess column
+  labels — if the image can't be Read, flag it for manual verify instead. One
+  listing often serves several colorway products: cross-fill the chart to all
+  siblings.
   running `upload-product-images.mjs`** — the script uploads EVERY image in the
   dir sorted, and "sheet.jpg" sorts after the numbered files, so the contact
   sheet ships as the last gallery image. `rm` all sheets first. Also, parallel

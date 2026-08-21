@@ -37,6 +37,16 @@ function display(v: number | string | null, from: "cm" | "in", to: "cm" | "in") 
 export function SizeGuide({ guide }: { guide: SizeGuideData }) {
   const source = guide.unit === "in" ? "in" : "cm";
   const [unit, setUnit] = useState<"cm" | "in">(source);
+  // Defensive: a malformed guide (e.g. sizes not an array, or measurements
+  // missing) must never crash the whole product page — render nothing instead.
+  if (
+    !Array.isArray(guide.sizes) ||
+    !guide.measurements ||
+    typeof guide.measurements !== "object" ||
+    Array.isArray(guide.measurements)
+  ) {
+    return null;
+  }
   return (
     <div className="mt-8">
       <div className="mb-2 flex items-center justify-between">

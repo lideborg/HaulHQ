@@ -61,3 +61,10 @@ export function parseWeidianItem(html: string): ParsedSource {
     priceCny: price ? parseFloat(price[1]) : null,
   };
 }
+
+// A Yupoo single-photo permalink page (path /<photoId>) links back to its
+// parent album. Extract that album id so enrichment can upgrade the stored
+// link to the album — the page that actually carries price + weidian link.
+export function yupooParentAlbum(html: string): string | null {
+  return /\/albums\/(\d+)/.exec(html)?.[1] ?? null;
+}

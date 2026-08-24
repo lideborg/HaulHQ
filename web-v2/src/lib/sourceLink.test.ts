@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { classifySourceLink, superbuyWrap, yupooSubdomain } from "./sourceLink.ts";
+import { classifySourceLink, superbuyWrap, yupooAlbumUrl, yupooSubdomain } from "./sourceLink.ts";
 
 test("yupoo album link", () => {
   const r = classifySourceLink("https://99team.x.yupoo.com/albums/196799387?uid=1&isSubCate=false");
@@ -67,4 +67,32 @@ test("taobao short links accepted as taobao", () => {
 test("goofish and 1688 accepted as other", () => {
   assert.equal(classifySourceLink("https://www.goofish.com/item?id=1")?.kind, "other");
   assert.equal(classifySourceLink("https://detail.1688.com/offer/123.html")?.kind, "other");
+});
+
+test("yupoo photo permalink classified as yupoo_photo with ids", () => {
+  const r = classifySourceLink("https://charlesking77.x.yupoo.com/112310886?uid=1");
+  assert.equal(r?.kind, "yupoo_photo");
+  assert.equal(r?.itemId, "112310886");
+  assert.equal(r?.shop, "charlesking77");
+});
+
+test("yupoo non-numeric paths still classified as yupoo_shop", () => {
+  assert.equal(classifySourceLink("https://deateath.x.yupoo.com/categories/123")?.kind, "yupoo_shop");
+  assert.equal(classifySourceLink("https://deateath.x.yupoo.com/search/album?q=x")?.kind, "yupoo_shop");
+  // short numeric run (< 6 digits) is not a photo id
+  assert.equal(classifySourceLink("https://deateath.x.yupoo.com/123")?.kind, "yupoo_shop");
+});
+
+test("superbuy-wrapped photo permalink unwraps to yupoo_photo", () => {
+  const wrapped =
+    "https://www.superbuy.com/en/page/buy/?url=" +
+    encodeURIComponent("https://charlesking77.x.yupoo.com/112310886");
+  assert.equal(classifySourceLink(wrapped)?.kind, "yupoo_photo");
+});
+
+test("yupooAlbumUrl carries uid=1 (yupoo 404s without it)", () => {
+  assert.equal(
+    yupooAlbumUrl("charlesking77", "244957347"),
+    "https://charlesking77.x.yupoo.com/albums/244957347?uid=1",
+  );
 });

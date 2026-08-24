@@ -2,8 +2,13 @@
 // failure (blocked fetch, weird markup, storage error) must still land the
 // item as a plain "requested" link — the admin inbox is the guarantee.
 import { createAdminClient } from "@/lib/supabase/admin";
-import { classifySourceLink } from "./sourceLink";
-import { parseYupooAlbum, parseWeidianItem, type ParsedSource } from "./sourceParse";
+import { classifySourceLink, yupooAlbumUrl } from "./sourceLink";
+import {
+  parseYupooAlbum,
+  parseWeidianItem,
+  yupooParentAlbum,
+  type ParsedSource,
+} from "./sourceParse";
 
 const UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
@@ -21,24 +26,30 @@ export async function resolveSourcingItem(itemId: string): Promise<void> {
       .select("id, source_link")
       .eq("id", itemId)
       .single();
-    const src = item?.source_link ? classifySourceLink(item.source_link) : null;
+    let src = item?.source_link ? classifySourceLink(item.source_link) : null;
+    // A single-photo permalink (friend clicked INTO a photo before copying)
+    // has no price or buy link — its page names the parent album, so upgrade
+    // to that and persist the album as the item's canonical source. If the
+    // album can't be resolved, fall through and parse the photo page itself
+    // (already fetched — don't burn a second request on the same URL).
+    let prefetched: string | null = null;
+    if (src?.kind === "yupoo_photo" && src.shop) {
+      const photoHtml = await fetchSource(src.url, true);
+      const albumId = photoHtml ? yupooParentAlbum(photoHtml) : null;
+      if (albumId) {
+        const albumUrl = yupooAlbumUrl(src.shop, albumId);
+        src = { kind: "yupoo_album", url: albumUrl, itemId: albumId, shop: src.shop };
+        patch.source_link = albumUrl;
+      } else {
+        prefetched = photoHtml;
+      }
+    }
     // "other" hosts (Goofish, 1688) and idless short links have nothing we can
     // parse — skip straight to filing the plain request.
     if (src && src.kind !== "other") {
-      // Yupoo 404s album pages without a uid param — force uid=1 when missing.
-      const fetchUrl = new URL(src.url);
-      if (src.kind.startsWith("yupoo") && !fetchUrl.searchParams.has("uid"))
-        fetchUrl.searchParams.set("uid", "1");
-      const res = await fetch(fetchUrl.toString(), {
-        headers: { "user-agent": UA },
-        signal: AbortSignal.timeout(15000),
-        // Refuse redirects on purpose: the host allowlist only validates the
-        // initial host, so a 30x could bounce us to an internal address (SSRF).
-        // A 3xx then has res.ok === false, so the guard below skips it.
-        redirect: "manual",
-      });
-      if (res.ok) {
-        const html = await res.text();
+      const html =
+        prefetched ?? (await fetchSource(src.url, src.kind.startsWith("yupoo")));
+      if (html != null) {
         const parsed: ParsedSource =
           src.kind === "weidian" || src.kind === "taobao"
             ? parseWeidianItem(html)
@@ -70,6 +81,22 @@ export async function resolveSourcingItem(itemId: string): Promise<void> {
       .eq("id", itemId)
       .eq("status", "sourcing");
   }
+}
+
+// One fetch for store pages. Yupoo 404s without a uid param — force uid=1
+// when missing. Refuse redirects on purpose: the host is only validated on
+// the initial URL, so a 30x could bounce to an internal address (SSRF); a
+// 3xx has res.ok === false and returns null like any other failure.
+async function fetchSource(url: string, isYupoo: boolean): Promise<string | null> {
+  const fetchUrl = new URL(url);
+  if (isYupoo && !fetchUrl.searchParams.has("uid"))
+    fetchUrl.searchParams.set("uid", "1");
+  const res = await fetch(fetchUrl.toString(), {
+    headers: { "user-agent": UA },
+    signal: AbortSignal.timeout(15000),
+    redirect: "manual",
+  });
+  return res.ok ? await res.text() : null;
 }
 
 async function mirrorItemImage(

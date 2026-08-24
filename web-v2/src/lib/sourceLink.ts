@@ -5,6 +5,7 @@
 // 1688) — the item still files as a plain request for the admin.
 export type SourceKind =
   | "yupoo_album"
+  | "yupoo_photo"
   | "yupoo_shop"
   | "weidian"
   | "taobao"
@@ -37,6 +38,12 @@ export function classifySourceLink(raw: string): SourceLink | null {
     const album = u.pathname.match(/^\/albums\/(\d+)/);
     if (album)
       return { kind: "yupoo_album", url: u.toString(), itemId: album[1], shop };
+    // Bare-number path = a single-photo permalink (what friends copy after
+    // clicking INTO a photo). It has no price/buy-link — enrichment resolves
+    // it to the parent album, which does.
+    const photo = u.pathname.match(/^\/(\d{6,})(?:\/|$)/);
+    if (photo)
+      return { kind: "yupoo_photo", url: u.toString(), itemId: photo[1], shop };
     return { kind: "yupoo_shop", url: u.toString(), itemId: null, shop };
   }
 
@@ -63,6 +70,13 @@ export function classifySourceLink(raw: string): SourceLink | null {
   }
 
   return null;
+}
+
+// Canonical album URL for storing/rendering. Yupoo 404s every shop page
+// without a uid param, so the persisted link must carry uid=1 or the admin
+// inbox renders a dead href.
+export function yupooAlbumUrl(shop: string, albumId: string): string {
+  return `https://${shop}.x.yupoo.com/albums/${albumId}?uid=1`;
 }
 
 // Admin builds this on the fly for weidian/taobao sources — never stored.

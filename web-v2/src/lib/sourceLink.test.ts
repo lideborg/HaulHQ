@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { classifySourceLink, superbuyWrap, yupooSubdomain } from "./sourceLink.ts";
+import { classifySourceLink, superbuyWrap, yupooAlbumUrl, yupooSubdomain } from "./sourceLink.ts";
 
 test("yupoo album link", () => {
   const r = classifySourceLink("https://99team.x.yupoo.com/albums/196799387?uid=1&isSubCate=false");
@@ -88,4 +88,11 @@ test("superbuy-wrapped photo permalink unwraps to yupoo_photo", () => {
     "https://www.superbuy.com/en/page/buy/?url=" +
     encodeURIComponent("https://charlesking77.x.yupoo.com/112310886");
   assert.equal(classifySourceLink(wrapped)?.kind, "yupoo_photo");
+});
+
+test("yupooAlbumUrl carries uid=1 (yupoo 404s without it)", () => {
+  assert.equal(
+    yupooAlbumUrl("charlesking77", "244957347"),
+    "https://charlesking77.x.yupoo.com/albums/244957347?uid=1",
+  );
 });

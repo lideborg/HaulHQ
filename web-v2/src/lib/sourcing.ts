@@ -2,7 +2,7 @@
 // failure (blocked fetch, weird markup, storage error) must still land the
 // item as a plain "requested" link — the admin inbox is the guarantee.
 import { createAdminClient } from "@/lib/supabase/admin";
-import { classifySourceLink, type SourceLink } from "./sourceLink";
+import { classifySourceLink, yupooAlbumUrl } from "./sourceLink";
 import {
   parseYupooAlbum,
   parseWeidianItem,
@@ -29,20 +29,26 @@ export async function resolveSourcingItem(itemId: string): Promise<void> {
     let src = item?.source_link ? classifySourceLink(item.source_link) : null;
     // A single-photo permalink (friend clicked INTO a photo before copying)
     // has no price or buy link — its page names the parent album, so upgrade
-    // to that and persist the album as the item's canonical source.
+    // to that and persist the album as the item's canonical source. If the
+    // album can't be resolved, fall through and parse the photo page itself
+    // (already fetched — don't burn a second request on the same URL).
+    let prefetched: string | null = null;
     if (src?.kind === "yupoo_photo" && src.shop) {
       const photoHtml = await fetchSource(src.url, true);
       const albumId = photoHtml ? yupooParentAlbum(photoHtml) : null;
       if (albumId) {
-        const albumUrl = `https://${src.shop}.x.yupoo.com/albums/${albumId}`;
-        src = { kind: "yupoo_album", url: albumUrl, itemId: albumId, shop: src.shop } satisfies SourceLink;
+        const albumUrl = yupooAlbumUrl(src.shop, albumId);
+        src = { kind: "yupoo_album", url: albumUrl, itemId: albumId, shop: src.shop };
         patch.source_link = albumUrl;
+      } else {
+        prefetched = photoHtml;
       }
     }
     // "other" hosts (Goofish, 1688) and idless short links have nothing we can
     // parse — skip straight to filing the plain request.
     if (src && src.kind !== "other") {
-      const html = await fetchSource(src.url, src.kind.startsWith("yupoo"));
+      const html =
+        prefetched ?? (await fetchSource(src.url, src.kind.startsWith("yupoo")));
       if (html != null) {
         const parsed: ParsedSource =
           src.kind === "weidian" || src.kind === "taobao"

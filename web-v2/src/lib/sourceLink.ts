@@ -72,6 +72,13 @@ export function classifySourceLink(raw: string): SourceLink | null {
   return null;
 }
 
+// Canonical album URL for storing/rendering. Yupoo 404s every shop page
+// without a uid param, so the persisted link must carry uid=1 or the admin
+// inbox renders a dead href.
+export function yupooAlbumUrl(shop: string, albumId: string): string {
+  return `https://${shop}.x.yupoo.com/albums/${albumId}?uid=1`;
+}
+
 // Admin builds this on the fly for weidian/taobao sources — never stored.
 export function superbuyWrap(url: string): string {
   return `https://www.superbuy.com/en/page/buy/?from=search-input&url=${encodeURIComponent(url)}`;

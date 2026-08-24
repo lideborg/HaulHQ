@@ -5,6 +5,7 @@
 // 1688) — the item still files as a plain request for the admin.
 export type SourceKind =
   | "yupoo_album"
+  | "yupoo_photo"
   | "yupoo_shop"
   | "weidian"
   | "taobao"
@@ -37,6 +38,12 @@ export function classifySourceLink(raw: string): SourceLink | null {
     const album = u.pathname.match(/^\/albums\/(\d+)/);
     if (album)
       return { kind: "yupoo_album", url: u.toString(), itemId: album[1], shop };
+    // Bare-number path = a single-photo permalink (what friends copy after
+    // clicking INTO a photo). It has no price/buy-link — enrichment resolves
+    // it to the parent album, which does.
+    const photo = u.pathname.match(/^\/(\d{6,})(?:\/|$)/);
+    if (photo)
+      return { kind: "yupoo_photo", url: u.toString(), itemId: photo[1], shop };
     return { kind: "yupoo_shop", url: u.toString(), itemId: null, shop };
   }
 

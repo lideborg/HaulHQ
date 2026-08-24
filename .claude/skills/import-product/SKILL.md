@@ -136,6 +136,15 @@ next import is faster and more reliable than this one.
 
 ## Scrape gotchas (learned the hard way)
 
+- **Yupoo photo permalink vs album (Stephanie-vest lesson).** `/<digits>` on a
+  Yupoo shop (e.g. `charlesking77.x.yupoo.com/112310886`) is a SINGLE-PHOTO
+  permalink: filename title, one photo, NO price/code/buy-link. The parent
+  `/albums/<id>` page has all of it (og:title "¥price code", every photo, and
+  often the embedded weidian link). The photo page HTML contains `/albums/(\d+)`
+  - always resolve to the album before scraping. web-v2 ingest now auto-upgrades
+  friend-pasted photo permalinks (`classifySourceLink` kind `yupoo_photo` +
+  `resolveSourcingItem`), but manual imports must do the same hop.
+
 - **STANDARD WORKFLOW for every Yupoo agent-catalog album (chaosmade, makemood,
   Taurus, etc.): open the album's buy-link THROUGH Superbuy and treat that page as
   the source of truth — NOT the Yupoo album.** The Yupoo album is only good for

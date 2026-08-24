@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseYupooAlbum, parseWeidianItem } from "./sourceParse.ts";
+import { parseYupooAlbum, parseWeidianItem, yupooParentAlbum } from "./sourceParse.ts";
 
 const YUPOO_HTML = `<!doctype html><html><head>
 <meta property="og:title" content="TR* 24ss suede loafers ¥560 | Yupoo">
@@ -45,4 +45,16 @@ test("weidian: title, protocol-relative image, embedded price", () => {
 test("weidian: all-null on unparseable html", () => {
   const r = parseWeidianItem("<html><body>captcha</body></html>");
   assert.deepEqual(r, { title: null, imageUrl: null, priceCny: null });
+});
+
+test("yupooParentAlbum: pulls album id from a photo permalink page", () => {
+  const html = `<html><body>
+    <a href="/albums/244957347?uid=1&referrercate=1">back to album</a>
+    <img src="https://photo.yupoo.com/charlesking77/abc/big.jpg">
+  </body></html>`;
+  assert.equal(yupooParentAlbum(html), "244957347");
+});
+
+test("yupooParentAlbum: null when the page names no album", () => {
+  assert.equal(yupooParentAlbum("<html><body>photo only</body></html>"), null);
 });

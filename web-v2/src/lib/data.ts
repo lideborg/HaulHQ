@@ -59,12 +59,17 @@ export async function getPublishedProducts(
   let rows = await fetchAllRows<Product>(page);
 
   if (opts.sort === "popular") {
-    const { data: pop } = await sb
-      .from("product_popularity")
-      .select("product_id, adds");
-    const rank = new Map(
-      (pop ?? []).map((r) => [r.product_id as string, r.adds as number]),
+    // product_popularity is one row per product, so it hits the same 1000-cap;
+    // page it too or products past row 1000 would all rank 0 and sink.
+    const pop = await fetchAllRows<{ product_id: string; adds: number }>(
+      (from, to) =>
+        sb
+          .from("product_popularity")
+          .select("product_id, adds")
+          .order("product_id", { ascending: true })
+          .range(from, to),
     );
+    const rank = new Map(pop.map((r) => [r.product_id, r.adds]));
     rows = [...rows].sort(
       (a, b) => (rank.get(b.id) ?? 0) - (rank.get(a.id) ?? 0),
     );

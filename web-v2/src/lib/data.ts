@@ -2,6 +2,7 @@ import { createAdminClient } from "./supabase/admin";
 import type { Product, Seller, Friend, Haul, HaulItem } from "./types";
 import { CATEGORY_ORDER } from "./categories";
 import { groupFactories, type FactoryCard } from "./factories";
+import { fetchAllRows } from "./paginate";
 import {
   UNLOCKED_STATUSES,
   isUnlocked,
@@ -28,29 +29,34 @@ export async function getPublishedProducts(
   opts: { sort?: string; color?: string; min?: number; max?: number } = {},
 ): Promise<Product[]> {
   const sb = createAdminClient();
-  let q = sb.from("products").select("*").eq("published", true);
-  if (brand) q = q.eq("brand", brand);
-  if (category) q = q.eq("category", category);
-  if (opts.color) q = q.eq("color", opts.color);
   const term = searchTerm(search);
-  if (term)
-    q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%,display_title.ilike.%${term}%`);
-  if (inStockOnly) q = q.eq("sold_out", false);
-  if (typeof opts.min === "number") q = q.gte("price_usd", opts.min);
-  if (typeof opts.max === "number") q = q.lte("price_usd", opts.max);
+  // Rebuilt per page (see fetchAllRows) so the whole catalog is returned, not
+  // just the first 1000 rows.
+  const page = (from: number, to: number) => {
+    let q = sb.from("products").select("*").eq("published", true);
+    if (brand) q = q.eq("brand", brand);
+    if (category) q = q.eq("category", category);
+    if (opts.color) q = q.eq("color", opts.color);
+    if (term)
+      q = q.or(`title.ilike.%${term}%,brand.ilike.%${term}%,display_title.ilike.%${term}%`);
+    if (inStockOnly) q = q.eq("sold_out", false);
+    if (typeof opts.min === "number") q = q.gte("price_usd", opts.min);
+    if (typeof opts.max === "number") q = q.lte("price_usd", opts.max);
 
-  // Non-popular sorts map straight to an ORDER BY; popular needs the add-counts.
-  if (opts.sort === "price-asc")
-    q = q.order("price_usd", { ascending: true, nullsFirst: false });
-  else if (opts.sort === "price-desc")
-    q = q.order("price_usd", { ascending: false, nullsFirst: false });
-  else if (opts.sort === "brand")
-    q = q.order("brand", { ascending: true }).order("created_at", { ascending: false });
-  else q = q.order("created_at", { ascending: false }); // "new" and default
+    // Non-popular sorts map straight to an ORDER BY; popular needs the
+    // add-counts. A stable order() is also what makes the paged ranges line up.
+    if (opts.sort === "price-asc")
+      q = q.order("price_usd", { ascending: true, nullsFirst: false });
+    else if (opts.sort === "price-desc")
+      q = q.order("price_usd", { ascending: false, nullsFirst: false });
+    else if (opts.sort === "brand")
+      q = q.order("brand", { ascending: true }).order("created_at", { ascending: false });
+    else q = q.order("created_at", { ascending: false }); // "new" and default
+    // Tie-break on id so rows with equal sort keys can't shuffle between pages.
+    return q.order("id", { ascending: true }).range(from, to);
+  };
 
-  const { data, error } = await q;
-  if (error) throw error;
-  let rows = (data ?? []) as Product[];
+  let rows = await fetchAllRows<Product>(page);
 
   if (opts.sort === "popular") {
     const { data: pop } = await sb
@@ -98,10 +104,13 @@ export interface ShopFacets {
 }
 export async function getShopFacets(inStockOnly = false): Promise<ShopFacets> {
   const sb = createAdminClient();
-  let fq = sb.from("products").select("brand, category").eq("published", true);
-  if (inStockOnly) fq = fq.eq("sold_out", false);
-  const { data, error } = await fq;
-  if (error) throw error;
+  const page = (from: number, to: number) => {
+    let fq = sb.from("products").select("brand, category").eq("published", true);
+    if (inStockOnly) fq = fq.eq("sold_out", false);
+    // Order for stable paging so counts past 1000 products are complete.
+    return fq.order("id", { ascending: true }).range(from, to);
+  };
+  const data = await fetchAllRows<{ brand: string | null; category: string | null }>(page);
   const brandCount = new Map<string, number>();
   const catCount = new Map<string, number>();
   for (const r of data ?? []) {

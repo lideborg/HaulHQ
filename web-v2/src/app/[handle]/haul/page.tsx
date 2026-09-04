@@ -147,8 +147,8 @@ export default async function HaulPage({
                     )}
                     {unavailable ? (
                       <p className="mt-0.5 text-[11px] text-neutral-500">
-                        {item.chosen_size ? `Size ${item.chosen_size} · ` : ""}Not
-                        available from seller
+                        {item.chosen_size ? `Size ${item.chosen_size} · ` : ""}Reached
+                        out to the factory — no reply
                       </p>
                     ) : (
                       <p className="mt-0.5 text-[11px] text-neutral-500">

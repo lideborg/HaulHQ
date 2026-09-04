@@ -3,11 +3,11 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { verifyPassword } from "@/lib/auth";
+import { verifyPassword, normalizeEmail } from "@/lib/auth";
 import { clientIp, isThrottled, recordFailure, failureDelay } from "@/lib/rateLimit";
 
 export async function loginFriend(formData: FormData) {
-  const id = String(formData.get("id") ?? "").trim().toLowerCase();
+  const id = normalizeEmail(String(formData.get("email") ?? ""));
   const pw = String(formData.get("password") ?? "");
 
   const throttleKey = `login:${id}:${await clientIp()}`;
@@ -17,11 +17,21 @@ export async function loginFriend(formData: FormData) {
   }
 
   const sb = createAdminClient();
-  const { data: friend } = await sb
+  // Email is the credential; the legacy anonymous handle (u#####) still works
+  // silently so friends who predate email login aren't locked out. Emails are
+  // stored normalized (trimmed + lowercased), so exact match is correct.
+  let { data: friend } = await sb
     .from("friends")
-    .select("access_token, handle, password_hash, onboarded_at, active")
-    .eq("handle", id)
+    .select("access_token, email, password_hash, onboarded_at, active")
+    .eq("email", id)
     .maybeSingle();
+  if (!friend) {
+    ({ data: friend } = await sb
+      .from("friends")
+      .select("access_token, email, password_hash, onboarded_at, active")
+      .eq("handle", id)
+      .maybeSingle());
+  }
 
   // Generic failure for missing user / no password / wrong password (no enumeration).
   if (
@@ -42,9 +52,10 @@ export async function loginFriend(formData: FormData) {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
   });
-  redirect(
-    friend.onboarded_at ? `/${friend.handle}/shop` : `/${friend.handle}/welcome`,
-  );
+  // Legacy friends without an email get gated to add one ((friend) layout
+  // enforces the same rule; this just lands them there directly).
+  if (!friend.email) redirect("/account/email");
+  redirect(friend.onboarded_at ? "/shop" : "/welcome");
 }
 
 export async function logout() {

@@ -122,8 +122,30 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    first — name files `000.jpg, 001.jpg, …`.
 6. **Friend-request link-back** — if this came from a `requested` item:
    `update items set product_id='<id>', title='<clean title>', quoted_price_usd=<price> where id='<itemId>';`
-7. **Verify** — open `http://localhost:3000/product/<id>`: all sizes render,
+7. **Verify** — open `http://localhost:3000/admin/preview/<id>`: all sizes render,
    gallery thumbnails work, size guide table shows. Fix before declaring done.
+8. **SUPERBUY-VERIFY every sized item, then stamp it.** For ANY apparel or shoe
+   (categories t-shirts/shirts/knitwear/hoodies/outerwear/pants/shorts/shoes),
+   the colors, PRICE, and IN-STOCK SIZES must come from the live buy page on
+   Superbuy — never from a curl of the Weidian JSON or a Yupoo album ¥ (the album
+   price is often stale; a size shown in the SKU list is often sold out). Open the
+   buy link through `superbuy.com/en/page/buy/?url=<encoded weidian/taobao>`, and
+   for a Yupoo import first pull the buy link OUT of the album, then load THAT.
+   Per color: click the swatch, read `.sku-item.text-li` (a `.disabled` size is OOS
+   → exclude it), read the `US $` price (→ `round(usd*1.2)`). Then stamp the row:
+   `update products set verified_at = now() where id = '<id>';`
+   One-size categories (bags/accessories/hats/glasses) need no size check and no
+   stamp. (This is now a hard lock — see the validator below — because the size/
+   price/color rules kept getting skipped under curl-only shortcuts.)
+
+9. **VALIDATE — the hard gate. Run it and it MUST exit 0 before you say done.**
+   From `web-v2/`: `node scripts/validate-shop.mjs --ids <comma,separated,new,ids>`
+   It checks (as code, not eyeballing) display_title present + capitalized "— Color"
+   suffix + no brand leak, color in the 12 families, brand_slug set/clean, images
+   present, price ≥ 0, sized items have sizes — catalog-wide — AND that every NEW
+   sized id you pass is Superbuy-verified (`verified_at` set). If it prints
+   violations, fix them; do NOT report the import done on a non-zero exit. It pages
+   past the 1000-row cap, so it sees the whole catalog.
 
 ## Keep this skill improving
 
@@ -281,9 +303,9 @@ next import is faster and more reliable than this one.
   all just print `set GEMINI_API_KEY`. Fallback without the key: hero is already
   `image_urls[0]` (stage the cleanest shot as `000.jpg`), and set `display_title`
   + `weight_g` (trousers ≈650g) manually via SQL.
-- **Public `/product/<id>` wants the UUID, not the `code`** — passing the 7-char
+- **Admin `/admin/preview/<id>` wants the UUID, not the `code`** — passing the 7-char
   code 500s (Postgres uuid-cast error, not a clean 404). Verify a fresh import at
-  `/product/<uuid>`; the friend route `/[handle]/product/<brand_slug>/<code>` uses
+  `/admin/preview/<uuid>` (admin session required; the old public /product/<uuid> route moved); the friend route `/[handle]/product/<brand_slug>/<code>` uses
   the code.
 - **Short links** (`k.youshop10.com/...`) resolve through the Superbuy wrapper but
   take a few extra seconds — wait and re-extract if the page is still skeleton.
@@ -522,3 +544,11 @@ next import is faster and more reliable than this one.
   from whichever source has the better resolution — Superbuy SKU thumbnails are
   often low-res, so prefer Yupoo/weidian gallery shots per color when available.
   Split each color into its own product row per the colorway rule.
+
+- **Yupoo album DESCRIPTION is JS-rendered - curl misses prices.** og:title is all
+  curl sees; the description block under the album title (where sellers like
+  colastudioglobal/Cola lab print "Price: $59 / Sizes: XS-M / Shipping: Americas
+  $20, Europe $15") only renders in a browser. If og:title carries no ¥/$, do NOT
+  conclude "no price": open the album in Chrome and zoom the header region
+  (approx region [285,130,910,330] at default window size). Cola lab quotes are
+  USD direct prices; shipping tiers go in admin_sizing_note.

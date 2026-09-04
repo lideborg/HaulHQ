@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { sha256Hex } from "@/lib/adminAuth";
+import { legacyRedirectPath } from "@/lib/legacyPaths";
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -11,7 +12,15 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(new URL("/admin/login", request.url));
     }
   }
+  // Legacy /<handle>/… links (old bookmarks/messages) → session-based routes.
+  const target = legacyRedirectPath(pathname);
+  if (target) {
+    const url = request.nextUrl.clone();
+    url.pathname = target;
+    return NextResponse.redirect(url, 307);
+  }
   return NextResponse.next();
 }
 
-export const config = { matcher: "/admin/:path*" };
+// Everything except Next internals and static files (dot in last segment).
+export const config = { matcher: "/((?!_next|.*\\.).*)" };

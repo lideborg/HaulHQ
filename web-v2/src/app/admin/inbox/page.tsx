@@ -14,11 +14,11 @@ export default async function InboxPage() {
       .select("*")
       .in("status", ["requested", "sourcing"])
       .order("created_at", { ascending: false }),
-    sb.from("friends").select("id, name, handle"),
+    sb.from("friends").select("id, name"),
   ]);
   if (error) throw error;
   const friendById = new Map(
-    ((friends ?? []) as Pick<Friend, "id" | "name" | "handle">[]).map((f) => [f.id, f]),
+    ((friends ?? []) as Pick<Friend, "id" | "name">[]).map((f) => [f.id, f]),
   );
   const items = (requested ?? []) as HaulItem[];
 
@@ -47,7 +47,7 @@ export default async function InboxPage() {
               <div key={item.id} className="border-b border-neutral-100 pb-4">
                 <p className="text-[11px] uppercase tracking-tight text-neutral-400">
                   {friend?.name ?? "Unknown friend"}
-                  {friend?.handle ? ` · @${friend.handle}` : ""} ·{" "}
+                  ·{" "}
                   {new Date(item.created_at).toLocaleDateString("en-US", {
                     month: "short",
                     day: "numeric",
@@ -88,9 +88,9 @@ export default async function InboxPage() {
                     )}
                   </p>
                 )}
-                {friend?.handle && (
+                {friend && (
                   <Link
-                    href={`/admin/friends/${friend.handle}`}
+                    href={`/admin/friends/${friend.id}`}
                     className="mt-2 inline-block text-[11px] uppercase tracking-tight underline"
                   >
                     Open {friend.name}&rsquo;s haul →

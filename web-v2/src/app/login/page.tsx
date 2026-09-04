@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { loginFriend } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -14,9 +15,13 @@ export default async function LoginPage({
         HaulHQ
       </h1>
       <form action={loginFriend} className="space-y-3">
+        {/* type="text" not "email": legacy friends may still sign in with their
+            old anonymous ID, which a browser email validator would reject. */}
         <input
-          name="id"
-          placeholder="Your username or ID"
+          name="email"
+          type="text"
+          inputMode="email"
+          placeholder="Email"
           autoFocus
           autoCapitalize="none"
           autoCorrect="off"
@@ -31,13 +36,15 @@ export default async function LoginPage({
           autoComplete="current-password"
           className="w-full border border-neutral-300 px-3 py-2 text-sm"
         />
-        {error && <p className="text-xs text-red-600">Wrong ID or password.</p>}
+        {error && <p className="text-xs text-red-600">Wrong email or password.</p>}
         <button className="w-full bg-black py-2 text-xs uppercase tracking-widest text-white">
           Sign in
         </button>
       </form>
       <p className="mt-6 text-[11px] text-neutral-400">
-        Forgot your password? Ask the admin for a reset link.
+        <Link href="/forgot" className="underline hover:text-black">
+          Forgot your password?
+        </Link>
       </p>
     </main>
   );

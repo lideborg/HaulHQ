@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-// Rendered for notFound() calls (unknown friend handle, missing product, etc.).
+// Rendered for notFound() calls (unknown route, missing product, etc.).
 export default function NotFound() {
   return (
     <div className="mx-auto flex max-w-md flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center">

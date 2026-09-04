@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { saveProfile } from "@/app/[handle]/profile-actions";
+import { saveProfile } from "@/app/(friend)/profile-actions";
 import { ftInToCm, lbsToKg } from "@/lib/sizing";
 import type { Measurements, ShippingAddress } from "@/lib/types";
 
@@ -13,12 +13,10 @@ const chip = (on: boolean) =>
   `border px-2 py-1 text-[10px] ${on ? "border-black bg-black text-white" : "border-neutral-300 text-neutral-600 hover:border-black"}`;
 
 export function ProfileForm({
-  handle,
   mode,
   initialAddress,
   initialMeasurements,
 }: {
-  handle: string;
   mode: "welcome" | "profile";
   initialAddress: ShippingAddress | null;
   initialMeasurements: Measurements | null;
@@ -94,7 +92,7 @@ export function ProfileForm({
     startTransition(async () => {
       const res = await saveProfile(skip ? { address: null, measurements: null } : collect());
       if (!res.ok) { setError(res.error ?? "Something went wrong."); return; }
-      if (mode === "welcome") router.push(`/${handle}/shop`);
+      if (mode === "welcome") router.push("/shop");
       else { setSaved(true); setTimeout(() => setSaved(false), 2000); }
     });
   }

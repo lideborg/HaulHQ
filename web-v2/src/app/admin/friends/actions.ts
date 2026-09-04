@@ -5,44 +5,27 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/adminAuth";
-import { randomUserId, randomToken } from "@/lib/auth";
-
-async function uniqueUserId(
-  sb: ReturnType<typeof createAdminClient>,
-): Promise<string> {
-  for (let i = 0; i < 25; i++) {
-    const id = randomUserId();
-    const { data } = await sb
-      .from("friends")
-      .select("handle")
-      .eq("handle", id)
-      .maybeSingle();
-    if (!data) return id;
-  }
-  throw new Error("could not generate a unique id");
-}
+import { randomToken } from "@/lib/auth";
 
 // Create a friend: `name` is a PRIVATE admin-only label (never shown publicly).
-// Generates the anonymous u##### id + a one-time setup token, then shows the
-// admin a /setup/<token> link to send.
+// Generates a one-time setup token, then shows the admin a /setup/<token> link
+// to send. The friend picks their own email + password on that page.
 export async function createFriend(formData: FormData) {
   await requireAdmin();
   const name = String(formData.get("name") ?? "").trim();
   if (!name) redirect("/admin?error=name");
 
   const sb = createAdminClient();
-  const handle = await uniqueUserId(sb);
   const setup_token = randomToken();
   const { error } = await sb.from("friends").insert({
     name,
-    handle,
     active: true,
     access_token: randomUUID(),
     setup_token,
   });
   if (error) redirect("/admin?error=save");
   revalidatePath("/admin");
-  redirect(`/admin?setup=${setup_token}&id=${handle}&action=create`);
+  redirect(`/admin?setup=${setup_token}&who=${encodeURIComponent(name)}&action=create`);
 }
 
 // Issue a fresh setup link so the friend can set a new password. The old
@@ -53,9 +36,15 @@ export async function resetFriendPassword(formData: FormData) {
   if (!id) return;
   const sb = createAdminClient();
   const setup_token = randomToken();
-  await sb.from("friends").update({ setup_token }).eq("handle", id);
+  const { data: friend } = await sb
+    .from("friends")
+    .update({ setup_token })
+    .eq("id", id)
+    .select("name")
+    .maybeSingle();
+  if (!friend) redirect("/admin");
   revalidatePath("/admin");
-  redirect(`/admin?setup=${setup_token}&id=${id}&action=reset`);
+  redirect(`/admin?setup=${setup_token}&who=${encodeURIComponent(friend.name)}&action=reset`);
 }
 
 export async function deleteFriend(formData: FormData) {
@@ -66,7 +55,7 @@ export async function deleteFriend(formData: FormData) {
   const { data: friend } = await sb
     .from("friends")
     .select("id")
-    .eq("handle", id)
+    .eq("id", id)
     .eq("is_admin", false)
     .maybeSingle();
   if (!friend) redirect("/admin");
@@ -92,9 +81,9 @@ export async function deleteFriend(formData: FormData) {
 // number is freed — the sequence stays clean.
 export async function unlockHaul(formData: FormData) {
   await requireAdmin();
-  const handle = String(formData.get("handle") ?? "");
+  const friendId = String(formData.get("friend_id") ?? "");
   const haulId = String(formData.get("haul_id") ?? "");
-  if (!handle || !haulId) return;
+  if (!friendId || !haulId) return;
   const sb = createAdminClient();
   const { data: haul } = await sb
     .from("hauls")
@@ -126,20 +115,20 @@ export async function unlockHaul(formData: FormData) {
     .update({ status: "open", approved_at: null })
     .eq("id", haul.id);
   if (flipError) throw flipError;
-  revalidatePath(`/admin/friends/${handle}`);
-  revalidatePath(`/${handle}/haul`);
+  revalidatePath(`/admin/friends/${friendId}`);
+  revalidatePath("/haul");
 }
 
 // Admin-only: flip the "I'll source this" flag on a haul item.
 export async function toggleSource(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id"));
-  const handle = String(formData.get("handle"));
+  const friendId = String(formData.get("friend_id"));
   if (!id) return;
   const sb = createAdminClient();
   const { data } = await sb.from("items").select("to_source").eq("id", id).maybeSingle();
   await sb.from("items").update({ to_source: !data?.to_source }).eq("id", id);
-  revalidatePath(`/admin/friends/${handle}`);
+  revalidatePath(`/admin/friends/${friendId}`);
 }
 
 // Admin-only: flip an item between "available" and "not available from
@@ -150,7 +139,7 @@ export async function toggleSource(formData: FormData) {
 export async function toggleUnavailable(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id"));
-  const handle = String(formData.get("handle"));
+  const friendId = String(formData.get("friend_id"));
   if (!id) return;
   const sb = createAdminClient();
   const { data: item } = await sb
@@ -173,18 +162,18 @@ export async function toggleUnavailable(formData: FormData) {
     next = "unavailable";
   }
   await sb.from("items").update({ status: next }).eq("id", id);
-  revalidatePath(`/admin/friends/${handle}`);
-  revalidatePath(`/${handle}/haul`);
+  revalidatePath(`/admin/friends/${friendId}`);
+  revalidatePath("/haul");
 }
 
 // Admin-only: save a private note on a haul item.
 export async function setAdminNote(formData: FormData) {
   await requireAdmin();
   const id = String(formData.get("id"));
-  const handle = String(formData.get("handle"));
+  const friendId = String(formData.get("friend_id"));
   const note = String(formData.get("note") ?? "").trim() || null;
   if (!id) return;
   const sb = createAdminClient();
   await sb.from("items").update({ admin_note: note }).eq("id", id);
-  revalidatePath(`/admin/friends/${handle}`);
+  revalidatePath(`/admin/friends/${friendId}`);
 }

@@ -147,15 +147,13 @@ export default async function PastHaulPage({
         <div className="flex justify-between border-b border-neutral-200 pb-2">
           <span className="text-neutral-500">Est. shipping (EMS{dest ? ` to ${dest}` : ""})</span>
           <span className="tabular-nums">
-            {shipping ? `${usd(shipping.lowUsd)}–${usd(shipping.highUsd)}` : "—"}
+            {shipping ? usd(shipping.usd) : "—"}
           </span>
         </div>
         <div className="flex justify-between pt-1 font-semibold">
           <span>Estimated total</span>
           <span className="tabular-nums">
-            {shipping
-              ? `${usd(totalCost + shipping.lowUsd)}–${usd(totalCost + shipping.highUsd)}`
-              : usd(totalCost)}
+            {shipping ? usd(totalCost + shipping.usd) : usd(totalCost)}
           </span>
         </div>
         <p className="pt-2 text-[10px] leading-relaxed text-neutral-400">

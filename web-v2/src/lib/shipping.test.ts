@@ -5,16 +5,15 @@ import { estimateShipping, destinationName } from "./shipping.ts";
 test("US estimate matches the calibrated receipts (9020g parcel ≈ $214 real)", () => {
   const est = estimateShipping(9020 / 1.18); // receipts are billed weight; undo the bridge
   assert.ok(est);
-  // real $214.21 + 20% margin = $257 — midpoint of the range should be close
-  const mid = (est.lowUsd + est.highUsd) / 2;
-  assert.ok(Math.abs(mid - 257) < 15, `mid ${mid}`);
+  // real $214.21 + 20% margin = $257 — the single figure should be close
+  assert.ok(Math.abs(est.usd - 257) < 15, `usd ${est.usd}`);
 });
 
 test("destination factor: Sweden ≈ 1.3x the US estimate", () => {
   const us = estimateShipping(2500, "US");
   const se = estimateShipping(2500, "SE");
   assert.ok(us && se);
-  const ratio = se.lowUsd / us.lowUsd;
+  const ratio = se.usd / us.usd;
   assert.ok(Math.abs(ratio - 1.3) < 0.02, `ratio ${ratio}`);
   assert.equal(se.chargeableKg, us.chargeableKg); // weight unchanged, only price
 });
@@ -47,7 +46,7 @@ test("free-text countries route correctly (profile stores what friends typed)", 
   const usBare = estimateShipping(2500, "US");
   const se = estimateShipping(2500, "SWEDEN");
   assert.deepEqual(us, usBare);
-  assert.ok(se && us && se.lowUsd > us.lowUsd);
+  assert.ok(se && us && se.usd > us.usd);
 });
 
 test("zero grams still returns null", () => {

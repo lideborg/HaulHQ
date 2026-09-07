@@ -217,7 +217,7 @@ export default async function HaulPage({
             <div className="flex justify-between border-b border-neutral-200 pb-2">
               <span className="text-neutral-500">Est. shipping (EMS{dest ? ` to ${dest}` : ""})</span>
               <span className="tabular-nums">
-                {shipping ? `${usd(shipping.lowUsd)}–${usd(shipping.highUsd)}` : "—"}
+                {shipping ? usd(shipping.usd) : "—"}
               </span>
             </div>
             <div className="flex justify-between pt-1 font-semibold">
@@ -226,9 +226,7 @@ export default async function HaulPage({
                 {/* Unweighed/unpriced items contribute 0, so the number is a
                     floor, not a range midpoint — say "from". */}
                 {unweighed > 0 || unpriced > 0 ? "from " : ""}
-                {shipping
-                  ? `${usd(totalCost + shipping.lowUsd)}–${usd(totalCost + shipping.highUsd)}`
-                  : usd(totalCost)}
+                {shipping ? usd(totalCost + shipping.usd) : usd(totalCost)}
               </span>
             </div>
             {editable.length > 0 && (

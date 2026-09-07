@@ -15,12 +15,12 @@ const STEP_G = 500; // billed in 0.5 kg increments
 // the midpoint lands at (or slightly above) what the parcel actually costs.
 const PACKAGING = 1.18;
 const MARGIN = 1.2; // Admin's 20% on shipping (same as items)
-const SPREAD = 0.12; // quoted range; also absorbs dense-vs-bulky variance
 
 export interface ShippingEstimate {
   chargeableKg: number; // billed weight (items + packaging, rounded up to 0.5 kg)
-  lowUsd: number;
-  highUsd: number;
+  // One number, not a range — friends see a single confirmed-feeling figure;
+  // the true-up at real parcel weight covers the variance.
+  usd: number;
 }
 
 // The receipt calibration above is US-only. Other destinations scale off it:
@@ -45,11 +45,9 @@ export function estimateShipping(
   const units = Math.ceil((totalItemGrams * PACKAGING) / STEP_G); // 0.5 kg units, ≥1
   const fee = EMS_FIRST + EMS_ADDL * (units - 1) + HANDLING;
   const factor = isUsDestination(country) ? 1 : INTL_FACTOR;
-  const withMargin = fee * MARGIN * factor;
   return {
     chargeableKg: units * 0.5,
-    lowUsd: Math.round(withMargin * (1 - SPREAD)),
-    highUsd: Math.round(withMargin * (1 + SPREAD)),
+    usd: Math.round(fee * MARGIN * factor),
   };
 }
 

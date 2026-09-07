@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getHaulsWithItems } from "@/lib/data";
 import { getViewer } from "@/lib/viewer";
-import { estimateShipping } from "@/lib/shipping";
+import { estimateShipping, destinationName, isUsDestination } from "@/lib/shipping";
 import { removeFromHaul, approveHaul } from "@/app/(friend)/haul-actions";
 import { QuantityStepper } from "@/components/QuantityStepper";
 import { haulLabel, LOCKED_STATUSES, isUnavailable } from "@/lib/hauls";
@@ -52,7 +52,10 @@ export default async function HaulPage({
   const unpriced = counted.filter((i) => i.quoted_price_usd == null).length;
   const totalGrams = counted.reduce((s, i) => s + (i.products?.weight_g ?? 0) * qty(i), 0);
   const unweighed = counted.filter((i) => i.products?.weight_g == null).length;
-  const shipping = estimateShipping(totalGrams);
+  const country = friend.shipping_address?.country;
+  const shipping = estimateShipping(totalGrams, country);
+  // Non-US lanes cost more; say which lane the estimate is for.
+  const dest = isUsDestination(country) ? null : destinationName(country);
   const editable = counted.filter((i) => !LOCKED.has(i.status ?? ""));
 
   const pastSummary = (g: HaulGroup) => {
@@ -212,7 +215,7 @@ export default async function HaulPage({
               </span>
             </div>
             <div className="flex justify-between border-b border-neutral-200 pb-2">
-              <span className="text-neutral-500">Est. shipping (EMS)</span>
+              <span className="text-neutral-500">Est. shipping (EMS{dest ? ` to ${dest}` : ""})</span>
               <span className="tabular-nums">
                 {shipping ? `${usd(shipping.lowUsd)}–${usd(shipping.highUsd)}` : "—"}
               </span>
@@ -256,9 +259,9 @@ export default async function HaulPage({
               </form>
             )}
             <p className="pt-2 text-[10px] leading-relaxed text-neutral-400">
-              Weights are estimates; shipping is based on past EMS parcels to the
-              US and settles at the real parcel weight. Final quote from Admin
-              before anything ships.
+              Weights are estimates; shipping is based on real past EMS parcels,
+              adjusted for your destination, and settles at the real parcel
+              weight. Final quote from Admin before anything ships.
             </p>
           </div>
         </>

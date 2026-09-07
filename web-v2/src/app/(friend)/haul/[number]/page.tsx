@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getHaulsWithItems } from "@/lib/data";
 import { getViewer } from "@/lib/viewer";
-import { estimateShipping } from "@/lib/shipping";
+import { estimateShipping, destinationName, isUsDestination } from "@/lib/shipping";
 import { haulLabel, isUnavailable } from "@/lib/hauls";
 
 export const dynamic = "force-dynamic";
@@ -44,7 +44,10 @@ export default async function PastHaulPage({
   const totalUnits = counted.reduce((s, i) => s + qty(i), 0);
   const totalCost = counted.reduce((s, i) => s + (i.quoted_price_usd ?? 0) * qty(i), 0);
   const totalGrams = counted.reduce((s, i) => s + (i.products?.weight_g ?? 0) * qty(i), 0);
-  const shipping = estimateShipping(totalGrams);
+  const country = friend.shipping_address?.country;
+  const shipping = estimateShipping(totalGrams, country);
+  // Non-US lanes cost more; say which lane the estimate is for.
+  const dest = isUsDestination(country) ? null : destinationName(country);
   const approvedDate = group.haul.approved_at
     ? new Date(group.haul.approved_at).toLocaleDateString("en-US", {
         month: "short",
@@ -142,7 +145,7 @@ export default async function PastHaulPage({
           <span className="tabular-nums">{usd(totalCost)}</span>
         </div>
         <div className="flex justify-between border-b border-neutral-200 pb-2">
-          <span className="text-neutral-500">Est. shipping (EMS)</span>
+          <span className="text-neutral-500">Est. shipping (EMS{dest ? ` to ${dest}` : ""})</span>
           <span className="tabular-nums">
             {shipping ? `${usd(shipping.lowUsd)}–${usd(shipping.highUsd)}` : "—"}
           </span>

@@ -1,0 +1,178 @@
+{
+  "createdAt": "2026-08-23T20:53:57-04:00",
+  "servers": [
+    {
+      "name": "RepLux",
+      "guild": "1497172875222716418",
+      "channels": [
+        {"name": "daily-drops", "url": "https://discord.com/channels/1497172875222716418/1497179997113417849"},
+        {"name": "releases", "url": "https://discord.com/channels/1497172875222716418/1497179937273286717"},
+        {"name": "clothes-updates", "url": "https://discord.com/channels/1497172875222716418/1497180137773334670"}
+      ]
+    },
+    {
+      "name": "CNMADE",
+      "guild": "1308675891538432010",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1308675891538432010/1324683481661440011"},
+        {"name": "announcement", "url": "https://discord.com/channels/1308675891538432010/1313035319091925043"}
+      ]
+    },
+    {
+      "name": "Thunderfashion",
+      "guild": "1231661236773458011",
+      "note": "verify-gated; only product-catalog visible and it is stale (last post Feb 2025)",
+      "channels": [
+        {"name": "product-catalog", "url": "https://discord.com/channels/1231661236773458011/1231669994820206622"}
+      ]
+    },
+    {
+      "name": "MadebyKungFu",
+      "guild": "1316678560026591262",
+      "channels": [
+        {"name": "new-releases", "url": "https://discord.com/channels/1316678560026591262/1316678560559136816"},
+        {"name": "production-updates", "url": "https://discord.com/channels/1316678560026591262/1316678560559136815"}
+      ]
+    },
+    {
+      "name": "Sorlan",
+      "guild": "1490196153684332737",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1490196153684332737/1492636407142027444"},
+        {"name": "product-updates", "url": "https://discord.com/channels/1490196153684332737/1492634417234055338"}
+      ]
+    },
+    {
+      "name": "Make Mood",
+      "guild": "1459960358012850260",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1459960358012850260/1460241376049365003"},
+        {"name": "production-updates", "url": "https://discord.com/channels/1459960358012850260/1460240841195917372"},
+        {"name": "announcements", "url": "https://discord.com/channels/1459960358012850260/1534214991606059138"}
+      ]
+    },
+    {
+      "name": "i795",
+      "guild": "1315577566718853180",
+      "channels": [
+        {"name": "new-releases", "url": "https://discord.com/channels/1315577566718853180/1356336474248839358"},
+        {"name": "production-update", "url": "https://discord.com/channels/1315577566718853180/1356336524433821787"},
+        {"name": "announcements", "url": "https://discord.com/channels/1315577566718853180/1315578029237469194"}
+      ]
+    },
+    {
+      "name": "Troublemaker",
+      "guild": "1354624526754906224",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1354624526754906224/1354834536927858728"},
+        {"name": "updates", "url": "https://discord.com/channels/1354624526754906224/1354834510457606210"}
+      ]
+    },
+    {
+      "name": "Producedbydini",
+      "guild": "1431567666816094329",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1431567666816094329/1436318504407138475"},
+        {"name": "updates", "url": "https://discord.com/channels/1431567666816094329/1431589497031757904"},
+        {"name": "anouncements", "url": "https://discord.com/channels/1431567666816094329/1436295155979128862"}
+      ]
+    },
+    {
+      "name": "SWAG MADE",
+      "guild": "1406816405726302269",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1406816405726302269/1406816406204321858"},
+        {"name": "updates", "url": "https://discord.com/channels/1406816405726302269/1406816406204321860"},
+        {"name": "server-announcements", "url": "https://discord.com/channels/1406816405726302269/1406816406204321856"}
+      ]
+    },
+    {
+      "name": "Bager",
+      "guild": "1435512329449242756",
+      "channels": [
+        {"name": "new-releases", "url": "https://discord.com/channels/1435512329449242756/1435656650538221619"},
+        {"name": "production-process", "url": "https://discord.com/channels/1435512329449242756/1435658729675558922"},
+        {"name": "weidian", "url": "https://discord.com/channels/1435512329449242756/1435656604795142184"}
+      ]
+    },
+    {
+      "name": "God'S GLASSES",
+      "guild": "1222053870704918548",
+      "channels": [
+        {"name": "production-updates", "url": "https://discord.com/channels/1222053870704918548/1222464165550096404"},
+        {"name": "announcement", "url": "https://discord.com/channels/1222053870704918548/1222055177297723452"}
+      ]
+    },
+    {
+      "name": "K9999",
+      "guild": "1488732689757507586",
+      "note": "has a honeypot channel named honeypot with lookalike unicode; never open it",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1488732689757507586/1488734914705887284"},
+        {"name": "updates", "url": "https://discord.com/channels/1488732689757507586/1488734934712582214"},
+        {"name": "server-announcements", "url": "https://discord.com/channels/1488732689757507586/1488735329660833823"}
+      ]
+    },
+    {
+      "name": "RMISM",
+      "guild": "1333844122221547651",
+      "channels": [
+        {"name": "weidian", "url": "https://discord.com/channels/1333844122221547651/1458232179598295318"},
+        {"name": "release-schedule", "url": "https://discord.com/channels/1333844122221547651/1512885112805785770"},
+        {"name": "announcement", "url": "https://discord.com/channels/1333844122221547651/1335547195570524224"}
+      ]
+    },
+    {
+      "name": "ColaStudioGlobal",
+      "guild": "1499256262888783883",
+      "channels": [
+        {"name": "releases", "url": "https://discord.com/channels/1499256262888783883/1499266639965847613"},
+        {"name": "updates", "url": "https://discord.com/channels/1499256262888783883/1499266690989559838"}
+      ]
+    },
+    {
+      "name": "Aristide",
+      "guild": "1477927912240975915",
+      "channels": [
+        {"name": "news", "url": "https://discord.com/channels/1477927912240975915/1479047582654398479"},
+        {"name": "announcement", "url": "https://discord.com/channels/1477927912240975915/1488797466936742008"}
+      ]
+    },
+    {
+      "name": "FashionReps",
+      "guild": "290327769076989957",
+      "note": "community server, not a seller; announcements only for ecosystem news",
+      "channels": [
+        {"name": "announcements", "url": "https://discord.com/channels/290327769076989957/593528584438677532"}
+      ]
+    },
+    {
+      "name": "GenGar (Satisfy Running reps)",
+      "guild": "1523553269568503868",
+      "channels": [
+        {"name": "new-release", "url": "https://discord.com/channels/1523553269568503868/1524293056306614342"},
+        {"name": "restocks", "url": "https://discord.com/channels/1523553269568503868/1524295027839336560"},
+        {"name": "announcements", "url": "https://discord.com/channels/1523553269568503868/1524294235019415552"}
+      ]
+    },
+    {
+      "name": "ELITEREP",
+      "guild": "1506367272241991872",
+      "channels": [
+        {"name": "release", "url": "https://discord.com/channels/1506367272241991872/1507345641762848859"},
+        {"name": "announcement", "url": "https://discord.com/channels/1506367272241991872/1507328108062314517"}
+      ]
+    },
+    {
+      "name": "TangReps",
+      "guild": "1385330712118427649",
+      "channels": [
+        {"name": "new-release", "url": "https://discord.com/channels/1385330712118427649/1385333282551627826"},
+        {"name": "news", "url": "https://discord.com/channels/1385330712118427649/1385332994113536094"}
+      ]
+    }
+  ],
+  "skipped": [
+    {"name": "Bianjing Made", "guild": "1519382845917757450", "reason": "No Access: verification-gated, only verification/links/rules channels visible"}
+  ]
+}

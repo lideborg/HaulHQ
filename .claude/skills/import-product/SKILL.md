@@ -21,8 +21,17 @@ are colorways, `size_guide` JSON read from the size-chart image, and
    / stock 0 / 已下架. If it is NOT sellable, STOP — do not import; tell Hampus
    it is dead and offer to find a live source. Yupoo scout-shop albums (e.g. the
    suppliervortex shops) attach buy-links that rot fast, so this check fails
-   often on them — never surface a product he cannot buy. (Superbuy "Risk Alert"
-   is an intermittent block, NOT a delisting — that one is not a sold-out.)
+   often on them — never surface a product he cannot buy.
+   **SUPERBUY HARD-BLOCK = DO NOT IMPORT (Hampus, 2026-09-06).** If the Superbuy
+   buy wrapper throws a blocking popup on the link — "Risk Reminder / Not
+   supported", "Risk Alert — legal risks, temporarily unable to process",
+   counterfeit warnings that prevent adding to cart — retry ONCE; if it still
+   blocks, the item is unbuyable for us (everything is purchased through
+   Superbuy) → do not create the row; if a row exists, unpublish it. Do NOT
+   fall back to weidian-only pricing for a Superbuy-blocked item. The one
+   exception that is fine: the "Sensitive Product Risk" DISCLOSURE with a
+   pre-checked "I have read and agree" box — that one does not block purchase
+   (whole real orders go through with it).
 
 1. **Resolve & scrape** — follow `add-haul-item`'s link-type table (same
    gotchas: Superbuy/e.tb.cn need Chrome MCP; Yupoo/weidian direct pages can
@@ -471,6 +480,18 @@ next import is faster and more reliable than this one.
   sheet ships as the last gallery image. `rm` all sheets first. Also, parallel
   bulk uploads can hit Supabase "Too many connections" — retry the failed
   product with a short sleep; it succeeds on the second pass.
+- **luxfactory888 (Yupoo) = structured agent shop, browser-only.** curl returns a
+  30KB JS skeleton; in the browser each album gives everything: title = `CODE,PRICE`
+  (e.g. "ALL717-2908,680" → ¥680), the weidian buy link printed in the description,
+  and clean photos (`photo.yupoo.com/luxfactory888/<hash>/big.jpg`, Referer the shop).
+  Size chart is usually album image index 1; when absent, the weidian DESCRIPTION
+  carries a landscape chart (601x274-ish geilicdn img in the server HTML). Brand
+  tells: `1V`/`LV`=Louis Vuitton, `MGL`=Maison Margiela; Givenchy written on the
+  garment. All single-color listings so far ("图片色"/Photo Color). GOTCHA: the
+  Superbuy wrapper throws a "Risk Reminder — Not supported (virtual products)"
+  popup on SOME of this shop's weidian links (it stuck across 3 attempts / 2
+  days on two items) — per the hard-block rule in step 0, those items are NOT
+  importable even though the weidian listing is live.
 - **steven-1989 (Yupoo) is fully curl-able**: album HTML contains the og:title
   ("￥<price>  <brand slang + CN title> <size range S-XL>  <code>#") and all
   photo hashes (`photo.yupoo.com/steven-1989/<hash>`). Brand slang there: MIU=
@@ -509,10 +530,15 @@ next import is faster and more reliable than this one.
 
 - Never leave images on Yupoo/Weidian URLs (hotlink-protected — they will
   break). alicdn also gets migrated for consistency.
-- **display_title name part = MAX 3 WORDS** (hyphenated compounds count as one:
-  "Long-Sleeve" is one word), then " — <Color>". "Reflective 3M Drawstring
-  Running Shorts" is WRONG; "Running Shorts — Black" is right. No brand in it.
-  Hampus has had to ask for this twice — treat it like a schema constraint.
+- **display_title name part: AIM FOR 2 WORDS, hard max 3** (hyphenated compounds
+  count as one word), then " — <Color>". ONE modifier max — never stack fabric +
+  cut + garment ("Suede Bowling Sneaker", "Ribbed Knit Polo", "Washed Linen
+  Shirt" are all WRONG → "Bowling Sneakers", "Knit Polo", "Linen Shirt"). Keep a
+  3rd word only when it is a real model/pattern name that identifies the piece
+  (Le Smoking Blazer, Tiger Camo Jacket, Little Sweep Glasses). Colors are ONE
+  plain word ("Washed Black" → "Black", "Grey Blue" → "Grey"). Footwear is
+  plural (Sneakers, Loafers, Clogs). No brand in it. Hampus has had to ask for
+  this three times (latest 2026-09-06) — treat it like a schema constraint.
 - **ALWAYS import every colorway as its own product with a per-color hero.**
   When a listing/album shows multiple colors: one row per color, and the
   thumbnail (image_urls[0]) must show ONLY that color — hunt the album for that
@@ -535,6 +561,14 @@ next import is faster and more reliable than this one.
 - After upsert + image upload, run the post-import passes:
   `retag-heroes` (auto via import-batch) → `propose-display-titles` →
   `estimate-weights` so the card name, hero, and shipping weight are set.
+- **`weight_g` is REQUIRED on every import (Hampus, 2026-09-07)** — the friend
+  cart's shipping estimate silently under-counts any item without a weight, which
+  is exactly the "surprise shipping cost" feeling we're avoiding. Set it in the
+  INSERT (rough is fine: tee 250, tank 150, shirt 300, knit 500, hoodie 550,
+  jacket 800, coat 1200, jeans/trousers 650, shorts 300, cap 120, belt 200,
+  sneakers 1000/pair, boots 1400, bag 600-1200, glasses 150) or run
+  `estimate-weights.mjs` right after (GEMINI_API_KEY lives in the setset-vault
+  workspace .env.local). Never leave it null.
 - **`display_title` is REQUIRED on every row — set it IN the insert.** The auto
   post-import chain (retag → propose-display-titles → estimate-weights) ONLY fires
   on the `import-batch.mjs` path. A hand-built **raw/bulk SQL `insert`** (e.g. many

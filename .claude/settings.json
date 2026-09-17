@@ -12,6 +12,18 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); [ \"$(printf '%s' \"$input\" | jq -r '.stop_hook_active // false')\" = \"true\" ] && exit 0; dir=\"${CLAUDE_PROJECT_DIR:-.}/web-v2\"; [ -d \"$dir\" ] || dir=\"web-v2\"; out=$(cd \"$dir\" 2>/dev/null && node scripts/validate-shop.mjs 2>&1); printf '%s' \"$out\" | grep -q 'SHOP VALIDATION FAILED' && printf '%s' \"$out\" | jq -Rs '{decision:\"block\", reason:(\"Shop data validator failed — fix these before ending the turn:\\n\"+.)}'; exit 0",
+            "timeout": 30,
+            "statusMessage": "Validating shop data..."
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {

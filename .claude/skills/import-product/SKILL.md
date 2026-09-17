@@ -318,6 +318,15 @@ next import is faster and more reliable than this one.
   size chart. Either `rm /tmp/haul-batch/*` first, use fresh keys (`g1`,`g2`…), or
   null `size_guide` post-import for any product that shouldn't have one (e.g.
   eyewear, bags, One-Size items). Watch the import log's `sg=y/n` column.
+- **`color` column must be a lowercase FAMILY slug** from `validate-shop.mjs`'s
+  `COLOR_FAMILIES` (black/white/grey/blue/brown/beige/green/red/yellow/purple/
+  pink/multi) — "Light Blue"/"Black" fail validation. Pretty colour names go in
+  the `colors` array / display_title, not `color`.
+- **Superbuy wrapper + `shopNNN.v.weidian.com` URLs hard-freeze the Chrome tab**
+  (renderer stuck 60s+, every screenshot times out; only fix is closing the tab).
+  Rewrite the wrapper param to the bare `https://weidian.com/item.html?itemID=...`
+  form — same buy page, loads fine. e.tb.cn wrappers also take 30-60s to render;
+  keep waiting and retrying the screenshot before giving up on the tab.
 - **1688 links** wrap the same as Taobao (`source_platform:"1688"`); the buy page
   and alicdn CDN behave identically. Frame dims like `54-20-146` are lens-bridge-
   temple, NOT a size selector → `sizes:["One Size"]`.

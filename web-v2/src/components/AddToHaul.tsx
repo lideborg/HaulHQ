@@ -1,17 +1,16 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { addToHaul } from "@/app/[handle]/haul-actions";
+import Link from "next/link";
+import { addToHaul } from "@/app/(friend)/haul-actions";
 import type { SizeAdvice } from "@/lib/sizing";
 
 export function AddToHaul({
-  handle,
   productId,
   sizes,
   recommended = null,
   profileHref = null,
 }: {
-  handle: string;
   productId: string;
   sizes: string[];
   recommended?: SizeAdvice | null;
@@ -29,7 +28,7 @@ export function AddToHaul({
   function submit() {
     setError(null);
     startTransition(async () => {
-      const res = await addToHaul(handle, productId, size);
+      const res = await addToHaul(productId, size);
       if (res.ok) setAdded(true);
       else setError(res.error ?? "Something went wrong.");
     });
@@ -89,12 +88,12 @@ export function AddToHaul({
       </button>
       {error && <p className="text-[11px] text-red-600">{error}</p>}
       {added && (
-        <a
-          href={`/${handle}/haul`}
+        <Link
+          href="/haul"
           className="block text-center text-[10px] uppercase tracking-widest text-neutral-500 underline"
         >
           View your haul
-        </a>
+        </Link>
       )}
     </div>
   );

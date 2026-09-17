@@ -3,48 +3,37 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { hashPassword } from "@/lib/auth";
-import { usernameError } from "@/lib/username";
+import { hashPassword, normalizeEmail, isEmail } from "@/lib/auth";
+import { sendWelcomeEmail } from "@/lib/email";
 
 export async function setPassword(formData: FormData) {
   const token = String(formData.get("token") ?? "");
   const pw = String(formData.get("password") ?? "");
   const confirm = String(formData.get("confirm") ?? "");
-  const username = String(formData.get("username") ?? "").trim().toLowerCase();
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  const email = normalizeEmail(String(formData.get("email") ?? ""));
+  // Email is the login credential, so it's required and must be unique.
+  if (!isEmail(email)) redirect(`/setup/${token}?error=email`);
   if (pw.length < 6) redirect(`/setup/${token}?error=short`);
   if (pw !== confirm) redirect(`/setup/${token}?error=match`);
-  // Email is required at onboarding so admin can always reach a friend with
-  // order updates. Basic shape check; the approve-haul field can update it later.
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect(`/setup/${token}?error=email`);
 
   const sb = createAdminClient();
   const { data: friend } = await sb
     .from("friends")
-    .select("id, access_token, handle, onboarded_at, active")
+    .select("id, access_token, onboarded_at, active")
     .eq("setup_token", token)
     .maybeSingle();
   if (!friend || !friend.active) redirect(`/setup/${token}?error=invalid`);
 
-  // The friend may keep their auto-generated id or pick their own username.
-  // Empty or unchanged keeps the current handle.
-  let handle = friend.handle;
-  if (username && username !== friend.handle) {
-    const err = usernameError(username);
-    if (err) redirect(`/setup/${token}?error=${err}`);
-    const { data: taken } = await sb
-      .from("friends")
-      .select("id")
-      .eq("handle", username)
-      .maybeSingle();
-    if (taken) redirect(`/setup/${token}?error=taken`);
-    handle = username;
-  }
-
-  await sb
+  const { error } = await sb
     .from("friends")
-    .update({ password_hash: await hashPassword(pw), setup_token: null, handle, email })
+    .update({ password_hash: await hashPassword(pw), setup_token: null, email })
     .eq("id", friend.id);
+  // The partial unique index on lower(email) rejects an address already used
+  // by another friend.
+  if (error) redirect(`/setup/${token}?error=taken`);
+
+  // Fire-and-forget confirmation; a mail hiccup must not block account setup.
+  await sendWelcomeEmail(email);
 
   (await cookies()).set("friend_token", friend.access_token, {
     httpOnly: true,
@@ -53,5 +42,5 @@ export async function setPassword(formData: FormData) {
     path: "/",
     maxAge: 60 * 60 * 24 * 365,
   });
-  redirect(friend.onboarded_at ? `/${handle}/shop` : `/${handle}/welcome`);
+  redirect(friend.onboarded_at ? "/shop" : "/welcome");
 }

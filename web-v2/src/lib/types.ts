@@ -75,11 +75,17 @@ export interface Measurements {
 export interface Friend {
   id: string;
   name: string;
+  // Legacy anonymous login id (u#####). Gone from all UI/URLs; kept only so
+  // pre-email accounts can still sign in until everyone has an email.
   handle: string | null;
-  // Optional — collected at haul approval so admin can email order updates.
+  // The login credential (stored trimmed + lowercased, unique). Null only on
+  // legacy accounts — the /account/email gate collects it at next sign-in.
   email: string | null;
   password_hash: string | null;
   setup_token: string | null;
+  // Self-serve password reset (single-use, 60-minute expiry).
+  reset_token: string | null;
+  reset_token_expires: string | null;
   access_token: string;
   shipping_address: ShippingAddress | null;
   currency: string;

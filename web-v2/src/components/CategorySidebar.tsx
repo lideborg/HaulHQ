@@ -5,13 +5,13 @@ import Link from "next/link";
 import { CATEGORY_LABEL } from "@/lib/categories";
 
 // Builds a shop URL keeping the current brand while changing the category.
-function href(handle: string, brand?: string, category?: string, showAll?: boolean) {
+function href(brand?: string, category?: string, showAll?: boolean) {
   const p = new URLSearchParams();
   if (brand) p.set("brand", brand);
   if (category) p.set("category", category);
   if (showAll) p.set("all", "1");
   const s = p.toString();
-  return s ? `/${handle}/shop?${s}` : `/${handle}/shop`;
+  return s ? `/shop?${s}` : "/shop";
 }
 
 // One sidebar row: label left, item count right-aligned in muted figures.
@@ -40,14 +40,12 @@ function Row({
 }
 
 export function CategorySidebar({
-  handle,
   categories,
   total,
   activeBrand,
   active,
   showAll,
 }: {
-  handle: string;
   categories: Array<{ slug: string; count: number }>;
   total: number;
   activeBrand?: string;
@@ -69,7 +67,7 @@ export function CategorySidebar({
         className={`mt-3 flex-col gap-1.5 ${open ? "flex" : "hidden"} md:flex`}
       >
         <Row
-          href={href(handle, activeBrand, undefined, showAll)}
+          href={href(activeBrand, undefined, showAll)}
           label="All"
           count={total}
           isActive={!active}
@@ -77,7 +75,7 @@ export function CategorySidebar({
         {categories.map((c) => (
           <Row
             key={c.slug}
-            href={href(handle, activeBrand, c.slug, showAll)}
+            href={href(activeBrand, c.slug, showAll)}
             label={CATEGORY_LABEL[c.slug] ?? c.slug}
             count={c.count}
             isActive={active === c.slug}

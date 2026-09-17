@@ -1,5 +1,6 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { updateProduct, togglePublished, toggleSoldOut } from "./actions";
+import { fetchAllRows } from "@/lib/paginate";
 import type { Product } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
@@ -22,11 +23,17 @@ export default async function AdminProducts({
 }) {
   const { error } = await searchParams;
   const sb = createAdminClient();
-  const { data } = await sb
-    .from("products")
-    .select("*")
-    .order("created_at", { ascending: false });
-  const products = (data ?? []) as Product[];
+  // Page past PostgREST's 1000-row cap — the catalog is >1000 products, and a
+  // single .select() silently truncates. `id` tie-breaks so no row is skipped
+  // or duplicated across page boundaries.
+  const products = await fetchAllRows<Product>((from, to) =>
+    sb
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .order("id", { ascending: true })
+      .range(from, to),
+  );
   return (
     <main className="mx-auto max-w-[1200px] px-6 py-10">
       <h1 className="mb-8 text-sm font-semibold uppercase tracking-tight">

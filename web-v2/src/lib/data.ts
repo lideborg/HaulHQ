@@ -151,19 +151,6 @@ export async function getProductById(id: string): Promise<Product | null> {
 // Deliberately excludes access_token (the login credential). Resolve identity
 // from the friend_token cookie via getCurrentFriend() instead. The return type
 // reflects that so callers can't compile against the missing field.
-export async function getFriendByHandle(
-  handle: string,
-): Promise<Omit<Friend, "access_token"> | null> {
-  const sb = createAdminClient();
-  const { data, error } = await sb
-    .from("friends")
-    .select("id, name, handle, shipping_address, currency, is_admin, active, measurements")
-    .eq("handle", handle)
-    .eq("active", true)
-    .maybeSingle();
-  if (error) throw error;
-  return (data as unknown as Omit<Friend, "access_token">) ?? null;
-}
 
 export async function getProductByCode(code: string): Promise<Product | null> {
   const sb = createAdminClient();
@@ -352,4 +339,18 @@ export async function getSellersForBrand(brand: string): Promise<Seller[]> {
     .contains("brands", [brand]);
   if (error) throw error;
   return (data ?? []) as Seller[];
+}
+
+export async function getFriendById(
+  id: string,
+): Promise<Omit<Friend, "access_token"> | null> {
+  const sb = createAdminClient();
+  const { data, error } = await sb
+    .from("friends")
+    .select("id, name, email, shipping_address, currency, is_admin, active, measurements")
+    .eq("id", id)
+    .eq("active", true)
+    .maybeSingle();
+  if (error) throw error;
+  return (data as unknown as Omit<Friend, "access_token">) ?? null;
 }

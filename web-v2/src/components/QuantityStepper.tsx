@@ -1,21 +1,19 @@
 "use client";
 
 import { useTransition } from "react";
-import { setQuantity } from "@/app/[handle]/haul-actions";
+import { setQuantity } from "@/app/(friend)/haul-actions";
 
 export function QuantityStepper({
-  handle,
   itemId,
   quantity,
 }: {
-  handle: string;
   itemId: string;
   quantity: number;
 }) {
   const [pending, start] = useTransition();
   const step = (next: number) =>
     start(async () => {
-      await setQuantity(handle, itemId, next);
+      await setQuantity(itemId, next);
     });
   return (
     <span className="inline-flex items-center border border-neutral-200 text-xs">

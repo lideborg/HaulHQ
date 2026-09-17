@@ -12,18 +12,16 @@ const SORTS = [
 ] as const;
 
 function buildHref(
-  handle: string,
   base: Record<string, string | undefined>,
   over: Record<string, string | undefined>,
 ) {
   const p = new URLSearchParams();
   for (const [k, v] of Object.entries({ ...base, ...over })) if (v) p.set(k, v);
   const s = p.toString();
-  return `/${handle}/shop${s ? `?${s}` : ""}`;
+  return `/shop${s ? `?${s}` : ""}`;
 }
 
 export function ShopSortFilter({
-  handle,
   brand,
   category,
   q,
@@ -33,7 +31,6 @@ export function ShopSortFilter({
   min,
   max,
 }: {
-  handle: string;
   brand?: string;
   category?: string;
   q?: string;
@@ -49,7 +46,7 @@ export function ShopSortFilter({
   const [hi, setHi] = useState(max ?? "");
   const base = { brand, category, q, all: showAll ? "1" : undefined, sort, color, min, max };
   const go = (over: Record<string, string | undefined>) =>
-    router.replace(buildHref(handle, base, over));
+    router.replace(buildHref(base, over));
   const activeSort = sort ?? "new";
   const dirty = Boolean(sort || color || min || max);
 

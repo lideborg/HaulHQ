@@ -7,6 +7,7 @@ import {
   resetFriendPassword,
   deleteFriend,
 } from "@/app/admin/friends/actions";
+import { viewAsFriend } from "@/app/admin/view-actions";
 
 export const dynamic = "force-dynamic";
 
@@ -20,9 +21,9 @@ const ERROR_MESSAGES: Record<string, string> = {
 export default async function AdminHome({
   searchParams,
 }: {
-  searchParams: Promise<{ setup?: string; id?: string; error?: string; action?: string }>;
+  searchParams: Promise<{ setup?: string; who?: string; error?: string; action?: string }>;
 }) {
-  const { setup, id, error, action } = await searchParams;
+  const { setup, who, error, action } = await searchParams;
 
   const sb = createAdminClient();
   const [{ count: products }, { count: pub }, { count: requests }, friends, confirmedRows] =
@@ -55,16 +56,16 @@ export default async function AdminHome({
         HaulHQ — HQ
       </h1>
 
-      {setup && id && (
+      {setup && who && (
         <div className="mb-6 border border-neutral-300 p-3 text-sm">
           <p>
             {action === "reset" ? (
               <>
-                New setup link for <span className="font-medium">{id}</span>. Send it to them:
+                New setup link for <span className="font-medium">{who}</span>. Send it to them:
               </>
             ) : (
               <>
-                Created <span className="font-medium">{id}</span>. Send them this
+                Created <span className="font-medium">{who}</span>. Send them this
                 one-time setup link:
               </>
             )}
@@ -104,8 +105,7 @@ export default async function AdminHome({
             <thead>
               <tr className="border-b border-neutral-200 text-left text-xs uppercase tracking-tight text-neutral-500">
                 <th className="py-2 pr-4 font-medium">Name</th>
-                <th className="py-2 pr-4 font-medium">Handle</th>
-                <th className="py-2 pr-4 font-medium">Link</th>
+                <th className="py-2 pr-4 font-medium">Email</th>
                 <th className="py-2 pr-4 font-medium">Items</th>
                 <th className="py-2 pr-4 font-medium">Haul</th>
                 <th className="py-2 font-medium">Actions</th>
@@ -116,29 +116,16 @@ export default async function AdminHome({
                 <tr key={f.id} className="border-b border-neutral-100">
                   <td className="py-2 pr-4">{f.name}</td>
                   <td className="py-2 pr-4 text-neutral-500">
-                    {f.handle ? `@${f.handle}` : "—"}
-                  </td>
-                  <td className="py-2 pr-4">
-                    {f.handle ? (
-                      <a href={`/${f.handle}`} className="underline">
-                        /{f.handle}
-                      </a>
-                    ) : (
-                      "—"
-                    )}
+                    {f.email ?? "—"}
                   </td>
                   <td className="py-2 pr-4">{f.haul_count}</td>
                   <td className="py-2 pr-4">
-                    {f.handle ? (
-                      <a
-                        href={`/admin/friends/${f.handle}`}
-                        className="text-xs uppercase tracking-tight underline"
-                      >
-                        View haul →
-                      </a>
-                    ) : (
-                      "—"
-                    )}
+                    <a
+                      href={`/admin/friends/${f.id}`}
+                      className="text-xs uppercase tracking-tight underline"
+                    >
+                      View haul →
+                    </a>
                     {confirmedOwners.has(f.id) && (
                       <span className="ml-2 bg-black px-1.5 py-0.5 text-[9px] uppercase tracking-tight text-white">
                         Confirmed
@@ -154,14 +141,20 @@ export default async function AdminHome({
                       </span>
                     ) : (
                       <div className="flex gap-3">
+                        <form action={viewAsFriend} className="inline">
+                          <input type="hidden" name="id" value={f.id} />
+                          <button className="text-[10px] uppercase tracking-tight text-neutral-400 hover:text-black">
+                            View shop
+                          </button>
+                        </form>
                         <form action={resetFriendPassword} className="inline">
-                          <input type="hidden" name="id" value={f.handle ?? ""} />
+                          <input type="hidden" name="id" value={f.id} />
                           <button className="text-[10px] uppercase tracking-tight text-neutral-400 hover:text-black">
                             Reset password
                           </button>
                         </form>
                         <form action={deleteFriend} className="inline">
-                          <input type="hidden" name="id" value={f.handle ?? ""} />
+                          <input type="hidden" name="id" value={f.id} />
                           <button className="text-[10px] uppercase tracking-tight text-red-400 hover:text-red-700">
                             Delete
                           </button>

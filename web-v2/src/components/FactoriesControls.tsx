@@ -2,20 +2,14 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import { addLinkToHaul } from "@/app/[handle]/factories/actions";
+import { addLinkToHaul } from "@/app/(friend)/factories/actions";
 import { LiveSearch } from "./LiveSearch";
 
-export function FactorySearch({
-  handle,
-  initial,
-}: {
-  handle: string;
-  initial: string;
-}) {
+export function FactorySearch({ initial }: { initial: string }) {
   return (
     <div className="mt-8">
       <LiveSearch
-        basePath={`/${handle}/factories`}
+        basePath="/factories"
         initial={initial}
         placeholder="Search any brand, e.g. Prada"
         className="w-full border border-neutral-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
@@ -39,12 +33,12 @@ function AddButton() {
   );
 }
 
-export function AddLinkForm({ handle }: { handle: string }) {
+export function AddLinkForm() {
   // Size is required so admin always gets a size intent. Bags/belts/accessories
   // that have no size tick "One size" instead, which submits size "One size".
   const [oneSize, setOneSize] = useState(false);
   return (
-    <form action={addLinkToHaul.bind(null, handle)} className="flex flex-col gap-2">
+    <form action={addLinkToHaul} className="flex flex-col gap-2">
       <div className="flex flex-col gap-2 sm:flex-row">
         <input
           type="url"

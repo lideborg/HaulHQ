@@ -1,26 +1,21 @@
 import Link from "next/link";
 import { LiveSearch } from "./LiveSearch";
 
-function shopHref(
-  handle: string,
-  params: Record<string, string | undefined>,
-) {
+function shopHref(params: Record<string, string | undefined>) {
   const p = new URLSearchParams();
   for (const [k, v] of Object.entries(params)) if (v) p.set(k, v);
   const s = p.toString();
-  return `/${handle}/shop${s ? `?${s}` : ""}`;
+  return `/shop${s ? `?${s}` : ""}`;
 }
 
 // SSENSE-style checkbox at the top of the sidebar. Checked (default) = sold-out
 // items hidden; unchecking adds ?all=1 to show everything. URL-driven.
 export function SoldOutToggle({
-  handle,
   brand,
   category,
   q,
   showAll,
 }: {
-  handle: string;
   brand?: string;
   category?: string;
   q?: string;
@@ -29,7 +24,7 @@ export function SoldOutToggle({
   const hiding = !showAll;
   return (
     <Link
-      href={shopHref(handle, { brand, category, q, all: hiding ? "1" : undefined })}
+      href={shopHref({ brand, category, q, all: hiding ? "1" : undefined })}
       className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-neutral-700 hover:text-black"
     >
       <span
@@ -47,13 +42,11 @@ export function SoldOutToggle({
 // Search box for the shop header (upper right). Results populate as you type
 // (LiveSearch rewrites ?q= debounced); the active filters survive the rewrite.
 export function SearchBox({
-  handle,
   brand,
   category,
   q,
   showAll,
 }: {
-  handle: string;
   brand?: string;
   category?: string;
   q?: string;
@@ -63,14 +56,14 @@ export function SearchBox({
     <div className="flex items-center gap-3">
       {q && (
         <Link
-          href={shopHref(handle, { brand, category, all: showAll ? "1" : undefined })}
+          href={shopHref({ brand, category, all: showAll ? "1" : undefined })}
           className="text-[11px] uppercase tracking-widest text-neutral-400 underline hover:text-black"
         >
           Clear
         </Link>
       )}
       <LiveSearch
-        basePath={`/${handle}/shop`}
+        basePath="/shop"
         params={{ brand, category, all: showAll ? "1" : undefined }}
         initial={q ?? ""}
         placeholder="Search any item or brand…"
